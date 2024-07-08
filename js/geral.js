@@ -15,6 +15,7 @@ const api = fetch("https://matealves.github.io/pizzaria/apiData.json")
 
     updateCart();
 
+    
     //##LIST PIZZAS
     data.map((item, index) => {
       //Mapear todos os objetos do JSON

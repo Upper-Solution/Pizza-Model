@@ -9,6 +9,7 @@ if ($conn->connect_error) {
     die('Connection failed: ' . $conn->connect_error);
 }
 
+
 // Verificar se o formulário de login foi enviado
 if ($_SERVER["REQUEST_METHOD"] == "POST") {
     // Limpar e validar dados do formulário

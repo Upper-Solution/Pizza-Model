@@ -85,6 +85,7 @@ $conn->close();
                 <h1 class="titulo--h1">Pizzas</h1>
                 <div class="pizza-area"></div>
             </main>
+            
             <aside>
                 <div class="cart--area">
                     <div class="menu-closer">

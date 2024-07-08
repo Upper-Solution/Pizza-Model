@@ -50,3 +50,4 @@ let openMenu = document.querySelector(".menu");
 toggleMenu.addEventListener("click", () => {
   openMenu.classList.toggle("menu-opened");
 });
+

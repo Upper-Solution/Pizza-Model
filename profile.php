@@ -14,6 +14,7 @@ if ($conn->connect_error) {
     die('Connection failed: ' . $conn->connect_error);
 }
 
+
 // Consulta SQL para obter os dados do usuário
 $user_id = $_SESSION['user_id'];
 $sql = "SELECT fullname, email, address, phone_number, profile_image FROM users WHERE id = ?";

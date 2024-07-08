@@ -18,6 +18,7 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
         die('Connection failed: ' . $conn->connect_error);
     }
 
+    
     // Verificar se o e-mail já está registrado
     $check_email_query = 'SELECT * FROM users WHERE email = ? LIMIT 1';
     $stmt_check_email = $conn->prepare($check_email_query);

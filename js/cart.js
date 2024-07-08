@@ -23,6 +23,7 @@ document
     }
     document.querySelector(".fa-cart-shopping").classList.add("pulse");
 
+    
     updateCart();
     closeModal();
     saveCart();
