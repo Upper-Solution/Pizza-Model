@@ -23,13 +23,13 @@ header = header.innerHTML = `<div class="menu-area">
                 <a href="index.html">
                     <li>Início</li>
                 </a>
-                <a href="menu.html">
+                <a href="menu.php">
                     <li>Pizzas</li>
                 </a>
-                <a href="" target="_blank">
+                <a href="https://github.com/matealves" target="_blank">
                     <li>Sobre</li>
                 </a>
-                <a href="" target="_blank">
+                <a href="https://www.linkedin.com/in/mateusalvesds/" target="_blank">
                     <li>Contato</li>
                 </a>
             </ul>
@@ -50,3 +50,4 @@ let openMenu = document.querySelector(".menu");
 toggleMenu.addEventListener("click", () => {
   openMenu.classList.toggle("menu-opened");
 });
+
