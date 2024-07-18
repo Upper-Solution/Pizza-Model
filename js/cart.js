@@ -1,29 +1,17 @@
 //##ADD TO CART
-document
-  .querySelector(".pizzaInfo--addButton")
-  .addEventListener("click", () => {
-    let size = parseInt(
-      document
-        .querySelector(".pizzaInfo--size.selected")
-        .getAttribute("data-key")
-    );
-    let identifier = pizzas[modalKey].id + "@" + size; //concatena id da pizza e tamanho
-    let keyItem = cart.findIndex((item) => item.identifier == identifier); //return
-    if (keyItem > -1) {
+document.querySelector(".pizzaInfo--addButton").addEventListener("click", () => {
+  let size = parseInt(document.querySelector(".pizzaInfo--size.selected").getAttribute("data-key"));
+  let identifier = pizzas[modalKey].id + "@" + size; //concatena id da pizza e tamanho
+  let keyItem = cart.findIndex((item) => item.identifier == identifier); //return
+
+  if (keyItem > -1) {
       cart[keyItem].qtd += modalQt; // aumenta a qtd caso item já esteja no cart
     } else {
       //## Adicionando objeto na variável "cart".
-      cart.push({
-        identifier,
-        id: pizzas[modalKey].id,
-        size,
-        price: pizzas[modalKey].price[size],
-        qtd: modalQt,
-      });
+      cart.push({identifier, id: pizzas[modalKey].id, size, price: pizzas[modalKey].price[size], qtd: modalQt,});
     }
     document.querySelector(".fa-cart-shopping").classList.add("pulse");
 
-    
     updateCart();
     closeModal();
     saveCart();
@@ -73,9 +61,7 @@ function updateCart() {
           break;
       }
       let pizzaName = `${pizzaItem.name} (${pizzaSizeName})`;
-      let cartItem = document
-        .querySelector(".models .cart--item")
-        .cloneNode(true);
+      let cartItem = document.querySelector(".models .cart--item").cloneNode(true);
 
       cartItem.querySelector("img").src = pizzaItem.img;
       cartItem.querySelector(".cart--item-nome").innerHTML = pizzaName;

@@ -182,7 +182,7 @@ $conn->close();
     </div>
 
     <footer>
-        <a href="https://www.linkedin.com/in/mateusalvesds/" target="_blank">© Developed by Mateus Alves</a>
+        <a href="" target="_blank">© Developed by UpperResolution</a>
     </footer>
 
     <script src="js/nav.js"></script>

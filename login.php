@@ -37,7 +37,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
             $_SESSION['user_phone_number'] = $userPhoneNumber;
             $_SESSION['user_profile_image'] = $userProfileImage;
 
-            header('Location: profile.php');
+            header('Location: menu.php');
             exit;
         } else {
             // Senha incorreta

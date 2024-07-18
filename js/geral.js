@@ -8,20 +8,19 @@ localStorage.getItem("pizza_cart")
   ? (cart = JSON.parse(localStorage.getItem("pizza_cart")))
   : (cart = []);
 
-const api = fetch("https://matealves.github.io/pizzaria/apiData.json")
+const api = fetch("https://github.com/Upper-Solution/Pizza-Model/blob/main/apiData.json")
   .then(async (response) => await response.json())
   .then((data) => {
     pizzas = data;
 
     updateCart();
 
-    
+
     //##LIST PIZZAS
     data.map((item, index) => {
       //Mapear todos os objetos do JSON
-      let pizzaItem = document
-        .querySelector(".models .pizza-item")
-        .cloneNode(true); //cloneNode() = Clona o elemento selecionado com a qtd do JSON
+      let pizzaItem = document.querySelector(".models .pizza-item").cloneNode(true);
+      //cloneNode() = Clona o elemento selecionado com a qtd do JSON
       pizzaItem.setAttribute("data-key", index); // colocando atributo e valor
 
       pizzaItem.querySelector(".pizza-item--img img").src = item.img;
@@ -127,10 +126,14 @@ document.querySelector(".pizzaInfo--qtmenos").addEventListener("click", () => {
         .querySelector(".pizzaInfo--size.selected")
         .getAttribute("data-key")
     );
+
     let preco = pizzas[modalKey].price[size];
+
     modalQt--;
     document.querySelector(".pizzaInfo--qt").innerHTML = modalQt;
+
     let updatePreco = preco * modalQt;
+    
     document.querySelector(
       ".pizzaInfo--actualPrice"
     ).innerHTML = `${updatePreco.toLocaleString("pt-br", {
