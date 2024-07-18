@@ -6,7 +6,7 @@ session_start();
 $loggedIn = isset($_SESSION['user_id']);
 
 // Conectar ao banco de dados
-$conn = new mysqli('localhost', 'root', '', 'delivery_app');
+$conn = new mysqli('127.0.0.1', 'u778175734_upper', '5pp2rr2s4l5t34N', 'u778175734_PIzzaDB', 3306);
 
 if ($conn->connect_error) {
     die('Connection failed: ' . $conn->connect_error);

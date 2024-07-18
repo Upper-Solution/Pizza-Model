@@ -26,10 +26,10 @@ header = header.innerHTML = `<div class="menu-area">
                 <a href="menu.php">
                     <li>Pizzas</li>
                 </a>
-                <a href="https://github.com/matealves" target="_blank">
+                <a href="" target="_blank">
                     <li>Sobre</li>
                 </a>
-                <a href="https://www.linkedin.com/in/mateusalvesds/" target="_blank">
+                <a href="" target="_blank">
                     <li>Contato</li>
                 </a>
             </ul>

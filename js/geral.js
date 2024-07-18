@@ -8,9 +8,9 @@ localStorage.getItem("pizza_cart")
   ? (cart = JSON.parse(localStorage.getItem("pizza_cart")))
   : (cart = []);
 
-const api = fetch("https://github.com/Upper-Solution/Pizza-Model/blob/main/apiData.json")
-  .then(async (response) => await response.json())
-  .then((data) => {
+const api = fetch("../apiData.json")
+  .then(response => response.json())
+  .then(data => {
     pizzas = data;
 
     updateCart();
