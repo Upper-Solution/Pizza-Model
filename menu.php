@@ -5,11 +5,23 @@ session_start();
 // Verificar se o usuário está logado
 $loggedIn = isset($_SESSION['user_id']);
 
-// Conectar ao banco de dados
-$conn = new mysqli('127.0.0.1', 'u778175734_upper', '5pp2rr2s4l5t34N', 'u778175734_PIzzaDB', 3306);
+// Inclui o arquivo de configuração
+require_once 'config.php';
 
-if ($conn->connect_error) {
-    die('Connection failed: ' . $conn->connect_error);
+// Obtém a conexão com o banco de dados
+$pdo = connectToDatabase($hosts, $port, $dbname, $username, $password);
+
+// Verifica se a conexão foi bem-sucedida
+if ($pdo) {
+    // Sua lógica de menu aqui
+    // Exemplo: Consultar dados do banco de dados
+    try {
+        $stmt = $pdo->query("SELECT * FROM users");
+    } catch (PDOException $e) {
+        echo "Erro ao consultar dados: " . $e->getMessage();
+    }
+} else {
+    echo "Não foi possível conectar ao banco de dados.";
 }
 
 $user = null;
@@ -18,7 +30,7 @@ $email = null;
 if ($loggedIn) {
     // Recuperar informações do usuário logado
     $userId = $_SESSION['user_id'];
-    $stmt = $conn->prepare('SELECT id, email FROM users WHERE id = ?');
+    $stmt = $pdo->prepare('SELECT id, email FROM users WHERE id = ?');
     $stmt->bind_param('i', $userId);
     $stmt->execute();
     $result = $stmt->get_result();
@@ -33,11 +45,11 @@ if ($loggedIn) {
     }
 
     // Fechar statement
-    $stmt->close();
+    $stmt = null;
 }
 
 // Fechar conexão
-$conn->close();
+$pdo = null;
 ?>
 <!DOCTYPE html>
 <html lang="pt-BR">

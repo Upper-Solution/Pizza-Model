@@ -1,50 +1,76 @@
 <?php
-// Iniciar a sessão
+// Iniciar a sessão na página menu.php
 session_start();
 
 // Verificar se o usuário está logado
-if (!isset($_SESSION['user_id'])) {
-    header('Location: login.php');
-    exit;
+$loggedIn = isset($_SESSION['user_id']);
+
+// Inclui o arquivo de configuração
+require_once 'config.php';
+
+// Obtém a conexão com o banco de dados
+$pdo = connectToDatabase($hosts, $port, $dbname, $username, $password);
+
+// Verifica se a conexão foi bem-sucedida
+if (!$pdo) {
+    die("Não foi possível conectar ao banco de dados.");
 }
 
-// Conectar ao banco de dados
-$conn = new mysqli('127.0.0.1', 'u778175734_upper', '5pp2rr2s4l5t34N', 'u778175734_PIzzaDB', 3306);
-if ($conn->connect_error) {
-    die('Connection failed: ' . $conn->connect_error);
-}
+$user = null;
+$email = null;
 
+if ($loggedIn) {
+    // Recuperar informações do usuário logado
+    $userId = $_SESSION['user_id'];
+    try {
+        $stmt = $pdo->prepare('SELECT id, email FROM users WHERE id = ?');
+        $stmt->execute([$userId]);
+        $user = $stmt->fetch(PDO::FETCH_ASSOC);
+
+        if ($user) {
+            // Usuário encontrado, mostrar informações ou realizar outras operações
+            $email = $user['email'];
+        } else {
+            // Não deveria acontecer se a sessão estiver corretamente configurada
+            echo "Erro ao recuperar informações do usuário.";
+        }
+    } catch (PDOException $e) {
+        echo "Erro ao consultar dados do usuário: " . $e->getMessage();
+    }
+}
 
 // Consulta SQL para obter os dados do usuário
-$user_id = $_SESSION['user_id'];
-$sql = "SELECT fullname, email, address, phone_number, profile_image FROM users WHERE id = ?";
-$stmt = $conn->prepare($sql);
-$stmt->bind_param('i', $user_id);
-$stmt->execute();
-$stmt->store_result();
+if ($loggedIn) {
+    try {
+        $stmt = $pdo->prepare("SELECT fullname, email, address, phone_number, profile_image FROM users WHERE id = ?");
+        $stmt->execute([$userId]);
 
-// Verificar se encontrou o usuário
-if ($stmt->num_rows > 0) {
-    $stmt->bind_result($user_fullname, $user_email, $user_address, $user_phone_number, $user_profile_image);
+        if ($stmt->rowCount() > 0) {
+            $user = $stmt->fetch(PDO::FETCH_ASSOC);
 
-    // Recuperar dados do usuário
-    $stmt->fetch();
-    
-    // A imagem está armazenada como bytes no banco de dados
-    // Converter bytes para base64
-    $user_profile_image_base64 = base64_encode($user_profile_image);
+            // Recuperar dados do usuário
+            $user_fullname = $user['fullname'];
+            $user_email = $user['email'];
+            $user_address = $user['address'];
+            $user_phone_number = $user['phone_number'];
+            $user_profile_image = $user['profile_image'];
 
-    // Fechar statement
-    $stmt->close();
-} else {
-    // Usuário não encontrado
-    header('Location: login.php');
-    exit;
+            // Converter bytes para base64
+            $user_profile_image_base64 = base64_encode($user_profile_image);
+        } else {
+            // Usuário não encontrado
+            header('Location: login.php');
+            exit;
+        }
+    } catch (PDOException $e) {
+        echo "Erro ao consultar dados do usuário: " . $e->getMessage();
+    }
 }
 
 // Fechar conexão
-$conn->close();
+$pdo = null;
 ?>
+
 
 <!DOCTYPE html>
 <html lang="pt-BR">

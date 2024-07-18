@@ -3,6 +3,8 @@ ini_set('display_errors', 1);
 error_reporting(E_ALL);
 session_start();
 
+$host = ['127.0.0.1', '193.203.175.99' ];
+
 if ($_SERVER['REQUEST_METHOD'] == 'POST') {
     // Verificar se todos os campos obrigatórios estão preenchidos
     $required_fields = ['password', 'fullname', 'email', 'cep', 'address', 'house_number', 'phone_number', 'city', 'neighborhood'];
@@ -13,7 +15,7 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
     }
 
     // Conectar ao banco de dados
-    $conn = new mysqli('127.0.0.1', 'u778175734_upper', '5pp2rr2s4l5t34N', 'u778175734_PIzzaDB', 3306);
+    $conn = new mysqli($host, 'u778175734_upper', '5pp2rr2s4l5t34N', 'u778175734_PIzzaDB', 3306);
     if ($conn->connect_error) {
         die('Connection failed: ' . $conn->connect_error);
     }

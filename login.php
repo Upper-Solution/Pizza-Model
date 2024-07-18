@@ -1,61 +1,95 @@
 <?php
-// Iniciar a sessão
+// Iniciar a sessão na página menu.php
 session_start();
 
-// Conectar ao banco de dados
-$conn = new mysqli('127.0.0.1', 'u778175734_upper', '5pp2rr2s4l5t34N', 'u778175734_PIzzaDB', 3306);
+// Verificar se o usuário está logado
+$loggedIn = isset($_SESSION['user_id']);
 
-if ($conn->connect_error) {
-    die('Connection failed: ' . $conn->connect_error);
+// Inclui o arquivo de configuração
+require_once 'config.php';
+
+// Obtém a conexão com o banco de dados
+$pdo = connectToDatabase($hosts, $port, $dbname, $username, $password);
+
+// Verifica se a conexão foi bem-sucedida
+if ($pdo) {
+    // Sua lógica de menu aqui
+    // Exemplo: Consultar dados do banco de dados
+    try {
+        $stmt = $pdo->query("SELECT * FROM users");
+    } catch (PDOException $e) {
+        echo "Erro ao consultar dados: " . $e->getMessage();
+    }
+} else {
+    echo "Não foi possível conectar ao banco de dados.";
 }
 
+$user = null;
+$email = null;
+
+if ($loggedIn) {
+    // Recuperar informações do usuário logado
+    $userId = $_SESSION['user_id'];
+    try {
+        $stmt = $pdo->prepare('SELECT id, email FROM users WHERE id = ?');
+        $stmt->execute([$userId]);
+        $user = $stmt->fetch(PDO::FETCH_ASSOC);
+
+        if ($user) {
+            // Usuário encontrado, mostrar informações ou realizar outras operações
+            $email = $user['email'];
+        } else {
+            // Não deveria acontecer se a sessão estiver corretamente configurada
+            echo "Erro ao recuperar informações do usuário.";
+        }
+    } catch (PDOException $e) {
+        echo "Erro ao consultar dados do usuário: " . $e->getMessage();
+    }
+}
 
 // Verificar se o formulário de login foi enviado
 if ($_SERVER["REQUEST_METHOD"] == "POST") {
     // Limpar e validar dados do formulário
-    $email = mysqli_real_escape_string($conn, $_POST['email']);
-    $password = mysqli_real_escape_string($conn, $_POST['password']);
+    $email = filter_var($_POST['email'], FILTER_SANITIZE_EMAIL);
+    $password = filter_var($_POST['password'], FILTER_SANITIZE_STRING);
 
     // Consulta SQL para verificar usuário
-    $stmt = $conn->prepare('SELECT id, fullname, email, address, phone_number, profile_image, password FROM users WHERE email = ?');
-    $stmt->bind_param('s', $email);
-    $stmt->execute();
-    $stmt->store_result();
+    try {
+        $stmt = $pdo->prepare('SELECT id, fullname, email, address, phone_number, profile_image, password FROM users WHERE email = ?');
+        $stmt->execute([$email]);
+        if ($stmt->rowCount() == 1) {
+            // Usuário encontrado, verificar senha
+            $user = $stmt->fetch(PDO::FETCH_ASSOC);
+            $hashedPassword = $user['password'];
 
-    if ($stmt->num_rows == 1) {
-        // Usuário encontrado, verificar senha
-        $stmt->bind_result($userId, $userFullname, $userEmail, $userAddress, $userPhoneNumber, $userProfileImage, $hashedPassword);
-        $stmt->fetch();
+            // Verificar se a senha digitada corresponde à senha hash no banco de dados
+            if (password_verify($password, $hashedPassword)) {
+                // Senha correta, iniciar sessão e redirecionar para menu.php
+                $_SESSION['user_id'] = $user['id'];
+                $_SESSION['user_fullname'] = $user['fullname'];
+                $_SESSION['user_email'] = $user['email'];
+                $_SESSION['user_address'] = $user['address'];
+                $_SESSION['user_phone_number'] = $user['phone_number'];
+                $_SESSION['user_profile_image'] = $user['profile_image'];
 
-        // Verificar se a senha digitada corresponde à senha hash no banco de dados
-        if (password_verify($password, $hashedPassword)) {
-            // Senha correta, iniciar sessão e redirecionar para menu.php
-            $_SESSION['user_id'] = $userId;
-            $_SESSION['user_fullname'] = $userFullname;
-            $_SESSION['user_email'] = $userEmail;
-            $_SESSION['user_address'] = $userAddress;
-            $_SESSION['user_phone_number'] = $userPhoneNumber;
-            $_SESSION['user_profile_image'] = $userProfileImage;
-
-            header('Location: menu.php');
-            exit;
+                header('Location: profile.php');
+                exit;
+            } else {
+                // Senha incorreta
+                echo "Senha incorreta. Por favor, tente novamente.";
+            }
         } else {
-            // Senha incorreta
-            echo "Senha incorreta. Por favor, tente novamente.";
+            // Usuário não encontrado
+            echo "Usuário não encontrado. Por favor, verifique o email.";
         }
-    } else {
-        // Usuário não encontrado
-        echo "Usuário não encontrado. Por favor, verifique o email.";
+    } catch (PDOException $e) {
+        echo "Erro ao consultar dados: " . $e->getMessage();
     }
-
-    // Fechar statement
-    $stmt->close();
 }
 
 // Fechar conexão
-$conn->close();
+$pdo = null;
 ?>
-
 
 <!DOCTYPE html>
 <html lang="pt-BR">
