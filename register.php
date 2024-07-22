@@ -3,7 +3,11 @@ ini_set('display_errors', 1);
 error_reporting(E_ALL);
 session_start();
 
-$host = ['127.0.0.1', '193.203.175.99' ];
+// Inclui o arquivo de configuração
+require_once 'config.php';
+
+// Obtém a conexão com o banco de dados
+$pdo = connectToDatabase($hosts, $port, $dbname, $username, $password);
 
 if ($_SERVER['REQUEST_METHOD'] == 'POST') {
     // Verificar se todos os campos obrigatórios estão preenchidos
@@ -14,20 +18,11 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
         }
     }
 
-    // Conectar ao banco de dados
-    $conn = new mysqli($host, 'u778175734_upper', '5pp2rr2s4l5t34N', 'u778175734_PIzzaDB', 3306);
-    if ($conn->connect_error) {
-        die('Connection failed: ' . $conn->connect_error);
-    }
-
-    
     // Verificar se o e-mail já está registrado
     $check_email_query = 'SELECT * FROM users WHERE email = ? LIMIT 1';
-    $stmt_check_email = $conn->prepare($check_email_query);
-    $stmt_check_email->bind_param('s', $_POST['email']);
-    $stmt_check_email->execute();
-    $result = $stmt_check_email->get_result();
-    if ($result->num_rows > 0) {
+    $stmt_check_email = $pdo->prepare($check_email_query);
+    $stmt_check_email->execute([$_POST['email']]);
+    if ($stmt_check_email->rowCount() > 0) {
         die('Este e-mail já está registrado. Por favor, escolha outro e-mail.');
     }
 
@@ -80,16 +75,25 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
     }
 
     // Inserir os dados do usuário no banco de dados
-    $stmt = $conn->prepare('INSERT INTO users (password, fullname, email, cep, address, house_number, phone_number, city, neighborhood, complement, profile_image) VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)');
+    $insert_user_query = 'INSERT INTO users (password, fullname, email, cep, address, house_number, phone_number, city, neighborhood, complement, profile_image) VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)';
+    $stmt = $pdo->prepare($insert_user_query);
     $hashed_password = password_hash($_POST['password'], PASSWORD_DEFAULT);
-    $stmt->bind_param('sssssssssss', $hashed_password, $_POST['fullname'], $_POST['email'], $_POST['cep'], $address_data['address'], $_POST['house_number'], $_POST['phone_number'], $address_data['city'], $address_data['neighborhood'], $_POST['complement'], $profile_image_path);
+    $stmt->execute([
+        $hashed_password, 
+        $_POST['fullname'], 
+        $_POST['email'], 
+        $_POST['cep'], 
+        $address_data['address'], 
+        $_POST['house_number'], 
+        $_POST['phone_number'], 
+        $address_data['city'], 
+        $address_data['neighborhood'], 
+        $_POST['complement'], 
+        $profile_image_path
+    ]);
 
-    if (!$stmt->execute()) {
-        die('Erro ao registrar usuário: ' . $stmt->error);
-    }
-
-    $stmt->close();
-    $conn->close();
+    // Fechar a conexão
+    $pdo = null;
 
     // Redirecionar para a página de login após o registro
     header('Location: login.php');
