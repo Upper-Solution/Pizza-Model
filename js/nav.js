@@ -76,6 +76,13 @@ document.addEventListener("DOMContentLoaded", function () {
                 });
             } else {
                 loginIcon.innerHTML = `<i class="fa-solid fa-user"></i>`;
+                loginIcon.style.cursor = 'pointer'; // Adiciona cursor pointer para o ícone
+
+                // Redireciona para a página de login ao clicar no ícone
+                loginIcon.addEventListener('click', function () {
+                    window.location.href = 'login.php';
+                });
+
                 // Oculta o menu de perfil e logout se não estiver logado
                 profileMenu.style.display = 'none';
             }
