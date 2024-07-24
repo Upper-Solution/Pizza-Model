@@ -1,0 +1,247 @@
+/* Reset básico e definição de fontes */
+body {
+    font-family: 'Lato', sans-serif;
+    margin: 0;
+    padding: 0;
+}
+
+.container {
+    width: 90%;
+    margin: auto;
+    padding: 20px;
+}
+
+.pizzas-container {
+    margin-top: 20px;
+}
+
+.pizzas-title {
+    font-size: 24px;
+    margin-bottom: 20px;
+    color: #333;
+}
+
+/* Formulário de pesquisa */
+form {
+    margin-bottom: 20px;
+}
+
+form label {
+    font-size: 16px;
+    margin-right: 10px;
+}
+
+form input[type="text"] {
+    padding: 5px;
+    font-size: 16px;
+}
+
+form button {
+    padding: 5px 10px;
+    font-size: 16px;
+    background-color: #007bff;
+    color: #fff;
+    border: none;
+    cursor: pointer;
+}
+
+form button:hover {
+    background-color: #0056b3;
+}
+
+/* Botão de adicionar pizza */
+.btn-add-pizza {
+    display: inline-block;
+    margin-bottom: 20px;
+    padding: 10px 20px;
+    background-color: #28a745;
+    color: #fff;
+    text-decoration: none;
+    font-size: 16px;
+    border-radius: 5px;
+}
+
+.btn-add-pizza:hover {
+    background-color: #218838;
+}
+
+/* Estilos para a tabela */
+.table-bg {
+    width: 100%;
+    border-collapse: collapse;
+    margin-top: 20px;
+}
+
+.table-bg th,
+.table-bg td {
+    border: 1px solid #ddd;
+    padding: 10px;
+    text-align: left;
+}
+
+.table-bg th {
+    background-color: #f4f4f4;
+    font-weight: bold;
+}
+
+.table-bg tr:nth-child(even) {
+    background-color: #f9f9f9;
+}
+
+.table-bg tr:hover {
+    background-color: #f1f1f1;
+}
+
+/* Botões de ação */
+.btn-edit,
+.btn-delete {
+    padding: 5px 10px;
+    font-size: 14px;
+    text-decoration: none;
+    border-radius: 5px;
+    margin-right: 5px;
+}
+
+.btn-edit {
+    background-color: #007bff;
+    color: #fff;
+}
+
+.btn-edit:hover {
+    background-color: #0056b3;
+}
+
+.btn-delete {
+    background-color: #dc3545;
+    color: #fff;
+}
+
+.btn-delete:hover {
+    background-color: #c82333;
+}
+.edit-form form {
+    margin: 0;
+    padding: 10px;
+    border: 1px solid #ddd;
+    background-color: #f9f9f9;
+}
+
+.edit-form input,
+.edit-form textarea {
+    width: 100%;
+    margin-bottom: 10px;
+}
+
+.edit-form button {
+    margin-right: 10px;
+}
+/* Container para os formulários de adição e edição */
+.add-form,
+.edit-form {
+    margin: 20px 0;
+    padding: 20px;
+    border: 1px solid #ddd;
+    border-radius: 8px;
+    background-color: #f9f9f9;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+}
+
+.add-form h3,
+.edit-form h3 {
+    margin-top: 0;
+    font-size: 1.5em;
+    color: #333;
+}
+
+.add-form label,
+.edit-form label {
+    display: block;
+    margin-bottom: 8px;
+    font-weight: bold;
+    color: #333;
+}
+
+.add-form input,
+.add-form textarea,
+.edit-form input,
+.edit-form textarea {
+    width: 100%;
+    padding: 8px;
+    margin-bottom: 12px;
+    border: 1px solid #ccc;
+    border-radius: 4px;
+}
+
+.add-form textarea,
+.edit-form textarea {
+    height: 100px;
+    resize: vertical;
+}
+
+.add-form button,
+.edit-form button {
+    padding: 10px 15px;
+    border: none;
+    border-radius: 4px;
+    color: #fff;
+    font-size: 1em;
+    cursor: pointer;
+    margin-right: 10px;
+}
+
+.add-form button[name="add_pizza"] {
+    background-color: #28a745; /* Verde para adicionar */
+}
+
+.add-form button[name="add_pizza"]:hover {
+    background-color: #218838;
+}
+
+.add-form button[type="button"] {
+    background-color: #dc3545; /* Vermelho para cancelar */
+}
+
+.add-form button[type="button"]:hover {
+    background-color: #c82333;
+}
+
+.edit-form button[type="submit"] {
+    background-color: #007bff; /* Azul para salvar */
+}
+
+.edit-form button[type="submit"]:hover {
+    background-color: #0069d9;
+}
+
+.edit-form button[type="button"] {
+    background-color: #6c757d; /* Cinza para cancelar */
+}
+
+.edit-form button[type="button"]:hover {
+    background-color: #5a6268;
+}
+
+.header-container {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 20px;
+}
+
+.pizzas-title {
+    margin: 0;
+}
+
+.btn-back {
+    background-color: #007bff;
+    color: #fff;
+    padding: 10px 15px;
+    text-decoration: none;
+    border-radius: 5px;
+    font-size: 14px;
+}
+
+.btn-back:hover {
+    background-color: #0056b3;
+}
+

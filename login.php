@@ -1,9 +1,11 @@
 <?php
-// Iniciar a sessão na página menu.php
-session_start();
+// Habilitar exibição de erros
+ini_set('display_errors', 1);
+ini_set('display_startup_errors', 1);
+error_reporting(E_ALL);
 
-// Verificar se o usuário está logado
-$loggedIn = isset($_SESSION['user_id']);
+// Iniciar a sessão na página login.php
+session_start();
 
 // Inclui o arquivo de configuração
 require_once 'config.php';
@@ -12,51 +14,25 @@ require_once 'config.php';
 $pdo = connectToDatabase($hosts, $port, $dbname, $username, $password);
 
 // Verifica se a conexão foi bem-sucedida
-if ($pdo) {
-    // Sua lógica de menu aqui
-    // Exemplo: Consultar dados do banco de dados
-    try {
-        $stmt = $pdo->query("SELECT * FROM users");
-    } catch (PDOException $e) {
-        echo "Erro ao consultar dados: " . $e->getMessage();
-    }
-} else {
-    echo "Não foi possível conectar ao banco de dados.";
+if (!$pdo) {
+    die("Não foi possível conectar ao banco de dados.");
 }
 
 $user = null;
 $email = null;
-
-if ($loggedIn) {
-    // Recuperar informações do usuário logado
-    $userId = $_SESSION['user_id'];
-    try {
-        $stmt = $pdo->prepare('SELECT id, email FROM users WHERE id = ?');
-        $stmt->execute([$userId]);
-        $user = $stmt->fetch(PDO::FETCH_ASSOC);
-
-        if ($user) {
-            // Usuário encontrado, mostrar informações ou realizar outras operações
-            $email = $user['email'];
-        } else {
-            // Não deveria acontecer se a sessão estiver corretamente configurada
-            echo "Erro ao recuperar informações do usuário.";
-        }
-    } catch (PDOException $e) {
-        echo "Erro ao consultar dados do usuário: " . $e->getMessage();
-    }
-}
+$error = null; // Inicializa a variável de erro
 
 // Verificar se o formulário de login foi enviado
 if ($_SERVER["REQUEST_METHOD"] == "POST") {
     // Limpar e validar dados do formulário
-    $email = filter_var($_POST['email'], FILTER_SANITIZE_EMAIL);
-    $password = filter_var($_POST['password'], FILTER_SANITIZE_STRING);
+    $email = filter_var(trim($_POST['email']), FILTER_SANITIZE_EMAIL);
+    $password = trim($_POST['password']); // Não precisa de sanitização adicional para senha
 
     // Consulta SQL para verificar usuário
     try {
         $stmt = $pdo->prepare('SELECT id, fullname, email, address, phone_number, profile_image, password FROM users WHERE email = ?');
         $stmt->execute([$email]);
+
         if ($stmt->rowCount() == 1) {
             // Usuário encontrado, verificar senha
             $user = $stmt->fetch(PDO::FETCH_ASSOC);
@@ -72,18 +48,18 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
                 $_SESSION['user_phone_number'] = $user['phone_number'];
                 $_SESSION['user_profile_image'] = $user['profile_image'];
 
-                header('Location: profile.php');
+                header('Location: menu.php');
                 exit;
             } else {
                 // Senha incorreta
-                echo "Senha incorreta. Por favor, tente novamente.";
+                $error = "Senha incorreta. Por favor, tente novamente.";
             }
         } else {
             // Usuário não encontrado
-            echo "Usuário não encontrado. Por favor, verifique o email.";
+            $error = "Usuário não encontrado. Por favor, verifique o email.";
         }
     } catch (PDOException $e) {
-        echo "Erro ao consultar dados: " . $e->getMessage();
+        $error = "Erro ao consultar dados: " . $e->getMessage();
     }
 }
 
@@ -120,6 +96,7 @@ $pdo = null;
                 <button type="submit" class="form-button">Login</button>
                 <br>
                 <a href="register.php" class="form-register-link">Cadastre-se</a>
+                <?php if ($error) { echo "<p class='form-error'>$error</p>"; } ?>
             </form>
         </div>
     </div>

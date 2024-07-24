@@ -1,0 +1,175 @@
+/* CSS Geral */
+body {
+    font-family: 'Lato', sans-serif;
+    margin: 0;
+    padding: 0;
+    color: #333;
+    background-color: #f9f9f9;
+}
+
+/* Header */
+.header {
+    text-align: center;
+    padding: 20px;
+    background-color: #f4f4f4;
+    position: relative;
+}
+
+.logo-container {
+    margin-bottom: 10px;
+}
+
+.logo-image {
+    max-width: 150px;
+}
+
+.banner-image {
+    max-width: 100%;
+    height: auto;
+}
+
+h1 {
+    margin: 0;
+    font-family: 'Hepta Slab', serif;
+}
+
+/* Main Content */
+.main-content {
+    padding: 20px;
+    max-width: 700px;
+    margin: 0 auto;
+    background-color: #fff;
+    box-shadow: 0 0 10px rgba(0,0,0,0.1);
+    border-radius: 8px;
+}
+
+.info-section {
+    text-align: center;
+    margin-bottom: 20px;
+}
+
+.info-section h2 {
+    font-family: 'Hepta Slab', serif;
+    margin-bottom: 10px;
+}
+
+.contact-section {
+    display: flex;
+    justify-content: space-between;
+    align-items: flex-start;
+    flex-wrap: wrap;
+}
+
+.contact-text,
+.social-media {
+    flex: 1;
+    margin: 0 20px;
+}
+
+.contact-text {
+    margin-right: 20px;
+}
+
+.contact-section h2 {
+    font-family: 'Hepta Slab', serif;
+    margin-bottom: 10px;
+}
+
+.contact-section p {
+    margin: 5px 0;
+}
+
+.social-media {
+    text-align: center;
+}
+
+.social-media h2 {
+    margin-bottom: 10px;
+}
+
+.social-icon {
+    text-decoration: none;
+    color: #333;
+    margin: 0 10px;
+    font-size: 24px;
+    transition: color 0.3s ease;
+}
+
+.social-icon:hover {
+    color: #007bff; /* Cor de hover */
+}
+
+/* Footer */
+.footer {
+    background-color: #f4f4f4;
+    text-align: center;
+    padding: 10px;
+}
+
+/* Estilos básicos para o body e outros elementos */
+body {
+    font-family: 'Lato', sans-serif;
+    margin: 0;
+    padding: 0;
+    background-color: #f9f9f9;
+}
+
+/* Estilos para o header e nav */
+.header {
+    background-color: #333; /* Cor de fundo */
+    padding: 10px 0; /* Espaçamento interno */
+}
+
+.nav-container {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    width: 90%;
+    max-width: 1200px;
+    margin: 0 auto;
+}
+
+.header h1 {
+    color: #fff;
+    font-size: 24px;
+}
+
+.nav-bar ul {
+    list-style: none; /* Remove os marcadores da lista */
+    margin: 0;
+    padding: 0;
+    display: flex;
+}
+
+.nav-bar ul li {
+    margin-left: 20px;
+}
+
+.nav-bar ul li a {
+    text-decoration: none; /* Remove o sublinhado */
+    color: #fff;
+    font-size: 16px;
+    padding: 5px 10px;
+    transition: color 0.3s ease-in-out;
+}
+
+.nav-bar ul li a:hover {
+    color: #ffcc00; /* Cor ao passar o mouse */
+}
+
+/* Estilos para responsividade */
+@media (max-width: 768px) {
+    .nav-container {
+        flex-direction: column;
+    }
+
+    .nav-bar ul {
+        flex-direction: column;
+        align-items: center;
+    }
+
+    .nav-bar ul li {
+        margin-left: 0;
+        margin-bottom: 10px;
+    }
+}

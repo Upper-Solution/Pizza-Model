@@ -9,47 +9,46 @@ $loggedIn = isset($_SESSION['user_id']);
 require_once 'config.php';
 
 // Obtém a conexão com o banco de dados
-$pdo = connectToDatabase($hosts, $port, $dbname, $username, $password);
+try {
+    $pdo = connectToDatabase($hosts, $port, $dbname, $username, $password);
+} catch (PDOException $e) {
+    echo "Erro ao conectar ao banco de dados: " . $e->getMessage();
+    exit();
+}
 
 // Verifica se a conexão foi bem-sucedida
 if ($pdo) {
-    // Sua lógica de menu aqui
-    // Exemplo: Consultar dados do banco de dados
+    // Consultar dados do banco de dados
     try {
         $stmt = $pdo->query("SELECT * FROM users");
     } catch (PDOException $e) {
         echo "Erro ao consultar dados: " . $e->getMessage();
     }
-} else {
-    echo "Não foi possível conectar ao banco de dados.";
-}
 
-$user = null;
-$email = null;
+    $user = null;
+    $email = null;
 
-if ($loggedIn) {
-    // Recuperar informações do usuário logado
-    $userId = $_SESSION['user_id'];
-    $stmt = $pdo->prepare('SELECT id, email FROM users WHERE id = ?');
-    $stmt->bind_param('i', $userId);
-    $stmt->execute();
-    $result = $stmt->get_result();
+    if ($loggedIn) {
+        // Recuperar informações do usuário logado
+        $userId = $_SESSION['user_id'];
+        try {
+            $stmt = $pdo->prepare('SELECT id, email FROM users WHERE id = :id');
+            $stmt->execute(['id' => $userId]);
+            $user = $stmt->fetch(PDO::FETCH_ASSOC);
 
-    if ($result->num_rows == 1) {
-        // Usuário encontrado, mostrar informações ou realizar outras operações
-        $user = $result->fetch_assoc();
-        $email = $user['email'];
-    } else {
-        // Não deveria acontecer se a sessão estiver corretamente configurada
-        echo "Erro ao recuperar informações do usuário.";
+            if ($user) {
+                $email = $user['email'];
+            } else {
+                echo "Erro ao recuperar informações do usuário.";
+            }
+        } catch (PDOException $e) {
+            echo "Erro ao consultar usuário: " . $e->getMessage();
+        }
     }
 
-    // Fechar statement
-    $stmt = null;
+    // Fechar conexão
+    $pdo = null;
 }
-
-// Fechar conexão
-$pdo = null;
 ?>
 <!DOCTYPE html>
 <html lang="pt-BR">
@@ -102,15 +101,13 @@ $pdo = null;
                 <div class="cart--area">
                     <div class="menu-closer">
                         <i class="fa-solid fa-arrow-left"></i>
-                        <?php
-                        if ($loggedIn) {
-                            echo '<div class="avatar-container">';
-                            echo '<img src="path_to_avatar_image.jpg" alt="Avatar do Usuário">';
-                            echo '</div>';
-                        } else {
-                            echo '<div class="avatar-container avatar-empty"></div>';
-                        }
-                        ?>
+                        <?php if ($loggedIn) { ?>
+                            <div class="avatar-container">
+                                <img src="path_to_avatar_image.jpg" alt="Avatar do Usuário">
+                            </div>
+                        <?php } else { ?>
+                            <div class="avatar-container avatar-empty"></div>
+                        <?php } ?>
                         <button id="loginButton" class="login-button"><?php echo $loggedIn ? 'Logout' : 'Login'; ?></button>
                     </div>
                     <h1>Suas Pizzas</h1>
@@ -223,6 +220,7 @@ $pdo = null;
                     console.log('Login button clicked');
                     <?php if ($loggedIn) { ?>
                         // Implementar a lógica para logout
+                        window.location.href = 'logout.php'; // Atualize com a URL de logout adequada
                     <?php } else { ?>
                         window.location.href = 'login.php';
                     <?php } ?>

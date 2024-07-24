@@ -11,11 +11,16 @@ $pdo = connectToDatabase($hosts, $port, $dbname, $username, $password);
 
 if ($_SERVER['REQUEST_METHOD'] == 'POST') {
     // Verificar se todos os campos obrigatórios estão preenchidos
-    $required_fields = ['password', 'fullname', 'email', 'cep', 'address', 'house_number', 'phone_number', 'city', 'neighborhood'];
+    $required_fields = ['password', 'confirm_password', 'fullname', 'email', 'cep', 'address', 'house_number', 'phone_number', 'city', 'neighborhood'];
     foreach ($required_fields as $field) {
         if (empty($_POST[$field])) {
             die('Por favor, preencha todos os campos obrigatórios.');
         }
+    }
+
+    // Verificar se as senhas coincidem
+    if ($_POST['password'] !== $_POST['confirm_password']) {
+        die('As senhas não coincidem. Por favor, tente novamente.');
     }
 
     // Verificar se o e-mail já está registrado
@@ -59,19 +64,22 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
         die('CEP inválido. Por favor, verifique e tente novamente.');
     }
 
-    // Salvar a imagem do perfil no servidor
-    $profile_image_path = 'default-profile.png'; // Imagem padrão
-
+    // Verificar e processar o upload da imagem do perfil
+    $profile_image = null;
     if (isset($_FILES['profile_image']) && $_FILES['profile_image']['error'] == UPLOAD_ERR_OK) {
-        // Nome da imagem única
-        $file_name = uniqid() . '_' . basename($_FILES['profile_image']['name']);
-        $uploadDir = 'uploads/';
-        $profile_image_path = $uploadDir . $file_name;
-
-        // Move o arquivo para o diretório de uploads
-        if (!move_uploaded_file($_FILES['profile_image']['tmp_name'], $profile_image_path)) {
-            die('Erro ao salvar a imagem do perfil.');
+        // Verificar o tipo do arquivo
+        $allowed_types = ['image/png', 'image/jpeg'];
+        if (!in_array($_FILES['profile_image']['type'], $allowed_types)) {
+            die('O arquivo deve ser uma imagem PNG, JPG ou JPEG.');
         }
+
+        // Verificar o tamanho do arquivo (máximo de 16 MB)
+        if ($_FILES['profile_image']['size'] > 16 * 1024 * 1024) {
+            die('O tamanho da imagem não pode exceder 16 MB.');
+        }
+
+        // Ler o conteúdo do arquivo
+        $profile_image = file_get_contents($_FILES['profile_image']['tmp_name']);
     }
 
     // Inserir os dados do usuário no banco de dados
@@ -89,7 +97,7 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
         $address_data['city'], 
         $address_data['neighborhood'], 
         $_POST['complement'], 
-        $profile_image_path
+        $profile_image
     ]);
 
     // Fechar a conexão
@@ -100,6 +108,7 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
     exit();
 }
 ?>
+
 
 <!DOCTYPE html>
 <html lang="pt-BR">
@@ -112,6 +121,39 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
     <link rel="stylesheet" href="css/register_styles.css">
     <link href="https://fonts.googleapis.com/css?family=Hepta+Slab:400,700|Lato:400,700&display=swap" rel="stylesheet">
     <title>Register - Pizzaria</title>
+    <script>
+        async function buscarEndereco(cep) {
+            if (!cep) {
+                return;
+            }
+
+            try {
+                const response = await fetch(`https://viacep.com.br/ws/${cep}/json/`);
+                const data = await response.json();
+
+                if (data.erro) {
+                    alert('CEP não encontrado.');
+                    return;
+                }
+
+                document.getElementById('address').value = data.logradouro;
+                document.getElementById('neighborhood').value = data.bairro;
+                document.getElementById('city').value = data.localidade;
+                document.getElementById('state').value = data.uf;
+            } catch (error) {
+                alert('Erro ao buscar endereço.');
+            }
+        }
+
+        function validarCep() {
+            const cep = document.getElementById('cep').value.replace(/\D/g, '');
+            if (cep.length === 8) {
+                buscarEndereco(cep);
+            } else {
+                alert('CEP inválido. Deve conter 8 dígitos.');
+            }
+        }
+    </script>
 </head>
 <body>
     <h1 class="form-title">Cadastro de Usuário</h1>
@@ -121,7 +163,7 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
                 <div class="profile-circle">
                     <img id="profileImage" src="default-profile.png" alt="Foto de Perfil">
                 </div>
-                <input type="file" id="profileImageInput" name="profile_image" accept="image/*" style="display: none;">
+                <input type="file" id="profileImageInput" name="profile_image" accept="image/png, image/jpeg" style="display: none;">
             </div>
             <form method="POST" action="register.php" enctype="multipart/form-data">
                 <div class="form-group-half">
@@ -135,7 +177,7 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
                     </div>
                     <div class="form-group">
                         <label for="cep">CEP:</label>
-                        <input type="text" id="cep" name="cep" class="form-input" required>
+                        <input type="text" id="cep" name="cep" class="form-input" required onblur="validarCep()">
                     </div>
                 </div>
                 <div class="form-group-half">
@@ -167,54 +209,36 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
                     </div>
                 </div>
                 <div class="form-group">
-                    <label for="password">Password:</label>
+                    <label for="profile_image">Foto de Perfil:</label>
+                    <input type="file" id="profile_image" name="profile_image" accept="image/png, image/jpeg" onchange="previewImage()">
+                </div>
+                <div class="form-group">
+                    <label for="password">Senha:</label>
                     <input type="password" id="password" name="password" class="form-input" required>
                 </div>
                 <div class="form-group">
-                    <label for="confirm_password">Confirmar Password:</label>
+                    <label for="confirm_password">Confirmar Senha:</label>
                     <input type="password" id="confirm_password" name="confirm_password" class="form-input" required>
                 </div>
-                <button type="submit" class="form-button">Register</button>
+                <div class="form-group">
+                    <input type="submit" value="Cadastrar" class="form-button">
+                </div>
             </form>
-            <div class="form-footer">
-                <p>Já tem uma conta? <a href="login.php">Login</a></p>
-            </div>
         </div>
     </div>
     <script>
-        document.getElementById('profileImage').addEventListener('click', function() {
-            document.getElementById('profileImageInput').click();
-        });
-
-        document.getElementById('profileImageInput').addEventListener('change', function() {
-            const file = this.files[0];
+        function previewImage() {
+            const fileInput = document.getElementById('profile_image');
+            const file = fileInput.files[0];
             if (file) {
                 const reader = new FileReader();
                 reader.onload = function(e) {
-                    document.getElementById('profileImage').src = e.target.result;
+                    const profileImage = document.getElementById('profileImage');
+                    profileImage.src = e.target.result;
                 };
                 reader.readAsDataURL(file);
             }
-        });
-
-        document.getElementById('cep').addEventListener('blur', function() {
-            const cep = this.value.replace(/\D/g, '');
-            if (cep.length !== 8) {
-                return;
-            }
-            fetch(`https://viacep.com.br/ws/${cep}/json/`)
-                .then(response => response.json())
-                .then(data => {
-                    if (data.erro) {
-                        console.log('CEP não encontrado.');
-                        return;
-                    }
-                    document.getElementById('address').value = data.logradouro;
-                    document.getElementById('neighborhood').value = data.bairro;
-                    document.getElementById('city').value = data.localidade;
-                })
-                .catch(error => console.error('Erro ao consultar o CEP:', error));
-        });
+        }
     </script>
 </body>
 </html>

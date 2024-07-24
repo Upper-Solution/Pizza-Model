@@ -1,5 +1,5 @@
 <?php
-// Iniciar a sessão na página menu.php
+// Iniciar a sessão
 session_start();
 
 // Verificar se o usuário está logado
@@ -57,6 +57,9 @@ if ($loggedIn) {
 
             // Converter bytes para base64
             $user_profile_image_base64 = base64_encode($user_profile_image);
+
+            // Definir o tipo MIME da imagem
+            $image_type = $user_profile_image_type ? $user_profile_image_type : 'image/jpeg'; // Defina o tipo MIME adequado
         } else {
             // Usuário não encontrado
             header('Location: login.php');
@@ -71,14 +74,12 @@ if ($loggedIn) {
 $pdo = null;
 ?>
 
-
 <!DOCTYPE html>
 <html lang="pt-BR">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
-    <link rel="shortcut icon" href="favicon.ico" type="image/x-icon">
     <link rel="stylesheet" href="css/style.css">
     <link rel="stylesheet" href="css/profile_styles.css">
     <link href="https://fonts.googleapis.com/css?family=Hepta+Slab:400,700|Lato:400,700&display=swap" rel="stylesheet">
@@ -90,13 +91,17 @@ $pdo = null;
             <h1 class="profile-title">Meu Perfil</h1>
             <div class="profile-card">
                 <div class="profile-pic">
-                    <img id="profileImage" src="data:image/png;base64, <?php echo $user_profile_image_base64; ?>" alt="Foto de Perfil">
+                    <?php if ($user_profile_image): ?>
+                        <img id="profileImage" src="data:<?php echo $image_type; ?>;base64,<?php echo $user_profile_image_base64; ?>" alt="Foto de Perfil">
+                    <?php else: ?>
+                        <img id="profileImage" src="default-profile.png" alt="Foto de Perfil">
+                    <?php endif; ?>
                 </div>
                 <div class="profile-info">
-                    <p><strong>Nome Completo:</strong> <?php echo $user_fullname; ?></p>
-                    <p><strong>Email:</strong> <?php echo $user_email; ?></p>
-                    <p><strong>Endereço:</strong> <?php echo $user_address; ?></p>
-                    <p><strong>Número de Celular:</strong> <?php echo $user_phone_number; ?></p>
+                    <p><strong>Nome Completo:</strong> <?php echo htmlspecialchars($user_fullname); ?></p>
+                    <p><strong>Email:</strong> <?php echo htmlspecialchars($user_email); ?></p>
+                    <p><strong>Endereço:</strong> <?php echo htmlspecialchars($user_address); ?></p>
+                    <p><strong>Número de Celular:</strong> <?php echo htmlspecialchars($user_phone_number); ?></p>
                 </div>
             </div>
             <div class="profile-actions">
