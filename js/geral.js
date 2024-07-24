@@ -8,7 +8,7 @@ localStorage.getItem("pizza_cart")
   ? (cart = JSON.parse(localStorage.getItem("pizza_cart")))
   : (cart = []);
 
-const api = fetch("../apiGetPizzas.php")
+const api = fetch("../apiData.json")
   .then(response => response.json())
   .then(data => {
     pizzas = data;
