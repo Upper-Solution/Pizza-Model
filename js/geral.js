@@ -25,13 +25,13 @@ const api = fetch("js/apiData.php")
       pizzaItem.setAttribute("data-key", index); // Define um atributo data-key com o índice da pizza
 
       // Define os atributos do item de pizza com os dados do JSON
-      pizzaItem.querySelector(".pizza-item--img img").src = item.img;
-      pizzaItem.querySelector(".pizza-item--price").innerHTML = `${item.price.toLocaleString("pt-br", {
+      pizzaItem.querySelector(".pizza-item--img img").src = `data:image/jpeg;base64,${item.imagem}`;
+      pizzaItem.querySelector(".pizza-item--price").innerHTML = `${item.preco.toLocaleString("pt-br", {
         style: "currency",
         currency: "BRL",
       })}`;
-      pizzaItem.querySelector(".pizza-item--name").innerHTML = item.name;
-      pizzaItem.querySelector(".pizza-item--desc").innerHTML = item.description;
+      pizzaItem.querySelector(".pizza-item--name").innerHTML = item.nome;
+      pizzaItem.querySelector(".pizza-item--desc").innerHTML = item.descricao;
 
       // Adiciona um evento de clique para abrir o modal com as informações da pizza selecionada
       pizzaItem.querySelector("a").addEventListener("click", (e) => {
@@ -41,13 +41,14 @@ const api = fetch("js/apiData.php")
         modalKey = key; // Define a chave da pizza no modal
 
         // Define as informações da pizza no modal
-        document.querySelector(".pizzaBig img").src = pizzas[key].img;
-        document.querySelector(".pizzaInfo h1").innerHTML = pizzas[key].name;
-        document.querySelector(".pizzaInfo--desc").innerHTML = pizzas[key].description;
-        document.querySelector(".pizzaInfo--actualPrice").innerHTML = `${pizzas[key].price.toLocaleString("pt-br", {
+        document.querySelector(".pizzaBig img").src = `data:image/jpeg;base64,${pizzas[key].imagem}`;
+        document.querySelector(".pizzaInfo h1").innerHTML = pizzas[key].nome;
+        document.querySelector(".pizzaInfo--desc").innerHTML = pizzas[key].descricao;
+        document.querySelector(".pizzaInfo--actualPrice").innerHTML = `${pizzas[key].preco.toLocaleString("pt-br", {
           style: "currency",
           currency: "BRL",
         })}`;
+        //Area comentada devido a conteudo não utilizado ainda
         /*
         document.querySelector(".pizzaInfo--size.selected").classList.remove("selected"); // Reseta o tamanho selecionado
         document.querySelectorAll(".pizzaInfo--size").forEach((size, sizeIndex) => {
@@ -113,7 +114,7 @@ document
 // Evento para diminuir a quantidade de pizzas no modal
 document.querySelector(".pizzaInfo--qtmenos").addEventListener("click", () => {
   if (modalQt > 1) {
-    let preco = pizzas[modalKey].price;
+    let preco = pizzas[modalKey].preco;
     modalQt--;
     document.querySelector(".pizzaInfo--qt").innerHTML = modalQt;
     let updatePreco = preco * modalQt;
@@ -126,7 +127,7 @@ document.querySelector(".pizzaInfo--qtmenos").addEventListener("click", () => {
 
 // Evento para aumentar a quantidade de pizzas no modal
 document.querySelector(".pizzaInfo--qtmais").addEventListener("click", () => {
-  let preco = pizzas[modalKey].price;
+  let preco = pizzas[modalKey].preco;
   modalQt++;
   document.querySelector(".pizzaInfo--qt").innerHTML = modalQt;
   let updatePreco = preco * modalQt;

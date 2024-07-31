@@ -21,8 +21,9 @@ document.querySelector(".pizzaInfo--addButton").addEventListener("click", () => 
     cart.push({ 
       identifier, 
       id: pizzas[modalKey].id,  
-      price: pizzas[modalKey].price, 
+      preco: pizzas[modalKey].preco, 
       qtd: modalQt, 
+      imagem: pizzas[modalKey].imagem
     });
   }
 
@@ -73,7 +74,7 @@ function updateCart() {
       // Encontra a pizza correspondente no array de pizzas
       let pizzaItem = pizzas.find((item) => item.id == cart[i].id);
       // Calcula o valor total das pizzas
-      pizzasValor += cart[i].price * cart[i].qtd;
+      pizzasValor += cart[i].preco * cart[i].qtd;
 /*
       // Define o nome do tamanho da pizza
       let pizzaSizeName;
@@ -90,12 +91,12 @@ function updateCart() {
       }
 */
       // Define o nome da pizza com o tamanho
-      let pizzaName = `${pizzaItem.name}`;
+      let pizzaName = `${pizzaItem.nome}`;
       // Clona o modelo de item do carrinho
       let cartItem = document.querySelector(".models .cart--item").cloneNode(true);
 
       // Define a imagem, nome e quantidade do item no carrinho
-      cartItem.querySelector("img").src = pizzaItem.img;
+      cartItem.querySelector("img").src = pizzaItem.imagem;
       cartItem.querySelector(".cart--item-nome").innerHTML = pizzaName;
       cartItem.querySelector(".cart--item--qt").innerHTML = cart[i].qtd;
 
