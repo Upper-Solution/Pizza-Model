@@ -3,18 +3,21 @@ let modalQt = 1;
 let modalKey = 0;
 let pizzas;
 
-// GET CART BY SESSION STORAGE
+// Verifica se há um carrinho salvo no 'localStorage', se sim, o carrega
+//caso contrario, inicializa um carrinho vazio.
 localStorage.getItem("pizza_cart")
-  ? (cart = JSON.parse(localStorage.getItem("pizza_cart")))
-  : (cart = []);
+ ? (cart = JSON.parse(localStorage.getItem("pizza_cart")))
+ : (cart = []);
 
+//Faz uma requisição a API que retorna um JSON com os dados das pizzas
+//clona o modelo de item de pizza, define os atributos e insere os dados da pizza
+//adiciona eventos de clique para abrir o modal com as informações da pizza selecionada
 const api = fetch("../apiData.json")
   .then(response => response.json())
   .then(data => {
     pizzas = data;
 
     updateCart();
-
 
     //##LIST PIZZAS
     data.map((item, index) => {
@@ -25,7 +28,7 @@ const api = fetch("../apiData.json")
 
       pizzaItem.querySelector(".pizza-item--img img").src = item.img;
       pizzaItem.querySelector(
-        ".pizza-item--price"
+        cart = []
       ).innerHTML = `${item.price[2].toLocaleString("pt-br", {
         style: "currency",
         currency: "BRL",
@@ -93,7 +96,7 @@ const api = fetch("../apiData.json")
     });
   });
 
-//##MODAL EVENTS
+//Função para fechar o modal
 function closeModal() {
   document.querySelector(".pizzaWindowArea").style.opacity = 0;
   setTimeout(() => {
@@ -101,6 +104,7 @@ function closeModal() {
   }, 600);
   window.scrollTo(0, 0);
 }
+
 //Fechar modal com Esc
 document.addEventListener("keydown", (event) => {
   const isEscKey = event.key === "Escape";
@@ -111,6 +115,7 @@ document.addEventListener("keydown", (event) => {
     closeModal();
   }
 });
+
 //Fechar modal com click no 'cancelar'
 document
   .querySelectorAll(".pizzaInfo--cancelButton, .pizzaInfo--cancelMobileButton")
@@ -118,7 +123,8 @@ document
     item.addEventListener("click", closeModal);
   });
 
-//##CONTROLS
+//Controle de quantidade
+//Eventos para aumentar e diminuir a quantidade de pizzas no modal e atualizar o preço de acordo
 document.querySelector(".pizzaInfo--qtmenos").addEventListener("click", () => {
   if (modalQt > 1) {
     let size = parseInt(
@@ -158,6 +164,7 @@ document.querySelector(".pizzaInfo--qtmais").addEventListener("click", () => {
   })}`;
 });
 
+//Evento para selecionar o tamanho da pizza no modal
 document.querySelectorAll(".pizzaInfo--size").forEach((size, sizeIndex) => {
   size.addEventListener("click", (e) => {
     document

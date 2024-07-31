@@ -1,21 +1,28 @@
-//##ADD TO CART
+/*Esse código é responsavel por adicionar pizzas ao 
+carrinho, atualizar a interface do carrinho e 
+finalizar a compra*/
+
+//Adicionar ao carrinho
+//Cria um identificador unico, combinando o ID da pizza e o tamanho
 document.querySelector(".pizzaInfo--addButton").addEventListener("click", () => {
   let size = parseInt(document.querySelector(".pizzaInfo--size.selected").getAttribute("data-key"));
   let identifier = pizzas[modalKey].id + "@" + size; //concatena id da pizza e tamanho
   let keyItem = cart.findIndex((item) => item.identifier == identifier); //return
-
+  
+  //Verifica se a pizza está no carrinho, se sim, aumenta a
+  //quantidade, se não, adiciona um novo item.
   if (keyItem > -1) {
-      cart[keyItem].qtd += modalQt; // aumenta a qtd caso item já esteja no cart
-    } else {
-      //## Adicionando objeto na variável "cart".
-      cart.push({identifier, id: pizzas[modalKey].id, size, price: pizzas[modalKey].price[size], qtd: modalQt,});
-    }
-    document.querySelector(".fa-cart-shopping").classList.add("pulse");
+    cart[keyItem].qtd += modalQt; // aumenta a qtd caso item já esteja no cart
+  } else {
+    //## Adicionando objeto na variável "cart".
+    cart.push({ identifier, id: pizzas[modalKey].id, size, price: pizzas[modalKey].price[size], qtd: modalQt, });
+  }
+  document.querySelector(".fa-cart-shopping").classList.add("pulse");
 
-    updateCart();
-    closeModal();
-    saveCart();
-  });
+  updateCart();
+  closeModal();
+  saveCart();
+});
 //Salvar itens do carrinho no localStorage
 const saveCart = () => {
   localStorage.setItem("pizza_cart", JSON.stringify(cart));
