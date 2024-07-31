@@ -1,8 +1,3 @@
-/* Estilo geral para o menu */
-.menu {
-    /* Outras propriedades de estilo do menu, se houver */
-}
-
 /* Estilo para os itens da lista no menu */
 .menu ul {
     list-style: none; /* Remove os marcadores da lista */
