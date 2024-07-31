@@ -1,56 +1,69 @@
+/* Resetando algumas configurações padrões do navegador */
+body, h1, form, input, button {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+/* Configurações básicas para o body */
 body {
     font-family: 'Lato', sans-serif;
     background-color: #f5f5f5;
     margin: 0;
     padding: 0;
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    height: 100vh;
 }
 
-
+/* Contêiner principal para centralizar o formulário */
 .container {
     display: flex;
     justify-content: center;
     align-items: center;
-    width: 30%;
-    height: 100%;
+    min-height: 80vh;
+    margin-top: 0px; /* Adiciona um espaçamento acima do formulário */
 }
 
+/* Estilo do contêiner do formulário */
 .form-container {
     background-color: #ffffff;
     padding: 2rem;
     border-radius: 8px;
-    box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
     text-align: center;
-    max-width: 600px;
+    max-width: 500px;
     width: 100%;
 }
 
+/* Título do formulário */
 .form-title {
     font-size: 2rem;
     margin-bottom: 1rem;
+    color: #333;
 }
 
+/* Grupo de campos do formulário */
 .form-group {
     margin-bottom: 1.5rem;
     text-align: left;
 }
 
+/* Estilo das labels dos campos */
 .form-group label {
     display: block;
     font-weight: bold;
     margin-bottom: 0.5rem;
+    color: #555;
 }
 
+/* Estilo dos inputs */
 .form-input {
     width: 100%;
-    padding: 0.5rem;
+    padding: 0.75rem;
     border: 1px solid #ddd;
     border-radius: 4px;
+    font-size: 1rem;
 }
 
+/* Estilo do botão de submit */
 .form-button {
     width: 100%;
     padding: 0.75rem;
@@ -63,10 +76,12 @@ body {
     margin-top: 1rem;
 }
 
+/* Efeito hover no botão */
 .form-button:hover {
     background-color: #218838;
 }
 
+/* Link para cadastro */
 .form-register-link {
     display: block;
     margin-top: 1rem;
@@ -75,27 +90,14 @@ body {
     font-size: 1rem;
 }
 
+/* Efeito hover no link de cadastro */
 .form-register-link:hover {
     text-decoration: underline;
 }
 
-@media (min-width: 768px) {
-    .container {
-        flex-direction: row;
-    }
-
-    .form-container {
-        flex-direction: column;
-        max-width: 800px;
-    }
-}
-
-@media (max-width: 767px) {
-    .container {
-        flex-direction: column;
-    }
-
-    .form-container {
-        width: 300%;
-    }
+/* Estilo da mensagem de erro */
+.form-error {
+    color: #dc3545;
+    margin-top: 1rem;
+    font-size: 0.875rem;
 }

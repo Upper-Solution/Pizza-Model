@@ -29,14 +29,22 @@ $pdo = null;
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <link rel="shortcut icon" href="favicon.ico" type="image/x-icon">
+    <script src="https://kit.fontawesome.com/8b4042ccf0.js" crossorigin="anonymous"></script>
     <link rel="stylesheet" href="css/sobre.css">
     <link rel="stylesheet" href="css/home.css">
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
+    <link rel="stylesheet" href="css/icon.css">
     <link href="https://fonts.googleapis.com/css?family=Hepta+Slab:400,700|Lato:400,700&display=swap" rel="stylesheet">
-    <title>Sobre Nós - <?php echo htmlspecialchars($empresa['nome']); ?></title>
+    <title>Pizzaria</title>
 </head>
 <body>
-    <header class="header"></header>
+    <div class="loader-content">
+        <div class="loader-circle"></div>
+    </div>
+
+    <header class="header">
+        <?php include 'nav.php'; ?>
+    </header>
+
     <main class="main-content">
         <section class="info-section">
             <h2>Sobre Nós</h2>

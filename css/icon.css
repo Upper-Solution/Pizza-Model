@@ -1,0 +1,123 @@
+/* Estilo geral para o menu */
+.menu {
+    /* Outras propriedades de estilo do menu, se houver */
+}
+
+/* Estilo para os itens da lista no menu */
+.menu ul {
+    list-style: none; /* Remove os marcadores da lista */
+    padding: 0; /* Remove o padding padrão */
+    margin: 0; /* Remove a margem padrão */
+}
+
+.menu ul li {
+    position: relative; /* Para posicionar o menu suspenso corretamente */
+    margin-bottom: 5px; /* Espaço entre os itens do menu */
+}
+
+/* Adiciona margem superior aos itens de menu, exceto o ícone de login */
+.menu ul li:not(#loginItem) {
+    margin-top: 20px; /* Adiciona 20px de espaço acima dos itens de menu */
+}
+
+/* Estilo específico para o ícone de login */
+#loginItem {
+    margin-bottom: 0; /* Remove o espaçamento inferior do item de login */
+    margin-top: 10px; /* Adiciona espaçamento superior ao item de login */
+}
+
+/* Estilo para o link do ícone de login */
+.login-link {
+    display: flex;
+    align-items: center; /* Centraliza o conteúdo verticalmente */
+    text-decoration: none; /* Remove o sublinhado dos links */
+}
+
+/* Estilo para o ícone de login */
+.login-icon {
+    width: 40px; /* Tamanho do ícone de login */
+    height: 40px; /* Tamanho do ícone de login */
+    display: flex;
+    align-items: center;
+    justify-content: center; /* Centraliza o conteúdo dentro do ícone */
+}
+
+/* Estilo para a imagem de perfil */
+.profile-icon {
+    width: 100%; /* Ajusta a largura da imagem para ocupar todo o ícone */
+    height: 100%; /* Ajusta a altura da imagem para ocupar todo o ícone */
+    border-radius: 50%; /* Faz a imagem ser circular */
+    object-fit: cover; /* Ajusta o tamanho da imagem para cobrir o ícone */
+    border: 2px solid #fff; /* Borda branca ao redor da imagem */
+    box-shadow: 0 0 5px rgba(0, 0, 0, 0.2); /* Sombra ao redor da imagem */
+}
+
+/* Estilo para o ícone de login quando não está logado */
+.login-icon i {
+    font-size: 24px; /* Tamanho do ícone */
+    color: #333; /* Cor do ícone */
+}
+
+/* Estilo para o menu suspenso de perfil */
+.profile-menu {
+    display: none; /* Esconde o menu suspenso por padrão */
+    position: absolute; /* Posiciona o menu suspenso relativo ao item de menu */
+    top: 100%; /* Posiciona o menu abaixo do item de menu */
+    left: 0;
+    background-color: #fff; /* Cor de fundo do menu */
+    border: 1px solid #ddd; /* Borda do menu */
+    box-shadow: 0 0 5px rgba(0, 0, 0, 0.2); /* Sombra ao redor do menu */
+    z-index: 1000; /* Garante que o menu fique acima de outros elementos */
+}
+
+/* Estilo para os itens do menu suspenso */
+.profile-menu a {
+    display: block; /* Faz cada item ocupar uma linha */
+    padding: 10px; /* Espaço interno dos itens do menu */
+    color: #333; /* Cor do texto */
+    text-decoration: none; /* Remove o sublinhado dos links */
+}
+
+/* Estilo para o menu suspenso ao passar o mouse sobre o item de menu */
+#loginItem:hover .profile-menu {
+    display: block; /* Mostra o menu suspenso */
+}
+
+/* Estilo para os itens do menu suspenso ao passar o mouse */
+.profile-menu a:hover {
+    background-color: #f0f0f0; /* Cor de fundo ao passar o mouse */
+}
+
+/* Responsividade para telas menores */
+@media (max-width: 768px) {
+    .menu ul {
+        padding: 0; /* Remove o padding da lista em telas menores */
+    }
+    
+    .menu ul li {
+        margin-top: 10px; /* Ajusta o espaço acima dos itens de menu em telas menores */
+    }
+
+    #loginItem {
+        margin-top: 5px; /* Ajusta o espaço superior do item de login em telas menores */
+    }
+    
+    .login-icon {
+        width: 30px; /* Reduz o tamanho do ícone de login em telas menores */
+        height: 30px; /* Reduz o tamanho do ícone de login em telas menores */
+    }
+    
+    /* Ajusta o menu suspenso para telas menores */
+    .profile-menu {
+        width: 100%; /* Ajusta a largura do menu suspenso para ocupar toda a largura disponível */
+        position: static; /* Torna o menu suspenso parte do fluxo do documento em telas menores */
+        top: auto; /* Remove o posicionamento superior */
+        left: auto; /* Remove o posicionamento esquerdo */
+        border: none; /* Remove a borda do menu em telas menores */
+        box-shadow: none; /* Remove a sombra do menu em telas menores */
+    }
+
+    #loginItem:hover .profile-menu {
+        display: block; /* Mostra o menu suspenso ao passar o mouse em telas menores */
+    }
+}

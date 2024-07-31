@@ -1,11 +1,10 @@
 <?php
-// Iniciar a sessão na página menu.php
 session_start();
 
 // Verificar se o usuário está logado
 $loggedIn = isset($_SESSION['user_id']);
 
-// Inclui o arquivo de configuração
+// Inclui o arquivo de configuração para conexão com o banco de dados
 require_once 'config.php';
 
 // Obtém a conexão com o banco de dados
@@ -16,39 +15,28 @@ try {
     exit();
 }
 
-// Verifica se a conexão foi bem-sucedida
-if ($pdo) {
-    // Consultar dados do banco de dados
+// Inicialização das variáveis de usuário
+$user = null;
+$email = null;
+
+if ($loggedIn) {
+    // Recuperar informações do usuário logado
+    $userId = $_SESSION['user_id'];
     try {
-        $stmt = $pdo->query("SELECT * FROM users");
-    } catch (PDOException $e) {
-        echo "Erro ao consultar dados: " . $e->getMessage();
-    }
+        $stmt = $pdo->prepare('SELECT id, email FROM users WHERE id = :id');
+        $stmt->execute(['id' => $userId]);
+        $user = $stmt->fetch(PDO::FETCH_ASSOC);
 
-    $user = null;
-    $email = null;
-
-    if ($loggedIn) {
-        // Recuperar informações do usuário logado
-        $userId = $_SESSION['user_id'];
-        try {
-            $stmt = $pdo->prepare('SELECT id, email FROM users WHERE id = :id');
-            $stmt->execute(['id' => $userId]);
-            $user = $stmt->fetch(PDO::FETCH_ASSOC);
-
-            if ($user) {
-                $email = $user['email'];
-            } else {
-                echo "Erro ao recuperar informações do usuário.";
-            }
-        } catch (PDOException $e) {
-            echo "Erro ao consultar usuário: " . $e->getMessage();
+        if ($user) {
+            $email = $user['email'];
         }
+    } catch (PDOException $e) {
+        echo "Erro ao consultar usuário: " . $e->getMessage();
     }
-
-    // Fechar conexão
-    $pdo = null;
 }
+
+// Fechar conexão com o banco de dados
+$pdo = null;
 ?>
 <!DOCTYPE html>
 <html lang="pt-BR">
@@ -62,20 +50,21 @@ if ($pdo) {
     <link href="https://fonts.googleapis.com/css?family=Hepta+Slab:400,700|Lato:400,700&display=swap" rel="stylesheet">
     <title>Pizzaria</title>
 </head>
-
 <body>
     <div class="loader-content">
         <div class="loader-circle"></div>
     </div>
 
-    <header class="header"></header>
+    <header class="header">
+        <?php include 'nav.php'; ?>
+    </header>
 
     <div class="container">
         <div class="container-area">
             <div class="models">
                 <div class="pizza-item">
                     <a href="">
-                        <div class="pizza-item--img"><img src="" /></div>
+                        <div class="pizza-item--img"><img src="" alt="Pizza Image" /></div>
                         <div class="pizza-item--add">+</div>
                         <div class="pizza-item--price">R$ --</div>
                         <div class="pizza-item--name">--</div>
@@ -83,7 +72,7 @@ if ($pdo) {
                     </a>
                 </div>
                 <div class="cart--item">
-                    <img src="" />
+                    <img src="" alt="Cart Item Image" />
                     <div class="cart--item-nome">--</div>
                     <div class="cart--item--qtarea">
                         <button class="cart--item-qtmenos">-</button>
@@ -96,7 +85,7 @@ if ($pdo) {
                 <h1 class="titulo--h1">Pizzas</h1>
                 <div class="pizza-area"></div>
             </main>
-            
+
             <aside>
                 <div class="cart--area">
                     <div class="menu-closer">
@@ -108,7 +97,9 @@ if ($pdo) {
                         <?php } else { ?>
                             <div class="avatar-container avatar-empty"></div>
                         <?php } ?>
-                        <button id="loginButton" class="login-button"><?php echo $loggedIn ? 'Logout' : 'Login'; ?></button>
+                        <button id="loginButton" class="login-button">
+                            <?php echo $loggedIn ? 'Logout' : 'Login'; ?>
+                        </button>
                     </div>
                     <h1>Suas Pizzas</h1>
                     <div class="cart"></div>
@@ -143,7 +134,7 @@ if ($pdo) {
                         <i class="fa-solid fa-arrow-left"></i>
                     </div>
                     <div class="pizzaBig">
-                        <img src="" />
+                        <img src="" alt="Pizza Image" />
                     </div>
                     <div class="pizzaInfo">
                         <h1>--</h1>
@@ -151,15 +142,9 @@ if ($pdo) {
                         <div class="pizzaInfo--sizearea">
                             <div class="pizzaInfo--sector">Tamanho</div>
                             <div class="pizzaInfo--sizes">
-                                <div data-key="0" class="pizzaInfo--size">
-                                    PEQUENA <span>--</span>
-                                </div>
-                                <div data-key="1" class="pizzaInfo--size">
-                                    MÉDIO <span>--</span>
-                                </div>
-                                <div data-key="2" class="pizzaInfo--size selected">
-                                    GRANDE <span>--</span>
-                                </div>
+                                <div data-key="0" class="pizzaInfo--size">PEQUENA <span>--</span></div>
+                                <div data-key="1" class="pizzaInfo--size">MÉDIO <span>--</span></div>
+                                <div data-key="2" class="pizzaInfo--size selected">GRANDE <span>--</span></div>
                             </div>
                         </div>
                         <div class="pizzaInfo--pricearea">
@@ -191,10 +176,9 @@ if ($pdo) {
     </div>
 
     <footer>
-        <a href="" target="_blank">© Developed by UpperResolution</a>
+        <a href="#" target="_blank">© Developed by UpperResolution</a>
     </footer>
 
-    <script src="js/nav.js"></script>
     <script src="js/geral.js"></script>
     <script src="js/cart.js"></script>
     <script>
@@ -210,7 +194,8 @@ if ($pdo) {
                     <?php if (!$loggedIn) { ?>
                         window.location.href = 'login.php';
                     <?php } else { ?>
-                        // Implementar a lógica para finalizar o pedido
+                        // Redirecione para o script PHP que envia a mensagem no WhatsApp
+                        window.location.href = 'send_whatsapp_message.php';
                     <?php } ?>
                 });
             }
@@ -219,8 +204,7 @@ if ($pdo) {
                 loginButton.addEventListener('click', function () {
                     console.log('Login button clicked');
                     <?php if ($loggedIn) { ?>
-                        // Implementar a lógica para logout
-                        window.location.href = 'logout.php'; // Atualize com a URL de logout adequada
+                        window.location.href = 'logout.php'; // URL de logout
                     <?php } else { ?>
                         window.location.href = 'login.php';
                     <?php } ?>
