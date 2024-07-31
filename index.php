@@ -13,8 +13,9 @@
 
 
 <body>
-    <header class="header"></header>
-
+    <header class="header">
+        <?php include 'nav.php'; ?>
+    </header>
     <main class="home">
         <div class="home-area">
             <section class="left-home">

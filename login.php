@@ -1,14 +1,17 @@
 <?php
-// Habilitar exibição de erros
-ini_set('display_errors', 1);
-ini_set('display_startup_errors', 1);
-error_reporting(E_ALL);
 
-// Iniciar a sessão na página login.php
+// Iniciar a sessão
 session_start();
 
-// Inclui o arquivo de configuração
-require_once 'config.php';
+// Inclui o arquivo de configuração e a função de conexão
+require_once 'config.php'; // Certifique-se de que este arquivo define a função connectToDatabase()
+
+// Configuração do banco de dados
+$hosts = ['127.0.0.1', '193.203.175.99'];
+$port = '3306';             // Porta padrão do MySQL
+$dbname = 'u778175734_PIzzaDB';
+$username = 'u778175734_upper';
+$password = '5pp2rr2s4l5t34N';
 
 // Obtém a conexão com o banco de dados
 $pdo = connectToDatabase($hosts, $port, $dbname, $username, $password);
@@ -25,8 +28,8 @@ $error = null; // Inicializa a variável de erro
 // Verificar se o formulário de login foi enviado
 if ($_SERVER["REQUEST_METHOD"] == "POST") {
     // Limpar e validar dados do formulário
-    $email = filter_var(trim($_POST['email']), FILTER_SANITIZE_EMAIL);
-    $password = trim($_POST['password']); // Não precisa de sanitização adicional para senha
+    $email = isset($_POST['email']) ? filter_var(trim($_POST['email']), FILTER_SANITIZE_EMAIL) : null;
+    $password = isset($_POST['password']) ? trim($_POST['password']) : null;
 
     // Consulta SQL para verificar usuário
     try {
@@ -65,6 +68,9 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
 
 // Fechar conexão
 $pdo = null;
+
+// Inclua nav.php após a conexão ser estabelecida
+include 'nav.php';
 ?>
 
 <!DOCTYPE html>
