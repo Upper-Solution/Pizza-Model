@@ -2,7 +2,7 @@
 header('Content-Type: application/json');
 
 // Inclui o arquivo de configuração
-require_once 'config.php';
+require_once '../config.php';
 
 // Obtém a conexão com o banco de dados
 $pdo = connectToDatabase($hosts, $port, $dbname, $username, $password);
