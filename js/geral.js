@@ -1,91 +1,78 @@
+// Inicializa o carrinho, quantidade do modal e chave do modal
 let cart = [];
 let modalQt = 1;
 let modalKey = 0;
 let pizzas;
 
-
-// Verifica se há um carrinho salvo no 'localStorage', se sim, o carrega
-//caso contrario, inicializa um carrinho vazio.
+// Verifica se há um carrinho salvo no 'localStorage'
+// Se existir, carrega o carrinho salvo; caso contrário, inicializa um carrinho vazio
 localStorage.getItem("pizza_cart")
- ? (cart = JSON.parse(localStorage.getItem("pizza_cart")))
- : (cart = []);
+  ? (cart = JSON.parse(localStorage.getItem("pizza_cart")))
+  : (cart = []);
 
-//Faz uma requisição a API que retorna um JSON com os dados das pizzas
-//clona o modelo de item de pizza, define os atributos e insere os dados da pizza
-//adiciona eventos de clique para abrir o modal com as informações da pizza selecionada
-const api = fetch("../apiData.json")
+// Faz uma requisição à API para obter os dados das pizzas em formato JSON
+// Atualiza o carrinho e lista as pizzas na interface
+const api = fetch("apiData.php")
   .then(response => response.json())
   .then(data => {
-    pizzas = data;
+    pizzas = data; // Armazena os dados das pizzas na variável 'pizzas'
+    updateCart();  // Atualiza o carrinho
 
-    updateCart();
-
-    //##LIST PIZZAS
+    // Mapeia todos os objetos do JSON (dados das pizzas)
     data.map((item, index) => {
-      //Mapear todos os objetos do JSON
+      // Clona o modelo de item de pizza
       let pizzaItem = document.querySelector(".models .pizza-item").cloneNode(true);
-      //cloneNode() = Clona o elemento selecionado com a qtd do JSON
-      pizzaItem.setAttribute("data-key", index); // colocando atributo e valor
+      pizzaItem.setAttribute("data-key", index); // Define um atributo data-key com o índice da pizza
 
+      // Define os atributos do item de pizza com os dados do JSON
       pizzaItem.querySelector(".pizza-item--img img").src = item.img;
-      pizzaItem.querySelector(
-        cart = []
-      ).innerHTML = `${item.price[2].toLocaleString("pt-br", {
+      pizzaItem.querySelector(".pizza-item--price").innerHTML = `${item.price.toLocaleString("pt-br", {
         style: "currency",
         currency: "BRL",
       })}`;
       pizzaItem.querySelector(".pizza-item--name").innerHTML = item.name;
       pizzaItem.querySelector(".pizza-item--desc").innerHTML = item.description;
 
-      //### MODAL
+      // Adiciona um evento de clique para abrir o modal com as informações da pizza selecionada
       pizzaItem.querySelector("a").addEventListener("click", (e) => {
-        e.preventDefault(); //Previna a ação padrão.
-        let key = e.target.closest(".pizza-item").getAttribute("data-key"); //target.closest() procura elemento mais próximo que contenha... Quando clicar, PEGAR o atributo data-key
-        modalQt = 1; // reset quantidade de pizzas ao abrir modal
-        modalKey = key; // Diz qual a pizza aberta no modal
+        e.preventDefault(); // Previne a ação padrão do link
+        let key = e.target.closest(".pizza-item").getAttribute("data-key"); // Obtém o data-key do item clicado
+        modalQt = 1; // Reseta a quantidade de pizzas no modal
+        modalKey = key; // Define a chave da pizza no modal
 
+        // Define as informações da pizza no modal
         document.querySelector(".pizzaBig img").src = pizzas[key].img;
         document.querySelector(".pizzaInfo h1").innerHTML = pizzas[key].name;
-        document.querySelector(".pizzaInfo--desc").innerHTML =
-          pizzas[key].description;
-        document.querySelector(".pizzaInfo--actualPrice").innerHTML = `${pizzas[
-          key
-        ].price[2].toLocaleString("pt-br", {
+        document.querySelector(".pizzaInfo--desc").innerHTML = pizzas[key].description;
+        document.querySelector(".pizzaInfo--actualPrice").innerHTML = `${pizzas[key].price.toLocaleString("pt-br", {
           style: "currency",
           currency: "BRL",
         })}`;
-        document
-          .querySelector(".pizzaInfo--size.selected")
-          .classList.remove("selected"); //reset no tamanho da pizza
-        document
-          .querySelectorAll(".pizzaInfo--size")
-          .forEach((size, sizeIndex) => {
-            //forEach() = Para cada;
-            if (sizeIndex == 2) {
-              size.classList.add("selected");
-            }
-            size.querySelector("span").innerHTML = pizzas[key].sizes[sizeIndex];
+        /*
+        document.querySelector(".pizzaInfo--size.selected").classList.remove("selected"); // Reseta o tamanho selecionado
+        document.querySelectorAll(".pizzaInfo--size").forEach((size, sizeIndex) => {
+          // Define os tamanhos da pizza no modal
+          if (sizeIndex == 2) {
+            size.classList.add("selected"); // Seleciona o tamanho padrão (grande)
+          }
+          size.querySelector("span").innerHTML = pizzas[key].sizes[sizeIndex]; // Define o tamanho
 
-            size.addEventListener("click", () => {
-              //Altera a cor do botão ao clicar
-              document
-                .querySelector(".pizzaInfo--size.selected")
-                .classList.remove("selected");
-              size.classList.add("selected");
-              //Altera o valor conforme o tamanho + moeda REAL R$
-              modalQt = 1;
-              document.querySelector(".pizzaInfo--qt").innerHTML = modalQt;
-              document.querySelector(
-                ".pizzaInfo--actualPrice"
-              ).innerHTML = ` ${pizzas[key].price[sizeIndex].toLocaleString(
-                "pt-br",
-                { style: "currency", currency: "BRL" }
-              )}`;
-            });
+          // Adiciona um evento de clique para alterar o tamanho da pizza
+          size.addEventListener("click", () => {
+            document.querySelector(".pizzaInfo--size.selected").classList.remove("selected");
+            size.classList.add("selected");
+            modalQt = 1;
+            document.querySelector(".pizzaInfo--qt").innerHTML = modalQt;
+            document.querySelector(".pizzaInfo--actualPrice").innerHTML = ` ${pizzas[key].price[sizeIndex].toLocaleString(
+              "pt-br",
+              { style: "currency", currency: "BRL" }
+            )}`;
           });
-
+        });
+*/
         document.querySelector(".pizzaInfo--qt").innerHTML = modalQt;
 
+        // Exibe o modal com animação de opacidade
         document.querySelector(".pizzaWindowArea").style.opacity = 0;
         document.querySelector(".pizzaWindowArea").style.display = "flex";
         setTimeout(() => {
@@ -93,84 +80,59 @@ const api = fetch("../apiData.json")
         }, 200);
       });
 
-      document.querySelector(".pizza-area").append(pizzaItem); //append() mantém o elemento e adiciona outro em seguida. appendChild() precisa de um elemento pai para inserir dentro
+      // Adiciona o item de pizza clonado à área de pizzas
+      document.querySelector(".pizza-area").append(pizzaItem);
     });
   });
 
-//Função para fechar o modal
+// Função para fechar o modal
 function closeModal() {
   document.querySelector(".pizzaWindowArea").style.opacity = 0;
   setTimeout(() => {
     document.querySelector(".pizzaWindowArea").style.display = "none";
   }, 600);
-  window.scrollTo(0, 0);
+  window.scrollTo(0, 0); // Rola a página para o topo
 }
 
-//Fechar modal com Esc
+// Fecha o modal ao pressionar a tecla 'Escape'
 document.addEventListener("keydown", (event) => {
   const isEscKey = event.key === "Escape";
-
-  if (
-    (document.querySelector(".pizzaWindowArea").style.opacity = 1 && isEscKey)
-  ) {
+  if ((document.querySelector(".pizzaWindowArea").style.opacity = 1 && isEscKey)) {
     closeModal();
   }
 });
 
-//Fechar modal com click no 'cancelar'
+// Fecha o modal ao clicar nos botões de cancelar
 document
   .querySelectorAll(".pizzaInfo--cancelButton, .pizzaInfo--cancelMobileButton")
   .forEach((item) => {
     item.addEventListener("click", closeModal);
   });
 
-//Controle de quantidade
-//Eventos para aumentar e diminuir a quantidade de pizzas no modal e atualizar o preço de acordo
+// Controle de quantidade
+// Evento para diminuir a quantidade de pizzas no modal
 document.querySelector(".pizzaInfo--qtmenos").addEventListener("click", () => {
   if (modalQt > 1) {
-    let size = parseInt(
-      document
-        .querySelector(".pizzaInfo--size.selected")
-        .getAttribute("data-key")
-    );
-
-    let preco = pizzas[modalKey].price[size];
-
+    let preco = pizzas[modalKey].price;
     modalQt--;
     document.querySelector(".pizzaInfo--qt").innerHTML = modalQt;
-
     let updatePreco = preco * modalQt;
-    
-    document.querySelector(
-      ".pizzaInfo--actualPrice"
-    ).innerHTML = `${updatePreco.toLocaleString("pt-br", {
+    document.querySelector(".pizzaInfo--actualPrice").innerHTML = `${updatePreco.toLocaleString("pt-br", {
       style: "currency",
       currency: "BRL",
     })}`;
   }
 });
+
+// Evento para aumentar a quantidade de pizzas no modal
 document.querySelector(".pizzaInfo--qtmais").addEventListener("click", () => {
-  let size = parseInt(
-    document.querySelector(".pizzaInfo--size.selected").getAttribute("data-key")
-  );
-  let preco = pizzas[modalKey].price[size];
+  let preco = pizzas[modalKey].price;
   modalQt++;
   document.querySelector(".pizzaInfo--qt").innerHTML = modalQt;
   let updatePreco = preco * modalQt;
-  document.querySelector(
-    ".pizzaInfo--actualPrice"
-  ).innerHTML = `${updatePreco.toLocaleString("pt-br", {
+  document.querySelector(".pizzaInfo--actualPrice").innerHTML = `${updatePreco.toLocaleString("pt-br", {
     style: "currency",
     currency: "BRL",
   })}`;
 });
 
-//Evento para selecionar o tamanho da pizza no modal
-document.querySelectorAll(".pizzaInfo--size").forEach((size, sizeIndex) => {
-  size.addEventListener("click", (e) => {
-    document
-      .querySelector(".pizzaInfo--size.selected")
-      .classList.remove("selected"); // reset tamanho selecionado
-    size.classList.add("selected");
-  });
-});
