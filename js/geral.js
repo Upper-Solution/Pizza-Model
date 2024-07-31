@@ -3,6 +3,7 @@ let modalQt = 1;
 let modalKey = 0;
 let pizzas;
 
+
 // Verifica se há um carrinho salvo no 'localStorage', se sim, o carrega
 //caso contrario, inicializa um carrinho vazio.
 localStorage.getItem("pizza_cart")
