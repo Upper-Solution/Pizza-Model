@@ -187,6 +187,6 @@ document.querySelector(".cart--finalizar").addEventListener("click", () => {
 
 function retornaIdQT(){
   cart.forEach(item => {
-    console.log(pizzaItem + ", "+item.qtd);
+    console.log(item.id + ", " + item.qtd);
   });
 }
