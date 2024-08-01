@@ -34,7 +34,6 @@ document.querySelector(".pizzaInfo--addButton").addEventListener("click", () => 
   updateCart();
   closeModal();
   saveCart();
-  selecionaPedido();
 });
 
 // Função para salvar itens do carrinho no localStorage
@@ -97,7 +96,7 @@ function updateCart() {
       let cartItem = document.querySelector(".models .cart--item").cloneNode(true);
 
       // Define a imagem, nome e quantidade do item no carrinho
-      cartItem.querySelector("img").src = pizzaItem.imagem;
+      cartItem.querySelector("img").src = `data:image/jpeg;base64,${pizzaItem.imagem}`;
       cartItem.querySelector(".cart--item-nome").innerHTML = pizzaName;
       cartItem.querySelector(".cart--item--qt").innerHTML = cart[i].qtd;
 
@@ -157,10 +156,12 @@ function updateCart() {
 
 // Finaliza a compra ao clicar no botão de finalizar
 document.querySelector(".cart--finalizar").addEventListener("click", () => {
+  retornaIdQT();
   cart = []; // Limpa o carrinho
   localStorage.clear(); // Limpa o localStorage
   updateCart(); // Atualiza a interface do carrinho
   document.querySelector(".fa-cart-shopping").classList.remove("pulse"); // Remove a animação de pulso do ícone do carrinho
+
   document.querySelector(".loader-content").classList.add("display"); // Exibe o loader
 
   setTimeout(() => {
@@ -184,6 +185,8 @@ document.querySelector(".cart--finalizar").addEventListener("click", () => {
   }, 2100);
 });
 
-function selecionaPedido(){
-  console.log(identifier)
+function retornaIdQT(){
+  cart.forEach(item => {
+    console.log(pizzaItem + ", "+item.qtd);
+  });
 }
