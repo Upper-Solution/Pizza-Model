@@ -34,6 +34,7 @@ document.querySelector(".pizzaInfo--addButton").addEventListener("click", () => 
   updateCart();
   closeModal();
   saveCart();
+  selecionaPedido();
 });
 
 // Função para salvar itens do carrinho no localStorage
@@ -182,3 +183,7 @@ document.querySelector(".cart--finalizar").addEventListener("click", () => {
     }, 4000);
   }, 2100);
 });
+
+function selecionaPedido(){
+  console.log(identifier)
+}

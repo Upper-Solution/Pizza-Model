@@ -186,9 +186,6 @@ $pdo = null;
                     console.log('Finalizar Pedido button clicked');
                     <?php if (!$loggedIn) { ?>
                         window.location.href = 'login.php';
-                    <?php } else { ?>
-                        // Redirecione para o script PHP que envia a mensagem no WhatsApp
-                        window.location.href = 'send_whatsapp_message.php';
                     <?php } ?>
                 });
             }
