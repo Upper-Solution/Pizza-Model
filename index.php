@@ -20,12 +20,11 @@
         <div class="home-area">
             <section class="left-home">
                 <div class="left-area">
-                    <div class="left-text1">Pizzas 10% OFF</div>
+                    <div class="left-text1">O Verdadeiro Sabor do Hambúrguer</div>
                     <div class="left-text2">Confira no cardápio</div>
-                    <div class="left-text3">Lorem ipsum dolor sit amet
-                        consectetur adipisicing elit. Incidunt, vitae
-                        beatae sint magnam, libero harum quae nobis
-                        veritatis iure hic provident illo porro.</div>
+                    <div class="left-text3">Nossos hambúrgueres artesanais são 
+                        feitos com os melhores ingredientes. Aproveite a chance de 
+                        provar o melhor da nossa cozinha. Peça agora e desfrute!</div>
                     <a href="menu.php">
                         <div class="button">Fazer pedido <i class="fa-solid
                                     fa-arrow-right"></i>
@@ -35,7 +34,7 @@
             </section>
             <section class="right-home">
                 <div class="right-image">
-                    <img src="images/pizza-desenho.png" alt="pizza.png">
+                    <img src="images/banner.jpg" alt="pizza.png">
                 </div>
             </section>
         </div>

@@ -48,7 +48,7 @@ $pdo = null;
     <script src="https://kit.fontawesome.com/8b4042ccf0.js" crossorigin="anonymous"></script>
     <link rel="stylesheet" href="css/style.css">
     <link href="https://fonts.googleapis.com/css?family=Hepta+Slab:400,700|Lato:400,700&display=swap" rel="stylesheet">
-    <title>Pizzaria</title>
+    <title>Hambúrguer</title>
 </head>
 <body>
     <div class="loader-content">
@@ -82,7 +82,7 @@ $pdo = null;
                 </div>
             </div>
             <main>
-                <h1 class="titulo--h1">Pizzas</h1>
+                <h1 class="titulo--h1">Hambúrguer</h1>
                 <div class="pizza-area"></div>
             </main>
 

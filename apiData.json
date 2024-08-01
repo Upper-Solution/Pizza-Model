@@ -1,130 +1,186 @@
 [
   {
     "id": 1,
-    "name": "Atum",
-    "img": "images/atum.png",
-    "price": [14.49, 19.99, 29.99],
-    "sizes": ["320g", "530g", "860g"],
-    "description": "Molho, muçarela, atum, cebola fatiada e orégano."
+    "name": "Hambúrguer Clássico",
+    "img": "images/xburguer.png",
+    "price": [9.99, 12.99, 15.99],
+    "sizes": ["Pequeno", "Médio", "Grande"],
+    "description": "Hambúrguer, queijo, alface, tomate, cebola, picles, ketchup e mostarda."
   },
   {
     "id": 2,
-    "name": "Calabresa",
-    "img": "images/calabresa.png",
-    "price": [14.5, 19.99, 27.99],
-    "sizes": ["320g", "530g", "860g"],
-    "description": "Molho, muçarela, calabresa fatiada, cebola fatiada e orégano."
+    "name": "Cheeseburger",
+    "img": "images/cheeseburger.png",
+    "price": [10.99, 13.99, 16.99],
+    "sizes": ["Pequeno", "Médio", "Grande"],
+    "description": "Hambúrguer, queijo, alface, tomate, cebola e maionese."
   },
   {
     "id": 3,
-    "name": "Camarão c/ catupiry",
-    "img": "images/camarao-c-catupiry.png",
-    "price": [16.5, 25.99, 32.99],
-    "sizes": ["320g", "530g", "860g"],
-    "description": "Molho, muçarela, camarões ao molho, catupiry e orégano."
+    "name": "Bacon Burger",
+    "img": "images/baconburger.png",
+    "price": [12.99, 15.99, 18.99],
+    "sizes": ["Pequeno", "Médio", "Grande"],
+    "description": "Hambúrguer, queijo, bacon, alface, tomate e maionese."
   },
   {
     "id": 4,
-    "name": "4 Queijos",
-    "img": "images/4queijos.png",
-    "price": [15.5, 19.99, 47.99],
-    "sizes": ["320g", "530g", "860g"],
-    "description": "Molho, muçarela, provolone, parmesão, catupiry e orégano."
+    "name": "Chicken Burger",
+    "img": "images/chickenburger.png",
+    "price": [11.99, 14.99, 17.99],
+    "sizes": ["Pequeno", "Médio", "Grande"],
+    "description": "Filé de frango grelhado, queijo, alface, tomate e maionese."
   },
   {
     "id": 5,
-    "name": "Frango c/ catupiry",
-    "img": "images/frango-catupiry.png",
-    "price": [14.5, 19.99, 26.99],
-    "sizes": ["320g", "530g", "860g"],
-    "description": "Molho, muçarela, frango desfiado, catupiry e orégano."
+    "name": "Veggie Burger",
+    "img": "images/veggieburger.png",
+    "price": [9.99, 12.99, 15.99],
+    "sizes": ["Pequeno", "Médio", "Grande"],
+    "description": "Hambúrguer vegetariano, queijo, alface, tomate, cebola e molho especial."
   },
   {
     "id": 6,
-    "name": "Milho c/ bacon",
-    "img": "images/milho-com-bacon.png",
-    "price": [14.5, 23.99, 42.99],
-    "sizes": ["320g", "530g", "860g"],
-    "description": "Molho, muçarela, milho, bacon, parmesão e orégano."
+    "name": "Cheddar Melt",
+    "img": "images/cheddarmelt.png",
+    "price": [11.99, 14.99, 17.99],
+    "sizes": ["Pequeno", "Médio", "Grande"],
+    "description": "Hambúrguer, cheddar, cebola caramelizada e molho especial."
   },
   {
     "id": 7,
-    "name": "Moda da casa",
-    "img": "images/moda-da-casa.png",
-    "price": [14.5, 23.99, 38.99],
-    "sizes": ["320g", "530g", "860g"],
-    "description": "Molho, muçarela, milho, bacon, parmesão e orégano."
+    "name": "BBQ Burger",
+    "img": "images/bbqburger.png",
+    "price": [12.99, 15.99, 18.99],
+    "sizes": ["Pequeno", "Médio", "Grande"],
+    "description": "Hambúrguer, queijo, bacon, molho barbecue, alface e tomate."
   },
   {
     "id": 8,
-    "name": "Muçarela",
-    "img": "images/muçarela.png",
-    "price": [14.5, 23.99, 32.99],
-    "sizes": ["320g", "530g", "860g"],
-    "description": "Molho, muçarela, milho, bacon, parmesão e orégano."
+    "name": "Double Burger",
+    "img": "images/doubleburger.png",
+    "price": [14.99, 18.99, 22.99],
+    "sizes": ["Pequeno", "Médio", "Grande"],
+    "description": "Dois hambúrgueres, queijo, alface, tomate, cebola e maionese."
   },
   {
     "id": 9,
-    "name": "Napolitana",
-    "img": "images/napolitana.png",
-    "price": [14.5, 26.99, 33.99],
-    "sizes": ["320g", "530g", "860g"],
-    "description": "Molho, muçarela, tomates em rodelas, parmesão, azeitonas e orégano."
+    "name": "Egg Burger",
+    "img": "images/eggburger.png",
+    "price": [10.99, 13.99, 16.99],
+    "sizes": ["Pequeno", "Médio", "Grande"],
+    "description": "Hambúrguer, ovo frito, queijo, alface, tomate e maionese."
   },
   {
     "id": 10,
-    "name": "Pepperoni",
-    "img": "images/pepperoni.png",
-    "price": [14.5, 21.99, 28.99],
-    "sizes": ["320g", "530g", "860g"],
-    "description": "Molho, salame pepperoni fatiado e orégano."
+    "name": "Spicy Burger",
+    "img": "images/spicyburger.png",
+    "price": [11.99, 14.99, 17.99],
+    "sizes": ["Pequeno", "Médio", "Grande"],
+    "description": "Hambúrguer, queijo, pimenta jalapeño, alface, tomate e molho picante."
   },
   {
     "id": 11,
-    "name": "Portuguesa",
-    "img": "images/portuguesa.png",
-    "price": [15.5, 26.99, 35.99],
-    "sizes": ["320g", "530g", "860g"],
-    "description": "Molho, muçarela, presunto, calabresa, ovos, cebola, azeitonas e orégano."
+    "name": "Cachorro Quente Tradicional",
+    "img": "images/cachorro-quente-tradicional.png",
+    "price": [8.99, 10.99, 12.99],
+    "sizes": ["Pequeno", "Médio", "Grande"],
+    "description": "Salsicha, ketchup, mostarda e batata palha."
   },
   {
     "id": 12,
-    "name": "Brócolis c/ catupiry",
-    "img": "images/brocolis-com-catupiry.png",
-    "price": [14.5, 22.99, 24.99],
-    "sizes": ["320g", "530g", "860g"],
-    "description": "Molho, muçarela, brócolis refogado com azeite de oliva e alho, catupiry e orégano."
+    "name": "Cachorro Quente Completo",
+    "img": "images/cachorro-quente-completo.png",
+    "price": [10.99, 13.99, 16.99],
+    "sizes": ["Pequeno", "Médio", "Grande"],
+    "description": "Salsicha, purê de batata, milho, ervilha, queijo, ketchup, mostarda e batata palha."
   },
   {
     "id": 13,
-    "name": "Chocolate",
-    "img": "images/chocolate.png",
-    "price": [14.5, 24.99, 29.99],
-    "sizes": ["320g", "530g", "860g"],
-    "description": "Chocolate ao leite."
+    "name": "Cachorro Quente com Bacon",
+    "img": "images/cachorro-quente-bacon.png",
+    "price": [9.99, 12.99, 15.99],
+    "sizes": ["Pequeno", "Médio", "Grande"],
+    "description": "Salsicha, bacon, queijo, ketchup, mostarda e batata palha."
   },
   {
     "id": 14,
-    "name": "M&M's",
-    "img": "images/chocolate-c-mm.png",
-    "price": [14.5, 22.99, 32.99],
-    "sizes": ["320g", "530g", "860g"],
-    "description": "Chocolate e M&M's."
+    "name": "Cachorro Quente Veggie",
+    "img": "images/cachorro-quente-veggie.png",
+    "price": [9.99, 12.99, 15.99],
+    "sizes": ["Pequeno", "Médio", "Grande"],
+    "description": "Salsicha vegetariana, ketchup, mostarda, alface, tomate e batata palha."
   },
   {
     "id": 15,
-    "name": "Chocolate c/ morango",
-    "img": "images/chocolate-com-morango.png",
-    "price": [15.5, 23.99, 34.99],
-    "sizes": ["320g", "530g", "860g"],
-    "description": "Chocolate ao leite e morango"
+    "name": "Porção de Batata Frita",
+    "img": "images/batata-frita.png",
+    "price": [5.99, 7.99, 9.99],
+    "sizes": ["Pequena", "Média", "Grande"],
+    "description": "Batata frita crocante."
   },
   {
     "id": 16,
-    "name": "Banana c/ doce de Leite",
-    "img": "images/banan-doce-de-leite.png",
-    "price": [16.5, 24.99, 29.99],
-    "sizes": ["320g", "530g", "860g"],
-    "description": "Banana, doce de leite, açúcar e canela."
+    "name": "Coca-Cola",
+    "img": "images/coca-cola.png",
+    "price": [4.99, 5.99, 6.99],
+    "sizes": ["Lata", "600ml", "1L"],
+    "description": "Refrigerante Coca-Cola."
+  },
+  {
+    "id": 17,
+    "name": "Guaraná",
+    "img": "images/guarana.png",
+    "price": [4.99, 5.99, 6.99],
+    "sizes": ["Lata", "600ml", "1L"],
+    "description": "Refrigerante Guaraná."
+  },
+  {
+    "id": 18,
+    "name": "Fanta Laranja",
+    "img": "images/fanta-laranja.png",
+    "price": [4.99, 5.99, 6.99],
+    "sizes": ["Lata", "600ml", "1L"],
+    "description": "Refrigerante Fanta Laranja."
+  },
+  {
+    "id": 19,
+    "name": "Fanta Uva",
+    "img": "images/fanta-uva.png",
+    "price": [4.99, 5.99, 6.99],
+    "sizes": ["Lata", "600ml", "1L"],
+    "description": "Refrigerante Fanta Uva."
+  },
+  {
+    "id": 20,
+    "name": "Água",
+    "img": "images/agua.png",
+    "price": [2.99, 3.99, 4.99],
+    "sizes": ["300ml", "500ml", "1L"],
+    "description": "Água mineral."
+  },
+  {
+    "id": 21,
+    "name": "Suco de Laranja",
+    "img": "images/suco-laranja.png",
+    "price": [4.99, 6.99, 8.99],
+    "sizes": ["Pequeno", "Médio", "Grande"],
+    "description": "Suco de laranja natural."
+  },
+  {
+    "id": 22,
+    "name": "Chá Gelado",
+    "img": "images/cha-gelado.png",
+    "price": [4.99, 5.99, 6.99],
+    "sizes": ["Lata", "600ml", "1L"],
+    "description": "Chá gelado de limão."
+  },
+  {
+    "id": 23,
+    "name": "Café Gelado",
+    "img": "images/cafe-gelado.png",
+    "price": [5.99, 7.99, 9.99],
+    "sizes": ["Pequeno", "Médio", "Grande"],
+    "description": "Café gelado com leite."
   }
 ]
