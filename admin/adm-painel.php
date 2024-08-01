@@ -41,8 +41,8 @@ if (isset($_POST['logout'])) {
                 <h2>Sobre</h2>
                 <p>Alterar as informações da página sobre</p>
             </div>
-            <div class="card" onclick="window.location.href='url3.php'">
-                <h2>teste</h2>
+            <div class="card" onclick="window.location.href='admin-orders.php'">
+                <h2>Pedidos</h2>
                 <p>testeeeeeeeee</p>
             </div>
         </div>
