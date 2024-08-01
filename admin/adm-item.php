@@ -12,12 +12,11 @@ if (!$pdo) {
 
 // Verifica se foi feito um filtro de pesquisa
 $searchQuery = '';
+$searchValue = null;
 if (isset($_GET['search']) && !empty($_GET['search'])) {
     $search = $_GET['search'];
     $searchQuery = " WHERE nome LIKE ? OR id = ?";
     $searchValue = "%$search%";
-} else {
-    $searchValue = null;
 }
 
 // Verifica se um formulário de edição foi enviado
@@ -26,11 +25,20 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST' && isset($_POST['edit_id'])) {
     $nome = $_POST['nome'];
     $descricao = $_POST['descricao'];
     $preco = $_POST['preco'];
+    $imagem = null;
+
+    if (is_uploaded_file($_FILES['imagem']['tmp_name'])) {
+        $imagem = file_get_contents($_FILES['imagem']['tmp_name']);
+    }
 
     try {
-        $stmt = $pdo->prepare("UPDATE Pizzas SET nome = ?, descricao = ?, preco = ? WHERE id = ?");
-        $stmt->execute([$nome, $descricao, $preco, $edit_id]);
-        // Recarrega a página após a atualização
+        if ($imagem) {
+            $stmt = $pdo->prepare("UPDATE Pizzas SET nome = ?, descricao = ?, preco = ?, imagem = ? WHERE id = ?");
+            $stmt->execute([$nome, $descricao, $preco, $imagem, $edit_id]);
+        } else {
+            $stmt = $pdo->prepare("UPDATE Pizzas SET nome = ?, descricao = ?, preco = ? WHERE id = ?");
+            $stmt->execute([$nome, $descricao, $preco, $edit_id]);
+        }
         header('Location: ' . $_SERVER['PHP_SELF']);
         exit;
     } catch (PDOException $e) {
@@ -43,11 +51,11 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST' && isset($_POST['add_pizza'])) {
     $nome = $_POST['nome'];
     $descricao = $_POST['descricao'];
     $preco = $_POST['preco'];
+    $imagem = file_get_contents($_FILES['imagem']['tmp_name']);
 
     try {
-        $stmt = $pdo->prepare("INSERT INTO Pizzas (nome, descricao, preco) VALUES (?, ?, ?)");
-        $stmt->execute([$nome, $descricao, $preco]);
-        // Recarrega a página após a adição
+        $stmt = $pdo->prepare("INSERT INTO Pizzas (nome, descricao, preco, imagem) VALUES (?, ?, ?, ?)");
+        $stmt->execute([$nome, $descricao, $preco, $imagem]);
         header('Location: ' . $_SERVER['PHP_SELF']);
         exit;
     } catch (PDOException $e) {
@@ -58,11 +66,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST' && isset($_POST['add_pizza'])) {
 // Consulta SQL para obter os dados das pizzas
 try {
     $stmt = $pdo->prepare("SELECT * FROM Pizzas" . $searchQuery . " ORDER BY id DESC");
-    if ($searchValue) {
-        $stmt->execute([$searchValue, $search]);
-    } else {
-        $stmt->execute();
-    }
+    $stmt->execute($searchValue ? [$searchValue, $search] : []);
     $pizzas = $stmt->fetchAll(PDO::FETCH_ASSOC);
 } catch (PDOException $e) {
     echo "Erro ao consultar dados das pizzas: " . $e->getMessage();
@@ -101,7 +105,7 @@ $pdo = null;
             <button class="btn-add-pizza" onclick="showAddForm()">Adicionar Pizza</button>
             <!-- Formulário de adição, inicialmente escondido -->
             <div id="add-form" class="add-form" style="display:none;">
-                <form method="POST" action="">
+                <form method="POST" action="" enctype="multipart/form-data">
                     <h3>Adicionar Nova Pizza</h3>
                     <label for="nome">Nome:</label>
                     <input type="text" name="nome" required>
@@ -111,6 +115,9 @@ $pdo = null;
                     <br>
                     <label for="preco">Preço (R$):</label>
                     <input type="number" name="preco" step="0.01" required>
+                    <br>
+                    <label for="imagem">Imagem:</label>
+                    <input type="file" name="imagem" accept="image/*">
                     <br>
                     <button type="submit" name="add_pizza">Adicionar</button>
                     <button type="button" onclick="hideAddForm()">Cancelar</button>
@@ -124,6 +131,7 @@ $pdo = null;
                         <th scope="col">Nome</th>
                         <th scope="col">Descrição</th>
                         <th scope="col">Preço (R$)</th>
+                        <th scope="col">Imagem</th>
                         <th scope="col">Ações</th>
                     </tr>
                 </thead>
@@ -136,6 +144,13 @@ $pdo = null;
                                 <td><?php echo htmlspecialchars($pizza['descricao']); ?></td>
                                 <td><?php echo htmlspecialchars($pizza['preco']); ?></td>
                                 <td>
+                                    <?php if ($pizza['imagem']): ?>
+                                        <img src="exibir_imagem.php?id=<?php echo htmlspecialchars($pizza['id']); ?>" alt="Imagem da Pizza" style="max-width: 100px;">
+                                    <?php else: ?>
+                                        <span>Sem imagem</span>
+                                    <?php endif; ?>
+                                </td>
+                                <td>
                                     <!-- Botão para mostrar o formulário de edição -->
                                     <button class="btn-edit" onclick="showEditForm(<?php echo htmlspecialchars($pizza['id']); ?>)">Editar</button>
                                     <a href="delete_pizza.php?id=<?php echo htmlspecialchars($pizza['id']); ?>" class="btn-delete" onclick="return confirm('Tem certeza que deseja excluir esta pizza?');">Excluir</a>
@@ -143,8 +158,8 @@ $pdo = null;
                             </tr>
                             <!-- Formulário de edição, inicialmente escondido -->
                             <tr id="edit-form-<?php echo htmlspecialchars($pizza['id']); ?>" class="edit-form" style="display:none;">
-                                <td colspan="5">
-                                    <form method="POST" action="">
+                                <td colspan="6">
+                                    <form method="POST" action="" enctype="multipart/form-data">
                                         <input type="hidden" name="edit_id" value="<?php echo htmlspecialchars($pizza['id']); ?>">
                                         <label for="nome">Nome:</label>
                                         <input type="text" name="nome" value="<?php echo htmlspecialchars($pizza['nome']); ?>" required>
@@ -155,6 +170,9 @@ $pdo = null;
                                         <label for="preco">Preço (R$):</label>
                                         <input type="number" name="preco" step="0.01" value="<?php echo htmlspecialchars($pizza['preco']); ?>" required>
                                         <br>
+                                        <label for="imagem">Imagem:</label>
+                                        <input type="file" name="imagem" accept="image/*">
+                                        <br>
                                         <button type="submit">Salvar</button>
                                         <button type="button" onclick="hideEditForm(<?php echo htmlspecialchars($pizza['id']); ?>)">Cancelar</button>
                                     </form>
@@ -163,7 +181,7 @@ $pdo = null;
                         <?php endforeach; ?>
                     <?php else: ?>
                         <tr>
-                            <td colspan="5">Nenhuma pizza encontrada.</td>
+                            <td colspan="6">Nenhuma pizza encontrada.</td>
                         </tr>
                     <?php endif; ?>
                 </tbody>
@@ -171,20 +189,20 @@ $pdo = null;
         </div>
     </div>
     <script>
-        function showEditForm(id) {
-            document.getElementById('edit-form-' + id).style.display = 'table-row';
-        }
-
-        function hideEditForm(id) {
-            document.getElementById('edit-form-' + id).style.display = 'none';
-        }
-
         function showAddForm() {
             document.getElementById('add-form').style.display = 'block';
         }
 
         function hideAddForm() {
             document.getElementById('add-form').style.display = 'none';
+        }
+
+        function showEditForm(id) {
+            document.getElementById('edit-form-' + id).style.display = 'table-row';
+        }
+
+        function hideEditForm(id) {
+            document.getElementById('edit-form-' + id).style.display = 'none';
         }
     </script>
 </body>
