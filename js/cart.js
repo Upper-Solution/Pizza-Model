@@ -185,8 +185,21 @@ document.querySelector(".cart--finalizar").addEventListener("click", () => {
   }, 2100);
 });
 
-function retornaIdQT(){
-  cart.forEach(item => {
-    console.log(item.id + ", " + item.qtd);
-  });
+// Função para enviar os dados do carrinho para o arquivo PHP
+function retornaIdQT() {
+  const cartData = cart.map(item => ({
+    id: item.id,
+    qtd: item.qtd
+  }));
+
+  fetch('../admin/get-dataCart.php', {
+    method: 'POST',
+    headers: {
+      'Content-Type': 'application/json'
+    },
+    body: JSON.stringify(cartData)
+  })
+  .then(response => response.json())
+  .then(data => console.log(data))
+  .catch(error => console.error('Erro:', error));
 }
