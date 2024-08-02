@@ -74,6 +74,8 @@ if ($loggedIn) {
 $pdo = null;
 ?>
 
+
+
 <!DOCTYPE html>
 <html lang="pt-BR">
 <head>
@@ -112,3 +114,7 @@ $pdo = null;
     </div>
 </body>
 </html>
+
+<script>
+    const userEmail = <?php echo json_encode($email); ?>;
+</script>
