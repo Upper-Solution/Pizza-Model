@@ -187,20 +187,37 @@ document.querySelector(".cart--finalizar").addEventListener("click", () => {
 
 // Função para enviar os dados do carrinho para o arquivo PHP
 function retornaIdQT() {
+  // Obter os dados do carrinho
   const cartData = cart.map(item => ({
-    id: item.id,
-    qtd: item.qtd,
-    valorTotal: item.total
+      orderId: item.id,
+      quantidade: item.qtd,
+      valorTotal: item.preco * item.qtd
   }));
 
   fetch('../admin/get-dataCart.php', {
-    method: 'POST',
-    headers: {
-      'Content-Type': 'application/json'
-    },
-    body: JSON.stringify(cartData)
+      method: 'POST',
+      headers: {
+          'Content-Type': 'application/json'
+      },
+      body: JSON.stringify(cartData)
   })
-  .then(response => response.json())
-  .then(data => console.log(data))
-  .catch(error => console.error('Erro:', error));
+  .then(response => {
+      // Verificar se a resposta é JSON
+      const contentType = response.headers.get('content-type');
+      if (contentType && contentType.includes('application/json')) {
+          return response.json();
+      } else {
+          return response.text().then(text => { throw new Error(text); });
+      }
+  })
+  .then(data => {
+      if (data.status === 'success') {
+          console.log('Pedido finalizado com sucesso:', data.message);
+      } else {
+          console.error('Erro ao finalizar o pedido:', data.message);
+      }
+  })
+  .catch(error => {
+      console.error('Erro ao enviar os dados do pedido:', error);
+  });
 }
