@@ -136,4 +136,3 @@ document.querySelector(".pizzaInfo--qtmais").addEventListener("click", () => {
     currency: "BRL",
   })}`;
 });
-

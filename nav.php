@@ -39,7 +39,6 @@ if ($loggedIn) {
     }
 }
 ?>
-
 <!DOCTYPE html>
 <html lang="pt-BR">
 <head>

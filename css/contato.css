@@ -1,0 +1,79 @@
+/* Reset básico para garantir consistência entre navegadores */
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+/* Estilização geral do corpo da página */
+body {
+    font-family: Arial, sans-serif; /* Fonte padrão para o texto */
+    line-height: 1.6; /* Melhor legibilidade do texto */
+    color: #333; /* Cor do texto */
+    background-color: #f4f4f4; /* Cor de fundo clara */
+    padding: 20px; /* Espaçamento em torno do conteúdo */
+}
+
+/* Estilização do cabeçalho da página */
+header {
+    background: #333; /* Cor de fundo escura */
+    padding: 20px; /* Espaçamento interno */
+    text-align: center; /* Alinha o texto ao centro */
+}
+
+/* Estilização da seção de contato */
+#contact {
+    background: #fff; /* Cor de fundo branca para contraste */
+    border-radius: 8px; /* Bordas arredondadas */
+    padding: 20px; /* Espaçamento interno */
+    max-width: 600px; /* Largura máxima da seção */
+    margin: 20px auto; /* Centraliza a seção horizontalmente */
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.1); /* Sombra suave ao redor da seção */
+}
+
+/* Estilização dos rótulos do formulário */
+form label {
+    display: block; /* Faz com que os rótulos ocupem uma linha inteira */
+    margin-bottom: 5px; /* Espaço abaixo dos rótulos */
+    font-weight: bold; /* Torna o texto dos rótulos negrito */
+}
+
+/* Estilização dos campos de entrada do formulário */
+form input[type="text"],
+form input[type="email"],
+form input[type="tel"],
+form textarea {
+    width: 100%; /* Faz com que os campos ocupem toda a largura disponível */
+    padding: 10px; /* Espaçamento interno dos campos */
+    margin-bottom: 15px; /* Espaço abaixo dos campos */
+    border: 1px solid #ccc; /* Borda cinza clara */
+    border-radius: 4px; /* Bordas arredondadas nos campos */
+    font-size: 16px; /* Tamanho da fonte dentro dos campos */
+}
+
+/* Estilização do botão de envio do formulário */
+form button {
+    background: #333; /* Cor de fundo escura */
+    color: #fff; /* Cor do texto clara */
+    border: none; /* Remove a borda padrão */
+    padding: 10px 20px; /* Espaçamento interno do botão */
+    border-radius: 4px; /* Bordas arredondadas do botão */
+    cursor: pointer; /* Muda o cursor para uma mãozinha ao passar sobre o botão */
+    font-size: 16px; /* Tamanho da fonte dentro do botão */
+}
+
+/* Estilização do botão ao passar o mouse sobre ele */
+form button:hover {
+    background: #555; /* Cor de fundo mais clara ao passar o mouse */
+}
+
+/* Estilização do rodapé da página */
+footer {
+    text-align: center; /* Alinha o texto ao centro */
+    padding: 10px; /* Espaçamento interno */
+    background: #333; /* Cor de fundo escura */
+    color: #fff; /* Cor do texto clara */
+    position: fixed; /* Fixa o rodapé na parte inferior da página */
+    width: 100%; /* Largura total */
+    bottom: 0; /* Posiciona na parte inferior */
+}
