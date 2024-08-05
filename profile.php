@@ -8,6 +8,12 @@ $loggedIn = isset($_SESSION['user_id']);
 // Inclui o arquivo de configuração
 require_once 'config.php';
 
+// Verificar se o admin está logado
+if (!isset($_SESSION['user_id'])) {
+    header('Location: login.php');
+    exit;
+}
+
 // Obtém a conexão com o banco de dados
 $pdo = connectToDatabase($hosts, $port, $dbname, $username, $password);
 
@@ -109,6 +115,7 @@ $pdo = null;
             <div class="profile-actions">
                 <a href="edit_profile.php" class="btn-edit-profile">Editar Perfil</a>
                 <a href="logout.php" class="btn-logout">Sair</a>
+                
             </div>
         </div>
     </div>

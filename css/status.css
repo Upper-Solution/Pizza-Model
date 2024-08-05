@@ -41,6 +41,7 @@ h1 {
     border: 1px solid #ddd;
     border-radius: 4px 0 0 4px;
     padding: 10px;
+    margin-left: 85px;
     font-size: 16px;
     width: 300px;
     outline: none;
@@ -63,6 +64,25 @@ h1 {
 }
 
 .search-section button:hover {
+    background-color: #005a8d;
+}
+
+.search-section a {
+    background-color: #0079bf;
+    border: 1px solid #0079bf;
+    color: #fff;
+    text-align: center;
+    float: right;
+    padding: 6.5px 20px;
+    border-radius: 4px;
+    cursor: pointer;
+    font-size: 16px;
+    text-decoration: none;
+    transition: background-color 0.3s;
+
+}
+
+.search-section a:hover {
     background-color: #005a8d;
 }
 

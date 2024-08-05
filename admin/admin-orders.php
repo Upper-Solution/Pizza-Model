@@ -1,14 +1,14 @@
 <?php
 session_start();
 
-// Verifica se o usuário é administrador
+// Inclui o arquivo de configuração
+require_once '../config.php';
+
+// Verificar se o admin está logado
 if (!isset($_SESSION['admin_id'])) {
     header('Location: adm-login.php');
     exit;
 }
-
-// Inclui o arquivo de configuração
-require_once '../config.php';
 
 // Obtém a conexão com o banco de dados
 $pdo = connectToDatabase($hosts, $port, $dbname, $username, $password);
@@ -102,6 +102,7 @@ $pdo = null;
             <input type="text" name="search" placeholder="Buscar por nome ou ID" value="<?php echo htmlspecialchars($_GET['search'] ?? '', ENT_QUOTES); ?>">
             <button type="submit">Pesquisar</button>
         </form>
+        <a href="adm-painel.php"> Voltar </a>
     </section>
 
     <!-- Contêineres para os status -->

@@ -2,6 +2,9 @@
 // Iniciar a sessão
 session_start();
 
+// Inclui o arquivo de configuração
+require_once '../config.php';
+
 // Verificar se o admin está logado
 if (!isset($_SESSION['admin_id'])) {
     header('Location: adm-login.php');
