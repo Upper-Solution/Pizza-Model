@@ -31,6 +31,7 @@ if (!$pdo) {
 
 $userId = $_SESSION['user_id'];
 try {
+    // Consultar o email do usuário
     $stmt = $pdo->prepare('SELECT email FROM users WHERE id = ?');
     $stmt->execute([$userId]);
     $user = $stmt->fetch();
@@ -48,17 +49,36 @@ try {
         exit;
     }
 
-    // Aqui você pode processar os dados do carrinho e salvar no banco de dados
-    // Exemplos de dados do carrinho:
-    $orderId = $cartData['id'];
-    $quantidade = $cartData['qtd'];
+    // Iniciar a transação
+    $pdo->beginTransaction();
 
-    // Exemplo de salvamento no banco de dados (ajuste conforme necessário)
-    $stmt = $pdo->prepare('INSERT INTO orders (user_email, order_id, quantidade) VALUES (?, ?, ?)');
-    $stmt->execute([$email, $orderId, $quantidade]);
+    // Inserir o pedido na tabela orders
+    foreach ($cartData as $item) {
+        $orderId = $item['orderId'];
+        $quantidade = $item['quantidade'];
+
+        // Consultar os dados da pizza
+        $stmt = $pdo->prepare('SELECT * FROM pizzas WHERE id = ?');
+        $stmt->execute([$orderId]);
+        $pizza = $stmt->fetch();
+
+        if (!$pizza) {
+            $pdo->rollBack();
+            echo json_encode(['status' => 'error', 'message' => 'Pizza não encontrada.']);
+            exit;
+        }
+
+        // Inserir os dados na tabela orders
+        $stmt = $pdo->prepare('INSERT INTO orders (user_email, pizza_id, quantidade, pizza_name, pizza_price) VALUES (?, ?, ?, ?, ?)');
+        $stmt->execute([$email, $orderId, $quantidade, $pizza['nome'], $pizza['preco']]);
+    }
+
+    // Commit da transação
+    $pdo->commit();
 
     echo json_encode(['status' => 'success', 'message' => 'Pedido finalizado com sucesso.']);
 } catch (PDOException $e) {
-    echo json_encode(['status' => 'error', 'message' => 'Erro ao consultar dados do usuário: ' . $e->getMessage()]);
+    $pdo->rollBack();
+    echo json_encode(['status' => 'error', 'message' => 'Erro ao processar o pedido: ' . $e->getMessage()]);
 }
 ?>

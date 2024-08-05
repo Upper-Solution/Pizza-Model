@@ -189,7 +189,8 @@ document.querySelector(".cart--finalizar").addEventListener("click", () => {
 function retornaIdQT() {
   const cartData = cart.map(item => ({
     id: item.id,
-    qtd: item.qtd
+    qtd: item.qtd,
+    valorTotal: item.total
   }));
 
   fetch('../admin/get-dataCart.php', {
