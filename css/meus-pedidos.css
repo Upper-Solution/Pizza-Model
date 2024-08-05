@@ -1,0 +1,113 @@
+body {
+    font-family: 'Lato', sans-serif;
+    background-color: #f8f8f8;
+    margin: 0;
+    padding: 0;
+}
+
+.menu-area {
+    background-color: #333;
+    padding: 10px 0;
+}
+
+.menu-area a {
+    color: white;
+    text-decoration: none;
+    margin: 0 15px;
+}
+
+.menu-area ul {
+    list-style-type: none;
+    margin: 0;
+    padding: 0;
+    display: flex;
+    align-items: center;
+}
+
+.menu-area .logo img {
+    height: 50px;
+}
+
+.menu-area nav {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
+.menu-area .profile-icon {
+    border-radius: 50%;
+    height: 30px;
+    width: 30px;
+}
+
+.content {
+    max-width: 800px;
+    margin: 20px auto;
+    padding: 20px;
+    background-color: #fff;
+    border-radius: 8px;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+}
+
+h1 {
+    font-family: 'Hepta Slab', serif;
+    color: #333;
+    margin-bottom: 20px;
+}
+
+.order-card {
+    border: 1px solid #ddd;
+    border-radius: 8px;
+    margin-bottom: 20px;
+    padding: 15px;
+    background-color: #fafafa;
+    position: relative;
+}
+
+.order-card h2 {
+    font-size: 18px;
+    margin: 0;
+    color: #333;
+}
+
+.order-card p {
+    margin: 5px 0;
+}
+
+.status-bar {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    margin-top: 15px;
+}
+
+.status-bar div {
+    width: 24%;
+    height: 10px;
+    border-radius: 5px;
+    background-color: #ddd;
+    position: relative;
+}
+
+.status-bar div.completed {
+    background-color: #4caf50;
+}
+
+.status-bar div::after {
+    content: '';
+    width: 10px;
+    height: 10px;
+    background-color: #4caf50;
+    border-radius: 50%;
+    position: absolute;
+    top: -3px;
+    right: -5px;
+}
+
+.order-items {
+    margin-top: 15px;
+    padding: 10px;
+    background-color: #fff;
+    border-radius: 8px;
+    box-shadow: 0 1px 2px rgba(0, 0, 0, 0.05);
+}

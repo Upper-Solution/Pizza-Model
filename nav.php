@@ -87,6 +87,7 @@ if ($loggedIn) {
                         </a>
                         <?php if ($loggedIn): ?>
                             <div class="profile-menu" id="profileMenu">
+                                <a href="meus-pedidos.php" class="profile-menu-item">Acompanhar pedido</a>
                                 <a href="profile.php" class="profile-menu-item">Ver Perfil</a>
                                 <a href="logout.php" class="profile-menu-item">Sair</a>
                             </div>
