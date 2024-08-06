@@ -52,44 +52,6 @@ $pdo = null;
     <title>Pedidos Realizados</title>
     <link rel="stylesheet" href="../css/status.css">
     <script src="https://cdnjs.cloudflare.com/ajax/libs/Sortable/1.15.0/Sortable.min.js"></script>
-    <style>
-        /* Estilos para o modal */
-        .modal {
-            display: none;
-            position: fixed;
-            z-index: 1;
-            left: 0;
-            top: 0;
-            width: 100%;
-            height: 100%;
-            overflow: auto;
-            background-color: rgb(0,0,0);
-            background-color: rgba(0,0,0,0.4);
-            padding-top: 60px;
-        }
-
-        .modal-content {
-            background-color: #fefefe;
-            margin: 5% auto;
-            padding: 20px;
-            border: 1px solid #888;
-            width: 80%;
-        }
-
-        .close {
-            color: #aaa;
-            float: right;
-            font-size: 28px;
-            font-weight: bold;
-        }
-
-        .close:hover,
-        .close:focus {
-            color: black;
-            text-decoration: none;
-            cursor: pointer;
-        }
-    </style>
 </head>
 <body>
     <header>
@@ -107,40 +69,22 @@ $pdo = null;
 
     <!-- Contêineres para os status -->
     <div id="status-container">
-        <div id="recebido" class="status-column">
+        <div id="recebido" class="status-column" data-status="Recebido">
             <h2>Recebido</h2>
-            <ul class="sortable" data-status="Recebido">
-                <?php
-                foreach ($orders as $order) {
-                    if ($order['status'] === 'Recebido') {
-                        echo "<li data-id='" . htmlspecialchars($order['order_id']) . "' onclick='showDetails(" . htmlspecialchars($order['order_id']) . ")'>" . htmlspecialchars($order['customer_name']) ." / ". htmlspecialchars($order['items']) . "</li>";
-                    }
-                }
-                ?>
+            <ul class="sortable" id="recebido-list">
+                <!-- Itens serão inseridos aqui via JavaScript -->
             </ul>
         </div>
-        <div id="preparando" class="status-column">
+        <div id="preparando" class="status-column" data-status="Preparando">
             <h2>Preparando</h2>
-            <ul class="sortable" data-status="Preparando">
-                <?php
-                foreach ($orders as $order) {
-                    if ($order['status'] === 'Preparando') {
-                        echo "<li data-id='" . htmlspecialchars($order['order_id']) . "' onclick='showDetails(" . htmlspecialchars($order['order_id']) . ")'>" . htmlspecialchars($order['customer_name']) ." / ". htmlspecialchars($order['items']) . "</li>";
-                    }
-                }
-                ?>
+            <ul class="sortable" id="preparando-list">
+                <!-- Itens serão inseridos aqui via JavaScript -->
             </ul>
         </div>
-        <div id="entrega" class="status-column">
+        <div id="entrega" class="status-column" data-status="Saiu para Entrega">
             <h2>Saiu para Entrega</h2>
-            <ul class="sortable" data-status="Saiu para Entrega">
-                <?php
-                foreach ($orders as $order) {
-                    if ($order['status'] === 'Saiu para Entrega') {
-                        echo "<li data-id='" . htmlspecialchars($order['order_id']) . "' onclick='showDetails(" . htmlspecialchars($order['order_id']) . ")'>" . htmlspecialchars($order['customer_name']) ." / ". htmlspecialchars($order['items']) . "</li>";
-                    }
-                }
-                ?>
+            <ul class="sortable" id="entrega-list">
+                <!-- Itens serão inseridos aqui via JavaScript -->
             </ul>
         </div>
     </div>
@@ -155,6 +99,82 @@ $pdo = null;
     </div>
 
     <script>
+        function fetchOrders() {
+            var xhr = new XMLHttpRequest();
+            xhr.open('GET', 'fetch-orders.php', true);
+            xhr.onload = function() {
+                if (xhr.status === 200) {
+                    var orders = JSON.parse(xhr.responseText);
+                    updateOrderLists(orders);
+                }
+            };
+            xhr.send();
+        }
+
+        function updateOrderLists(orders) {
+            var recebidoList = document.getElementById('recebido-list');
+            var preparandoList = document.getElementById('preparando-list');
+            var entregaList = document.getElementById('entrega-list');
+
+            recebidoList.innerHTML = '';
+            preparandoList.innerHTML = '';
+            entregaList.innerHTML = '';
+
+            orders.forEach(function(order) {
+                var listItem = "<li class='card' data-id='" + order.order_id + "' onclick='showDetails(" + order.order_id + ")'>" +
+                               "<div class='status-bolinha status-" + order.status.toLowerCase().replace(' ', '-') + "'></div>" +
+                               order.customer_name + " / " + order.items;
+
+                // Adiciona o botão 'Recusar' na coluna 'Recebido'
+                if (order.status === 'Recebido') {
+                    listItem += " <button onclick='confirmRejectOrder(" + order.order_id + ")'>Recusar</button>";
+                }
+
+                // Adiciona o botão 'Entregue' na coluna 'Saiu para Entrega'
+                if (order.status === 'Saiu para Entrega') {
+                    listItem += " <button onclick='confirmMarkAsDelivered(" + order.order_id + ")'>Entregue</button>";
+                }
+
+                listItem += "</li>";
+
+                if (order.status === 'Recebido') {
+                    recebidoList.innerHTML += listItem;
+                } else if (order.status === 'Preparando') {
+                    preparandoList.innerHTML += listItem;
+                } else if (order.status === 'Saiu para Entrega') {
+                    entregaList.innerHTML += listItem;
+                }
+            });
+
+            // Re-initialize sortable functionality
+            initializeSortable();
+        }
+
+        function initializeSortable() {
+            var sortableLists = document.querySelectorAll('.sortable');
+
+            sortableLists.forEach(function (list) {
+                Sortable.create(list, {
+                    group: 'shared',
+                    animation: 150,
+                    onStart: function (evt) {
+                        evt.item.classList.add('dragging');
+                    },
+                    onEnd: function (evt) {
+                        evt.item.classList.remove('dragging');
+                        
+                        var itemId = evt.item.dataset.id;
+                        var newStatus = evt.to.parentNode.dataset.status;
+                        
+                        var xhr = new XMLHttpRequest();
+                        xhr.open('POST', 'update-status.php', true);
+                        xhr.setRequestHeader('Content-Type', 'application/x-www-form-urlencoded');
+                        xhr.send('id=' + encodeURIComponent(itemId) + '&status=' + encodeURIComponent(newStatus));
+                    }
+                });
+            });
+        }
+
         function showDetails(orderId) {
             var xhr = new XMLHttpRequest();
             xhr.open('GET', 'get-order-details.php?id=' + encodeURIComponent(orderId), true);
@@ -171,35 +191,45 @@ $pdo = null;
             document.getElementById('orderModal').style.display = 'none';
         }
 
+        function confirmRejectOrder(orderId) {
+            if (confirm('Tem certeza que deseja recusar este pedido?')) {
+                rejectOrder(orderId);
+            }
+        }
+
+        function confirmMarkAsDelivered(orderId) {
+            if (confirm('Tem certeza que este pedido foi entregue?')) {
+                markAsDelivered(orderId);
+            }
+        }
+
+        function rejectOrder(orderId) {
+            var xhr = new XMLHttpRequest();
+            xhr.open('POST', 'update-status.php', true);
+            xhr.setRequestHeader('Content-Type', 'application/x-www-form-urlencoded');
+            xhr.onload = function() {
+                if (xhr.status === 200) {
+                    fetchOrders(); // Atualiza a lista de pedidos
+                }
+            };
+            xhr.send('id=' + encodeURIComponent(orderId) + '&status=Recusado');
+        }
+
+        function markAsDelivered(orderId) {
+            var xhr = new XMLHttpRequest();
+            xhr.open('POST', 'update-status.php', true);
+            xhr.setRequestHeader('Content-Type', 'application/x-www-form-urlencoded');
+            xhr.onload = function() {
+                if (xhr.status === 200) {
+                    fetchOrders(); // Atualiza a lista de pedidos
+                }
+            };
+            xhr.send('id=' + encodeURIComponent(orderId) + '&status=Entregue');
+        }
+
         document.addEventListener('DOMContentLoaded', function () {
-            // Seleciona todas as listas com a classe 'sortable'
-            var sortableLists = document.querySelectorAll('.sortable');
-            
-            // Inicializa o SortableJS para cada lista
-            sortableLists.forEach(function (list) {
-                Sortable.create(list, {
-                    group: 'shared', // Permite arrastar entre colunas
-                    animation: 150,
-                    onStart: function (evt) {
-                        evt.item.classList.add('dragging');
-                    },
-                    onEnd: function (evt) {
-                        evt.item.classList.remove('dragging');
-                        
-                        var itemId = evt.item.dataset.id;
-                        var newStatus = evt.from.dataset.status;
-                        
-                        console.log('Item moved:', itemId);
-                        console.log('New status:', newStatus);
-                        
-                        // Envia a atualização para o servidor
-                        var xhr = new XMLHttpRequest();
-                        xhr.open('POST', 'update-status.php', true);
-                        xhr.setRequestHeader('Content-Type', 'application/x-www-form-urlencoded');
-                        xhr.send('id=' + encodeURIComponent(itemId) + '&status=' + encodeURIComponent(newStatus));
-                    }
-                });
-            });
+            fetchOrders();
+            setInterval(fetchOrders, 5000); // Atualiza a cada 5 segundos
         });
     </script>
 </body>

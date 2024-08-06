@@ -20,12 +20,16 @@ if ($orderId > 0) {
         $order = $stmt->fetch(PDO::FETCH_ASSOC);
 
         if ($order) {
+            echo "<div class='order-details'>";
+            echo "<div class='column'>";
             echo "<p><strong>ID:</strong> " . htmlspecialchars($order['order_id']) . "</p>";
             echo "<p><strong>Nome do Cliente:</strong> " . htmlspecialchars($order['customer_name']) . "</p>";
             echo "<p><strong>Itens:</strong> " . htmlspecialchars($order['items']) . "</p>";
             echo "<p><strong>Total:</strong> R$ " . number_format($order['total'], 2, ',', '.') . "</p>";
             echo "<p><strong>Data do Pedido:</strong> " . htmlspecialchars($order['order_date']) . "</p>";
             echo "<p><strong>Status:</strong> " . htmlspecialchars($order['status']) . "</p>";
+            echo "</div>";
+            echo "<div class='column'>";
             echo "<p><strong>Cidade:</strong> " . htmlspecialchars($order['city']) . "</p>";
             echo "<p><strong>Bairro:</strong> " . htmlspecialchars($order['neighborhood']) . "</p>";
             echo "<p><strong>Rua:</strong> " . htmlspecialchars($order['street']) . "</p>";
@@ -33,6 +37,8 @@ if ($orderId > 0) {
             echo "<p><strong>Complemento:</strong> " . htmlspecialchars($order['complement']) . "</p>";
             echo "<p><strong>Observação:</strong> " . htmlspecialchars($order['observation']) . "</p>";
             echo "<p><strong>Telefone:</strong> " . htmlspecialchars($order['phone_number']) . "</p>";
+            echo "</div>";
+            echo "</div>";
         } else {
             echo "<p>Pedido não encontrado.</p>";
         }

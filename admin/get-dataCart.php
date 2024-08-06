@@ -56,7 +56,7 @@ try {
             $pizza['nome'],
             $quantidade,
             $total,
-            'Preparando', // Exemplo de status padrão
+            'Recebido', // Exemplo de status padrão
             $user['cep'],
             $user['city'],
             $user['neighborhood'],
