@@ -5,13 +5,29 @@ body {
     padding: 0;
 }
 
+.header {
+    height: 75px;
+    background: #fff;
+    display: flex;
+    justify-content: center;
+    position: fixed;
+    left: 0;
+    top: 0;
+    right: 0;
+    z-index: 99;
+    box-shadow: 0px 3px 10px rgba(0, 0, 0, .02)
+}
+
 .menu-area {
-    background-color: #333;
-    padding: 10px 0;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    width: 1300px;
+    background: #fff
 }
 
 .menu-area a {
-    color: white;
+    color: black;
     text-decoration: none;
     margin: 0 15px;
 }
@@ -40,9 +56,37 @@ body {
     width: 30px;
 }
 
+.menu_hamburger {
+    position: relative;
+    display: none;
+    align-items: center;
+    justify-content: center;
+    padding: 20px;
+    cursor: pointer;
+    z-index: 99
+}
+
+.menuMobile-area {
+    display: none
+}
+
+.container-menu-mobile {
+    display: none;
+    line-height: 46px;
+    height: 45px;
+    cursor: pointer
+}
+
+.menu-openner span,
+.fa-cart-shopping {
+    color: #fab427;
+    font-size: 1.2rem
+}
+
 .content {
     max-width: 800px;
     margin: 20px auto;
+    margin-top: 50px;
     padding: 20px;
     background-color: #fff;
     border-radius: 8px;
@@ -53,6 +97,7 @@ h1 {
     font-family: 'Hepta Slab', serif;
     color: #333;
     margin-bottom: 20px;
+    text-align: center;
 }
 
 .order-card {
@@ -78,11 +123,11 @@ h1 {
     display: flex;
     align-items: center;
     justify-content: space-between;
-    margin-top: 15px;
+    margin-top: 40px;
 }
 
 .status-bar div {
-    width: 24%;
+    width: 23.5%;
     height: 10px;
     border-radius: 5px;
     background-color: #ddd;
@@ -100,8 +145,19 @@ h1 {
     background-color: #4caf50;
     border-radius: 50%;
     position: absolute;
-    top: -3px;
-    right: -5px;
+    right: -12px;
+}
+
+.status-labels {
+    display: flex;
+    justify-content: space-between;
+}
+
+.status-labels span {
+    width: 24%;
+    text-align: center;
+    font-size: 12px;
+    color: #666;
 }
 
 .order-items {
