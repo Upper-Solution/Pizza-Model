@@ -64,7 +64,7 @@ $pdo = null;
             <div class="models">
                 <div class="pizza-item">
                     <a href="">
-                        <div class="pizza-item--img"><img src="" alt="Pizza Image" /></div>
+                        <div class="pizza-item--img"><img/></div>
                         <div class="pizza-item--add">+</div>
                         <div class="pizza-item--price">R$ --</div>
                         <div class="pizza-item--name">--</div>

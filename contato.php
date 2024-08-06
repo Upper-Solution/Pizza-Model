@@ -45,13 +45,12 @@ $pdo = null;
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Contato - Hamburgueria</title>
-    <!-- Link para o arquivo de CSS (assumindo que criará um arquivo separado) -->
+    <!-- Link para o arquivo de CSS -->
     <link rel="stylesheet" href="css/contato.css">
     <script defer src="js/geral.js"></script>
     <script src="https://kit.fontawesome.com/8b4042ccf0.js" crossorigin="anonymous"></script>
     <link href="https://fonts.googleapis.com/css?family=Hepta+Slab:400,700|Lato:400,700&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="css/style.css">
-
 </head>
 <body>
 
@@ -59,7 +58,7 @@ $pdo = null;
         <?php include 'nav.php'; ?>
     </header>
 
-    <nav id="nav-container" ></nav>
+    <nav id="nav-container"></nav>
 
     <!-- Cabeçalho da página -->
     <header>
@@ -69,36 +68,42 @@ $pdo = null;
 
     <!-- Seção de contato -->
     <section id="contact">
-        <h2>Fale Conosco</h2>
-        
-        <!-- Formulário de contato -->
-        <form action="process_contact.php" method="post">
-            <!-- Campo para o nome do usuário -->
-            <label for="name">Nome:</label>
-            <input type="text" id="name" name="name" required>
+        <div class="contact-container">
+            <!-- Informações da Hamburgueria -->
+            <div class="hamburgueria-info">
+                <h2>Informações da Hamburgueria</h2>
+                <p>Siga-nos nas mídias sociais:</p>
+                <p><a href="https://www.facebook.com/hamburgueria" target="_blank"><i class="fab fa-facebook"></i> Facebook</a></p>
+                <p><a href="https://www.instagram.com/hamburgueria" target="_blank"><i class="fab fa-instagram"></i> Instagram</a></p>
+                <p>Envie um email para: <a href="mailto:contato@hamburgueria.com"><i class="fas fa-envelope"></i> contato@hamburgueria.com</a></p>
+            </div>
+            
+            <!-- Formulário de contato -->
+            <div class="contact-form">
+                <h2>Fale Conosco</h2>
+                <form action="process_contact.php" method="post">
+                    <label for="name">Nome:</label>
+                    <input type="text" id="name" name="name" required>
 
-            <!-- Campo para o email do usuário -->
-            <label for="email">Email:</label>
-            <input type="email" id="email" name="email" required>
+                    <label for="email">Email:</label>
+                    <input type="email" id="email" name="email" required>
 
-            <!-- Campo para o telefone do usuário -->
-            <label for="phone">Telefone:</label>
-            <input type="tel" id="phone" name="phone" required>
+                    <label for="phone">Telefone:</label>
+                    <input type="tel" id="phone" name="phone" required>
 
-            <!-- Campo para a mensagem do usuário -->
-            <label for="message">Mensagem:</label>
-            <textarea id="message" name="message" rows="5" required></textarea>
+                    <label for="message">Mensagem:</label>
+                    <textarea id="message" name="message" rows="5" required></textarea>
 
-            <!-- Botão para enviar o formulário -->
-            <button type="submit">Enviar</button>
-        </form>
+                    <button type="submit">Enviar</button>
+                </form>
+            </div>
+        </div>
     </section>
 
     <!-- Rodapé da página -->
     <footer>
         <p>&copy; 2024 Hamburgueria. Todos os direitos reservados.</p>
     </footer>
-
 
 </body>
 </html>

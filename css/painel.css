@@ -1,5 +1,6 @@
 body {
     font-family: Arial, sans-serif;
+    font-size: 16px;
     margin: 0;
     padding: 0;
     background-color: #f0f0f0;
@@ -19,14 +20,24 @@ body {
     background-color: #333;
     color: #fff;
     padding: 10px 20px;
+    border-radius: 25px 0 25px 0;
 }
 
-.logout-button {
+.exit-buttom{
+    font-size: 16px;
     background-color: #ff0000;
     color: #fff;
     border: none;
     padding: 10px 20px;
     cursor: pointer;
+    border-radius: 7px;
+}
+
+.exit-buttom:hover{
+    background-color: #fff;
+    color: #ff0000;
+    transition: background-color 0.2s;
+
 }
 
 .dashboard {

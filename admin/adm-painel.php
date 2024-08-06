@@ -32,7 +32,7 @@ if (isset($_POST['logout'])) {
         <header class="header">
             <h1>Bem-vindo ao Painel de Administração</h1>
             <form method="POST" action="">
-                <button type="submit" name="logout" class="logout-button">Sair</button>
+                <button type="submit" name="logout" class="exit-buttom">Sair</button>
             </form>
         </header>
         <div class="dashboard">

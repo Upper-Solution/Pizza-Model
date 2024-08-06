@@ -12,6 +12,7 @@ body {
     color: #333; /* Cor do texto */
     background-color: #f4f4f4; /* Cor de fundo clara */
     padding: 20px; /* Espaçamento em torno do conteúdo */
+
 }
 
 /* Estilização do cabeçalho da página */
@@ -19,15 +20,36 @@ header {
     background: #333; /* Cor de fundo escura */
     padding: 20px; /* Espaçamento interno */
     text-align: center; /* Alinha o texto ao centro */
+    color: #fff; /* Cor do texto no cabeçalho */
 }
 
 /* Estilização da seção de contato */
 #contact {
+    margin: 20px auto; /* Centraliza a seção horizontalmente */
+    max-width: 1200px; /* Largura máxima da seção */
+}
+
+/* Container para o layout de duas colunas */
+.contact-container {
+    display: flex; /* Usa flexbox para layout de duas colunas */
+    gap: 20px; /* Espaço entre as colunas */
+}
+
+/* Estilização das informações da hamburgueria */
+.hamburgueria-info {
+    flex: 1; /* Ocupa metade da largura disponível */
     background: #fff; /* Cor de fundo branca para contraste */
     border-radius: 8px; /* Bordas arredondadas */
     padding: 20px; /* Espaçamento interno */
-    max-width: 600px; /* Largura máxima da seção */
-    margin: 20px auto; /* Centraliza a seção horizontalmente */
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.1); /* Sombra suave ao redor da seção */
+}
+
+/* Estilização do formulário de contato */
+.contact-form {
+    flex: 1; /* Ocupa metade da largura disponível */
+    background: #fff; /* Cor de fundo branca para contraste */
+    border-radius: 8px; /* Bordas arredondadas */
+    padding: 20px; /* Espaçamento interno */
     box-shadow: 0 0 10px rgba(0, 0, 0, 0.1); /* Sombra suave ao redor da seção */
 }
 
@@ -69,6 +91,7 @@ form button:hover {
 
 /* Estilização do rodapé da página */
 footer {
+    background-color: #333;
     text-align: center; /* Alinha o texto ao centro */
     padding: 10px; /* Espaçamento interno */
     background: #333; /* Cor de fundo escura */
