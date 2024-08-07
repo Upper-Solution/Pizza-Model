@@ -100,7 +100,7 @@ $pdo = null;
         <div class="pizzas-container">
             <!-- Novo container para título e botão de voltar -->
             <div class="header-container">
-                <h2 class="pizzas-title">Nossas Pizzas</h2>
+                <h2 class="pizzas-title">Lanches Cadastrados</h2>
                 <a href="adm-painel.php" class="btn-back">Voltar</a>
             </div>
             <!-- Formulário de pesquisa -->
