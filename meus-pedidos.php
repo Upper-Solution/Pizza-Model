@@ -54,7 +54,7 @@ try {
             <h2>Pedido #<?php echo htmlspecialchars($order['order_id']); ?></h2>
             <p>Data: <?php echo htmlspecialchars($order['order_date']); ?></p>
             <div class="status-bar">
-                <div class="<?php echo ($order['status'] == 'Pedido Realizado' || $order['status'] == 'Preparando' || $order['status'] == 'Saiu para Entrega' || $order['status'] == 'Entregue') ? 'completed' : ''; ?>"></div>
+                <div class="<?php echo ($order['status'] == 'Recebido' || $order['status'] == 'Preparando' || $order['status'] == 'Saiu para Entrega' || $order['status'] == 'Entregue') ? 'completed' : ''; ?>"></div>
                 <div class="<?php echo ($order['status'] == 'Preparando' || $order['status'] == 'Saiu para Entrega' || $order['status'] == 'Entregue') ? 'completed' : ''; ?>"></div>
                 <div class="<?php echo ($order['status'] == 'Saiu para Entrega' || $order['status'] == 'Entregue') ? 'completed' : ''; ?>"></div>
                 <div class="<?php echo ($order['status'] == 'Entregue') ? 'completed' : ''; ?>"></div>
