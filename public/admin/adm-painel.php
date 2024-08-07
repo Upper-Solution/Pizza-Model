@@ -46,9 +46,19 @@ if (isset($_POST['logout'])) {
             </div>
             <div class="card" onclick="window.location.href='admin-orders.php'">
                 <h2>Pedidos</h2>
-                <p>testeeeeeeeee</p>
+                <p>Gerenciar os pedidos realizados pelos clientes.</p>
+            </div>
+            <div class="card new-line" onclick="window.location.href='adm-clientes.php'">
+                <h2>Taxas e descontos</h2>
+                <p>Definir valor da entrega e taxa de descontos.</p>
+            </div>
+            <div class="card new-line" onclick="window.location.href='adm-relatorio.php'">
+                <h2>Relatórios</h2>
+                <p>Visualizar relatórios de vendas e desempenho.</p>
             </div>
         </div>
     </div>
 </body>
 </html>
+
+

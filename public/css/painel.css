@@ -23,7 +23,7 @@ body {
     border-radius: 25px 0 25px 0;
 }
 
-.exit-buttom{
+.exit-buttom {
     font-size: 16px;
     background-color: #ff0000;
     color: #fff;
@@ -33,15 +33,15 @@ body {
     border-radius: 7px;
 }
 
-.exit-buttom:hover{
+.exit-buttom:hover {
     background-color: #fff;
     color: #ff0000;
     transition: background-color 0.2s;
-
 }
 
 .dashboard {
     display: flex;
+    flex-wrap: wrap; /* Permite a quebra de linha */
     justify-content: space-around;
     margin-top: 20px;
 }
@@ -52,7 +52,7 @@ body {
     margin: 10px;
     box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
     cursor: pointer;
-    flex: 1;
+    flex: 1 1 calc(33.333% - 40px); /* Ajuste da largura */
     text-align: center;
     transition: transform 0.3s ease-in-out;
 }
@@ -67,6 +67,10 @@ body {
 
 .card:hover {
     transform: scale(1.05);
+}
+
+.new-line {
+    flex-basis: 100%;
 }
 
 @media (max-width: 768px) {
