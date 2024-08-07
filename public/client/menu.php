@@ -189,72 +189,28 @@ $pdo = null;
         document.addEventListener("DOMContentLoaded", function () {
             console.log('DOM fully loaded and parsed');
             const finalizarPedidoBtn = document.getElementById('finalizarPedidoBtn');
-            const pixModal = document.getElementById('pixModal');
-            const span = document.getElementsByClassName('close')[0];
-            const pixAmount = document.getElementById('pixAmount');
-            const pixQRCode = document.getElementById('pixQRCode');
-            const confirmPaymentBtn = document.getElementById('confirmPaymentBtn');
             const loginButton = document.getElementById('loginButton');
-            
-            if (loginButton) {
-                loginButton.addEventListener('click', function () {
-                    window.location.href = <?php echo $loggedIn ? "'../../config/logout.php'" : "'login.php'"; ?>;
-                });
-            }
 
             if (finalizarPedidoBtn) {
                 finalizarPedidoBtn.addEventListener('click', function (event) {
                     event.preventDefault();
-                    <?php if ($loggedIn) { ?>
-                        // Calcular o valor total do pedido (você precisa substituir essa lógica com seu cálculo real)
-                        let totalAmount = 100.00; // Exemplo de valor total
-                        pixAmount.innerText = `R$ ${totalAmount.toFixed(2)}`;
-                        
-                        // Integrar com a API de pagamento para obter o QR code
-                        fetch('exemplo_de_endpoint.php', {
-                            method: 'POST',
-                            headers: {
-                                'Content-Type': 'application/json'
-                            },
-                            body: JSON.stringify({
-                                amount: totalAmount
-                            })
-                        })
-                        .then(response => response.json())
-                        .then(data => {
-                            // Exibir o código QR do Pix
-                            pixQRCode.innerHTML = `<img src="${data.qrCode}" alt="QR Code">`;
-                            
-                            // Mostrar o modal
-                            pixModal.style.display = "block";
-                        })
-                        .catch(error => {
-                            console.error('Erro ao gerar QR Code do Pix:', error);
-                        });
-                    <?php } else { ?>
+                    console.log('Finalizar Pedido button clicked');
+                    <?php if (!$loggedIn) { ?>
                         window.location.href = 'login.php';
                     <?php } ?>
                 });
             }
 
-            // Fechar o modal ao clicar no X
-            span.onclick = function() {
-                pixModal.style.display = "none";
+            if (loginButton) {
+                loginButton.addEventListener('click', function () {
+                    console.log('Login button clicked');
+                    <?php if ($loggedIn) { ?>
+                        window.location.href = '../../config/logout.php'; 
+                    <?php } else { ?>
+                        window.location.href = 'login.php';
+                    <?php } ?>
+                });
             }
-
-            // Fechar o modal ao clicar fora dele
-            window.onclick = function(event) {
-                if (event.target == pixModal) {
-                    pixModal.style.display = "none";
-                }
-            }
-
-            // Lógica para confirmar o pagamento
-            confirmPaymentBtn.addEventListener('click', function () {
-                // Lógica para confirmar o pagamento
-                // Redirecionar para uma página de confirmação de pedido ou algo similar
-                window.location.href = 'pagina_de_confirmacao.php';
-            });
         });
     </script>
 </body>
