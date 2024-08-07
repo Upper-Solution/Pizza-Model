@@ -1,6 +1,6 @@
 <?php
 // Inclui o arquivo de configuração
-require_once 'config.php';
+require_once '../../config/config.php';
 
 // Obtém a conexão com o banco de dados
 $pdo = connectToDatabase($hosts, $port, $dbname, $username, $password);
@@ -28,11 +28,11 @@ $pdo = null;
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
-    <link rel="shortcut icon" href="favicon.ico" type="image/x-icon">
+    <link rel="shortcut icon" href="../imagens/favicon.ico" type="image/x-icon">
     <script src="https://kit.fontawesome.com/8b4042ccf0.js" crossorigin="anonymous"></script>
-    <link rel="stylesheet" href="css/sobre.css">
-    <link rel="stylesheet" href="css/home.css">
-    <link rel="stylesheet" href="css/icon.css">
+    <link rel="stylesheet" href="../css/sobre.css">
+    <link rel="stylesheet" href="../css/home.css">
+    <link rel="stylesheet" href="../css/icon.css">
     <link href="https://fonts.googleapis.com/css?family=Hepta+Slab:400,700|Lato:400,700&display=swap" rel="stylesheet">
     <title>Pizzaria</title>
 </head>
@@ -42,7 +42,7 @@ $pdo = null;
     </div>
 
     <header class="header">
-        <?php include 'nav.php'; ?>
+        <?php include '../../includes/nav.php'; ?>
     </header>
 
     <main class="main-content">
@@ -74,6 +74,6 @@ $pdo = null;
     <footer class="footer">
         <p>&copy; <?php echo date('Y'); ?> <?php echo htmlspecialchars($empresa['nome']); ?>. Todos os direitos reservados.</p>
     </footer>
-    <script src="js/nav.js"></script>
+    <script src="../js/nav.js"></script>
 </body>
 </html>

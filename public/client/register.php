@@ -4,7 +4,7 @@ error_reporting(E_ALL);
 session_start();
 
 // Inclui o arquivo de configuração
-require_once 'config.php';
+require_once '../../config/config.php';
 
 // Obtém a conexão com o banco de dados
 $pdo = connectToDatabase($hosts, $port, $dbname, $username, $password);
@@ -116,9 +116,9 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
-    <link rel="shortcut icon" href="favicon.ico" type="image/x-icon">
+    <link rel="shortcut icon" href="../imagens/favicon.ico" type="image/x-icon">
     <script src="https://kit.fontawesome.com/8b4042ccf0.js" crossorigin="anonymous"></script>
-    <link rel="stylesheet" href="css/register_styles.css">
+    <link rel="stylesheet" href="../css/register_styles.css">
     <link href="https://fonts.googleapis.com/css?family=Hepta+Slab:400,700|Lato:400,700&display=swap" rel="stylesheet">
     <title>Register - Pizzaria</title>
     <script>

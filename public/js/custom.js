@@ -5,12 +5,12 @@ document.addEventListener("DOMContentLoaded", function () {
     finalizarPedidoBtn.addEventListener('click', function (event) {
         event.preventDefault();
 
-        fetch('check_login.php')
+        fetch('../../config/check_login.php')
             .then(response => response.json())
             .then(data => {
                 if (data.logged_in) {
                     // Usuário está logado, finalizar pedido
-                    fetch('finalizar_pedido.php', { method: 'POST' })
+                    fetch('../../config/finalizar_pedido.php', { method: 'POST' })
                         .then(response => response.text())
                         .then(data => {
                             alert(data);
@@ -23,7 +23,7 @@ document.addEventListener("DOMContentLoaded", function () {
                         });
                 } else {
                     // Usuário não está logado, redirecionar para a página de login
-                    window.location.href = 'login.php';
+                    window.location.href = '../client/login.php';
                 }
             })
             .catch(error => {
@@ -33,7 +33,7 @@ document.addEventListener("DOMContentLoaded", function () {
     });
 
     loginButton.addEventListener('click', function () {
-        window.location.href = 'login.php';
+        window.location.href = '../client/login.php';
     });
 });
 

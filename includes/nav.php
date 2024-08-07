@@ -1,9 +1,10 @@
 <?php
+
 // Inicia a sessão
 session_start();
 
 // Inclui o arquivo de configuração
-require_once 'config.php';
+require_once __DIR__ . '/../config/config.php';
 
 // Verificar se o usuário está logado
 $loggedIn = isset($_SESSION['user_id']);
@@ -45,15 +46,15 @@ if ($loggedIn) {
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
-    <link rel="stylesheet" href="css/icon.css">
+    <link rel="stylesheet" href="../css/icon.css">
     <link href="https://fonts.googleapis.com/css?family=Hepta+Slab:400,700|Lato:400,700&display=swap" rel="stylesheet">
     <title>icon</title>
 </head>
 <body>
     <div class="menu-area">
         <div class="logo">
-            <a href="index.php">
-                <img src="images/logo_pizza.png" alt="logo_pizza.png">
+            <a href="../client/index.php">
+                <img src="../imagens/logo_pizza.png" alt="logo_pizza.png">
             </a>
         </div>
         <nav>
@@ -71,12 +72,12 @@ if ($loggedIn) {
             </div>
             <div class="menu">
                 <ul>
-                    <li><a href="index.php">Início</a></li>
-                    <li><a href="menu.php">Cardápio</a></li>
-                    <li><a href="sobre.php">Sobre</a></li>
-                    <li><a href="contato.php">Contato</a></li>
+                    <li><a href="../client/index.php">Início</a></li>
+                    <li><a href="../client/menu.php">Cardápio</a></li>
+                    <li><a href="../client/sobre.php">Sobre</a></li>
+                    <li><a href="../client/contato.php">Contato</a></li>
                     <li id="loginItem">
-                        <a href="<?php echo $loggedIn ? '#' : 'login.php'; ?>" class="login-link">
+                        <a href="<?php echo $loggedIn ? '#' : '../client/login.php'; ?>" class="login-link">
                             <div class="login-icon" id="loginIcon">
                                 <?php if ($loggedIn && $user_profile_image_base64): ?>
                                     <img src="data:image/jpeg;base64,<?php echo $user_profile_image_base64; ?>" alt="Foto de Perfil" class="profile-icon">
@@ -87,9 +88,9 @@ if ($loggedIn) {
                         </a>
                         <?php if ($loggedIn): ?>
                             <div class="profile-menu" id="profileMenu">
-                                <a href="meus-pedidos.php" class="profile-menu-item">Acompanhar pedido</a>
-                                <a href="profile.php" class="profile-menu-item">Ver Perfil</a>
-                                <a href="logout.php" class="profile-menu-item">Sair</a>
+                                <a href="../client/meus-pedidos.php" class="profile-menu-item">Acompanhar pedido</a>
+                                <a href="../client/profile.php" class="profile-menu-item">Ver Perfil</a>
+                                <a href="../../config/logout.php" class="profile-menu-item">Sair</a>
                             </div>
                         <?php endif; ?>
                     </li>

@@ -1,6 +1,6 @@
 <?php
 require_once 'config.php';
-require_once 'pix_api.php';
+require_once '../includes/pix_api.php';
 
 $data = json_decode(file_get_contents('php://input'), true);
 $amount = $data['amount'];

@@ -18,6 +18,6 @@ if (ini_get("session.use_cookies")) {
 session_destroy();
 
 // Redirecionar para a página de login
-header("Location: menu.php");
+header("Location: ../public/client/menu.php");
 exit;
 ?>

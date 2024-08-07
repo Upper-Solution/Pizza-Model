@@ -4,7 +4,7 @@
 session_start();
 
 // Inclui o arquivo de configuração e a função de conexão
-require_once 'config.php'; // Certifique-se de que este arquivo define a função connectToDatabase()
+require_once '../../config/config.php'; // Certifique-se de que este arquivo define a função connectToDatabase()
 
 // Configuração do banco de dados
 $hosts = ['127.0.0.1', '193.203.175.99'];
@@ -70,7 +70,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
 $pdo = null;
 
 // Inclua nav.php após a conexão ser estabelecida
-include 'nav.php';
+include '../../includes/nav.php';
 ?>
 
 <!DOCTYPE html>
@@ -79,10 +79,10 @@ include 'nav.php';
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
-    <link rel="shortcut icon" href="favicon.ico" type="image/x-icon">
+    <link rel="shortcut icon" href="../imagens/favicon.ico" type="image/x-icon">
     <script src="https://kit.fontawesome.com/8b4042ccf0.js" crossorigin="anonymous"></script>
-    <link rel="stylesheet" href="css/style.css">
-    <link rel="stylesheet" href="css/login_styles.css">
+    <link rel="stylesheet" href="../css/style.css">
+    <link rel="stylesheet" href="../css/login_styles.css">
     <link href="https://fonts.googleapis.com/css?family=Hepta+Slab:400,700|Lato:400,700&display=swap" rel="stylesheet">
     <title>Login - Pizzaria</title>
 </head>

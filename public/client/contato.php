@@ -5,7 +5,7 @@ session_start();
 $loggedIn = isset($_SESSION['user_id']);
 
 // Inclui o arquivo de configuração para conexão com o banco de dados
-require_once 'config.php';
+require_once '../../config/config.php';
 
 // Obtém a conexão com o banco de dados
 try {
@@ -46,16 +46,16 @@ $pdo = null;
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Contato - Hamburgueria</title>
     <!-- Link para o arquivo de CSS -->
-    <link rel="stylesheet" href="css/contato.css">
-    <script defer src="js/geral.js"></script>
+    <link rel="stylesheet" href="../css/contato.css">
+    <script defer src="../js/geral.js"></script>
     <script src="https://kit.fontawesome.com/8b4042ccf0.js" crossorigin="anonymous"></script>
     <link href="https://fonts.googleapis.com/css?family=Hepta+Slab:400,700|Lato:400,700&display=swap" rel="stylesheet">
-    <link rel="stylesheet" href="css/style.css">
+    <link rel="stylesheet" href="../css/style.css">
 </head>
 <body>
 
     <header class="header">
-        <?php include 'nav.php'; ?>
+        <?php include '../../includes/nav.php'; ?>
     </header>
 
     <nav id="nav-container"></nav>

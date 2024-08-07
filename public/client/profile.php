@@ -6,7 +6,7 @@ session_start();
 $loggedIn = isset($_SESSION['user_id']);
 
 // Inclui o arquivo de configuração
-require_once 'config.php';
+require_once '../../config/config.php';
 
 // Verificar se o admin está logado
 if (!isset($_SESSION['user_id'])) {
@@ -88,8 +88,8 @@ $pdo = null;
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
-    <link rel="stylesheet" href="css/style.css">
-    <link rel="stylesheet" href="css/usuario.css">
+    <link rel="stylesheet" href="../css/style.css">
+    <link rel="stylesheet" href="../css/usuario.css">
     <link href="https://fonts.googleapis.com/css?family=Hepta+Slab:400,700|Lato:400,700&display=swap" rel="stylesheet">
     <title>Perfil - Pizzaria</title>
 </head>
@@ -114,7 +114,7 @@ $pdo = null;
             </div>
             <div class="profile-actions">
                 <a href="edit_profile.php" class="btn-edit-profile">Editar Perfil</a>
-                <a href="logout.php" class="btn-logout">Sair</a>
+                <a href="../../config/logout.php" class="btn-logout">Sair</a>
                 
             </div>
         </div>

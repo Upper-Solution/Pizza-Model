@@ -12,7 +12,7 @@ localStorage.getItem("pizza_cart")
 
 // Faz uma requisição à API para obter os dados das pizzas em formato JSON
 // Atualiza o carrinho e lista as pizzas na interface
-const api = fetch("js/apiData.php")
+const api = fetch("../../includes/apiData.php")
   .then(response => response.json())
   .then(data => {
     pizzas = data; // Armazena os dados das pizzas na variável 'pizzas'

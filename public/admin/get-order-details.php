@@ -1,5 +1,5 @@
 <?php
-require_once '../config.php';
+require_once '../../config/config.php';
 
 // Obtém a conexão com o banco de dados
 $pdo = connectToDatabase($hosts, $port, $dbname, $username, $password);

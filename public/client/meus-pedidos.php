@@ -3,7 +3,7 @@
 session_start();
 
 // Inclui o arquivo de configuração
-require_once 'config.php';
+require_once '../../config/config.php';
 
 // Verificar se o usuário está logado
 if (!isset($_SESSION['user_email'])) {
@@ -36,14 +36,14 @@ try {
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
-    <link rel="stylesheet" href="css/meus-pedidos.css">
+    <link rel="stylesheet" href="../css/meus-pedidos.css">
     <link href="https://fonts.googleapis.com/css?family=Hepta+Slab:400,700|Lato:400,700&display=swap" rel="stylesheet">
     <title>Meus Pedidos</title>
 </head>
 <body>
 
     <header class="header">
-        <?php include 'nav.php'; ?>
+        <?php include '../../includes/nav.php'; ?>
     </header>
 
     <div class="content">

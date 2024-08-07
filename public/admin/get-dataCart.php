@@ -1,7 +1,7 @@
 <?php
 session_start();
 
-require_once '../config.php';
+require_once '../../config/config.php';
 
 $loggedIn = isset($_SESSION['user_id']);
 if (!$loggedIn) {
@@ -56,7 +56,7 @@ try {
             $pizza['nome'],
             $quantidade,
             $total,
-            'Recebido', // Exemplo de status padrão
+            'Recebido', 
             $user['cep'],
             $user['city'],
             $user['neighborhood'],

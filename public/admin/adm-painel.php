@@ -3,7 +3,7 @@
 session_start();
 
 // Inclui o arquivo de configuração
-require_once '../config.php';
+require_once '../../config/config.php';
 
 // Verificar se o admin está logado
 if (!isset($_SESSION['admin_id'])) {
