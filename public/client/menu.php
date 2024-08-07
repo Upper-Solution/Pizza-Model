@@ -162,20 +162,9 @@ $pdo = null;
                         <i class="fa-solid fa-circle-check success-img"></i>
                         <h1>Seu pedido foi finalizado!</h1>
                     </div>
-                    <span>Previsão de entrega: 30 minutos!</span>
+                    <span>Previsão de entrega: 45 minutos!</span>
                 </div>
             </div>
-        </div>
-    </div>
-
-    <!-- Modal de pagamento via Pix -->
-    <div id="pixModal" class="modal">
-        <div class="modal-content">
-            <span class="close">&times;</span>
-            <h2>Pagamento via Pix</h2>
-            <p>Valor a ser pago: <span id="pixAmount"></span></p>
-            <div id="pixQRCode"></div>
-            <button id="confirmPaymentBtn">Confirmar Pagamento</button>
         </div>
     </div>
 

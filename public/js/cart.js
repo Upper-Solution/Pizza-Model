@@ -1,6 +1,30 @@
 /* Esse código é responsável por adicionar pizzas ao 
 carrinho, atualizar a interface do carrinho e 
 finalizar a compra */
+// Faz a requisição a API apiGetDB_to_Js
+let entregaTaxa;
+let valorDesconto;
+async function fetchOrders() {
+  try {
+    const response = await fetch('../../includes/apiGetDB_to_Js.php');
+    const data = await response.json();
+
+    if (data.error) {
+      console.log(data.error);
+    } else if (data.message) {
+      console.log(data.message);
+    } else {
+      entregaTaxa = parseFloat(data[0].taxaEntrega); // Define a taxaEntrega
+      valorDesconto = parseFloat(data[0].descontoPedido);
+      console.log('Taxa de Entrega:', valorDesconto);
+    }
+  } catch (error) {
+    console.error('Error fetching orders:', error);
+    document.getElementById('order-list').innerHTML = `<div class="alert alert-danger">Error fetching orders.</div>`;
+  }
+}
+fetchOrders();
+
 
 // Adicionar ao carrinho
 // Cria um identificador único, combinando o ID da pizza e o tamanho
@@ -8,21 +32,21 @@ document.querySelector(".pizzaInfo--addButton").addEventListener("click", () => 
   // Obtém o tamanho selecionado
   // let size = parseInt(document.querySelector(".pizzaInfo--size.selected").getAttribute("data-key"));
   // Concatena o id da pizza com o tamanho para criar um identificador único
-  let identifier = pizzas[modalKey].id; 
+  let identifier = pizzas[modalKey].id;
   // Procura no carrinho se o identificador já existe
-  let keyItem = cart.findIndex((item) => item.identifier == identifier); 
-  
+  let keyItem = cart.findIndex((item) => item.identifier == identifier);
+
   // Verifica se a pizza já está no carrinho
   if (keyItem > -1) {
     // Se já estiver, aumenta a quantidade
-    cart[keyItem].qtd += modalQt; 
+    cart[keyItem].qtd += modalQt;
   } else {
     // Se não estiver, adiciona um novo item ao carrinho
-    cart.push({ 
-      identifier, 
-      id: pizzas[modalKey].id,  
-      preco: pizzas[modalKey].preco, 
-      qtd: modalQt, 
+    cart.push({
+      identifier,
+      id: pizzas[modalKey].id,
+      preco: pizzas[modalKey].preco,
+      qtd: modalQt,
       imagem: pizzas[modalKey].imagem
     });
   }
@@ -31,6 +55,8 @@ document.querySelector(".pizzaInfo--addButton").addEventListener("click", () => 
   document.querySelector(".fa-cart-shopping").classList.add("pulse");
 
   // Atualiza o carrinho, fecha o modal e salva o carrinho no localStorage
+   // Chame a função para garantir que `entregaTaxa` seja definida
+
   updateCart();
   closeModal();
   saveCart();
@@ -65,8 +91,8 @@ function updateCart() {
 
     let pizzasValor = 0;
     let subtotal = 0;
-    let entrega = 5;
-    let desconto = 0;
+    let entrega = entregaTaxa || 0;
+    let desconto = valorDesconto || 0;
     let total = 0;
 
     // Itera sobre os itens do carrinho
@@ -75,23 +101,24 @@ function updateCart() {
       let pizzaItem = pizzas.find((item) => item.id == cart[i].id);
       // Calcula o valor total das pizzas
       pizzasValor += cart[i].preco * cart[i].qtd;
-/*
-      // Define o nome do tamanho da pizza
-      let pizzaSizeName;
-      switch (cart[i].size) {
-        case 0:
-          pizzaSizeName = "P";
-          break;
-        case 1:
-          pizzaSizeName = "M";
-          break;
-        case 2:
-          pizzaSizeName = "G";
-          break;
-      }
-*/
+      /*
+            // Define o nome do tamanho da pizza
+            let pizzaSizeName;
+            switch (cart[i].size) {
+              case 0:
+                pizzaSizeName = "P";
+                break;
+              case 1:
+                pizzaSizeName = "M";
+                break;
+              case 2:
+                pizzaSizeName = "G";
+                break;
+            }
+      */
       // Define o nome da pizza com o tamanho
       let pizzaName = `${pizzaItem.nome}`;
+
       // Clona o modelo de item do carrinho
       let cartItem = document.querySelector(".models .cart--item").cloneNode(true);
 
@@ -122,7 +149,6 @@ function updateCart() {
 
     // Calcula os valores de subtotal, desconto e total
     subtotal = pizzasValor + entrega;
-    desconto = subtotal * 0.1;
     total = subtotal - desconto;
 
     // Atualiza os valores na interface
@@ -180,44 +206,45 @@ document.querySelector(".cart--finalizar").addEventListener("click", () => {
         document.querySelector(".success.pizzaWindowArea").style.display = "none";
         updateCart(); // Atualiza o carrinho
         closeModal(); // Fecha o modal
+        window.location.href = '../client/meus-pedidos.php' // Direciona o usuario para a tela de meus-pedidos após a compra
+
       }, 200);
     }, 4000);
   }, 2100);
 });
-
 // Função para enviar os dados do carrinho para o arquivo PHP
 function retornaIdQT() {
   // Obter os dados do carrinho
   const cartData = cart.map(item => ({
-      orderId: item.id,
-      quantidade: item.qtd,
-      valorTotal: item.preco * item.qtd
+    orderId: item.id,
+    quantidade: item.qtd,
+    valorTotal: item.preco * item.qtd
   }));
 
   fetch('../admin/get-dataCart.php', {
-      method: 'POST',
-      headers: {
-          'Content-Type': 'application/json'
-      },
-      body: JSON.stringify(cartData)
+    method: 'POST',
+    headers: {
+      'Content-Type': 'application/json'
+    },
+    body: JSON.stringify(cartData)
   })
-  .then(response => {
+    .then(response => {
       // Verificar se a resposta é JSON
       const contentType = response.headers.get('content-type');
       if (contentType && contentType.includes('application/json')) {
-          return response.json();
+        return response.json();
       } else {
-          return response.text().then(text => { throw new Error(text); });
+        return response.text().then(text => { throw new Error(text); });
       }
-  })
-  .then(data => {
+    })
+    .then(data => {
       if (data.status === 'success') {
-          console.log('Pedido finalizado com sucesso:', data.message);
+        console.log('Pedido finalizado com sucesso:', data.message);
       } else {
-          console.error('Erro ao finalizar o pedido:', data.message);
+        console.error('Erro ao finalizar o pedido:', data.message);
       }
-  })
-  .catch(error => {
+    })
+    .catch(error => {
       console.error('Erro ao enviar os dados do pedido:', error);
-  });
+    });
 }
