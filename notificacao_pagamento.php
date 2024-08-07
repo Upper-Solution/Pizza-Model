@@ -1,6 +1,6 @@
 <?php
 // Insira aqui a assinatura secreta gerada pelo Mercado Pago
-define('MERCADOPAGO_SECRET_KEY', 'sua_assinatura_secreta');
+define('MERCADOPAGO_SECRET_KEY', 'c7dd4646dc21e9b60c5cad196ef41f16d4163466f707d7714b42c305a6d5c686');
 
 // Receber dados da notificação
 $input = file_get_contents('php://input');
