@@ -33,13 +33,33 @@ $searchQuery = '';
 $searchValue = [];
 if (isset($_GET['search']) && !empty($_GET['search'])) {
     $search = $_GET['search'];
-    $searchQuery = " WHERE customer_name LIKE ? OR order_id = ?";
-    $searchValue = ["%$search%", $search];
+    $searchQuery .= " AND (customer_name LIKE ? OR order_id = ?)";
+    $searchValue[] = "%$search%";
+    $searchValue[] = $search;
+}
+
+// Filtros adicionais
+if (isset($_GET['month']) && !empty($_GET['month'])) {
+    $month = $_GET['month'];
+    $searchQuery .= " AND MONTH(order_date) = ?";
+    $searchValue[] = $month;
+}
+
+if (isset($_GET['year']) && !empty($_GET['year'])) {
+    $year = $_GET['year'];
+    $searchQuery .= " AND YEAR(order_date) = ?";
+    $searchValue[] = $year;
+}
+
+if (isset($_GET['status']) && !empty($_GET['status'])) {
+    $status = $_GET['status'];
+    $searchQuery .= " AND status = ?";
+    $searchValue[] = $status;
 }
 
 // Consulta SQL para obter o total de pedidos (para paginação)
 try {
-    $countQuery = "SELECT COUNT(*) FROM orders" . $searchQuery;
+    $countQuery = "SELECT COUNT(*) FROM orders WHERE 1=1" . $searchQuery;
     $countStmt = $pdo->prepare($countQuery);
     if ($searchValue) {
         $countStmt->execute($searchValue);
@@ -53,7 +73,7 @@ try {
 
 // Consulta SQL para obter os dados dos pedidos com paginação
 try {
-    $dataQuery = "SELECT * FROM orders" . $searchQuery . " ORDER BY order_date DESC LIMIT $rowsPerPage OFFSET $offset";
+    $dataQuery = "SELECT * FROM orders WHERE 1=1" . $searchQuery . " ORDER BY order_date DESC LIMIT $rowsPerPage OFFSET $offset";
     $stmt = $pdo->prepare($dataQuery);
     if ($searchValue) {
         $stmt->execute($searchValue);
@@ -81,46 +101,85 @@ $totalPages = ceil($totalRows / $rowsPerPage);
     <title>Visualizar Pedidos</title>
 </head>
 <body>
-    <h1>Lista de Pedidos</h1>
-    <div class="search-container">
-        <form method="get" action="">
-            <input type="text" name="search" placeholder="Pesquisar por nome ou ID" value="<?php echo htmlspecialchars(isset($_GET['search']) ? $_GET['search'] : '', ENT_QUOTES); ?>">
-            <input type="submit" value="Pesquisar">
-        </form>
-    </div>
-    <?php if (!empty($orders)): ?>
-        <table>
-            <thead>
-                <tr>
-                    <th>ID</th>
-                    <th>ID do Cliente</th>
-                    <th>Data do Pedido</th>
-                    <th>Valor Total</th>
-                    <th>Status</th>
-                </tr>
-            </thead>
-            <tbody>
-                <?php foreach ($orders as $order): ?>
-                    <tr>
-                        <td><?php echo htmlspecialchars($order["order_id"]); ?></td>
-                        <td><?php echo htmlspecialchars($order["customer_name"]); ?></td>
-                        <td><?php echo htmlspecialchars($order["order_date"]); ?></td>
-                        <td><?php echo htmlspecialchars($order["total"]); ?></td>
-                        <td><?php echo htmlspecialchars($order["status"]); ?></td>
-                    </tr>
-                <?php endforeach; ?>
-            </tbody>
-        </table>
-        <div class="pagination">
-            <?php if ($page > 1): ?>
-                <a href="?page=<?php echo $page - 1; ?><?php echo isset($_GET['search']) ? '&search=' . urlencode($_GET['search']) : ''; ?>">« Anterior</a>
-            <?php endif; ?>
-            <?php if ($page < $totalPages): ?>
-                <a href="?page=<?php echo $page + 1; ?><?php echo isset($_GET['search']) ? '&search=' . urlencode($_GET['search']) : ''; ?>">Próximo »</a>
-            <?php endif; ?>
+    <header>
+        <h1>Administração de Pedidos</h1>
+    </header>
+    <div class="container">
+        <h2>Lista de Pedidos</h2>
+        <div class="search-container">
+            <form method="get" action="">
+                <!-- Formulário de filtro existente -->
+                <input type="text" name="search" placeholder="Pesquisar por nome ou ID" value="<?php echo htmlspecialchars(isset($_GET['search']) ? $_GET['search'] : '', ENT_QUOTES); ?>">
+                
+                <select name="month">
+                    <option value="">Mês</option>
+                    <?php for ($i = 1; $i <= 12; $i++): ?>
+                        <option value="<?php echo $i; ?>" <?php echo (isset($_GET['month']) && $_GET['month'] == $i) ? 'selected' : ''; ?>>
+                            <?php echo date('F', mktime(0, 0, 0, $i, 1)); ?>
+                        </option>
+                    <?php endfor; ?>
+                </select>
+                
+                <select name="year">
+                    <option value="">Ano</option>
+                    <?php for ($i = date('Y'); $i >= 2000; $i--): ?>
+                        <option value="<?php echo $i; ?>" <?php echo (isset($_GET['year']) && $_GET['year'] == $i) ? 'selected' : ''; ?>>
+                            <?php echo $i; ?>
+                        </option>
+                    <?php endfor; ?>
+                </select>
+                
+                <select name="status">
+                    <option value="">Status</option>
+                    <option value="recusado" <?php echo (isset($_GET['status']) && $_GET['status'] == 'recusado') ? 'selected' : ''; ?>>Recusado</option>
+                    <option value="entregue" <?php echo (isset($_GET['status']) && $_GET['status'] == 'entregue') ? 'selected' : ''; ?>>Entregue</option>
+                </select>
+                
+                <input type="submit" value="Filtrar">
+            </form>
+            <form method="get" action="export.php" style="margin-top: 10px;">
+                <!-- Formulário de exportação -->
+                <input type="hidden" name="search" value="<?php echo htmlspecialchars(isset($_GET['search']) ? $_GET['search'] : '', ENT_QUOTES); ?>">
+                <input type="hidden" name="month" value="<?php echo htmlspecialchars(isset($_GET['month']) ? $_GET['month'] : '', ENT_QUOTES); ?>">
+                <input type="hidden" name="year" value="<?php echo htmlspecialchars(isset($_GET['year']) ? $_GET['year'] : '', ENT_QUOTES); ?>">
+                <input type="hidden" name="status" value="<?php echo htmlspecialchars(isset($_GET['status']) ? $_GET['status'] : '', ENT_QUOTES); ?>">
+                <input type="submit" value="Exportar CSV">
+            </form>
         </div>
-    <?php else: ?>
-        <p>Nenhum pedido encontrado.</p>
-    <?php endif; ?>
+        <?php if (!empty($orders)): ?>
+            <table>
+                <thead>
+                    <tr>
+                        <th>ID</th>
+                        <th>ID do Cliente</th>
+                        <th>Data do Pedido</th>
+                        <th>Valor Total</th>
+                        <th>Status</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <?php foreach ($orders as $order): ?>
+                        <tr>
+                            <td><?php echo htmlspecialchars($order["order_id"]); ?></td>
+                            <td><?php echo htmlspecialchars($order["customer_name"]); ?></td>
+                            <td><?php echo htmlspecialchars($order["order_date"]); ?></td>
+                            <td><?php echo htmlspecialchars($order["total"]); ?></td>
+                            <td><?php echo htmlspecialchars($order["status"]); ?></td>
+                        </tr>
+                    <?php endforeach; ?>
+                </tbody>
+            </table>
+            <div class="pagination">
+                <?php if ($page > 1): ?>
+                    <a href="?page=<?php echo $page - 1; ?><?php echo isset($_GET['search']) ? '&search=' . urlencode($_GET['search']) : ''; ?><?php echo isset($_GET['month']) ? '&month=' . urlencode($_GET['month']) : ''; ?><?php echo isset($_GET['year']) ? '&year=' . urlencode($_GET['year']) : ''; ?><?php echo isset($_GET['status']) ? '&status=' . urlencode($_GET['status']) : ''; ?>">« Anterior</a>
+                <?php endif; ?>
+                <?php if ($page < $totalPages): ?>
+                    <a href="?page=<?php echo $page + 1; ?><?php echo isset($_GET['search']) ? '&search=' . urlencode($_GET['search']) : ''; ?><?php echo isset($_GET['month']) ? '&month=' . urlencode($_GET['month']) : ''; ?><?php echo isset($_GET['year']) ? '&year=' . urlencode($_GET['year']) : ''; ?><?php echo isset($_GET['status']) ? '&status=' . urlencode($_GET['status']) : ''; ?>">Próximo »</a>
+                <?php endif; ?>
+            </div>
+        <?php else: ?>
+            <p>Nenhum pedido encontrado.</p>
+        <?php endif; ?>
+    </div>
 </body>
 </html>

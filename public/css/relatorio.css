@@ -1,151 +1,139 @@
-/* Estilo geral */
+/* Estilos gerais */
 body {
     font-family: Arial, sans-serif;
-    background-color: #f4f4f4;
-    color: #333;
     margin: 0;
     padding: 0;
+    background-color: #f4f4f4;
 }
 
-/* Container principal */
-.container {
-    width: 80%;
-    margin: 0 auto;
-    padding: 20px;
-    background: #fff;
-    box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
-    border-radius: 8px;
-}
-
-/* Título */
-h1 {
-    font-size: 24px;
-    color: #444;
-    margin-bottom: 20px;
+header {
+    background-color: #333; /* Cor de fundo do cabeçalho */
+    color: white;
+    padding: 15px;
     text-align: center;
 }
 
-/* Formulário de pesquisa */
+.container {
+    width: 90%;
+    max-width: 1200px;
+    margin: 20px auto;
+    padding: 20px;
+    background-color: #fff;
+    border-radius: 8px;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+}
+
+h2 {
+    margin-top: 0;
+    color: #333;
+}
+
+/* Estilos do formulário de filtros */
 .search-container {
     margin-bottom: 20px;
 }
 
 .search-container form {
     display: flex;
-    justify-content: center;
+    flex-wrap: wrap;
+    gap: 10px;
 }
 
-.search-container input[type="text"] {
+.search-container input[type="text"],
+.search-container select,
+.search-container input[type="submit"] {
     padding: 10px;
-    width: 250px;
     border: 1px solid #ccc;
     border-radius: 4px;
-    font-size: 16px;
+    font-size: 14px;
 }
 
 .search-container input[type="submit"] {
-    padding: 10px 20px;
+    background-color: #333;
+    color: white;
     border: none;
-    background-color: #007bff;
-    color: #fff;
-    font-size: 16px;
-    border-radius: 4px;
     cursor: pointer;
-    margin-left: 10px;
 }
 
 .search-container input[type="submit"]:hover {
-    background-color: #0056b3;
+    background-color: #333;
 }
 
-/* Tabela */
+/* Estilos da tabela */
 table {
     width: 100%;
     border-collapse: collapse;
     margin-bottom: 20px;
 }
 
-table th, table td {
+table th,
+table td {
     padding: 12px;
     text-align: left;
     border-bottom: 1px solid #ddd;
 }
 
 table th {
-    background-color: #007bff;
-    color: #fff;
+    background-color: #333;
+    color: white;
 }
 
 table tr:nth-child(even) {
     background-color: #f2f2f2;
 }
 
-/* Paginação */
+/* Estilos da paginação */
 .pagination {
-    text-align: center;
+    display: flex;
+    justify-content: space-between;
     margin-top: 20px;
 }
 
 .pagination a {
-    display: inline-block;
-    padding: 10px 15px;
-    margin: 0 5px;
-    border-radius: 4px;
-    background-color: #007bff;
-    color: #fff;
+    color: #333;
     text-decoration: none;
-    font-size: 16px;
+    padding: 10px 20px;
+    border: 1px solid #333;
+    border-radius: 4px;
 }
 
 .pagination a:hover {
-    background-color: #0056b3;
+    background-color: #333;
+    color: white;
 }
 
-.pagination a.disabled {
-    background-color: #ccc;
-    cursor: not-allowed;
-    pointer-events: none;
-    color: #666;
+/* Adicionar estilos específicos para selecionar opções */
+.search-container select {
+    width: 150px;
+}
+.search-container {
+    margin: 20px;
 }
 
-/* Botão de download PDF */
-.actions {
-    margin-bottom: 20px;
-    text-align: center;
+.filter-form, .export-form {
+    margin-bottom: 10px;
 }
 
-.actions .btn {
-    padding: 10px 20px;
+.search-input, .search-select, .filter-button, .export-button {
+    padding: 8px;
+    margin: 5px;
+}
+
+.search-input {
+    width: 200px;
+}
+
+.search-select {
+    width: 120px;
+}
+
+.filter-button, .export-button {
+    background-color: #4CAF50;
+    color: white;
     border: none;
-    background-color: #28a745;
-    color: #fff;
-    font-size: 16px;
-    border-radius: 4px;
-    text-decoration: none;
     cursor: pointer;
 }
 
-.actions .btn:hover {
-    background-color: #218838;
-}
-
-/* Responsividade */
-@media (max-width: 768px) {
-    .container {
-        width: 95%;
-    }
-
-    .search-container form {
-        flex-direction: column;
-        align-items: center;
-    }
-
-    .search-container input[type="text"] {
-        width: 100%;
-        margin-bottom: 10px;
-    }
-
-    .search-container input[type="submit"] {
-        width: 100%;
-    }
+.filter-button:hover, .export-button:hover {
+    background-color: #45a049;
 }
