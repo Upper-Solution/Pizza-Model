@@ -1,32 +1,138 @@
-/* Estilos básicos */
-body {
-    font-family: 'Lato', sans-serif;
-    background-color: #f4f4f4;
+/* Arquivo: adm-sobre.css */
+
+/* Reset básico */
+* {
     margin: 0;
     padding: 0;
+    box-sizing: border-box;
+    font-family: 'Roboto', sans-serif;
+}
+
+body {
+    background-color: #f4f4f9;
     color: #333;
+    line-height: 1.6;
+}
+
+header {
+    background-color: #333;
+    color: #fff;
+    padding: 20px;
+    text-align: center;
+    position: relative;
+}
+
+header h1 {
+    margin-bottom: 10px;
+}
+
+header .back-button {
+    position: absolute;
+    top: 20px;
+    left: 20px;
+    background-color: #ffffff;
+    color: #fff;
+    padding: 10px 15px;
+    text-decoration: none;
+    border-radius: 5px;
+    font-weight: bold;
+}
+
+header .back-button:hover {
+    background-color: #d2d2d2;
 }
 
 .container {
-    width: 80%;
-    max-width: 1200px;
-    margin: 30px auto;
-    background: #fff;
+    max-width: 800px;
+    margin: 20px auto;
     padding: 20px;
+    background-color: #fff;
     border-radius: 8px;
-    box-shadow: 0 2px 5px rgba(0,0,0,0.1);
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
 }
 
-h1 {
+.form-container {
+    display: flex;
+    flex-direction: column;
+    gap: 20px;
+}
+
+.image-group {
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+}
+
+.image-group label {
+    font-weight: 500;
+    color: #555;
+}
+
+.image-group input[type="file"] {
+    margin-top: 5px;
+}
+
+.preview-image {
+    max-width: 30%;
+    height: auto;
+    border-radius: 5px;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+}
+
+input[type="text"],
+input[type="email"],
+input[type="url"],
+textarea {
+    width: 100%;
+    padding: 10px;
+    border: 1px solid #ddd;
+    border-radius: 5px;
+    font-size: 16px;
+}
+
+textarea {
+    resize: vertical;
+    min-height: 100px;
+}
+
+.form-group {
     margin-bottom: 20px;
-    color: #007bff;
 }
 
-/* Mensagens de sucesso e erro */
+.form-group label {
+    display: block;
+    margin-bottom: 5px;
+    font-weight: 500;
+    color: #555;
+}
+
+.button {
+    display: inline-block;
+    background-color: #007bff;
+    color: #fff;
+    padding: 10px 20px;
+    border: none;
+    border-radius: 5px;
+    font-size: 16px;
+    font-weight: bold;
+    text-align: center;
+    cursor: pointer;
+    text-decoration: none;
+    transition: background-color 0.3s ease;
+}
+
+.button:hover {
+    background-color: #0056b3;
+}
+
+.message-container {
+    margin-top: 20px;
+}
+
 .message {
     padding: 10px;
-    margin-bottom: 20px;
     border-radius: 5px;
+    font-size: 16px;
 }
 
 .message.success {
@@ -37,81 +143,4 @@ h1 {
 .message.error {
     background-color: #f8d7da;
     color: #721c24;
-}
-
-/* Formulário */
-form {
-    display: flex;
-    flex-direction: column;
-    gap: 20px;
-}
-
-form label {
-    margin-top: 10px;
-    font-weight: bold;
-    color: #333;
-}
-
-form input[type="text"],
-form input[type="email"],
-form input[type="url"],
-form textarea {
-    width: calc(100% - 22px);
-    padding: 10px;
-    border: 1px solid #ccc;
-    border-radius: 4px;
-    margin-bottom: 10px;
-}
-
-form textarea {
-    height: 100px;
-}
-
-/* Botões */
-button[type="submit"] {
-    background-color: #007bff;
-    border: none;
-    color: white;
-    padding: 10px 20px;
-    text-align: center;
-    text-decoration: none;
-    display: inline-block;
-    font-size: 16px;
-    border-radius: 5px;
-    cursor: pointer;
-    margin-top: 10px;
-}
-
-button[type="submit"]:hover {
-    background-color: #0056b3;
-}
-
-a.button {
-    background-color: #6c757d;
-    border: none;
-    color: white;
-    padding: 10px 20px;
-    text-align: center;
-    text-decoration: none;
-    display: inline-block;
-    font-size: 16px;
-    border-radius: 5px;
-    cursor: pointer;
-    margin-top: 10px;
-    text-align: center;
-}
-
-a.button:hover {
-    background-color: #5a6268;
-}
-
-/* Imagens de prévia */
-.preview-image {
-    width: 200px; /* Define a largura fixa */
-    height: 150px; /* Define a altura fixa */
-    object-fit: cover; /* Garante que a imagem se ajuste ao tamanho sem distorção */
-    border-radius: 4px;
-    box-shadow: 0 2px 5px rgba(0,0,0,0.1);
-    margin-top: 10px;
-    display: block;
 }

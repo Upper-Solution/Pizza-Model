@@ -32,7 +32,7 @@ if (isset($_POST['logout'])) {
         <header class="header">
             <h1>Bem-vindo ao Painel de Administração</h1>
             <form method="POST" action="">
-                <button type="submit" name="logout" class="exit-buttom">Sair</button>
+                <button type="submit" name="logout" class="exit-button">Sair</button>
             </form>
         </header>
         <div class="dashboard">
@@ -42,23 +42,21 @@ if (isset($_POST['logout'])) {
             </div>
             <div class="card" onclick="window.location.href='adm-sobre.php'">
                 <h2>Sobre</h2>
-                <p>Alterar as informações da página sobre</p>
+                <p>Alterar as informações da página sobre.</p>
             </div>
             <div class="card" onclick="window.location.href='admin-orders.php'">
                 <h2>Pedidos</h2>
                 <p>Gerenciar os pedidos realizados pelos clientes.</p>
             </div>
-            <div class="card new-line" onclick="window.location.href='adm-clientes.php'">
-                <h2>Taxas e descontos</h2>
-                <p>Definir valor da entrega e taxa de descontos.</p>
+            <div class="card" onclick="window.location.href='adm-clientes.php'">
+                <h2>Taxas e Descontos</h2>
+                <p>(AINDA ESTA EM DESENVOLVIMENTO MEU COPINXA)</p>
             </div>
-            <div class="card new-line" onclick="window.location.href='adm-relatorio.php'">
-                <h2>Relatórios</h2>
+            <div class="card" onclick="window.location.href='adm-relatorio.php'">
+                <h2>Gerar Relatórios</h2>
                 <p>Visualizar relatórios de vendas e desempenho.</p>
             </div>
         </div>
     </div>
 </body>
 </html>
-
-

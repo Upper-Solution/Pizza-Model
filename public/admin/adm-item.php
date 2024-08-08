@@ -91,42 +91,39 @@ $pdo = null;
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <link rel="shortcut icon" href="../imagens/favicon.ico" type="image/x-icon">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
     <link rel="stylesheet" href="../css/adm.css">
-    <link href="https://fonts.googleapis.com/css?family=Hepta+Slab:400,700|Lato:400,700&display=swap" rel="stylesheet">
     <title>Pizzaria - Menu</title>
 </head>
 <body>
+    <header class="header">
+        <div class="header-content">
+            <h1 class="header-title">Lanches Cadastrados</h1>
+            <a href="adm-painel.php" class="btn-back">Voltar</a>
+        </div>
+    </header>
     <div class="container">
         <div class="pizzas-container">
-            <!-- Novo container para título e botão de voltar -->
-            <div class="header-container">
-                <h2 class="pizzas-title">Lanches Cadastrados</h2>
-                <a href="adm-painel.php" class="btn-back">Voltar</a>
-            </div>
             <!-- Formulário de pesquisa -->
-            <form method="GET" action="">
+            <form method="GET" action="" class="search-form">
                 <label for="search">Pesquisar:</label>
                 <input type="text" id="search" name="search" placeholder="Nome ou ID" value="<?php echo htmlspecialchars(isset($_GET['search']) ? $_GET['search'] : ''); ?>">
-                <button type="submit">Buscar</button>
+                <button type="submit"><i class="fas fa-search"></i> Buscar</button>
             </form>
             <!-- Botão para adicionar pizza -->
             <button class="btn-add-pizza" onclick="showAddForm()">Adicionar Pizza</button>
             <!-- Formulário de adição, inicialmente escondido -->
-            <div id="add-form" class="add-form" style="display:none;">
+            <div id="add-form" class="add-form">
                 <form method="POST" action="" enctype="multipart/form-data">
                     <h3>Adicionar Nova Pizza</h3>
                     <label for="nome">Nome:</label>
                     <input type="text" name="nome" required>
-                    <br>
                     <label for="descricao">Descrição:</label>
                     <textarea name="descricao" required></textarea>
-                    <br>
                     <label for="preco">Preço (R$):</label>
                     <input type="number" name="preco" step="0.01" required>
-                    <br>
                     <label for="imagem">Imagem:</label>
                     <input type="file" name="imagem" accept="image/*">
-                    <br>
                     <button type="submit" name="add_pizza">Adicionar</button>
                     <button type="button" onclick="hideAddForm()">Cancelar</button>
                 </form>
@@ -135,12 +132,12 @@ $pdo = null;
             <table class="table-bg">
                 <thead>
                     <tr>
-                        <th scope="col">ID</th>
-                        <th scope="col">Nome</th>
-                        <th scope="col">Descrição</th>
-                        <th scope="col">Preço (R$)</th>
-                        <th scope="col">Imagem</th>
-                        <th scope="col">Ações</th>
+                        <th>ID</th>
+                        <th>Nome</th>
+                        <th>Descrição</th>
+                        <th>Preço (R$)</th>
+                        <th>Imagem</th>
+                        <th>Ações</th>
                     </tr>
                 </thead>
                 <tbody>
@@ -153,37 +150,19 @@ $pdo = null;
                                 <td><?php echo htmlspecialchars($pizza['preco']); ?></td>
                                 <td>
                                     <?php if ($pizza['imagem']): ?>
-                                        <img src="exibir_imagem.php?id=<?php echo htmlspecialchars($pizza['id']); ?>" alt="Imagem da Pizza" style="max-width: 100px;">
+                                        <img src="exibir_imagem.php?id=<?php echo htmlspecialchars($pizza['id']); ?>" alt="Imagem da Pizza" class="pizza-image">
                                     <?php else: ?>
                                         <span>Sem imagem</span>
                                     <?php endif; ?>
                                 </td>
                                 <td>
-                                    <!-- Botão para mostrar o formulário de edição -->
-                                    <button class="btn-edit" onclick="showEditForm(<?php echo htmlspecialchars($pizza['id']); ?>)">Editar</button>
-                                    <a href="delete_pizza.php?id=<?php echo htmlspecialchars($pizza['id']); ?>" class="btn-delete" onclick="return confirm('Tem certeza que deseja excluir esta pizza?');">Excluir</a>
-                                </td>
-                            </tr>
-                            <!-- Formulário de edição, inicialmente escondido -->
-                            <tr id="edit-form-<?php echo htmlspecialchars($pizza['id']); ?>" class="edit-form" style="display:none;">
-                                <td colspan="6">
-                                    <form method="POST" action="" enctype="multipart/form-data">
-                                        <input type="hidden" name="edit_id" value="<?php echo htmlspecialchars($pizza['id']); ?>">
-                                        <label for="nome">Nome:</label>
-                                        <input type="text" name="nome" value="<?php echo htmlspecialchars($pizza['nome']); ?>" required>
-                                        <br>
-                                        <label for="descricao">Descrição:</label>
-                                        <textarea name="descricao" required><?php echo htmlspecialchars($pizza['descricao']); ?></textarea>
-                                        <br>
-                                        <label for="preco">Preço (R$):</label>
-                                        <input type="number" name="preco" step="0.01" value="<?php echo htmlspecialchars($pizza['preco']); ?>" required>
-                                        <br>
-                                        <label for="imagem">Imagem:</label>
-                                        <input type="file" name="imagem" accept="image/*">
-                                        <br>
-                                        <button type="submit">Salvar</button>
-                                        <button type="button" onclick="hideEditForm(<?php echo htmlspecialchars($pizza['id']); ?>)">Cancelar</button>
-                                    </form>
+                                    <!-- Ícones de editar e excluir -->
+                                    <a href="edit_pizza.php?id=<?php echo htmlspecialchars($pizza['id']); ?>" class="icon-edit" title="Editar">
+                                        <i class="fas fa-edit"></i>
+                                    </a>
+                                    <a href="delete_pizza.php?id=<?php echo htmlspecialchars($pizza['id']); ?>" class="icon-delete" title="Excluir" onclick="return confirm('Tem certeza que deseja excluir esta pizza?');">
+                                        <i class="fas fa-trash-alt"></i>
+                                    </a>
                                 </td>
                             </tr>
                         <?php endforeach; ?>
@@ -203,14 +182,6 @@ $pdo = null;
 
         function hideAddForm() {
             document.getElementById('add-form').style.display = 'none';
-        }
-
-        function showEditForm(id) {
-            document.getElementById('edit-form-' + id).style.display = 'table-row';
-        }
-
-        function hideEditForm(id) {
-            document.getElementById('edit-form-' + id).style.display = 'none';
         }
     </script>
 </body>
