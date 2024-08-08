@@ -7,3 +7,4 @@ url = "https://mediumblue-newt-815943.hostingersite.com/public/client/menu.php"
 for _ in range(5):
     webbrowser.open_new_tab(url)
     
+#abrir no terminal 
