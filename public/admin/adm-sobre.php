@@ -125,6 +125,8 @@ $pdo = null;
     <header>
         <h1>Sobre a Empresa</h1>
         <a href="adm-painel.php" class="button back-button">Voltar</a>
+
+        
     </header>
     <div class="container">
         <form action="adm-sobre.php" method="post" enctype="multipart/form-data">

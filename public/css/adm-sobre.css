@@ -22,15 +22,11 @@ header {
     position: relative;
 }
 
-header h1 {
-    margin-bottom: 10px;
-}
-
 header .back-button {
     position: absolute;
-    top: 20px;
+    top: 23px;
     left: 20px;
-    background-color: #ffffff;
+    background-color: #0056b3;
     color: #fff;
     padding: 10px 15px;
     text-decoration: none;
@@ -108,7 +104,7 @@ textarea {
 
 .button {
     display: inline-block;
-    background-color: #007bff;
+    background-color: #0056b3;
     color: #fff;
     padding: 10px 20px;
     border: none;

@@ -114,8 +114,8 @@ $pdo = null;
             </div>
             <div class="profile-actions">
                 <a href="edit_profile.php" class="btn-edit-profile">Editar Perfil</a>
+                <a href="menu.php" class="btn-edit-profile">Voltar</a>
                 <a href="../../config/logout.php" class="btn-logout">Sair</a>
-                
             </div>
         </div>
     </div>
