@@ -1,78 +1,78 @@
-body {
-    font-family: Arial, sans-serif;
-    font-size: 16px;
-    margin: 0;
-    padding: 0;
-    background-color: #f0f0f0;
-}
-
-.container {
-    width: 100%;
-    max-width: 1200px;
-    margin: 0 auto;
-    padding: 20px;
-}
-
+/* Cabeçalho */
 .header {
+    width: 100%;
     display: flex;
-    justify-content: space-between;
+    font-family: Arial, sans-serif;
     align-items: center;
-    background-color: #333;
+    justify-content: space-between; /* Distribui espaço entre itens */
+    background-color: #333; /* Cor de fundo moderna */
     color: #fff;
-    padding: 10px 20px;
-    border-radius: 25px 0 25px 0;
+    padding: 15px 25px; /* Padding para um visual espaçoso */
+    position: fixed;
+    top: 0;
+    left: 0;
+    z-index: 1000;
+    box-sizing: border-box; /* Inclui padding e bordas no cálculo da largura */
 }
 
-.exit-buttom {
+/* Ajuste para o botão sair */
+.header form {
+    margin: 0;
+}
+
+.exit-button {
     font-size: 16px;
-    background-color: #ff0000;
+    background-color: #ff0000; /* Cor do botão */
     color: #fff;
     border: none;
     padding: 10px 20px;
     cursor: pointer;
-    border-radius: 7px;
+    border-radius: 5px; /* Bordas arredondadas */
+    transition: background-color 0.3s, color 0.3s; /* Transição suave */
 }
 
-.exit-buttom:hover {
+.exit-button:hover {
     background-color: #fff;
     color: #ff0000;
-    transition: background-color 0.2s;
 }
 
+
+/* Painel de controle */
 .dashboard {
     display: flex;
-    flex-wrap: wrap; /* Permite a quebra de linha */
-    justify-content: space-around;
-    margin-top: 20px;
+    flex-wrap: wrap;
+    justify-content: space-between;
+    margin-top: 130px; /* Espaço adicional acima dos cards */
 }
 
 .card {
     background-color: #fff;
     padding: 20px;
     margin: 10px;
-    box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+    font-family: Arial, sans-serif;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1); /* Sombra mais profunda para destaque */
     cursor: pointer;
-    flex: 1 1 calc(33.333% - 40px); /* Ajuste da largura */
+    flex: 1 1 calc(33.333% - 20px); /* Ajuste da largura para três cards por linha */
     text-align: center;
-    transition: transform 0.3s ease-in-out;
+    border-radius: 10px; /* Bordas mais suaves */
+    transition: transform 0.3s ease, box-shadow 0.3s ease; /* Transição suave */
 }
 
 .card h2 {
     margin-top: 0;
+    color: #333; /* Cor do texto mais escura */
 }
 
 .card p {
-    color: #555;
+    color: #666; /* Cor do texto mais suave */
 }
 
 .card:hover {
-    transform: scale(1.05);
+    transform: translateY(-5px); /* Efeito de elevação ao passar o mouse */
+    box-shadow: 0 6px 12px rgba(0, 0, 0, 0.2); /* Aumento da sombra para um destaque maior */
 }
 
-.new-line {
-    flex-basis: 100%;
-}
-
+/* Responsividade */
 @media (max-width: 768px) {
     .dashboard {
         flex-direction: column;
@@ -80,7 +80,7 @@ body {
     }
 
     .card {
-        width: 80%;
+        width: 90%;
         margin: 10px 0;
     }
 }
