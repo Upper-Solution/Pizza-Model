@@ -50,7 +50,7 @@ if (isset($_POST['logout'])) {
             </div>
             <div class="card" onclick="window.location.href='adm-clientes.php'">
                 <h2>Taxas e Descontos</h2>
-                <p>Definir valor da entrega e taxa de descontos.</p>
+                <p>(AINDA ESTA EM DESENVOLVIMENTO MEU COPINXA)</p>
             </div>
             <div class="card" onclick="window.location.href='adm-relatorio.php'">
                 <h2>Gerar Relatórios</h2>

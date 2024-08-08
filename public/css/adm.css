@@ -1,23 +1,57 @@
-/* Reset básico e definição de fontes */
-body {
-    font-family: 'Lato', sans-serif;
+/* Reset básico */
+* {
     margin: 0;
     padding: 0;
+    box-sizing: border-box;
 }
 
+/* Configurações gerais */
+body {
+    font-family: 'Lato', sans-serif;
+    background-color: #f9f9f9;
+    color: #333;
+}
+
+/* Container principal */
 .container {
-    width: 90%;
-    margin: auto;
+    max-width: 1200px;
+    margin: 0 auto;
     padding: 20px;
 }
 
-.pizzas-container {
-    margin-top: 20px;
+/* Cabeçalho */
+.header {
+    background-color: #333;
+    color: #fff;
+    padding: 15px;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+    margin-bottom: 20px;
 }
 
-.pizzas-title {
+.header-content {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
+.header-title {
     font-size: 24px;
-    margin-bottom: 20px;
+    margin: 0;
+}
+
+.btn-back {
+    background-color: #fff;
+    color: #333;
+    border: none;
+    padding: 10px 20px;
+    border-radius: 5px;
+    font-size: 16px;
+    cursor: pointer;
+    transition: background-color 0.3s, color 0.3s;
+}
+
+.btn-back:hover {
+    background-color: #fff;
     color: #333;
 }
 
@@ -27,62 +61,126 @@ form {
 }
 
 form label {
-    font-size: 19px;
-    margin-right: 10px;
+    font-weight: bold;
 }
 
 form input[type="text"] {
-    padding: 5px;
+    padding: 10px;
+    border-radius: 4px;
+    border: 1px solid #ccc;
+    width: 250px;
     font-size: 16px;
-    border-radius: 3px;
 }
 
 form button {
-    padding: 7px;
+    padding: 10px 15px;
+    border: none;
+    background-color: #0056b3;
+    color: #fff;
     border-radius: 5px;
     font-size: 16px;
-    background-color: #007bff;
-    color: #fff;
-    border: none;
     cursor: pointer;
+    transition: background-color 0.3s;
 }
 
 form button:hover {
-    background-color: #0056b3;
+    background-color: #004186;
+    color: #fff;
 }
 
-/* Botão de adicionar pizza */
+/* Botão para adicionar pizza */
 .btn-add-pizza {
-    display: inline-block;
-    margin-bottom: 20px;
-    padding: 10px 20px;
-    background-color: #28a745;
+    background-color: #0056b3;
     color: #fff;
-    text-decoration: none;
-    font-size: 16px;
+    border: none;
+    padding: 10px 20px;
     border-radius: 5px;
+    font-size: 16px;
+    cursor: pointer;
+    margin-bottom: 20px;
+    transition: background-color 0.3s;
 }
 
 .btn-add-pizza:hover {
-    background-color: #218838;
+    background-color: #004186;
+    color: #fff;
 }
 
-/* Estilos para a tabela */
+/* Formulário de adição */
+.add-form {
+    background-color: #fff;
+    padding: 20px;
+    border-radius: 8px;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+    margin-bottom: 20px;
+}
+
+.add-form h3 {
+    margin-bottom: 15px;
+}
+
+.add-form label {
+    display: block;
+    margin-bottom: 5px;
+    font-weight: bold;
+}
+
+.add-form input[type="text"],
+.add-form input[type="number"],
+.add-form textarea,
+.add-form input[type="file"] {
+    width: 100%;
+    padding: 10px;
+    border-radius: 4px;
+    border: 1px solid #ccc;
+    margin-bottom: 15px;
+}
+
+.add-form button {
+    background-color: #333;
+    color: #fff;
+    border: none;
+    padding: 10px 20px;
+    border-radius: 5px;
+    font-size: 16px;
+    cursor: pointer;
+    margin-right: 10px;
+    transition: background-color 0.3s;
+}
+
+.add-form button:hover {
+    background-color: #e5533f;
+}
+
+.add-form button[type="button"] {
+    background-color: #ddd;
+    color: #333;
+}
+
+.add-form button[type="button"]:hover {
+    background-color: #ccc;
+}
+
+/* Tabela */
 .table-bg {
     width: 100%;
     border-collapse: collapse;
     margin-top: 20px;
+    background-color: #fff;
+    border-radius: 8px;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
 }
 
 .table-bg th,
 .table-bg td {
-    border: 1px solid #ddd;
-    padding: 10px;
+    padding: 12px;
     text-align: left;
+    border-bottom: 1px solid #ddd;
 }
 
 .table-bg th {
-    background-color: #f4f4f4;
+    background-color: #333;
+    color: #fff;
     font-weight: bold;
 }
 
@@ -94,23 +192,31 @@ form button:hover {
     background-color: #f1f1f1;
 }
 
+/* Imagem da pizza */
+.table-bg img {
+    max-width: 100px;
+    border-radius: 6px;
+}
+
 /* Botões de ação */
 .btn-edit,
 .btn-delete {
-    padding: 5px 10px;
+    border: none;
+    padding: 8px 12px;
+    border-radius: 4px;
     font-size: 14px;
-    text-decoration: none;
-    border-radius: 5px;
+    cursor: pointer;
     margin-right: 5px;
+    color: #333;
 }
 
 .btn-edit {
-    background-color: #007bff;
+    background-color: #ffa500;
     color: #fff;
 }
 
 .btn-edit:hover {
-    background-color: #0056b3;
+    background-color: #e59400;
 }
 
 .btn-delete {
@@ -121,129 +227,87 @@ form button:hover {
 .btn-delete:hover {
     background-color: #c82333;
 }
-.edit-form form {
-    margin: 0;
-    padding: 10px;
-    border: 1px solid #ddd;
-    background-color: #f9f9f9;
-}
 
-.edit-form input,
-.edit-form textarea {
-    width: 100%;
-    margin-bottom: 10px;
-}
-
-.edit-form button {
-    margin-right: 10px;
-}
-/* Container para os formulários de adição e edição */
-.add-form,
+/* Formulário de edição */
 .edit-form {
-    margin: 20px 0;
-    padding: 20px;
-    border: 1px solid #ddd;
+    background-color: #fff;
+    padding: 15px;
     border-radius: 8px;
-    background-color: #f9f9f9;
-    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+    margin-bottom: 20px;
+    display: table;
+    width: 100%;
 }
 
-.add-form h3,
-.edit-form h3 {
-    margin-top: 0;
-    font-size: 1.5em;
-    color: #333;
-}
-
-.add-form label,
 .edit-form label {
     display: block;
-    margin-bottom: 8px;
+    margin-bottom: 5px;
     font-weight: bold;
-    color: #333;
 }
 
-.add-form input,
-.add-form textarea,
-.edit-form input,
-.edit-form textarea {
-    width: 100%;
-    padding: 8px;
-    margin-bottom: 12px;
+.edit-form input[type="text"],
+.edit-form input[type="number"],
+.edit-form textarea,
+.edit-form input[type="file"] {
+    width: calc(100% - 20px);
+    padding: 10px;
+    border-radius: 4px;
     border: 1px solid #ccc;
-    border-radius: 4px;
+    margin-bottom: 15px;
 }
 
-.add-form textarea,
-.edit-form textarea {
-    height: 100px;
-    resize: vertical;
-}
-
-.add-form button,
 .edit-form button {
-    padding: 10px 15px;
-    border: none;
-    border-radius: 4px;
+    background-color: #333;
     color: #fff;
-    font-size: 1em;
+    border: none;
+    padding: 10px 20px;
+    border-radius: 5px;
+    font-size: 16px;
     cursor: pointer;
     margin-right: 10px;
+    transition: background-color 0.3s;
 }
 
-.add-form button[name="add_pizza"] {
-    background-color: #28a745; /* Verde para adicionar */
-}
-
-.add-form button[name="add_pizza"]:hover {
-    background-color: #218838;
-}
-
-.add-form button[type="button"] {
-    background-color: #dc3545; /* Vermelho para cancelar */
-}
-
-.add-form button[type="button"]:hover {
-    background-color: #c82333;
-}
-
-.edit-form button[type="submit"] {
-    background-color: #007bff; /* Azul para salvar */
-}
-
-.edit-form button[type="submit"]:hover {
-    background-color: #0069d9;
+.edit-form button:hover {
+    background-color: #e5533f;
 }
 
 .edit-form button[type="button"] {
-    background-color: #6c757d; /* Cinza para cancelar */
+    background-color: #ddd;
+    color: #333;
 }
 
 .edit-form button[type="button"]:hover {
-    background-color: #5a6268;
+    background-color: #ccc;
 }
 
-.header-container {
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
-    margin-bottom: 20px;
-}
+/* Responsividade */
+@media (max-width: 768px) {
+    .header-content {
+        flex-direction: column;
+        align-items: flex-start;
+    }
 
-.pizzas-title {
-    margin: 0;
-}
+    .header-title {
+        margin-bottom: 10px;
+    }
 
-.btn-back {
-    background-color: #007bff;
-    color: #fff;
-    padding: 10px 15px;
-    text-decoration: none;
-    border-radius: 5px;
-    font-size: 14px;
-}
+    .btn-back {
+        margin-top: 10px;
+    }
 
-.btn-back:hover {
-    background-color: #0056b3;
-}
+    .add-form,
+    .edit-form {
+        width: 100%;
+    }
 
+    .table-bg th,
+    .table-bg td {
+        padding: 8px;
+        font-size: 14px;
+    }
+
+    .table-bg img {
+        max-width: 80px;
+    }
+}
