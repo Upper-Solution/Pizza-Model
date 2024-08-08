@@ -128,6 +128,23 @@ $pdo = null;
                     <button type="button" onclick="hideAddForm()">Cancelar</button>
                 </form>
             </div>
+            <!-- Formulário de edição, inicialmente escondido -->
+            <div id="edit-form" class="edit-form" style="display:none;">
+                <form method="POST" action="" enctype="multipart/form-data">
+                    <h3>Editar Pizza</h3>
+                    <input type="hidden" id="edit_id" name="edit_id">
+                    <label for="edit_nome">Nome:</label>
+                    <input type="text" id="edit_nome" name="nome" required>
+                    <label for="edit_descricao">Descrição:</label>
+                    <textarea id="edit_descricao" name="descricao" required></textarea>
+                    <label for="edit_preco">Preço (R$):</label>
+                    <input type="number" id="edit_preco" name="preco" step="0.01" required>
+                    <label for="edit_imagem">Imagem:</label>
+                    <input type="file" id="edit_imagem" name="imagem" accept="image/*">
+                    <button type="submit">Salvar Alterações</button>
+                    <button type="button" onclick="hideEditForm()">Cancelar</button>
+                </form>
+            </div>
             <!-- Tabela de pizzas -->
             <table class="table-bg">
                 <thead>
@@ -157,7 +174,12 @@ $pdo = null;
                                 </td>
                                 <td>
                                     <!-- Ícones de editar e excluir -->
-                                    <a href="edit_pizza.php?id=<?php echo htmlspecialchars($pizza['id']); ?>" class="icon-edit" title="Editar">
+                                    <a href="javascript:void(0);" class="icon-edit" title="Editar" 
+                                       onclick="showEditForm(this)" 
+                                       data-id="<?php echo htmlspecialchars($pizza['id']); ?>" 
+                                       data-nome="<?php echo htmlspecialchars($pizza['nome']); ?>" 
+                                       data-descricao="<?php echo htmlspecialchars($pizza['descricao']); ?>" 
+                                       data-preco="<?php echo htmlspecialchars($pizza['preco']); ?>">
                                         <i class="fas fa-edit"></i>
                                     </a>
                                     <a href="delete_pizza.php?id=<?php echo htmlspecialchars($pizza['id']); ?>" class="icon-delete" title="Excluir" onclick="return confirm('Tem certeza que deseja excluir esta pizza?');">
@@ -178,10 +200,46 @@ $pdo = null;
     <script>
         function showAddForm() {
             document.getElementById('add-form').style.display = 'block';
+            hideEditForm(); // Oculta o formulário de edição se estiver visível
         }
 
         function hideAddForm() {
             document.getElementById('add-form').style.display = 'none';
+        }
+
+        function showEditForm(element) {
+            // Extrai os dados dos atributos data- do elemento clicado
+            const id = element.getAttribute('data-id');
+            const nome = element.getAttribute('data-nome');
+            const descricao = element.getAttribute('data-descricao');
+            const preco = element.getAttribute('data-preco');
+
+            // Verifica se os dados são válidos
+            if (id && nome && descricao && preco) {
+                // Preenche os campos do formulário de edição
+                document.getElementById('edit_id').value = id;
+                document.getElementById('edit_nome').value = nome;
+                document.getElementById('edit_descricao').value = descricao;
+                document.getElementById('edit_preco').value = preco;
+
+                // Mostra o formulário de edição
+                document.getElementById('edit-form').style.display = 'block';
+
+                // Oculta o formulário de adição se estiver visível
+                hideAddForm();
+
+                // Rola a página para o topo
+                window.scrollTo({
+                    top: 0,
+                    behavior: 'smooth' // Opcional: anima a rolagem
+                });
+            } else {
+                console.error("Dados da pizza não estão disponíveis.");
+            }
+        }
+
+        function hideEditForm() {
+            document.getElementById('edit-form').style.display = 'none';
         }
     </script>
 </body>

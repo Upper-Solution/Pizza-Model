@@ -1,34 +1,14 @@
-/* Reset básico */
-* {
+body {
+    font-family: Arial, sans-serif;
+    background-color: #f4f4f4;
     margin: 0;
     padding: 0;
-    box-sizing: border-box;
 }
 
-/* Configurações gerais */
-body {
-    font-family: 'Lato', sans-serif;
-    background-color: #f9f9f9;
-    color: #333;
-}
-
-/* Container principal */
-.container {
-    max-width: 1200px;
-    margin: 0 auto;
-    padding: 20px;
-}
-
-/* Cabeçalho */
 .header {
     background-color: #333;
-    color: #fff;
-    padding: 15px;
-    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
-    margin-bottom: 20px;
-}
-
-.header-content {
+    color: white;
+    padding: 10px 20px;
     display: flex;
     justify-content: space-between;
     align-items: center;
@@ -40,274 +20,133 @@ body {
 }
 
 .btn-back {
-    background-color: #fff;
-    color: #333;
-    border: none;
-    padding: 10px 20px;
-    border-radius: 5px;
-    font-size: 16px;
-    cursor: pointer;
-    transition: background-color 0.3s, color 0.3s;
-}
-
-.btn-back:hover {
-    background-color: #fff;
-    color: #333;
-}
-
-/* Formulário de pesquisa */
-form {
-    margin-bottom: 20px;
-}
-
-form label {
-    font-weight: bold;
-}
-
-form input[type="text"] {
-    padding: 10px;
+    color: white;
+    text-decoration: none;
+    padding: 8px 15px;
+    background-color: #555;
     border-radius: 4px;
-    border: 1px solid #ccc;
-    width: 250px;
-    font-size: 16px;
 }
 
-form button {
-    padding: 10px 15px;
-    border: none;
-    background-color: #0056b3;
-    color: #fff;
-    border-radius: 5px;
-    font-size: 16px;
-    cursor: pointer;
-    transition: background-color 0.3s;
+.container {
+    padding: 20px;
 }
 
-form button:hover {
-    background-color: #004186;
-    color: #fff;
-}
-
-/* Botão para adicionar pizza */
-.btn-add-pizza {
-    background-color: #0056b3;
-    color: #fff;
-    border: none;
-    padding: 10px 20px;
-    border-radius: 5px;
-    font-size: 16px;
-    cursor: pointer;
-    margin-bottom: 20px;
-    transition: background-color 0.3s;
-}
-
-.btn-add-pizza:hover {
-    background-color: #004186;
-    color: #fff;
-}
-
-/* Formulário de adição */
-.add-form {
-    background-color: #fff;
+.pizzas-container {
+    background-color: white;
     padding: 20px;
     border-radius: 8px;
-    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+}
+
+.search-form {
     margin-bottom: 20px;
 }
 
-.add-form h3 {
-    margin-bottom: 15px;
-}
-
-.add-form label {
-    display: block;
-    margin-bottom: 5px;
-    font-weight: bold;
-}
-
-.add-form input[type="text"],
-.add-form input[type="number"],
-.add-form textarea,
-.add-form input[type="file"] {
-    width: 100%;
-    padding: 10px;
-    border-radius: 4px;
-    border: 1px solid #ccc;
-    margin-bottom: 15px;
-}
-
-.add-form button {
-    background-color: #333;
-    color: #fff;
-    border: none;
-    padding: 10px 20px;
-    border-radius: 5px;
-    font-size: 16px;
-    cursor: pointer;
+.search-form input[type="text"] {
+    padding: 8px;
+    width: 200px;
     margin-right: 10px;
-    transition: background-color 0.3s;
 }
 
-.add-form button:hover {
-    background-color: #e5533f;
+.search-form button {
+    padding: 8px 15px;
+    background-color: #333;
+    color: white;
+    border: none;
+    cursor: pointer;
 }
 
-.add-form button[type="button"] {
-    background-color: #ddd;
-    color: #333;
+.btn-add-pizza {
+    display: block;
+    margin-bottom: 20px;
+    padding: 10px 15px;
+    background-color: #28a745;
+    color: white;
+    border: none;
+    border-radius: 4px;
+    cursor: pointer;
 }
 
-.add-form button[type="button"]:hover {
-    background-color: #ccc;
+.add-form, .edit-form {
+    margin-bottom: 20px;
 }
 
-/* Tabela */
+.add-form h3, .edit-form h3 {
+    margin-top: 0;
+}
+
+.add-form label, .edit-form label {
+    display: block;
+    margin-top: 10px;
+}
+
+.add-form input[type="text"], .edit-form input[type="text"],
+.add-form textarea, .edit-form textarea,
+.add-form input[type="number"], .edit-form input[type="number"] {
+    width: 100%;
+    padding: 8px;
+    margin-top: 5px;
+    border: 1px solid #ccc;
+    border-radius: 4px;
+}
+
+.add-form input[type="file"], .edit-form input[type="file"] {
+    margin-top: 5px;
+}
+
+.add-form button[type="submit"], .edit-form button[type="submit"] {
+    margin-top: 15px;
+    padding: 10px 15px;
+    background-color: #28a745;
+    color: white;
+    border: none;
+    border-radius: 4px;
+    cursor: pointer;
+}
+
+.add-form button[type="button"], .edit-form button[type="button"] {
+    margin-top: 15px;
+    padding: 10px 15px;
+    background-color: #dc3545;
+    color: white;
+    border: none;
+    border-radius: 4px;
+    cursor: pointer;
+}
+
 .table-bg {
     width: 100%;
     border-collapse: collapse;
     margin-top: 20px;
-    background-color: #fff;
-    border-radius: 8px;
-    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
 }
 
-.table-bg th,
-.table-bg td {
-    padding: 12px;
+.table-bg th, .table-bg td {
+    padding: 10px;
     text-align: left;
     border-bottom: 1px solid #ddd;
 }
 
 .table-bg th {
-    background-color: #333;
-    color: #fff;
-    font-weight: bold;
+    background-color: #f8f8f8;
 }
 
-.table-bg tr:nth-child(even) {
-    background-color: #f9f9f9;
-}
-
-.table-bg tr:hover {
-    background-color: #f1f1f1;
-}
-
-/* Imagem da pizza */
-.table-bg img {
+.pizza-image {
     max-width: 100px;
-    border-radius: 6px;
-}
-
-/* Botões de ação */
-.btn-edit,
-.btn-delete {
-    border: none;
-    padding: 8px 12px;
+    max-height: 100px;
+    object-fit: cover;
     border-radius: 4px;
-    font-size: 14px;
-    cursor: pointer;
-    margin-right: 5px;
-    color: #333;
 }
 
-.btn-edit {
-    background-color: #ffa500;
-    color: #fff;
-}
-
-.btn-edit:hover {
-    background-color: #e59400;
-}
-
-.btn-delete {
-    background-color: #dc3545;
-    color: #fff;
-}
-
-.btn-delete:hover {
-    background-color: #c82333;
-}
-
-/* Formulário de edição */
-.edit-form {
-    background-color: #fff;
-    padding: 15px;
-    border-radius: 8px;
-    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
-    margin-bottom: 20px;
-    display: table;
-    width: 100%;
-}
-
-.edit-form label {
-    display: block;
-    margin-bottom: 5px;
-    font-weight: bold;
-}
-
-.edit-form input[type="text"],
-.edit-form input[type="number"],
-.edit-form textarea,
-.edit-form input[type="file"] {
-    width: calc(100% - 20px);
-    padding: 10px;
-    border-radius: 4px;
-    border: 1px solid #ccc;
-    margin-bottom: 15px;
-}
-
-.edit-form button {
-    background-color: #333;
-    color: #fff;
-    border: none;
-    padding: 10px 20px;
-    border-radius: 5px;
-    font-size: 16px;
-    cursor: pointer;
+.icon-edit, .icon-delete {
     margin-right: 10px;
-    transition: background-color 0.3s;
-}
-
-.edit-form button:hover {
-    background-color: #e5533f;
-}
-
-.edit-form button[type="button"] {
-    background-color: #ddd;
     color: #333;
+    cursor: pointer;
 }
 
-.edit-form button[type="button"]:hover {
-    background-color: #ccc;
+.icon-edit:hover {
+    color: #007bff;
 }
 
-/* Responsividade */
-@media (max-width: 768px) {
-    .header-content {
-        flex-direction: column;
-        align-items: flex-start;
-    }
-
-    .header-title {
-        margin-bottom: 10px;
-    }
-
-    .btn-back {
-        margin-top: 10px;
-    }
-
-    .add-form,
-    .edit-form {
-        width: 100%;
-    }
-
-    .table-bg th,
-    .table-bg td {
-        padding: 8px;
-        font-size: 14px;
-    }
-
-    .table-bg img {
-        max-width: 80px;
-    }
+.icon-delete:hover {
+    color: #dc3545;
 }
