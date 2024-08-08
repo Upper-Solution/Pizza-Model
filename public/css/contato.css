@@ -7,7 +7,7 @@
 
 /* Estilização geral do corpo da página */
 body {
-    font-family: Arial, sans-serif; /* Fonte padrão para o texto */
+    font-family: "Montserrat", sans-serif;  /* Fonte padrão para o texto */
     line-height: 1.6; /* Melhor legibilidade do texto */
     color: #333; /* Cor do texto */
     background-color: #f4f4f4; /* Cor de fundo clara */
@@ -16,7 +16,7 @@ body {
 }
 
 /* Estilização do cabeçalho da página */
-header {
+#cabecalho {
     background: #333; /* Cor de fundo escura */
     padding: 20px; /* Espaçamento interno */
     text-align: center; /* Alinha o texto ao centro */

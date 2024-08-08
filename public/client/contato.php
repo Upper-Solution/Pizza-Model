@@ -61,10 +61,10 @@ $pdo = null;
     <nav id="nav-container"></nav>
 
     <!-- Cabeçalho da página -->
-    <header>
+    <div id="cabecalho">
         <h1>Contato</h1>
         <p>Entre em contato com a nossa hamburgueria!</p>
-    </header>
+    </div>
 
     <!-- Seção de contato -->
     <section id="contact">

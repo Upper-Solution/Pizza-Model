@@ -1,30 +1,9 @@
 /* Esse código é responsável por adicionar pizzas ao 
 carrinho, atualizar a interface do carrinho e 
 finalizar a compra */
-// Faz a requisição a API apiGetDB_to_Js
 let entregaTaxa;
 let valorDesconto;
-async function fetchOrders() {
-  try {
-    const response = await fetch('../../includes/apiGetDB_to_Js.php');
-    const data = await response.json();
-
-    if (data.error) {
-      console.log(data.error);
-    } else if (data.message) {
-      console.log(data.message);
-    } else {
-      entregaTaxa = parseFloat(data[0].taxaEntrega); // Define a taxaEntrega
-      valorDesconto = parseFloat(data[0].descontoPedido);
-      console.log('Taxa de Entrega:', valorDesconto);
-    }
-  } catch (error) {
-    console.error('Error fetching orders:', error);
-    document.getElementById('order-list').innerHTML = `<div class="alert alert-danger">Error fetching orders.</div>`;
-  }
-}
 fetchOrders();
-
 
 // Adicionar ao carrinho
 // Cria um identificador único, combinando o ID da pizza e o tamanho
@@ -55,7 +34,7 @@ document.querySelector(".pizzaInfo--addButton").addEventListener("click", () => 
   document.querySelector(".fa-cart-shopping").classList.add("pulse");
 
   // Atualiza o carrinho, fecha o modal e salva o carrinho no localStorage
-   // Chame a função para garantir que `entregaTaxa` seja definida
+  // Chame a função para garantir que `entregaTaxa` seja definida
 
   updateCart();
   closeModal();
@@ -247,4 +226,21 @@ function retornaIdQT() {
     .catch(error => {
       console.error('Erro ao enviar os dados do pedido:', error);
     });
+}
+
+// Faz a requisição a API apiGetDB_to_Js
+async function fetchOrders() {
+  try {
+    const response = await fetch('../../includes/apiGetDB_to_Js.php');
+    const data = await response.json();
+
+    if (data.error || data.message) {
+      console.log(data.error ?? data.message);
+    } else {
+      entregaTaxa = parseFloat(data[0].taxaEntrega); // Define a taxaEntrega
+      valorDesconto = parseFloat(data[0].descontoPedido);
+    }
+  } catch (error) {
+    console.error('Error fetching orders:', error);
+  }
 }
