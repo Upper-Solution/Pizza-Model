@@ -15,6 +15,7 @@ document.querySelector(".pizzaInfo--addButton").addEventListener("click", () => 
   // Procura no carrinho se o identificador já existe
   let keyItem = cart.findIndex((item) => item.identifier == identifier);
 
+  
   // Verifica se a pizza já está no carrinho
   if (keyItem > -1) {
     // Se já estiver, aumenta a quantidade
