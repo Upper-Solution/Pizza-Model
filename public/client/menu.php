@@ -151,10 +151,15 @@ $pdo = null;
                                 </div>
                             </div>
                         </div>
+                        <div class="pizzaObservations">
+                            <textarea id="observations" rows="4" placeholder="Escreva suas observações aqui..."></textarea>
+                        </div>
                         <div class="pizzaInfo--addButton">Adicionar ao carrinho</div>
                         <div class="pizzaInfo--cancelButton">Cancelar</div>
+                        
                     </div>
                 </div>
+                
             </div>
             <div class="success pizzaWindowArea">
                 <div class="pizzaWindowBody success">

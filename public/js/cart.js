@@ -12,6 +12,7 @@ document.querySelector(".pizzaInfo--addButton").addEventListener("click", () => 
   // let size = parseInt(document.querySelector(".pizzaInfo--size.selected").getAttribute("data-key"));
   // Concatena o id da pizza com o tamanho para criar um identificador único
   let identifier = pizzas[modalKey].id;
+  let obsPedido = document.getElementById('observations').value;
   // Procura no carrinho se o identificador já existe
   let keyItem = cart.findIndex((item) => item.identifier == identifier);
 
@@ -198,6 +199,7 @@ function retornaIdQT() {
   const cartData = cart.map(item => ({
     orderId: item.id,
     quantidade: item.qtd,
+    obs: obsPedido,
     valorTotal: item.preco * item.qtd
   }));
 
