@@ -16,8 +16,6 @@ getInfoDB();
 // Cria um identificador único, combinando o ID da pizza e o tamanho
 document.querySelector(".pizzaInfo--addButton").addEventListener("click", () => {
 
-
-
   // Obtém o identificador da pizza (você pode ajustar conforme sua lógica)
   let identifier = pizzas[modalKey].id;
 
@@ -48,6 +46,10 @@ document.querySelector(".pizzaInfo--addButton").addEventListener("click", () => 
       valorTroco
     });
   }
+
+  //Limpa a area de observações
+  document.getElementById("observations").value = '';
+
   // Adiciona uma animação de pulso ao ícone do carrinho
   document.querySelector(".fa-cart-shopping").classList.add("pulse");
 
@@ -70,14 +72,11 @@ document.querySelector(".menu-openner").addEventListener("click", () => {
   }
 });
 
-
-
 // Fecha o menu do carrinho ao clicar no botão de fechar
 document.querySelector(".menu-closer").addEventListener("click", () => {
   document.querySelector("aside").style.left = "100vw";
 });
 
-// Função para atualizar a interface do carrinho
 // Função para atualizar a interface do carrinho
 function updateCart() {
   // Atualiza o número de itens no ícone do carrinho
@@ -175,8 +174,6 @@ function updateCart() {
     document.querySelector("aside").style.left = "100vw";
   }
 }
-
-
 
 // Finaliza a compra ao clicar no botão de finalizar
 document.querySelector(".cart--finalizar").addEventListener("click", () => {
