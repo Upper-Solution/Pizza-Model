@@ -10,17 +10,22 @@ let formaPagamento;
 let valorTroco;
 
 
-fetchOrders();
+getInfoDB();
 
 // Adicionar ao carrinho
 // Cria um identificador único, combinando o ID da pizza e o tamanho
 document.querySelector(".pizzaInfo--addButton").addEventListener("click", () => {
 
+
+
   // Obtém o identificador da pizza (você pode ajustar conforme sua lógica)
   let identifier = pizzas[modalKey].id;
 
   // Captura as observações do usuário
-  let observacoes = document.getElementById("observations").value.trim();
+  let observacoes;
+  observacoes = document.getElementById("observations").value.trim();
+
+
 
   // Procura no carrinho se o identificador já existe
   let keyItem = cart.findIndex((item) => item.identifier == identifier);
@@ -29,7 +34,6 @@ document.querySelector(".pizzaInfo--addButton").addEventListener("click", () => 
   if (keyItem > -1) {
     // Se já estiver, aumenta a quantidade e atualiza as observações
     cart[keyItem].qtd += modalQt;
-    cart[keyItem].observacoes = observacoes;
   } else {
     // Se não estiver, adiciona um novo item ao carrinho
     cart.push({
@@ -38,7 +42,7 @@ document.querySelector(".pizzaInfo--addButton").addEventListener("click", () => 
       preco: pizzas[modalKey].preco,
       qtd: modalQt,
       imagem: pizzas[modalKey].imagem,
-      observacoes,
+      observacoes: observacoes,
       observacaoGeral,
       formaPagamento,
       valorTroco
@@ -66,11 +70,14 @@ document.querySelector(".menu-openner").addEventListener("click", () => {
   }
 });
 
+
+
 // Fecha o menu do carrinho ao clicar no botão de fechar
 document.querySelector(".menu-closer").addEventListener("click", () => {
   document.querySelector("aside").style.left = "100vw";
 });
 
+// Função para atualizar a interface do carrinho
 // Função para atualizar a interface do carrinho
 function updateCart() {
   // Atualiza o número de itens no ícone do carrinho
@@ -93,21 +100,7 @@ function updateCart() {
       let pizzaItem = pizzas.find((item) => item.id == cart[i].id);
       // Calcula o valor total das pizzas
       pizzasValor += cart[i].preco * cart[i].qtd;
-      /*
-            // Define o nome do tamanho da pizza
-            let pizzaSizeName;
-            switch (cart[i].size) {
-              case 0:
-                pizzaSizeName = "P";
-                break;
-              case 1:
-                pizzaSizeName = "M";
-                break;
-              case 2:
-                pizzaSizeName = "G";
-                break;
-            }
-      */
+      
       // Define o nome da pizza com o tamanho
       let pizzaName = `${pizzaItem.nome}`;
 
@@ -118,6 +111,17 @@ function updateCart() {
       cartItem.querySelector("img").src = `data:image/jpeg;base64,${pizzaItem.imagem}`;
       cartItem.querySelector(".cart--item-nome").innerHTML = pizzaName;
       cartItem.querySelector(".cart--item--qt").innerHTML = cart[i].qtd;
+
+      // Define o elemento de observações
+      const observacoesElement = cartItem.querySelector(".cart--obs");
+      observacoesElement.innerHTML = cart[i].observacoes || '';
+
+      // Exibe ou oculta o elemento de observações com base na sua presença
+      if (!cart[i].observacoes) {
+        observacoesElement.style.display = 'none'; // Oculta o elemento se não houver observações
+      } else {
+        observacoesElement.style.display = 'block'; // Garante que o elemento esteja visível se houver observações
+      }
 
       // Evento para diminuir a quantidade do item no carrinho
       cartItem.querySelector(".cart--item-qtmenos").addEventListener("click", () => {
@@ -171,6 +175,8 @@ function updateCart() {
     document.querySelector("aside").style.left = "100vw";
   }
 }
+
+
 
 // Finaliza a compra ao clicar no botão de finalizar
 document.querySelector(".cart--finalizar").addEventListener("click", () => {
@@ -252,7 +258,7 @@ function retornaIdQT() {
 }
 
 // Faz a requisição a API apiGetDB_to_Js
-async function fetchOrders() {
+async function getInfoDB() {
   try {
     const response = await fetch('../../includes/apiGetDB_to_Js.php');
     const data = await response.json();

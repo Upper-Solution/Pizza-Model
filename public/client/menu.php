@@ -79,6 +79,11 @@ $pdo = null;
                         <div class="cart--item--qt">1</div>
                         <button class="cart--item-qtmais">+</button>
                     </div>
+                    <br>
+
+                    <div class="cart--obs">
+                        <p></p>
+                    </div>
                 </div>
             </div>
             <main>
@@ -197,7 +202,8 @@ $pdo = null;
     </footer>
 
     <script src="../js/geral.js"></script>
-    <script src="../js/cart.js"></script>
+    <script src="../js/cart.js">
+    </script>
     <script>
         document.addEventListener("DOMContentLoaded", function () {
             console.log('DOM fully loaded and parsed');
