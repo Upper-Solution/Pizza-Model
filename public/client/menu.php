@@ -124,6 +124,25 @@ $pdo = null;
                             <span>Total</span>
                             <span>R$ --</span>
                         </div>
+                        
+                        <div class="observacoesGerais">
+                        <label for="observacoesGerais">Observações Gerais:</label>
+                        <textarea id="observacoesGerais" rows="4" placeholder="Escreva suas observações aqui..."></textarea>
+                        <div class="formaPagamento">
+                        <label for="formaPagamento">Forma de Pagamento:</label>
+                        <select id="formaPagamento" name="formaPagamento">
+                            <option value="cartao">Cartão</option>
+                            <option value="pix">Pix</option>
+                            <option value="dinheiro">Dinheiro</option>
+                        </select>
+
+                        <!-- Input para Troco (escondido por padrão) -->
+                        <div id="trocoContainer" style="display:none;">
+                            <label for="troco">Valor para Troco:</label>
+                            <input type="text" id="troco" name="troco" placeholder="Insira o valor para troco">
+                        </div>
+                    </div>
+
                         <div id="finalizarPedidoBtn" class="cart--finalizar">Finalizar a compra</div>
                     </div>
                 </div>
@@ -205,6 +224,19 @@ $pdo = null;
                     <?php } ?>
                 });
             }
+        });
+
+        document.addEventListener("DOMContentLoaded", function () {
+            const formaPagamento = document.getElementById('formaPagamento');
+            const trocoContainer = document.getElementById('trocoContainer');
+
+            formaPagamento.addEventListener('change', function () {
+                if (formaPagamento.value === 'dinheiro') {
+                    trocoContainer.style.display = 'block';
+                } else {
+                    trocoContainer.style.display = 'none';
+                }
+            });
         });
     </script>
 </body>

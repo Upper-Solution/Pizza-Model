@@ -3,6 +3,7 @@ carrinho, atualizar a interface do carrinho e
 finalizar a compra */
 let entregaTaxa;
 let valorDesconto;
+
 fetchOrders();
 
 // Adicionar ao carrinho
@@ -12,15 +13,19 @@ document.querySelector(".pizzaInfo--addButton").addEventListener("click", () => 
   // let size = parseInt(document.querySelector(".pizzaInfo--size.selected").getAttribute("data-key"));
   // Concatena o id da pizza com o tamanho para criar um identificador único
   let identifier = pizzas[modalKey].id;
-  let obsPedido = document.getElementById('observations').value;
+
+  // Captura as observações do usuário
+  let observacoes = document.getElementById("observations").value.trim();
+  
   // Procura no carrinho se o identificador já existe
   let keyItem = cart.findIndex((item) => item.identifier == identifier);
 
-  
   // Verifica se a pizza já está no carrinho
   if (keyItem > -1) {
     // Se já estiver, aumenta a quantidade
     cart[keyItem].qtd += modalQt;
+    cart[keyItem].observacoes = observacoes; // Atualiza as observações se o item já estiver no carrinho
+ 
   } else {
     // Se não estiver, adiciona um novo item ao carrinho
     cart.push({
@@ -28,10 +33,10 @@ document.querySelector(".pizzaInfo--addButton").addEventListener("click", () => 
       id: pizzas[modalKey].id,
       preco: pizzas[modalKey].preco,
       qtd: modalQt,
-      imagem: pizzas[modalKey].imagem
+      imagem: pizzas[modalKey].imagem,
+      observacoes
     });
   }
-
   // Adiciona uma animação de pulso ao ícone do carrinho
   document.querySelector(".fa-cart-shopping").classList.add("pulse");
 
@@ -199,7 +204,7 @@ function retornaIdQT() {
   const cartData = cart.map(item => ({
     orderId: item.id,
     quantidade: item.qtd,
-    obs: obsPedido,
+    observacoes: item.observacoes,
     valorTotal: item.preco * item.qtd
   }));
 

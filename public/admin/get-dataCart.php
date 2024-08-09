@@ -37,9 +37,10 @@ try {
     foreach ($cartData as $item) {
         $orderId = $item['orderId'];
         $quantidade = $item['quantidade'];
+        $observacao = $item['observacoes'];
         $total = $item['valorTotal'];
 
-        // Consultar as mações da pizza
+        // Consultar as informações da pizza
         $stmt = $pdo->prepare('SELECT nome, descricao FROM Pizzas WHERE id = ?');
         $stmt->execute([$orderId]);
         $pizza = $stmt->fetch();
@@ -50,11 +51,12 @@ try {
         }
 
         // Inserir os dados na tabela orders
-        $stmt = $pdo->prepare('INSERT INTO orders (customer_name, items, quantidade, total, order_date, status, cep, city, neighborhood, street, number, complement, phone_number, email) VALUES (?, ?, ?, ?, NOW(), ?, ?, ?, ?, ?, ?, ?, ?, ?)');
+        $stmt = $pdo->prepare('INSERT INTO orders (customer_name, items, quantidade, observacoesPedidos, total, status, cep, city, neighborhood, street, number, complement, phone_number, email) VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)');
         $stmt->execute([
             $user['fullname'],
             $pizza['nome'],
             $quantidade,
+            $observacao,
             $total,
             'Recebido', 
             $user['cep'],
