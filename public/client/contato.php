@@ -1,109 +1,92 @@
-<?php
-session_start();
-
-// Verificar se o usuário está logado
-$loggedIn = isset($_SESSION['user_id']);
-
-// Inclui o arquivo de configuração para conexão com o banco de dados
-require_once '../../config/config.php';
-
-// Obtém a conexão com o banco de dados
-try {
-    $pdo = connectToDatabase($hosts, $port, $dbname, $username, $password);
-} catch (PDOException $e) {
-    echo "Erro ao conectar ao banco de dados: " . $e->getMessage();
-    exit();
-}
-
-// Inicialização das variáveis de usuário
-$user = null;
-$email = null;
-
-if ($loggedIn) {
-    // Recuperar informações do usuário logado
-    $userId = $_SESSION['user_id'];
-    try {
-        $stmt = $pdo->prepare('SELECT id, email FROM users WHERE id = :id');
-        $stmt->execute(['id' => $userId]);
-        $user = $stmt->fetch(PDO::FETCH_ASSOC);
-
-        if ($user) {
-            $email = $user['email'];
-        }
-    } catch (PDOException $e) {
-        echo "Erro ao consultar usuário: " . $e->getMessage();
-    }
-}
-
-// Fechar conexão com o banco de dados
-$pdo = null;
-?>
-
 <!DOCTYPE html>
-<html lang="pt-BR">
+<html lang="en">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Contato - Hamburgueria</title>
-    <!-- Link para o arquivo de CSS -->
-    <link rel="stylesheet" href="../css/contato.css">
-    <script defer src="../js/geral.js"></script>
-    <script src="https://kit.fontawesome.com/8b4042ccf0.js" crossorigin="anonymous"></script>
-    <link href="https://fonts.googleapis.com/css?family=Hepta+Slab:400,700|Lato:400,700&display=swap" rel="stylesheet">
+    <title>Contato</title>
+    <link href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css" rel="stylesheet">
     <link rel="stylesheet" href="../css/style.css">
+
+    <style>
+
+        .area-text textarea {
+            width: 100%;
+            padding: 10px;
+            font-size: 16px;
+            border-radius: 5px;
+            border: 1px solid #ccc;
+            box-shadow: inset 0 1px 3px rgba(0, 0, 0, 0.1);
+            transition: border-color 0.3s ease, box-shadow 0.3s ease;
+            resize: vertical; /* Permite o redimensionamento vertical */
+        }
+
+        .area-text textarea:focus {
+            border-color: #e0a225; /* Cor da borda ao focar no campo */
+            box-shadow: inset 0 1px 3px rgba(255, 196, 0, 0.849);
+            outline: none;
+        }
+
+        .area-text textarea::placeholder {
+            color: #aaa; /* Cor do texto do placeholder */
+            font-style: italic;
+        }
+
+
+        .contact-section {
+            padding: 40px 0;
+        }
+        .contact-section h2 {
+            margin-bottom: 40px;
+            font-weight: bold;
+            color: #343a40;
+        }
+        .form-control {
+            margin-bottom: 20px;
+            border-radius: 0;
+        }
+        .contact-info {
+            font-size: 1.2rem;
+            color: #495057;
+        }
+    </style>
 </head>
 <body>
-
-    <header class="header">
-        <?php include '../../includes/nav.php'; ?>
-    </header>
-
-    <nav id="nav-container"></nav>
-
-    <!-- Cabeçalho da página -->
-    <div id="cabecalho">
-        <h1>Contato</h1>
-        <p>Entre em contato com a nossa hamburgueria!</p>
-    </div>
-
-    <!-- Seção de contato -->
-    <section id="contact">
-        <div class="contact-container">
-            <!-- Informações da Hamburgueria -->
-            <div class="hamburgueria-info">
-                <h2>Informações da Hamburgueria</h2>
-                <p>Siga-nos nas mídias sociais:</p>
-                <p><a href="https://www.facebook.com/hamburgueria" target="_blank"><i class="fab fa-facebook"></i> Facebook</a></p>
-                <p><a href="https://www.instagram.com/hamburgueria" target="_blank"><i class="fab fa-instagram"></i> Instagram</a></p>
-                <p>Envie um email para: <a href="mailto:contato@hamburgueria.com"><i class="fas fa-envelope"></i> contato@hamburgueria.com</a></p>
-            </div>
-            
-            <!-- Formulário de contato -->
-            <div class="contact-form">
-                <h2>Fale Conosco</h2>
-                <form action="process_contact.php" method="post">
-                    <label for="name">Nome:</label>
-                    <input type="text" id="name" name="name" required>
-
-                    <label for="email">Email:</label>
-                    <input type="email" id="email" name="email" required>
-
-                    <label for="phone">Telefone:</label>
-                    <input type="tel" id="phone" name="phone" required>
-
-                    <label for="message">Mensagem:</label>
-                    <textarea id="message" name="message" rows="5" required></textarea>
-
-                    <button type="submit">Enviar</button>
-                </form>
+    <section class="contact-section">
+        <div class="container">
+        <header class="header">
+            <?php include '../../includes/nav.php'; ?>
+        </header>
+            <div class="row">
+                <div class="col-md-6 text-center text-md-left area-text">
+                    <h2>Entre em Contato</h2>
+                    <form>
+                        <div class="form-group">
+                            <input type="text" class="form-control" id="name" placeholder="Seu Nome">
+                        </div>
+                        <div class="form-group">
+                            <input type="email" class="form-control" id="email" placeholder="Seu Email">
+                        </div>
+                        <div class="form-group">
+                            <textarea class="form-control" id="message" rows="5" placeholder="Sua Mensagem Aqui"></textarea>
+                        </div>
+                        <button type="submit" class="btn btn-primary">Enviar Mensagem</button>
+                    </form>
+                </div>
+                <div class="col-md-6">
+                    <h2>Informações de Contato</h2>
+                    <p class="contact-info"><strong>Telefone:</strong> (11) 1234-5678</p>
+                    <p class="contact-info"><strong>Email:</strong> contato@lanches.com</p>
+                    <p class="contact-info"><strong>Endereço:</strong> Rua dos testes, 123 - Florianópolis, SC</p>
+                </div>
             </div>
         </div>
     </section>
-
-    <!-- Rodapé da página -->
     <footer>
-        <p>&copy; 2024 Hamburgueria. Todos os direitos reservados.</p>
+        <a href="#" target="_blank">© Developed by UpperResolution</a>
     </footer>
 
+    <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.9.2/dist/umd/popper.min.js"></script>
+    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
 </body>
 </html>
