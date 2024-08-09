@@ -38,6 +38,9 @@ try {
         $orderId = $item['orderId'];
         $quantidade = $item['quantidade'];
         $observacao = $item['observacoes'];
+        $observacoesGerais = $item['observacoesGerais'];
+        $formaPagamento = $item['formaPagamento'];
+        $valorTroco = $item['valorTroco'];
         $total = $item['valorTotal'];
 
         // Consultar as informações da pizza
@@ -51,12 +54,15 @@ try {
         }
 
         // Inserir os dados na tabela orders
-        $stmt = $pdo->prepare('INSERT INTO orders (customer_name, items, quantidade, observacoesPedidos, total, status, cep, city, neighborhood, street, number, complement, phone_number, email) VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)');
+        $stmt = $pdo->prepare('INSERT INTO orders (customer_name, items, quantidade, observacoesPedidos, ObservacoesGerais, formaPagamento, valorTroco, total, status, cep, city, neighborhood, street, number, complement, phone_number, email) VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)');
         $stmt->execute([
             $user['fullname'],
             $pizza['nome'],
             $quantidade,
             $observacao,
+            $observacoesGerais,
+            $formaPagamento,
+            $valorTroco,
             $total,
             'Recebido', 
             $user['cep'],

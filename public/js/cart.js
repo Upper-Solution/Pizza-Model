@@ -1,31 +1,35 @@
 /* Esse código é responsável por adicionar pizzas ao 
 carrinho, atualizar a interface do carrinho e 
 finalizar a compra */
+
+// Inicializa as variáveis globais
 let entregaTaxa;
 let valorDesconto;
+let observacaoGeral;
+let formaPagamento;
+let valorTroco;
+
 
 fetchOrders();
 
 // Adicionar ao carrinho
 // Cria um identificador único, combinando o ID da pizza e o tamanho
 document.querySelector(".pizzaInfo--addButton").addEventListener("click", () => {
-  // Obtém o tamanho selecionado
-  // let size = parseInt(document.querySelector(".pizzaInfo--size.selected").getAttribute("data-key"));
-  // Concatena o id da pizza com o tamanho para criar um identificador único
+
+  // Obtém o identificador da pizza (você pode ajustar conforme sua lógica)
   let identifier = pizzas[modalKey].id;
 
   // Captura as observações do usuário
   let observacoes = document.getElementById("observations").value.trim();
-  
+
   // Procura no carrinho se o identificador já existe
   let keyItem = cart.findIndex((item) => item.identifier == identifier);
 
   // Verifica se a pizza já está no carrinho
   if (keyItem > -1) {
-    // Se já estiver, aumenta a quantidade
+    // Se já estiver, aumenta a quantidade e atualiza as observações
     cart[keyItem].qtd += modalQt;
-    cart[keyItem].observacoes = observacoes; // Atualiza as observações se o item já estiver no carrinho
- 
+    cart[keyItem].observacoes = observacoes;
   } else {
     // Se não estiver, adiciona um novo item ao carrinho
     cart.push({
@@ -34,7 +38,10 @@ document.querySelector(".pizzaInfo--addButton").addEventListener("click", () => 
       preco: pizzas[modalKey].preco,
       qtd: modalQt,
       imagem: pizzas[modalKey].imagem,
-      observacoes
+      observacoes,
+      observacaoGeral,
+      formaPagamento,
+      valorTroco
     });
   }
   // Adiciona uma animação de pulso ao ícone do carrinho
@@ -42,7 +49,6 @@ document.querySelector(".pizzaInfo--addButton").addEventListener("click", () => 
 
   // Atualiza o carrinho, fecha o modal e salva o carrinho no localStorage
   // Chame a função para garantir que `entregaTaxa` seja definida
-
   updateCart();
   closeModal();
   saveCart();
@@ -168,6 +174,12 @@ function updateCart() {
 
 // Finaliza a compra ao clicar no botão de finalizar
 document.querySelector(".cart--finalizar").addEventListener("click", () => {
+  capturarInformacoes();
+  cart.forEach(item => {
+    item.observacaoGeral = observacaoGeral;
+    item.formaPagamento = formaPagamento;
+    item.valorTroco = valorTroco;
+  });
   retornaIdQT();
   cart = []; // Limpa o carrinho
   localStorage.clear(); // Limpa o localStorage
@@ -198,6 +210,7 @@ document.querySelector(".cart--finalizar").addEventListener("click", () => {
     }, 4000);
   }, 2100);
 });
+
 // Função para enviar os dados do carrinho para o arquivo PHP
 function retornaIdQT() {
   // Obter os dados do carrinho
@@ -205,10 +218,13 @@ function retornaIdQT() {
     orderId: item.id,
     quantidade: item.qtd,
     observacoes: item.observacoes,
-    valorTotal: item.preco * item.qtd
+    valorTotal: item.preco * item.qtd,
+    observacoesGerais: item.observacaoGeral,
+    formaPagamento: item.formaPagamento,
+    valorTroco: item.valorTroco
   }));
-
   fetch('../admin/get-dataCart.php', {
+
     method: 'POST',
     headers: {
       'Content-Type': 'application/json'
@@ -216,7 +232,6 @@ function retornaIdQT() {
     body: JSON.stringify(cartData)
   })
     .then(response => {
-      // Verificar se a resposta é JSON
       const contentType = response.headers.get('content-type');
       if (contentType && contentType.includes('application/json')) {
         return response.json();
@@ -251,4 +266,27 @@ async function fetchOrders() {
   } catch (error) {
     console.error('Error fetching orders:', error);
   }
+}
+
+// Função para capturar e armazenar as informações
+function capturarInformacoes() {
+  // Seletores dos elementos
+  const observacoesGeraisInput = document.getElementById('observacoesGerais');
+  const formaPagamentoSelect = document.getElementById('formaPagamento');
+  const trocoInput = document.getElementById('troco');
+
+  // Armazenar observação geral
+  observacaoGeral = observacoesGeraisInput.value;
+  console.log('Observação Geral:', observacaoGeral);
+
+  // Armazenar forma de pagamento
+  formaPagamento = formaPagamentoSelect.value;
+  console.log('Forma de Pagamento:', formaPagamento);
+
+  // Armazenar valor do troco, se visível
+  valorTroco = null;
+  if (trocoInput && trocoInput.style.display !== 'none') {
+    valorTroco = trocoInput.value;
+  }
+  console.log('Valor para Troco:', valorTroco);
 }

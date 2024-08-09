@@ -26,6 +26,9 @@ if ($orderId > 0) {
             echo "<p><strong>Nome do Cliente:</strong> " . htmlspecialchars($order['customer_name']) . "</p>";
             echo "<p><strong>Itens:</strong> " . htmlspecialchars($order['items']) . "</p>";
             echo "<p><strong>Observação do pedido:</strong> " . htmlspecialchars($order['observacoesPedidos']) . "</p>";
+            echo "<p><strong>Observações Gerais do pedido:</strong> " . htmlspecialchars($order['ObservacoesGerais']) . "</p>";
+            echo "<p><strong>Forma de Pagamento:</strong> " . htmlspecialchars($order['formaPagamento']) . "</p>";
+            echo "<p><strong>Troco para:</strong> " . htmlspecialchars($order['valorTroco']) . "</p>";
             echo "<p><strong>Total:</strong> R$ " . number_format($order['total'], 2, ',', '.') . "</p>";
             echo "<p><strong>Data do Pedido:</strong> " . htmlspecialchars($order['order_date']) . "</p>";
             echo "<p><strong>Status:</strong> " . htmlspecialchars($order['status']) . "</p>";
