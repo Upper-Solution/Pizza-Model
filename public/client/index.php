@@ -34,7 +34,7 @@
             </section>
             <section class="right-home">
                 <div class="right-image">
-                    <img src="../images/banner.jpg" alt="pizza.png">
+                    <img src="../imagens/banner.jpg" alt="banner.png">
                 </div>
             </section>
         </div>
