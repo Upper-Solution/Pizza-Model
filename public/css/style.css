@@ -240,7 +240,6 @@
     background-color: #219150;
 }
 
-
 * {
     box-sizing: border-box;
     margin: 0;
@@ -606,15 +605,9 @@ h1 {
     cursor: pointer
 }
 
-/* Pizza Item */
-.pizza-item {
-    position: relative;
-    transition: background-color .3s, box-shadow .3s;
-}
-
 .pizza-item:hover {
     box-shadow: 0px 5px 15px rgba(0, 0, 0, .084);
-    background-color: #fff;
+    background-color: #fff
 }
 
 .pizza-item a {
@@ -623,7 +616,7 @@ h1 {
     flex-direction: column;
     align-items: center;
     text-decoration: none;
-    border-radius: 15px;
+    border-radius: 15px
 }
 
 .pizza-item--img {
@@ -633,13 +626,13 @@ h1 {
     background-color: #eee;
     border-radius: 100px;
     box-shadow: 0px 10px 50px rgba(0, 0, 0, .02);
-    z-index: -1;
+    z-index: -1
 }
 
 .pizza-item--img img {
     width: 100%;
     height: auto;
-    border-radius: 100px;
+    border-radius: 100px
 }
 
 .pizza-item--add {
@@ -654,13 +647,13 @@ h1 {
     cursor: pointer;
     margin-top: -25px;
     font-weight: 600;
-    transition: all ease .3s;
+    transition: all ease .3s
 }
 
 .pizza-item--price {
     font-size: 15px;
     color: #333;
-    margin-top: 5px;
+    margin-top: 5px
 }
 
 .pizza-item--name {
@@ -668,17 +661,16 @@ h1 {
     font-size: 1.2rem;
     font-weight: bold;
     color: #333;
-    margin: 5px 10px;
+    margin: 5px 10px
 }
 
 .pizza-item--desc {
     width: 200px;
     font-size: .75rem;
     color: #555;
-    padding: 10px 10px 20px;
+    padding: 10px 10px 20px
 }
 
-/* Pizza Window */
 .pizzaWindowArea {
     position: fixed;
     left: 0;
@@ -691,7 +683,7 @@ h1 {
     justify-content: center;
     align-items: center;
     overflow-y: auto;
-    z-index: 99;
+    z-index: 99
 }
 
 .pizzaWindowBody {
@@ -700,47 +692,47 @@ h1 {
     border-radius: 10px;
     box-shadow: 0px 10px 25px rgba(153, 153, 153, .342);
     display: flex;
-    margin: 20px 0;
+    margin: 20px 0px
 }
 
 .pizzaWindowBody.modal {
-    padding: 10px 50px;
+    padding: 10px 50px
 }
 
 .pizzaBig {
     flex: 1;
     display: flex;
     justify-content: center;
-    align-items: center;
+    align-items: center
 }
 
 .pizzaBig img {
     height: 350px;
     width: auto;
-    border-radius: 200px;
+    border-radius: 200px
 }
 
 .pizzaBig--back {
     position: absolute;
     width: 30px;
     height: 30px;
-    background-color: #000;
+    background-color: #000
 }
 
 .pizzaInfo {
     flex: 1;
-    padding-bottom: 50px;
+    padding-bottom: 50px
 }
 
 .pizzaInfo h1 {
-    margin-top: 50px;
+    margin-top: 50px
 }
 
 .pizzaInfo .pizzaInfo--desc {
     font-size: 15px;
     color: #999;
     margin-top: 10px;
-    width: 90%;
+    width: 90%
 }
 
 .pizzaInfo--sector {
@@ -748,13 +740,13 @@ h1 {
     text-transform: uppercase;
     font-size: 14px;
     margin-top: 30px;
-    margin-bottom: 10px;
+    margin-bottom: 10px
 }
 
 .pizzaInfo--sizes {
     display: inline-flex;
     border-radius: 10px;
-    overflow: hidden;
+    overflow: hidden
 }
 
 .pizzaInfo--size {
@@ -764,44 +756,44 @@ h1 {
     font-size: 13px;
     font-weight: bold;
     cursor: pointer;
-    transition: all .3s;
+    transition: all .3s
 }
 
 .pizzaInfo--size:hover {
-    background-color: #ccc;
+    background-color: #ccc
 }
 
 .pizzaInfo--size span {
     font-size: 12px;
     color: #999;
-    font-weight: normal;
+    font-weight: normal
 }
 
 .pizzaInfo--size.selected {
     background-color: #fab427;
-    color: #fff;
+    color: #fff
 }
 
 .pizzaInfo--size.selected span {
-    color: #fff;
+    color: #fff
 }
 
 .pizzaInfo--price {
     display: flex;
-    align-items: center;
+    align-items: center
 }
 
 .pizzaInfo--actualPrice {
     font-size: 28px;
     width: 30%;
-    margin-right: 30px;
+    margin-right: 30px
 }
 
 .pizzaInfo--qtarea {
     display: inline-flex;
     background-color: #eee;
     border-radius: 10px;
-    height: 30px;
+    height: 30px
 }
 
 .pizzaInfo--qtarea button {
@@ -810,16 +802,16 @@ h1 {
     font-size: 17px;
     outline: 0;
     cursor: pointer;
-    padding: 0 10px;
-    color: #333;
+    padding: 0px 10px;
+    color: #333
 }
 
 .pizzaInfo--qt {
     line-height: 30px;
     font-size: 12px;
     font-weight: bold;
-    padding: 0 5px;
-    color: #000;
+    padding: 0px 5px;
+    color: #000
 }
 
 .pizzaInfo--addButton {
@@ -831,16 +823,16 @@ h1 {
     display: inline-block;
     cursor: pointer;
     margin-right: 30px;
-    transition: all .3s;
+    transition: all .3s
 }
 
 .pizzaInfo--addButton:hover {
-    background-color: #e0a225;
+    background-color: #e0a225
 }
 
 .pizzaInfo--cancelButton {
     display: inline-block;
-    cursor: pointer;
+    cursor: pointer
 }
 
 .pizzaInfo--cancelMobileButton {
@@ -852,9 +844,8 @@ h1 {
     font-weight: bold;
 }
 
-/* Cart */
 .cart {
-    margin-bottom: 20px;
+    margin-bottom: 20px
 }
 
 .cart--item {
@@ -868,7 +859,7 @@ h1 {
 .cart--item img {
     width: 40px;
     height: 40px;
-    margin-right: 10px;
+    margin-right: 10px
 }
 
 .cart--item-nome {
@@ -880,7 +871,7 @@ h1 {
     display: inline-flex;
     background-color: #eee;
     border-radius: 10px;
-    height: 30px;
+    height: 30px
 }
 
 .cart--item--qtarea button {
@@ -889,16 +880,16 @@ h1 {
     font-size: 17px;
     outline: 0;
     cursor: pointer;
-    padding: 0 10px;
-    color: #333;
+    padding: 0px 10px;
+    color: #333
 }
 
 .cart--item--qt {
     line-height: 30px;
     font-size: 12px;
     font-weight: bold;
-    padding: 0 5px;
-    color: #000;
+    padding: 0px 5px;
+    color: #000
 }
 
 .cart--totalitem {
@@ -907,17 +898,17 @@ h1 {
     color: #999;
     display: flex;
     justify-content: space-between;
-    font-size: 15px;
+    font-size: 15px
 }
 
 .cart--totalitem span:first-child {
-    font-weight: bold;
+    font-weight: bold
 }
 
 .cart--totalitem.big {
     font-size: 20px;
     color: #000;
-    font-weight: bold;
+    font-weight: bold
 }
 
 .cart--finalizar {
@@ -928,21 +919,19 @@ h1 {
     cursor: pointer;
     text-align: center;
     margin-top: 20px;
-    transition: all ease .2s;
+    transition: all ease .2s
 }
 
 .cart--finalizar:hover {
-    background-color: #35af4a;
+    background-color: #35af4a
 }
 
-/* Success */
 .success-img {
     color: #48d05f;
     font-size: 3rem;
-    margin-right: 20px;
+    margin-right: 20px
 }
 
-/* Footer */
 footer {
     display: block;
     height: 100px;
@@ -950,14 +939,14 @@ footer {
     background-color: #fff;
     text-align: center;
     line-height: 100px;
-    font-weight: 500;
+    font-weight: 500
 }
 
 footer a {
     position: relative;
     text-decoration: none;
     color: #999;
-    padding-bottom: 2px;
+    padding-bottom: 2px
 }
 
 footer a::after {
@@ -968,109 +957,57 @@ footer a::after {
     width: 0%;
     height: 1px;
     background: #cfcfcf;
-    transition: .3s ease-out;
+    transition: .3s ease-out
 }
 
 footer a:hover::after {
     left: 0%;
-    width: 100%;
+    width: 100%
 }
 
-@media (max-width: 1300px) {
+@media(max-width: 1300px) {
 
     .menu-area,
     .container-area {
-        padding: 0 8%;
+        padding: 0 8%
     }
 }
 
-@media (max-width: 1250px) {
+@media(max-width: 1250px) {
     aside.show {
-        width: 35%;
+        width: 35%
     }
 }
 
-@media (max-width: 979px) {
+@media(max-width: 979px) {
     aside.show {
-        width: 50%;
+        width: 50%
     }
 }
 
-@media (max-width: 820px) {
+@media(max-width: 820px) {
     body {
         background: #fff;
-        margin: 0;
-        padding: 0;
-        box-sizing: border-box;
+        flex-direction: column;
+        justify-content: center
     }
 
     .header {
-        box-shadow: none;
+        box-shadow: none
     }
 
     .pizza-item {
-        display: flex;
-        /* Alinha horizontalmente */
-        width: 100%;
-        padding: 10px;
-        margin-bottom: 15px;
-        border-radius: 8px;
+        width: 280px;
         background: #fff;
-        box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
-        box-sizing: border-box;
-        align-items: center;
+        margin-top: 15px
     }
 
-    .pizza-item img {
-        width: 80px;
-        /* Tamanho fixo da imagem */
-        height: 80px;
-        border-radius: 8px;
-        object-fit: cover;
-        margin-right: 15px;
-        /* Espaço entre a imagem e as informações */
-    }
-
-    .pizza-item .info {
-        display: flex;
-        flex-direction: column;
-        flex: 1;
-        /* Ocupar o restante do espaço disponível */
-    }
-
-    .pizza-item .info h2 {
-        font-size: 16px;
-        margin: 0;
-        color: #333;
-    }
-
-    .pizza-item .info p {
-        font-size: 14px;
-        margin: 5px 0;
-        color: #777;
-    }
-
-    .pizza-item .info .price {
-        font-size: 16px;
-        font-weight: bold;
-        color: #e74c3c;
-    }
-
-    .pizza-item .info .size {
-        font-size: 12px;
-    }
-
-    .pizza-item .info .size span {
-        font-size: 10px;
-    }
-
-    /* Estilização do botão e menus móveis */
     .container-menu-mobile {
-        display: flex;
+        display: flex
     }
 
     .menu_hamburger {
-        display: inline-flex;
+        display: inline-flex
     }
 
     .menu {
@@ -1080,34 +1017,34 @@ footer a:hover::after {
         z-index: 98;
         display: flex;
         justify-content: center;
-        width: 0;
+        width: 0px;
         height: 100vh;
         padding-top: 75px;
-        background: rgba(255, 255, 255, 0.888);
+        background: rgba(255, 255, 255, .888);
         overflow-x: hidden;
         overflow-y: auto;
-        transition: all ease 0.5s;
+        transition: all ease .5s
     }
 
     .menu ul {
         flex-direction: column;
-        padding-right: 40px;
+        padding-right: 40px
     }
 
     .menu li {
         display: block;
         padding: 8px;
-        text-align: center;
+        text-align: center
     }
 
     .menu-opened {
-        width: 200px !important;
+        width: 200px !important
     }
 
     .menuMobile-area {
         display: flex;
         z-index: 99;
-        margin-right: 15px;
+        margin-right: 15px
     }
 
     aside {
@@ -1117,62 +1054,62 @@ footer a:hover::after {
         right: 0;
         top: 0;
         bottom: 0;
-        transition: all ease 0.5s;
+        transition: all ease .5s
     }
 
     aside.show {
         width: auto;
-        z-index: 99;
+        z-index: 99
     }
 
     .cart--area {
-        width: 100vw;
+        width: 100vw
     }
 
     .cart--item--qtarea {
-        height: 45px;
+        height: 45px
     }
 
     .cart--item--qtarea button {
-        padding: 0px 18px;
+        padding: 0px 18px
     }
 
     .cart--item--qt {
         line-height: 45px;
-        font-size: 15px;
+        font-size: 15px
     }
 
     .menu-closer {
         display: block;
-        margin-bottom: 25px;
+        margin-bottom: 25px
     }
 
     .pizzaWindowArea {
         justify-content: flex-start;
-        align-items: flex-start;
+        align-items: flex-start
     }
 
     .success {
         flex-direction: column;
         align-items: center;
         text-align: center;
-        padding: 0 25px 20px;
+        padding: 0 25px 20px
     }
 
     .success .pedido-finalizado {
         padding-top: 30px;
-        flex-direction: column;
+        flex-direction: column
     }
 
     .success span {
         display: block;
         font-size: 12px;
-        padding: 15px 0;
+        padding: 15px 0
     }
 
     .success-img {
         margin: 30px 20px 0;
-        line-height: 63px;
+        line-height: 63px
     }
 
     .pizzaWindowBody {
@@ -1181,62 +1118,62 @@ footer a:hover::after {
         border-radius: 0;
         box-shadow: none;
         margin: 0;
-        z-index: 99;
+        z-index: 99
     }
 
     .pizzaWindowBody.modal {
         padding: 25px 40px;
-        height: 100vh;
+        height: 100vh
     }
 
     .pizzaBig img {
         width: 60%;
-        height: auto;
+        height: auto
     }
 
     .pizzaInfo h1 {
         margin-top: 5px;
-        font-size: 22px;
+        font-size: 22px
     }
 
     .pizzaInfo .pizzaInfo--desc {
-        font-size: 12px;
+        font-size: 12px
     }
 
     .pizzaInfo--sector {
         font-size: 12px;
-        margin-top: 20px;
+        margin-top: 20px
     }
 
     .pizzaInfo--price {
-        justify-content: space-between;
+        justify-content: space-between
     }
 
     .pizzaInfo--price .pizzaInfo--actualPrice {
-        font-size: 22px;
+        font-size: 22px
     }
 
     .pizzaInfo--size {
         padding: 10px;
-        font-size: 12px;
+        font-size: 12px
     }
 
     .pizzaInfo--size span {
-        font-size: 10px;
+        font-size: 10px
     }
 
     .pizzaInfo--qtarea {
-        height: 40px;
+        height: 40px
     }
 
     .pizzaInfo--qtarea button {
         font-size: 23px;
-        padding: 0px 13px;
+        padding: 0px 13px
     }
 
     .pizzaInfo--qt {
         line-height: 40px;
-        font-size: 15px;
+        font-size: 15px
     }
 
     .pizzaInfo--addButton {
@@ -1245,14 +1182,14 @@ footer a:hover::after {
         text-align: center;
         margin: 18px auto;
         padding: 15px 20px;
-        border-radius: 10px;
+        border-radius: 10px
     }
 
     .pizzaInfo--cancelButton {
-        display: none;
+        display: none
     }
 
     .pizzaInfo--cancelMobileButton {
-        display: block;
+        display: block
     }
 }
