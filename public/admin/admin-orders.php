@@ -58,7 +58,6 @@ $pdo = null;
         <h1>Pedidos Realizados</h1>
     </header>
     
-    <!-- Formulário de pesquisa -->
     <section class="search-section">
         <form method="get" action="">
             <input type="text" name="search" placeholder="Buscar por nome ou ID" value="<?php echo htmlspecialchars($_GET['search'] ?? '', ENT_QUOTES); ?>">
@@ -67,29 +66,21 @@ $pdo = null;
         <a href="adm-painel.php"> Voltar </a>
     </section>
 
-    <!-- Contêineres para os status -->
     <div id="status-container">
         <div id="recebido" class="status-column" data-status="Recebido">
             <h2>Recebido</h2>
-            <ul class="sortable" id="recebido-list">
-                <!-- Itens serão inseridos aqui via JavaScript -->
-            </ul>
+            <ul class="sortable" id="recebido-list"></ul>
         </div>
         <div id="preparando" class="status-column" data-status="Preparando">
             <h2>Preparando</h2>
-            <ul class="sortable" id="preparando-list">
-                <!-- Itens serão inseridos aqui via JavaScript -->
-            </ul>
+            <ul class="sortable" id="preparando-list"></ul>
         </div>
         <div id="entrega" class="status-column" data-status="Saiu para Entrega">
             <h2>Saiu para Entrega</h2>
-            <ul class="sortable" id="entrega-list">
-                <!-- Itens serão inseridos aqui via JavaScript -->
-            </ul>
+            <ul class="sortable" id="entrega-list"></ul>
         </div>
     </div>
 
-    <!-- Modal para mostrar detalhes do pedido -->
     <div id="orderModal" class="modal">
         <div class="modal-content">
             <span class="close" onclick="closeModal()">&times;</span>
@@ -120,47 +111,64 @@ $pdo = null;
             preparandoList.innerHTML = '';
             entregaList.innerHTML = '';
 
+            var groupedOrders = {};
+
             orders.forEach(function(order) {
-                var listItem = "<li class='card' data-id='" + order.order_id + "' onclick='showDetails(" + order.order_id + ")'>" +
-                               "<div class='status-bolinha status-" + order.status.toLowerCase().replace(' ', '-') + "'></div>" +
-                               order.customer_name + " / " + order.items;
+                var key = order.order_date + '-' + order.customer_email;
 
-                // Adiciona o botão 'Recusar' na coluna 'Recebido'
-                if (order.status === 'Recebido') {
-                    listItem += " <button onclick='confirmRejectOrder(" + order.order_id + ")'>Recusar</button>";
+                if (!groupedOrders[key]) {
+                    groupedOrders[key] = [];
                 }
 
-                // Adiciona o botão 'Entregue' na coluna 'Saiu para Entrega'
-                if (order.status === 'Saiu para Entrega') {
-                    listItem += " <button onclick='confirmMarkAsDelivered(" + order.order_id + ")'>Entregue</button>";
-                }
-
-                listItem += "</li>";
-
-                if (order.status === 'Recebido') {
-                    recebidoList.innerHTML += listItem;
-                } else if (order.status === 'Preparando') {
-                    preparandoList.innerHTML += listItem;
-                } else if (order.status === 'Saiu para Entrega') {
-                    entregaList.innerHTML += listItem;
-                }
+                groupedOrders[key].push(order);
             });
 
-            // Re-initialize sortable functionality
+            for (var key in groupedOrders) {
+                if (groupedOrders.hasOwnProperty(key)) {
+                    var orderGroup = groupedOrders[key];
+
+                    var listItem = "<li class='card' data-id='" + orderGroup[0].order_id + "' onclick='showDetails(" + orderGroup[0].order_id + ")'>" +
+                                   "<div class='status-bolinha status-" + orderGroup[0].status.toLowerCase().replace(' ', '-') + "'></div>" +
+                                   orderGroup[0].customer_name + " / " + orderGroup[0].items;
+
+                    if (orderGroup.length > 1) {
+                        listItem += " (Duplicado: " + orderGroup.length + " pedidos)";
+                    }
+
+                    if (orderGroup[0].status === 'Recebido') {
+                        listItem += " <button onclick='confirmRejectOrder(" + orderGroup[0].order_id + ")'>Recusar</button>";
+                    }
+
+                    if (orderGroup[0].status === 'Saiu para Entrega') {
+                        listItem += " <button onclick='confirmMarkAsDelivered(" + orderGroup[0].order_id + ")'>Entregue</button>";
+                    }
+
+                    listItem += "</li>";
+
+                    if (orderGroup[0].status === 'Recebido') {
+                        recebidoList.innerHTML += listItem;
+                    } else if (orderGroup[0].status === 'Preparando') {
+                        preparandoList.innerHTML += listItem;
+                    } else if (orderGroup[0].status === 'Saiu para Entrega') {
+                        entregaList.innerHTML += listItem;
+                    }
+                }
+            }
+
             initializeSortable();
         }
 
         function initializeSortable() {
             var sortableLists = document.querySelectorAll('.sortable');
 
-            sortableLists.forEach(function (list) {
+            sortableLists.forEach(function(list) {
                 Sortable.create(list, {
                     group: 'shared',
                     animation: 150,
-                    onStart: function (evt) {
+                    onStart: function(evt) {
                         evt.item.classList.add('dragging');
                     },
-                    onEnd: function (evt) {
+                    onEnd: function(evt) {
                         evt.item.classList.remove('dragging');
                         
                         var itemId = evt.item.dataset.id;
@@ -198,7 +206,7 @@ $pdo = null;
         }
 
         function confirmMarkAsDelivered(orderId) {
-            if (confirm('Tem certeza que este pedido foi entregue?')) {
+            if (confirm('Tem certeza que deseja marcar este pedido como entregue?')) {
                 markAsDelivered(orderId);
             }
         }
@@ -207,30 +215,27 @@ $pdo = null;
             var xhr = new XMLHttpRequest();
             xhr.open('POST', 'update-status.php', true);
             xhr.setRequestHeader('Content-Type', 'application/x-www-form-urlencoded');
+            xhr.send('id=' + encodeURIComponent(orderId) + '&status=Recusado');
             xhr.onload = function() {
                 if (xhr.status === 200) {
-                    fetchOrders(); // Atualiza a lista de pedidos
+                    fetchOrders();
                 }
             };
-            xhr.send('id=' + encodeURIComponent(orderId) + '&status=Recusado');
         }
 
         function markAsDelivered(orderId) {
             var xhr = new XMLHttpRequest();
             xhr.open('POST', 'update-status.php', true);
             xhr.setRequestHeader('Content-Type', 'application/x-www-form-urlencoded');
+            xhr.send('id=' + encodeURIComponent(orderId) + '&status=Entregue');
             xhr.onload = function() {
                 if (xhr.status === 200) {
-                    fetchOrders(); // Atualiza a lista de pedidos
+                    fetchOrders();
                 }
             };
-            xhr.send('id=' + encodeURIComponent(orderId) + '&status=Entregue');
         }
 
-        document.addEventListener('DOMContentLoaded', function () {
-            fetchOrders();
-            setInterval(fetchOrders, 5000); // Atualiza a cada 5 segundos
-        });
+        fetchOrders();
     </script>
 </body>
 </html>

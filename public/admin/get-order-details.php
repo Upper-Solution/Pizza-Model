@@ -1,56 +1,82 @@
 <?php
 require_once '../../config/config.php';
 
-// Obtém a conexão com o banco de dados
-$pdo = connectToDatabase($hosts, $port, $dbname, $username, $password);
+if (isset($_GET['id'])) {
+    $orderId = $_GET['id'];
 
-// Verifica se a conexão foi bem-sucedida
-if (!$pdo) {
-    die("Não foi possível conectar ao banco de dados.");
-}
-
-// Obtém o ID do pedido da solicitação
-$orderId = isset($_GET['id']) ? (int)$_GET['id'] : 0;
-
-if ($orderId > 0) {
-    // Consulta SQL para obter os detalhes do pedido
     try {
+        // Conectando ao banco de dados
+        $pdo = connectToDatabase($hosts, $port, $dbname, $username, $password);
+
+        // Buscando o pedido específico pelo ID
         $stmt = $pdo->prepare("SELECT * FROM orders WHERE order_id = ?");
-        $stmt->execute([$orderId]);
+        if (!$stmt->execute([$orderId])) {
+            throw new Exception("Erro ao executar a consulta SQL para o pedido com ID $orderId.");
+        }
+
         $order = $stmt->fetch(PDO::FETCH_ASSOC);
 
         if ($order) {
-            echo "<div class='order-details'>";
-            echo "<div class='column'>";
-            echo "<p><strong>ID:</strong> " . htmlspecialchars($order['order_id']) . "</p>";
-            echo "<p><strong>Nome do Cliente:</strong> " . htmlspecialchars($order['customer_name']) . "</p>";
-            echo "<p><strong>Itens:</strong> " . htmlspecialchars($order['items']) . "</p>";
-            echo "<p><strong>Observação do pedido:</strong> " . htmlspecialchars($order['observacoesPedidos']) . "</p>";
-            echo "<p><strong>Observações Gerais do pedido:</strong> " . htmlspecialchars($order['ObservacoesGerais']) . "</p>";
-            echo "<p><strong>Forma de Pagamento:</strong> " . htmlspecialchars($order['formaPagamento']) . "</p>";
-            echo "<p><strong>Troco para:</strong> " . htmlspecialchars($order['valorTroco']) . "</p>";
-            echo "<p><strong>Total:</strong> R$ " . number_format($order['total'], 2, ',', '.') . "</p>";
-            echo "<p><strong>Data do Pedido:</strong> " . htmlspecialchars($order['order_date']) . "</p>";
-            echo "<p><strong>Status:</strong> " . htmlspecialchars($order['status']) . "</p>";
-            echo "</div>";
-            echo "<div class='column'>";
-            echo "<p><strong>Cidade:</strong> " . htmlspecialchars($order['city']) . "</p>";
-            echo "<p><strong>Bairro:</strong> " . htmlspecialchars($order['neighborhood']) . "</p>";
-            echo "<p><strong>Rua:</strong> " . htmlspecialchars($order['street']) . "</p>";
-            echo "<p><strong>Número:</strong> " . htmlspecialchars($order['number']) . "</p>";
-            echo "<p><strong>Complemento:</strong> " . htmlspecialchars($order['complement']) . "</p>";
-            echo "<p><strong>Observação:</strong> " . htmlspecialchars($order['observation']) . "</p>";
-            echo "<p><strong>Telefone:</strong> " . htmlspecialchars($order['phone_number']) . "</p>";
-            echo "</div>";
-            echo "</div>";
+            // Buscando todos os pedidos que compartilham a mesma chave (nome, e-mail, data)
+            $stmt = $pdo->prepare("SELECT * FROM orders WHERE customer_name = ? AND email = ? AND order_date = ?");
+            if (!$stmt->execute([$order['customer_name'], $order['email'], $order['order_date']])) {
+                throw new Exception("Erro ao executar a consulta SQL para os pedidos duplicados.");
+            }
+            $orders = $stmt->fetchAll(PDO::FETCH_ASSOC);
+
+            // Inicializar variáveis para acumular a soma
+            $totalQuantity = 0;
+            $totalPrice = 0.0;
+            $mergedItems = [];
+
+            echo "<h3>Cliente: " . htmlspecialchars($order['customer_name']) . "</h3>";
+            echo "<p>Email: " . htmlspecialchars($order['email']) . "</p>";
+            echo "<p>Data do Pedido: " . htmlspecialchars($order['order_date']) . "</p>";
+            echo "<p>Endereço: " . htmlspecialchars($order['address']) . "</p>";
+            echo "<p>Telefone: " . htmlspecialchars($order['phone_number']) . "</p>";
+            echo "<p>Observações: " . htmlspecialchars($order['notes']) . "</p>";
+
+            // Processar pedidos e mesclar itens
+            foreach ($orders as $index => $order) {
+                // Adicionar itens ao array para mesclar
+                $items = explode(';', $order['items']); // Supondo que os itens são separados por ";"
+                foreach ($items as $item) {
+                    if (!empty($item)) {
+                        $itemKey = $item . ' (Pedido ' . ($index + 1) . ')';
+                        if (!isset($mergedItems[$itemKey])) {
+                            $mergedItems[$itemKey] = ['quantity' => 0, 'price' => 0.0];
+                        }
+                        $mergedItems[$itemKey]['quantity'] += (int)$order['quantidade'];
+                        $mergedItems[$itemKey]['price'] += (float)$order['total'];
+                    }
+                }
+
+                // Verificar e acumular a quantidade e o preço total
+                $quantity = isset($order['quantidade']) ? (int)$order['quantidade'] : 0;
+                $price = isset($order['total']) ? (float)$order['total'] : 0.0;
+
+                $totalQuantity += $quantity;
+                $totalPrice += $price;
+            }
+
+            // Exibindo itens mesclados
+            echo "<h3>Itens Mesclados</h3>";
+            foreach ($mergedItems as $item => $details) {
+                echo "<p>Item: " . htmlspecialchars($item) . "</p>";
+                echo "<p>Quantidade Total: " . $details['quantity'] . "</p>";
+                echo "<p>Preço Total: R$" . number_format($details['price'], 2, ',', '.') . "</p>";
+                echo "<hr>";
+            }
+
+            // Exibindo total acumulado
+            echo "<h3>Total Geral</h3>";
+            echo "<p>Total Quantidade: " . $totalQuantity . "</p>";
+            echo "<p>Total Preço: R$" . number_format($totalPrice, 2, ',', '.') . "</p>";
         } else {
-            echo "<p>Pedido não encontrado.</p>";
+            echo "<p>Detalhes do pedido não encontrados.</p>";
         }
-    } catch (PDOException $e) {
-        echo "Erro ao consultar detalhes do pedido: " . $e->getMessage();
+    } catch (Exception $e) {
+        echo "<p>Erro: " . $e->getMessage() . "</p>";
     }
 }
-
-// Fechar conexão
-$pdo = null;
 ?>
