@@ -1,3 +1,4 @@
+/* Body and General Layout */
 body {
     font-family: Arial, sans-serif;
     background-color: #f0f0f0;
@@ -5,6 +6,7 @@ body {
     padding: 0;
 }
 
+/* Header Styling */
 header {
     background-color: #333;
     color: #fff;
@@ -12,9 +14,11 @@ header {
     padding: 1rem;
 }
 
+/* Search Section */
 .search-section {
     display: flex;
     justify-content: space-between;
+    align-items: center;
     padding: 1rem;
     background-color: #fff;
     border-bottom: 1px solid #ccc;
@@ -22,6 +26,7 @@ header {
 
 .search-section form {
     display: flex;
+    align-items: center;
 }
 
 .search-section input[type="text"] {
@@ -29,22 +34,10 @@ header {
     border: 1px solid #ccc;
     border-radius: 4px;
     margin-right: 1rem;
+    width: 300px; /* Ajuste o tamanho do campo de pesquisa conforme necessário */
 }
 
-.search-section button {
-    padding: 0.5rem 1rem;
-    background-color: #333;
-    color: #fff;
-    border: none;
-    border-radius: 4px;
-    cursor: pointer;
-    transition: background-color 0.3s ease;
-}
-
-.search-section button:hover {
-    background-color: #555;
-}
-
+.search-section button,
 .search-section a {
     padding: 0.5rem 1rem;
     background-color: #333;
@@ -53,16 +46,19 @@ header {
     border-radius: 4px;
     text-decoration: none;
     line-height: 2rem;
+    cursor: pointer;
     transition: background-color 0.3s ease;
 }
 
+.search-section button:hover,
 .search-section a:hover {
     background-color: #555;
 }
 
+/* Status Section */
 #status-container {
     display: flex;
-    justify-content: space-around;
+    justify-content: space-between;
     padding: 1rem;
     background-color: #f0f0f0;
 }
@@ -73,15 +69,21 @@ header {
     padding: 1rem;
     border-radius: 8px;
     box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+    position: relative;
+    overflow: hidden;
+    box-sizing: border-box; /* Inclui padding e border na largura total */
 }
 
+/* Title of Status Columns */
 .status-column h2 {
     text-align: center;
     background-color: #eee;
     padding: 0.5rem;
     border-radius: 4px;
+    margin: 0 0 1rem 0;
 }
 
+/* Specific Status Styles */
 #recebido {
     border-top: 4px solid #3498db;
 }
@@ -94,126 +96,218 @@ header {
     border-top: 4px solid #2ecc71;
 }
 
-.sortable {
-    list-style-type: none;
-    padding: 0;
-    margin: 0;
-}
+/* Card Styling */
 .card {
     background-color: #fafafa;
     border: 1px solid #ddd;
     padding: 1rem;
-    margin-bottom: 0.5rem;
+    margin-bottom: 1rem;
     border-radius: 4px;
     cursor: pointer;
     transition: box-shadow 0.3s ease;
-    display: flex; /* Use flexbox to position the items */
-    align-items: center; /* Align items vertically */
+    display: flex;
+    flex-direction: column;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+    width: 100%;
+    box-sizing: border-box;
 }
 
-.card .status-bolinha {
-    width: 12px;
-    height: 12px;
-    border-radius: 50%;
-    margin-right: 10px;
-}
-
-.status-recebido {
-    background-color: #3498db; /* Azul para Recebido */
-}
-
-.status-preparando {
-    background-color: #f39c12; /* Laranja para Preparando */
-}
-
-.status-entrega {
-    background-color: #2ecc71; /* Verde para Entrega */
-}
-
-.card {
-    background-color: #fafafa;
-    border: 1px solid #ddd;
-    padding: 1rem;
+/* Container for Order ID and Clock */
+.order-id-container {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
     margin-bottom: 0.5rem;
-    border-radius: 4px;
+    padding-bottom: 0.5rem;
+    border-bottom: 1px solid #ddd;
+}
+
+/* Styling for Order ID */
+.order-id {
+    font-weight: bold;
+    font-size: 18px;
+}
+
+/* Styling for Clock */
+.clock {
+    font-size: 0.9rem;
+    color: #555;
+    margin-left: 1rem;
+}
+
+/* Text Styling */
+.order-observation,
+.order-name {
+    font-size: 0.9rem;
+    color: #777; /* Cor mais apagada para texto secundário */
+    margin: 0.5rem 0;
+}
+
+/* Buttons Container */
+.buttons-container {
+    margin-top: auto;
+    display: flex;
+    gap: 5px;
+    justify-content: flex-start;
+}
+
+/* Button Styles */
+.reject-button {
+    background-color: #f04400;
+    color: white;
+    border: none;
+    padding: 5px 10px;
+    border-radius: 3px;
     cursor: pointer;
-    transition: box-shadow 0.3s ease;
+    transition: background-color 0.3s ease;
+    font-size: 0.9rem;
 }
 
-.card:hover {
-    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+.status-button,
+.deliver-button {
+    background-color: #007bff;
+    color: white;
+    border: none;
+    padding: 5px 10px;
+    border-radius: 3px;
+    cursor: pointer;
+    transition: background-color 0.3s ease;
+    font-size: 0.9rem;
 }
 
-.card.dragging {
-    opacity: 0.5;
+.status-button:hover,
+.reject-button:hover,
+.deliver-button:hover {
+    background-color: #0056b3;
 }
 
-/* Modal Styling */
+/* Specific style for Delivered Button */
+.deliver-button {
+    background-color: #28a745;
+    color: white;
+}
+
+.deliver-button:hover {
+    background-color: #218838;
+}
+
+/* Modal Styles */
 .modal {
     display: none; /* Hidden by default */
     position: fixed; /* Stay in place */
-    z-index: 1; /* Sit on top */
+    z-index: 1000; /* Sit on top */
     left: 0;
     top: 0;
     width: 100%; /* Full width */
     height: 100%; /* Full height */
     overflow: auto; /* Enable scroll if needed */
-    background-color: rgba(0, 0, 0, 0.4); /* Black w/ opacity */
-    animation: fadeIn 0.5s; /* Fade-in animation */
-}
-
-@keyframes fadeIn {
-    from { opacity: 0; }
-    to { opacity: 1; }
+    background-color: rgba(0,0,0,0.5); /* Black background with opacity */
 }
 
 .modal-content {
     background-color: #fff;
-    margin: 10% auto; /* 10% from the top and centered */
+    margin: 5% auto; /* 5% from the top and centered */
     padding: 20px;
-    border-radius: 10px;
-    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+    border-radius: 8px;
     width: 80%; /* Could be more or less, depending on screen size */
-    animation: slideIn 0.4s; /* Slide-in animation */
-}
-
-@keyframes slideIn {
-    from { transform: translateY(-50px); }
-    to { transform: translateY(0); }
+    max-width: 800px; /* Max width of modal */
+    box-shadow: 0 2px 10px rgba(0,0,0,0.2);
+    position: relative;
 }
 
 .close {
-    color: #aaa;
+    color: #000;
     float: right;
     font-size: 28px;
     font-weight: bold;
-    transition: color 0.3s ease;
+    cursor: pointer;
 }
 
 .close:hover,
 .close:focus {
-    color: #000;
+    color: #ff0000;
     text-decoration: none;
-    cursor: pointer;
 }
 
-.order-details {
+/* Modal Title */
+.modal-title {
+    font-size: 28px;
+    margin-bottom: 20px;
+    font-weight: bold;
+    color: #2c3e50;
+    text-align: center;
+}
+
+/* Order Details Container */
+.order-detail-container {
     display: flex;
-    justify-content: space-between;
+    flex-wrap: wrap;
     gap: 20px;
+    justify-content: center;
 }
 
-.column {
-    flex: 1;
-    padding: 10px;
+/* Individual Detail Box */
+.order-detail {
+    flex: 1 1 45%;
+    max-width: 500px;
+    padding: 20px;
+    border-radius: 12px;
+    background: linear-gradient(145deg, #ffffff, #f1f1f1);
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
 }
 
-.column p {
+/* Section Title */
+.order-detail h3 {
+    margin-top: 0;
+    color: #2980b9;
+    font-size: 22px;
+    border-bottom: 2px solid #2980b9;
+    padding-bottom: 10px;
+}
+
+/* Paragraphs */
+.order-detail p {
     margin: 10px 0;
+    color: #34495e;
+    font-size: 16px;
 }
 
-.column strong {
-    display: block;
-    margin-bottom: 5px;
-    color: #333;
+/* Divider */
+.order-detail hr {
+    margin: 20px 0;
+    border: 0;
+    height: 1px;
+    background: #bdc3c7;
+}
+
+/* Responsive Design */
+@media (max-width: 768px) {
+    .modal-content {
+        width: 90%;
+    }
+
+    .order-details p {
+        font-size: 14px;
+    }
+}
+
+
+/* List Styling */
+ul {
+    list-style-type: disc; /* Define o estilo dos marcadores da lista */
+    margin: 0;
+    padding: 0;
+}
+
+ul li {
+    margin: 0.5rem 0; /* Espaçamento entre os itens da lista */
+    padding: 0.5rem;
+    background-color: #fff;
+    border: 1px solid #ddd;
+    border-radius: 4px;
+    box-shadow: 0 1px 3px rgba(0, 0, 0, 0.1);
+}
+
+ul li:last-child {
+    margin-bottom: 0; /* Remove a margem inferior no último item */
 }

@@ -1,6 +1,8 @@
 <?php
 require_once '../../config/config.php';
 
+header('Content-Type: application/json'); // Definir o tipo de conteúdo para JSON
+
 if (isset($_GET['id'])) {
     $orderId = $_GET['id'];
 
@@ -29,13 +31,6 @@ if (isset($_GET['id'])) {
             $totalPrice = 0.0;
             $mergedItems = [];
 
-            echo "<h3>Cliente: " . htmlspecialchars($order['customer_name']) . "</h3>";
-            echo "<p>Email: " . htmlspecialchars($order['email']) . "</p>";
-            echo "<p>Data do Pedido: " . htmlspecialchars($order['order_date']) . "</p>";
-            echo "<p>Endereço: " . htmlspecialchars($order['address']) . "</p>";
-            echo "<p>Telefone: " . htmlspecialchars($order['phone_number']) . "</p>";
-            echo "<p>Observações: " . htmlspecialchars($order['notes']) . "</p>";
-
             // Processar pedidos e mesclar itens
             foreach ($orders as $index => $order) {
                 // Adicionar itens ao array para mesclar
@@ -59,24 +54,31 @@ if (isset($_GET['id'])) {
                 $totalPrice += $price;
             }
 
-            // Exibindo itens mesclados
-            echo "<h3>Itens Mesclados</h3>";
-            foreach ($mergedItems as $item => $details) {
-                echo "<p>Item: " . htmlspecialchars($item) . "</p>";
-                echo "<p>Quantidade Total: " . $details['quantity'] . "</p>";
-                echo "<p>Preço Total: R$" . number_format($details['price'], 2, ',', '.') . "</p>";
-                echo "<hr>";
-            }
+            // Preparar os dados para resposta JSON
+            $response = [
+                'customer_name' => $order['customer_name'],
+                'email' => $order['email'],
+                'order_date' => $order['order_date'],
+                'cep' => $order['cep'],
+                'street' => $order['street'],
+                'number' => $order['number'],
+                'neighborhood' => $order['neighborhood'],
+                'phone_number' => $order['phone_number'],
+                'notes' => $order['notes'],
+                'merged_items' => $mergedItems,
+                'total_quantity' => $totalQuantity,
+                'total_price' => $totalPrice
+            ];
 
-            // Exibindo total acumulado
-            echo "<h3>Total Geral</h3>";
-            echo "<p>Total Quantidade: " . $totalQuantity . "</p>";
-            echo "<p>Total Preço: R$" . number_format($totalPrice, 2, ',', '.') . "</p>";
+            // Enviar resposta JSON
+            echo json_encode($response);
         } else {
-            echo "<p>Detalhes do pedido não encontrados.</p>";
+            echo json_encode(['error' => 'Detalhes do pedido não encontrados.']);
         }
     } catch (Exception $e) {
-        echo "<p>Erro: " . $e->getMessage() . "</p>";
+        echo json_encode(['error' => 'Erro: ' . $e->getMessage()]);
     }
+} else {
+    echo json_encode(['error' => 'ID do pedido não fornecido.']);
 }
 ?>
