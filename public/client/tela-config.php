@@ -45,42 +45,30 @@ $pdo = null;
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <script src="https://kit.fontawesome.com/8b4042ccf0.js" crossorigin="anonymous"></script>
     <title>Configurações</title>
     <link rel="stylesheet" href="../css/config.css">
     <link rel="stylesheet" href="../css/nav.css">
-    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
 </head>
 
 <body>
-    <div class="container mt-4"> <!-- Ajuste a margem superior -->
-        <!--Nav-->
+    <div class="container">
+
         <header class="header">
             <?php include '../../includes/nav.php'; ?>
         </header>
+        <section class="area-flex">
         
-    <div class="conteudo">
-        <div class="row justify-content-center"> <!-- Mudar de 'justify-content-center' para 'justify-content-start' -->
-            <!-- Bloco de Usuário -->
-            <div class="col-md-6 mb-4 text-center">
-                <a href="config-user.php" class="link-block">
-                    <div class="block bg-primary text-white">
-                        <h3>Configurações de Usuário</h3>
-                    </div>
-                </a>
-            </div>
 
-            <!-- Bloco de Configurações -->
-            <div class="col-md-6 mb-4 text-center">
-                <a href="configurations.php" class="link-block">
-                    <div class="block bg-secondary text-white">
-                        <h3>Configurações do Sistema</h3>
-                    </div>
-                </a>
-            </div>
+        <div class="block user-settings">
+            <a>Configurações de Usuário</a>
+            <!-- Conteúdo das configurações de usuário -->
         </div>
+        <div class="block system-settings">
+            <a>Configurações do Sistema</a>
+            <!-- Conteúdo das configurações do sistema -->
+        </div>
+        </section>
     </div>
-
-    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
 </body>
-
 </html>

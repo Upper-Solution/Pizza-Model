@@ -1,8 +1,10 @@
 .menu-area {
+    padding-left: 80px;
+    padding-right: 80px;
     display: flex;
     justify-content: space-between;
     align-items: center;
-    width: 1300px;
+    width: 100%;
     background: #fff
 }
 
@@ -193,6 +195,8 @@
     background-color: #f0f0f0; /* Cor de fundo ao passar o mouse */
 }
 
+/***********************
+Revisar*/
 /* Responsividade para telas menores */
 @media (max-width: 768px) {
     .menu ul {
@@ -224,5 +228,214 @@
 
     #loginItem:hover .profile-menu {
         display: block; /* Mostra o menu suspenso ao passar o mouse em telas menores */
+    }
+}
+
+@media(max-width: 820px) {
+    body {
+        background: #fff;
+        flex-direction: column;
+        justify-content: center
+    }
+
+    .header {
+        box-shadow: none
+    }
+
+    .pizza-item {
+        width: 280px;
+        background: #fff;
+        margin-top: 15px
+    }
+
+    .container-menu-mobile {
+        display: flex
+    }
+
+    .menu_hamburger {
+        display: inline-flex
+    }
+
+    .menu {
+        position: fixed;
+        top: 0;
+        right: 0;
+        z-index: 98;
+        display: flex;
+        justify-content: center;
+        width: 0px;
+        height: 100vh;
+        padding-top: 75px;
+        background: rgba(255, 255, 255, .888);
+        overflow-x: hidden;
+        overflow-y: auto;
+        transition: all ease .5s
+    }
+
+    .menu ul {
+        flex-direction: column;
+        padding-right: 40px
+    }
+
+    .menu li {
+        display: block;
+        padding: 8px;
+        text-align: center
+    }
+
+    .menu-opened {
+        width: 200px !important
+    }
+
+    .menuMobile-area {
+        display: flex;
+        z-index: 99;
+        margin-right: 15px
+    }
+
+    aside {
+        width: auto;
+        position: fixed;
+        left: 100vw;
+        right: 0;
+        top: 0;
+        bottom: 0;
+        transition: all ease .5s
+    }
+
+    aside.show {
+        width: auto;
+        z-index: 99
+    }
+
+    .cart--area {
+        width: 100vw
+    }
+
+    .cart--item--qtarea {
+        height: 45px
+    }
+
+    .cart--item--qtarea button {
+        padding: 0px 18px
+    }
+
+    .cart--item--qt {
+        line-height: 45px;
+        font-size: 15px
+    }
+
+    .menu-closer {
+        display: block;
+        margin-bottom: 25px
+    }
+
+    .pizzaWindowArea {
+        justify-content: flex-start;
+        align-items: flex-start
+    }
+
+    .success {
+        flex-direction: column;
+        align-items: center;
+        text-align: center;
+        padding: 0 25px 20px
+    }
+
+    .success .pedido-finalizado {
+        padding-top: 30px;
+        flex-direction: column
+    }
+
+    .success span {
+        display: block;
+        font-size: 12px;
+        padding: 15px 0
+    }
+
+    .success-img {
+        margin: 30px 20px 0;
+        line-height: 63px
+    }
+
+    .pizzaWindowBody {
+        width: 100vw;
+        display: block;
+        border-radius: 0;
+        box-shadow: none;
+        margin: 0;
+        z-index: 99
+    }
+
+    .pizzaWindowBody.modal {
+        padding: 25px 40px;
+        height: 100vh
+    }
+
+    .pizzaBig img {
+        width: 60%;
+        height: auto
+    }
+
+    .pizzaInfo h1 {
+        margin-top: 5px;
+        font-size: 22px
+    }
+
+    .pizzaInfo .pizzaInfo--desc {
+        font-size: 12px
+    }
+
+    .pizzaInfo--sector {
+        font-size: 12px;
+        margin-top: 20px
+    }
+
+    .pizzaInfo--price {
+        justify-content: space-between
+    }
+
+    .pizzaInfo--price .pizzaInfo--actualPrice {
+        font-size: 22px
+    }
+
+    .pizzaInfo--size {
+        padding: 10px;
+        font-size: 12px
+    }
+
+    .pizzaInfo--size span {
+        font-size: 10px
+    }
+
+    .pizzaInfo--qtarea {
+        height: 40px
+    }
+
+    .pizzaInfo--qtarea button {
+        font-size: 23px;
+        padding: 0px 13px
+    }
+
+    .pizzaInfo--qt {
+        line-height: 40px;
+        font-size: 15px
+    }
+
+    .pizzaInfo--addButton {
+        font-size: 15px;
+        display: block;
+        text-align: center;
+        margin: 18px auto;
+        padding: 15px 20px;
+        border-radius: 10px
+    }
+
+    .pizzaInfo--cancelButton {
+        display: none
+    }
+
+    .pizzaInfo--cancelMobileButton {
+        display: block
     }
 }

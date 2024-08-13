@@ -81,7 +81,7 @@ include '../../includes/nav.php';
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <link rel="shortcut icon" href="../imagens/favicon.ico" type="image/x-icon">
     <script src="https://kit.fontawesome.com/8b4042ccf0.js" crossorigin="anonymous"></script>
-    <link rel="stylesheet" href="../css/style.css">
+    <link rel="stylesheet" href="../css/nav.css">
     <link rel="stylesheet" href="../css/login_styles.css">
     <link href="https://fonts.googleapis.com/css?family=Hepta+Slab:400,700|Lato:400,700&display=swap" rel="stylesheet">
     <title>Login - Pizzaria</title>
