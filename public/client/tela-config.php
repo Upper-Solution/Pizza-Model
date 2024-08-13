@@ -47,17 +47,19 @@ $pdo = null;
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Configurações</title>
     <link rel="stylesheet" href="../css/config.css">
-    <link rel="stylesheet" href="../css/style.css">
+    <link rel="stylesheet" href="../css/nav.css">
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
 </head>
 
 <body>
     <div class="container mt-4"> <!-- Ajuste a margem superior -->
+        <!--Nav-->
         <header class="header">
             <?php include '../../includes/nav.php'; ?>
         </header>
+        
     <div class="conteudo">
-        <div class="row justify-content-start"> <!-- Mudar de 'justify-content-center' para 'justify-content-start' -->
+        <div class="row justify-content-center"> <!-- Mudar de 'justify-content-center' para 'justify-content-start' -->
             <!-- Bloco de Usuário -->
             <div class="col-md-6 mb-4 text-center">
                 <a href="config-user.php" class="link-block">
