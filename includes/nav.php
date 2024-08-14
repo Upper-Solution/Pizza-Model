@@ -90,7 +90,7 @@ if ($loggedIn) {
                         <?php if ($loggedIn): ?>
                             <div class="profile-menu" id="profileMenu">
                                 <a href="../client/meus-pedidos.php" class="profile-menu-item">Acompanhar pedido</a>
-                                <a href="../client/config-user.php" class="profile-menu-item">Ver Perfil</a>
+                                <a href="../client/tela-config.php" class="profile-menu-item">Configurações</a>
                                 <a href="../../config/logout.php" class="profile-menu-item">Sair</a>
                             </div>
                         <?php endif; ?>

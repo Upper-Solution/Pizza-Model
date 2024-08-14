@@ -38,75 +38,73 @@ if ($loggedIn) {
 // Fechar conexão com o banco de dados
 $pdo = null;
 ?>
-
 <!DOCTYPE html>
-<html lang="pt-br">
-
+<html lang="pt-BR">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <script src="https://kit.fontawesome.com/8b4042ccf0.js" crossorigin="anonymous"></script>
     <title>Configurações de Usuário</title>
     <link rel="stylesheet" href="../css/config.css">
-    <link rel="stylesheet" href="../css/style.css">
-    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
+    <link rel="stylesheet" href="../css/nav.css">
 </head>
-
 <body>
-    <div class="container">
     <header class="header">
             <?php include '../../includes/nav.php'; ?>
-        </header>
-        <div class="row">
-            <!-- Informações Pessoais -->
-            <div class="col-md-6 form-section">
-                <h5>Informações Pessoais</h5>
-                <form>
-                    <div class="mb-3">
-                        <label for="nome" class="form-label">Nome Completo</label>
-                        <input type="text" class="form-control" id="nome" placeholder="Seu nome">
-                    </div>
-                    <div class="mb-3">
-                        <label for="email" class="form-label">Email</label>
-                        <input type="email" class="form-control" id="email" placeholder="seu@email.com">
-                    </div>
-                    <div class="mb-3">
-                        <label for="telefone" class="form-label">Telefone</label>
-                        <input type="tel" class="form-control" id="telefone" placeholder="(XX) XXXX-XXXX">
-                    </div>
-                </form>
-            </div>
+    </header>
+    <div class="container-configUser">
+    
+        <div class="cabeçalho-config-user">
+            <button id="backButton">Voltar</button>
+        </div>
 
-            <!-- Informações de Endereço -->
-            <div class="col-md-6 form-section">
-                <h5>Informações de Endereço</h5>
-                <form>
-                    <div class="mb-3">
-                        <label for="cidade" class="form-label">Cidade</label>
-                        <input type="text" class="form-control" id="cidade" placeholder="Sua cidade">
-                    </div>
-                    <div class="mb-3">
-                        <label for="cep" class="form-label">CEP</label>
-                        <input type="text" class="form-control" id="cep" placeholder="XXXXX-XXX">
-                    </div>
-                    <div class="mb-3">
-                        <label for="bairro" class="form-label">Bairro</label>
-                        <input type="text" class="form-control" id="bairro" placeholder="Seu bairro">
-                    </div>
-                    <div class="mb-3">
-                        <label for="rua" class="form-label">Rua</label>
-                        <input type="text" class="form-control" id="rua" placeholder="Sua rua">
-                    </div>
-                    <div class="mb-3">
-                        <label for="numero" class="form-label">Número</label>
-                        <input type="text" class="form-control" id="numero" placeholder="Número da casa">
-                    </div>
-                    <button type="submit" class="btn btn-primary btn-salvar float-end">Salvar</button>
-                </form>
-            </div>
+        <form class="forms-config-user" action="">
+        <div class="profile-section">
+            <img src="path/to/profile.jpg" alt="Foto de Perfil">
+            <input type="file" id="uploadPhoto">
+        </div>
+
+        <div class="form-group">
+            <label for="userName">Nome:</label>
+            <input type="text" id="userName" name="userName">
+        </div>
+
+        <div class="form-group">
+            <label for="userZip">CEP:</label>
+            <input type="text" id="userZip" name="userZip">
+        </div>
+
+        <div class="form-group">
+            <label for="userCity">Cidade:</label>
+            <input type="text" id="userCity" name="userCity">
+        </div>
+
+        <div class="form-group">
+            <label for="userDistrict">Bairro:</label>
+            <input type="text" id="userDistrict" name="userZip">
+        </div>
+
+        <div class="form-group">
+            <label for="userStreet">Rua:</label>
+            <input type="text" id="userStreet" name="userAddress">
+        </div>
+
+        <div class="form-group">
+            <label for="userHouseNumber">Numero:</label>
+            <input type="text" id="userHouseNumber" name="userAddress">
+        </div>
+
+        <div class="form-group">
+            <label for="userAddress">Complemento:</label>
+            <input type="text" id="userAddress" name="userAddress">
+        </div>
+        </form>
+
+        <div class="botao-salvar">
+            <button id="saveButton">Salvar</button>
         </div>
     </div>
 
-    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
+    <script src="../js/edit-perfil-user.js"></script>
 </body>
-
 </html>
