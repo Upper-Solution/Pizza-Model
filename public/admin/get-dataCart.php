@@ -34,6 +34,17 @@ try {
         exit;
     }
 
+    // Iniciar uma transação
+    $pdo->beginTransaction();
+
+    // Inicializar variáveis para o pedido
+    $totalPedido = 0;
+    $observacaoPedidos = '';
+    $observacoesGerais = '';
+    $formaPagamento = '';
+    $valorTroco = 0;
+    $itensPedido = [];
+
     foreach ($cartData as $item) {
         $orderId = $item['orderId'];
         $quantidade = $item['quantidade'];
@@ -44,40 +55,54 @@ try {
         $total = $item['valorTotal'];
 
         // Consultar as informações da pizza
-        $stmt = $pdo->prepare('SELECT nome, descricao FROM Pizzas WHERE id = ?');
+        $stmt = $pdo->prepare('SELECT nome FROM Pizzas WHERE id = ?');
         $stmt->execute([$orderId]);
         $pizza = $stmt->fetch();
 
         if (!$pizza) {
+            // Reverter a transação se houver um erro
+            $pdo->rollBack();
             echo json_encode(['status' => 'error', 'message' => 'Pizza não encontrada.']);
             exit;
         }
 
-        // Inserir os dados na tabela orders
-        $stmt = $pdo->prepare('INSERT INTO orders (customer_name, items, quantidade, observacoesPedidos, ObservacoesGerais, formaPagamento, valorTroco, total, status, cep, city, neighborhood, street, number, complement, phone_number, email) VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)');
-        $stmt->execute([
-            $user['fullname'],
-            $pizza['nome'],
-            $quantidade,
-            $observacao,
-            $observacoesGerais,
-            $formaPagamento,
-            $valorTroco,
-            $total,
-            'Recebido', 
-            $user['cep'],
-            $user['city'],
-            $user['neighborhood'],
-            $user['address'],
-            $user['house_number'],
-            $user['complement'],
-            $user['phone_number'],
-            $user['email'],
-        ]);
+        // Acumular o total do pedido e informações dos itens
+        $totalPedido += $total;
+        $itensPedido[] = $pizza['nome'] . ' - Qtd: ' . $quantidade . ' |';
     }
+
+    // Converter o array de itens em uma string separada por nova linha
+    $itensPedidoStr = implode("\n", $itensPedido);
+
+    // Inserir o pedido na tabela orders
+    $stmt = $pdo->prepare('INSERT INTO orders (customer_name, quantidade, observacoesPedidos, ObservacoesGerais, formaPagamento, valorTroco, total, status, cep, city, neighborhood, street, number, complement, phone_number, email, items) VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)');
+    $stmt->execute([
+        $user['fullname'], // customer_name
+        count($cartData), // quantidade
+        $observacaoPedidos, // observacoesPedidos
+        $observacoesGerais, // ObservacoesGerais
+        $formaPagamento, // formaPagamento
+        $valorTroco, // valorTroco
+        $totalPedido, // total
+        'Recebido', // status
+        $user['cep'], // cep
+        $user['city'], // city
+        $user['neighborhood'], // neighborhood
+        $user['address'], // street
+        $user['house_number'], // number
+        $user['complement'], // complement
+        $user['phone_number'], // phone_number
+        $user['email'], // email
+        $itensPedidoStr // items (formatado como 'nome, quantidade')
+    ]);
+
+    // Confirmar a transação
+    $pdo->commit();
 
     echo json_encode(['status' => 'success', 'message' => 'Pedido finalizado com sucesso.']);
 } catch (PDOException $e) {
+    // Reverter a transação em caso de erro
+    $pdo->rollBack();
     echo json_encode(['status' => 'error', 'message' => 'Erro ao consultar dados: ' . $e->getMessage()]);
 }
 ?>

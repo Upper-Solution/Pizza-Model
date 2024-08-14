@@ -1,13 +1,12 @@
-
+/* Reset de margens e paddings */
 * {
     box-sizing: border-box;
     margin: 0;
     padding: 0;
-    
 }
 
 body {
-    font-family: "Montserrat", sans-serif;
+    font-family: 'Montserrat', sans-serif;
     background-color: #f8f8f8;
     margin: 0;
     padding: 0;
@@ -18,22 +17,23 @@ body {
     background: #fff;
     display: flex;
     justify-content: center;
+    align-items: center;
     position: fixed;
-    left: 0;
     top: 0;
+    left: 0;
     right: 0;
     z-index: 99;
-    box-shadow: 0px 3px 10px rgba(0, 0, 0, .02)
+    box-shadow: 0 3px 10px rgba(0, 0, 0, 0.1);
 }
 
 .menu-area {
     display: flex;
     justify-content: space-between;
     align-items: center;
-    width: 1300px;
+    width: 100%;
+    max-width: 1300px;
     background: #fff;
-    font-size: 13.6px;
-
+    padding: 0 20px;
 }
 
 .menu-area a {
@@ -56,7 +56,6 @@ body {
 
 .menu-area nav {
     display: flex;
-    justify-content: space-between;
     align-items: center;
 }
 
@@ -67,44 +66,40 @@ body {
 }
 
 .menu_hamburger {
-    position: relative;
     display: none;
     align-items: center;
     justify-content: center;
-    padding: 20px;
+    padding: 15px;
     cursor: pointer;
-    z-index: 99
 }
 
 .menuMobile-area {
-    display: none
+    display: none;
 }
 
 .container-menu-mobile {
     display: none;
     line-height: 46px;
-    height: 45px;
-    cursor: pointer
+    cursor: pointer;
 }
 
 .menu-openner span,
 .fa-cart-shopping {
     color: #fab427;
-    font-size: 1.2rem
+    font-size: 1.2rem;
 }
 
 .content {
     max-width: 800px;
-    margin: 20px auto;
-    margin-top: 50px;
+    margin: 100px auto 20px; /* Ajuste para a altura do header fixo */
     padding: 20px;
     background-color: #fff;
     border-radius: 8px;
-    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
 }
 
 h1 {
-    font-family: 'Hepta Slab', serif;
+    font-family: 'Montserrat', sans-serif;
     color: #333;
     margin-bottom: 20px;
     text-align: center;
@@ -115,8 +110,8 @@ h1 {
     border-radius: 8px;
     margin-bottom: 20px;
     padding: 15px;
-    background-color: #fafafa;
-    position: relative;
+    background-color: #fff;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.05);
 }
 
 .order-card h2 {
@@ -127,51 +122,75 @@ h1 {
 
 .order-card p {
     margin: 5px 0;
+    color: #666;
+}
+
+.order-date {
+    color: #999;
 }
 
 .status-bar {
     display: flex;
     align-items: center;
     justify-content: space-between;
-    margin-top: 40px;
-}
-
-.status-bar div {
-    width: 23.5%;
-    height: 10px;
-    border-radius: 5px;
-    background-color: #ddd;
+    margin-top: 20px;
     position: relative;
-}
-
-.status-bar div.completed {
-    background-color: #4caf50;
-    position: relative;
+    height: 12px;
+    background: #f0f0f0;
+    border-radius: 6px;
     overflow: hidden;
 }
 
-.status-bar div::after {
-    content: '';
-    width: 10px;
-    height: 10px;
-    background-color: #4caf50;
-    border-radius: 50%;
-    position: absolute;
-    right: -12px;
+.progress-step {
+    flex: 1;
+    height: 12px;
+    border-radius: 6px;
+    background: #ddd;
+    position: relative;
+    overflow: hidden;
+    margin: 0 2px;
+    transition: background 0.3s ease;
 }
 
-/* Remove a última bolinha verde */
-.status-bar div:last-child::after {
-    display: none;
+.progress-step.complete {
+    background: #66bb6a; /* Cor para status completo */
+}
+
+.progress-step.active {
+    background: #4caf50; /* Cor para status ativo */
+}
+
+.progress-step.Recusado {
+    background: #f44336; /* Cor para status cancelado */
+}
+
+.progress-step.delivered {
+    background: #4caf50; /* Cor para status entregue */
+}
+
+.Recusado-status .progress-bar,
+.delivered-status .progress-bar {
+    display: none; /* Ocultar a barra de progresso para pedidos cancelados e entregues */
+}
+
+.progress-bar {
+    height: 100%;
+    background: #4caf50; /* Cor padrão da barra de progresso */
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 0%;
+    transition: width 0.6s ease;
 }
 
 .status-labels {
     display: flex;
     justify-content: space-between;
+    margin-top: 5px;
 }
 
 .status-labels span {
-    width: 24%;
+    flex: 1;
     text-align: center;
     font-size: 12px;
     color: #666;
@@ -183,4 +202,56 @@ h1 {
     background-color: #fff;
     border-radius: 8px;
     box-shadow: 0 1px 2px rgba(0, 0, 0, 0.05);
+}
+
+/* Tag para status Recusado */
+.status-recused {
+    background-color: #f44336; /* Cor vermelha */
+    color: #fff;
+    padding: 5px 10px;
+    border-radius: 5px;
+    display: inline-block;
+    font-weight: bold;
+    margin-bottom: 10px;
+}
+
+/* Tag para status Entregue */
+.status-delivered {
+    background-color: #4caf50; /* Cor verde */
+    color: #fff;
+    padding: 5px 10px;
+    border-radius: 5px;
+    display: inline-block;
+    font-weight: bold;
+    margin-bottom: 10px;
+}
+
+
+/* Responsividade */
+@media (max-width: 768px) {
+    .menu_hamburger {
+        display: flex;
+    }
+
+    .menu-area {
+        flex-direction: column;
+        align-items: flex-start;
+    }
+
+    .menu-area ul {
+        flex-direction: column;
+        display: none; /* Para menu hambúrguer */
+    }
+
+    .menuMobile-area {
+        display: block;
+    }
+
+    .container-menu-mobile {
+        display: block;
+    }
+
+    .content {
+        margin-top: 80px; /* Ajuste para a altura do header fixo em telas menores */
+    }
 }
