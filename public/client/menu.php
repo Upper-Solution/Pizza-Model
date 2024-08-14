@@ -51,29 +51,27 @@ $pdo = null;
     <title>Cardápio</title>
 </head>
 <body>
-    <div class="loader-content" id="loader">
+    <div class="loader-content">
         <div class="loader-circle"></div>
     </div>
 
-    <header class="header" id="header">
+    <header class="header">
         <?php include '../../includes/nav.php'; ?>
     </header>
 
     <div class="container">
         <div class="container-area">
             <div class="models">
-                <!-- Pizza Item Template -->
-                <div class="pizza-item" id="pizza-item-template">
-                    <a href="#">
-                        <div class="pizza-item--img"><img src="" alt="Pizza Image"/></div>
+                <div class="pizza-item">
+                    <a href="">
+                        <div class="pizza-item--img"><img/></div>
                         <div class="pizza-item--add">+</div>
                         <div class="pizza-item--price">R$ --</div>
                         <div class="pizza-item--name">--</div>
                         <div class="pizza-item--desc">--</div>
                     </a>
                 </div>
-                <!-- Cart Item Template -->
-                <div class="cart--item" id="cart-item-template">
+                <div class="cart--item">
                     <img src="" alt="Cart Item Image" />
                     <div class="cart--item-nome">--</div>
                     <div class="cart--item--qtarea">
@@ -81,21 +79,22 @@ $pdo = null;
                         <div class="cart--item--qt">1</div>
                         <button class="cart--item-qtmais">+</button>
                     </div>
+                    <br>
+
                     <div class="cart--obs">
                         <p></p>
                     </div>
                 </div>
             </div>
-
             <main>
                 <h1 class="titulo--h1">Cardápio</h1>
-                <div class="pizza-area" id="pizza-area"></div>
+                <div class="pizza-area"></div>
             </main>
 
             <aside>
-                <div class="cart--area" id="cart-area">
+                <div class="cart--area">
                     <div class="menu-closer">
-                        <i class="fa-solid fa-arrow-left" id="menu-closer-icon"></i>
+                        <i class="fa-solid fa-arrow-left"></i>
                         <?php if ($loggedIn) { ?>
                             <div class="avatar-container">
                                 <img src="path_to_avatar_image.jpg" alt="Avatar do Usuário">
@@ -108,87 +107,85 @@ $pdo = null;
                         </button>
                     </div>
                     <h1>Suas Pizzas</h1>
-                    <div class="cart" id="cart"></div>
+                    <div class="cart"></div>
                     <div class="cart--details">
                         <div class="cart--totalitem pizzasValor">
                             <span>Pizzas</span>
-                            <span id="pizzas-total">R$ --</span>
+                            <span>R$ --</span>
                         </div>
                         <div class="cart--totalitem entrega">
                             <span>Taxa de entrega</span>
-                            <span id="delivery-fee">R$ --</span>
+                            <span>R$ --</span>
                         </div>
                         <div class="cart--totalitem subtotal">
                             <span>Subtotal</span>
-                            <span id="subtotal">R$ --</span>
+                            <span>R$ --</span>
                         </div>
                         <div class="cart--totalitem desconto">
                             <span>Desconto (-10%)</span>
-                            <span id="discount">R$ --</span>
+                            <span>R$ --</span>
                         </div>
                         <div class="cart--totalitem total big">
                             <span>Total</span>
-                            <span id="total">R$ --</span>
+                            <span>R$ --</span>
                         </div>
                         
                         <div class="observacoesGerais">
-                            <label for="observacoesGerais">Observações Gerais:</label>
-                            <textarea id="observacoesGerais" rows="4" placeholder="Escreva suas observações aqui..."></textarea>
-                        </div>
-
+                        <label for="observacoesGerais">Observações Gerais:</label>
+                        <textarea id="observacoesGerais" rows="4" placeholder="Escreva suas observações aqui..."></textarea>
                         <div class="formaPagamento">
-                            <label for="formaPagamento">Forma de Pagamento:</label>
-                            <select id="formaPagamento" name="formaPagamento">
-                                <option value="cartao">Cartão</option>
-                                <option value="pix">Pix</option>
-                                <option value="dinheiro">Dinheiro</option>
-                            </select>
+                        <label for="formaPagamento">Forma de Pagamento:</label>
+                        <select id="formaPagamento" name="formaPagamento">
+                            <option value="cartao">Cartão</option>
+                            <option value="pix">Pix</option>
+                            <option value="dinheiro">Dinheiro</option>
+                        </select>
 
-                            <!-- Input para Troco (escondido por padrão) -->
-                            <div id="trocoContainer" class="hidden">
-                                <label for="troco">Valor para Troco:</label>
-                                <input type="text" id="troco" name="troco" placeholder="Insira o valor para troco">
-                            </div>
+                        <!-- Input para Troco (escondido por padrão) -->
+                        <div id="trocoContainer" style="display:none;">
+                            <label for="troco">Valor para Troco:</label>
+                            <input type="text" id="troco" name="troco" placeholder="Insira o valor para troco">
                         </div>
+                    </div>
 
                         <div id="finalizarPedidoBtn" class="cart--finalizar">Finalizar a compra</div>
                     </div>
                 </div>
             </aside>
-
-            <div class="pizzaWindowArea" id="pizza-window-area">
+            <div class="pizzaWindowArea">
                 <div class="pizzaWindowBody modal">
-                    <div class="pizzaInfo--cancelMobileButton" id="pizza-info-cancel-mobile">
+                    <div class="pizzaInfo--cancelMobileButton">
                         <i class="fa-solid fa-arrow-left"></i>
                     </div>
                     <div class="pizzaBig">
-                        <img src="" alt="Pizza Image" id="pizza-image"/>
+                        <img src="" alt="Pizza Image" />
                     </div>
                     <div class="pizzaInfo">
-                        <h1 id="pizza-name">--</h1>
-                        <div class="pizzaInfo--desc" id="pizza-desc">--</div>
+                        <h1>--</h1>
+                        <div class="pizzaInfo--desc">--</div>
                         
                         <div class="pizzaInfo--pricearea">
                             <div class="pizzaInfo--sector">Preço</div>
                             <div class="pizzaInfo--price">
-                                <div class="pizzaInfo--actualPrice" id="pizza-price">R$ --</div>
+                                <div class="pizzaInfo--actualPrice">R$ --</div>
                                 <div class="pizzaInfo--qtarea">
-                                    <button class="pizzaInfo--qtmenos" id="pizza-qtmenos">-</button>
-                                    <div class="pizzaInfo--qt" id="pizza-qt">1</div>
-                                    <button class="pizzaInfo--qtmais" id="pizza-qtmais">+</button>
+                                    <button class="pizzaInfo--qtmenos">-</button>
+                                    <div class="pizzaInfo--qt">1</div>
+                                    <button class="pizzaInfo--qtmais">+</button>
                                 </div>
                             </div>
                         </div>
                         <div class="pizzaObservations">
-                            <textarea id="pizza-observations" rows="4" placeholder="Escreva suas observações aqui..."></textarea>
+                            <textarea id="observations" rows="4" placeholder="Escreva suas observações aqui..."></textarea>
                         </div>
-                        <div class="pizzaInfo--addButton" id="add-to-cart">Adicionar ao carrinho</div>
-                        <div class="pizzaInfo--cancelButton" id="cancel-button">Cancelar</div>
+                        <div class="pizzaInfo--addButton">Adicionar ao carrinho</div>
+                        <div class="pizzaInfo--cancelButton">Cancelar</div>
+                        
                     </div>
                 </div>
+                
             </div>
-
-            <div class="success pizzaWindowArea" id="success-window">
+            <div class="success pizzaWindowArea">
                 <div class="pizzaWindowBody success">
                     <div class="pedido-finalizado">
                         <i class="fa-solid fa-circle-check success-img"></i>
@@ -205,19 +202,46 @@ $pdo = null;
     </footer>
 
     <script src="../js/geral.js"></script>
-    <script src="../js/cart.js"></script>
+    <script src="../js/cart.js">
+    </script>
     <script>
         document.addEventListener("DOMContentLoaded", function () {
             console.log('DOM fully loaded and parsed');
             const finalizarPedidoBtn = document.getElementById('finalizarPedidoBtn');
             const loginButton = document.getElementById('loginButton');
-            
-            finalizarPedidoBtn.addEventListener('click', () => {
-                window.location.href = "<?php echo $loggedIn ? 'finalizar-pedido.php' : 'login.php'; ?>";
-            });
 
-            loginButton.addEventListener('click', () => {
-                window.location.href = "<?php echo $loggedIn ? 'logout.php' : 'login.php'; ?>";
+            if (finalizarPedidoBtn) {
+                finalizarPedidoBtn.addEventListener('click', function (event) {
+                    event.preventDefault();
+                    console.log('Finalizar Pedido button clicked');
+                    <?php if (!$loggedIn) { ?>
+                        window.location.href = 'login.php';
+                    <?php } ?>
+                });
+            }
+
+            if (loginButton) {
+                loginButton.addEventListener('click', function () {
+                    console.log('Login button clicked');
+                    <?php if ($loggedIn) { ?>
+                        window.location.href = '../../config/logout.php'; 
+                    <?php } else { ?>
+                        window.location.href = 'login.php';
+                    <?php } ?>
+                });
+            }
+        });
+
+        document.addEventListener("DOMContentLoaded", function () {
+            const formaPagamento = document.getElementById('formaPagamento');
+            const trocoContainer = document.getElementById('trocoContainer');
+
+            formaPagamento.addEventListener('change', function () {
+                if (formaPagamento.value === 'dinheiro') {
+                    trocoContainer.style.display = 'block';
+                } else {
+                    trocoContainer.style.display = 'none';
+                }
             });
         });
     </script>
