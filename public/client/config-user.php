@@ -50,54 +50,63 @@ $pdo = null;
 </head>
 <body>
     <header class="header">
-            <?php include '../../includes/nav.php'; ?>
+        <?php include '../../includes/nav.php'; ?>
     </header>
-    <div class="container-configUser">
-    
-        <div class="cabeçalho-config-user">
+    <div class="cabeçalho-config-user">
             <button id="backButton">Voltar</button>
         </div>
+    <div class="container-configUser">
+        
 
         <form class="forms-config-user" action="">
-        <div class="profile-section">
-            <img src="path/to/profile.jpg" alt="Foto de Perfil">
-            <input type="file" id="uploadPhoto">
-        </div>
+            <div class="profile-section">
+                <i id="userImage-profile" class="fas fa-user"></i>
+                <label for="uploadPhoto" class="custom-file-upload">
+                    Escolher foto
+                </label>
+                <input type="file" id="uploadPhoto">
+            </div>
 
-        <div class="form-group">
-            <label for="userName">Nome:</label>
-            <input type="text" id="userName" name="userName">
-        </div>
+            <!-- Campos do formulário -->
+            <div class="form-group">
+                <label for="userName">Nome:</label>
+                <input type="text" id="userName" name="userName">
+            </div>
 
-        <div class="form-group">
-            <label for="userZip">CEP:</label>
-            <input type="text" id="userZip" name="userZip">
-        </div>
+            <div class="form-group">
+                <label for="userPhone-number">Telefone:</label>
+                <input type="text" id="userPhone-number" name="userPhone-number">
+            </div>
 
-        <div class="form-group">
-            <label for="userCity">Cidade:</label>
-            <input type="text" id="userCity" name="userCity">
-        </div>
+            <div class="form-group">
+                <label for="userZip">CEP:</label>
+                <input type="text" id="userZip" name="userZip">
+            </div>
 
-        <div class="form-group">
-            <label for="userDistrict">Bairro:</label>
-            <input type="text" id="userDistrict" name="userZip">
-        </div>
+            <div class="form-group">
+                <label for="userCity">Cidade:</label>
+                <input type="text" id="userCity" name="userCity">
+            </div>
 
-        <div class="form-group">
-            <label for="userStreet">Rua:</label>
-            <input type="text" id="userStreet" name="userAddress">
-        </div>
+            <div class="form-group">
+                <label for="userDistrict">Bairro:</label>
+                <input type="text" id="userDistrict" name="userDistrict">
+            </div>
 
-        <div class="form-group">
-            <label for="userHouseNumber">Numero:</label>
-            <input type="text" id="userHouseNumber" name="userAddress">
-        </div>
+            <div class="form-group">
+                <label for="userStreet">Rua:</label>
+                <input type="text" id="userStreet" name="userStreet">
+            </div>
 
-        <div class="form-group">
-            <label for="userAddress">Complemento:</label>
-            <input type="text" id="userAddress" name="userAddress">
-        </div>
+            <div class="form-group">
+                <label for="userHouseNumber">Número:</label>
+                <input type="text" id="userHouseNumber" name="userHouseNumber">
+            </div>
+
+            <div class="form-group">
+                <label for="userAddress">Complemento:</label>
+                <input type="text" id="userAddress" name="userAddress">
+            </div>
         </form>
 
         <div class="botao-salvar">

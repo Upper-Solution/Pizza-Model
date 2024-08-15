@@ -52,25 +52,29 @@ $pdo = null;
 </head>
 
 <body>
-    <div class="container-telaConfig">
         <header class="header">
             <?php include '../../includes/nav.php'; ?>
         </header>
-        <section class="area-flex">
-            <div class="block user-settings" data-url="./config-user.php">
-                <!-- Conteúdo das configurações de usuário -->
-                <div class="content">
-                    <h3>Configurações de Usuário</h3>
+        <div class="container-telaConfig">
+            
+            <section class="area-flex">
+                <div class="config-area">
+                <h2>Configurações</h2>
+
+                    <div class="block user-settings" data-url="./config-user.php">
+                        <div class="content">
+                            <h3>Configurações de Usuário</h3>
+                        </div>
+                    </div>
+                    <div class="block system-settings" data-url="./config-system.php">
+                        <div class="content">
+                            <h3>Configurações do Sistema</h3>
+                        </div>
+                    </div>
                 </div>
-            </div>
-            <div class="block system-settings" data-url="./config-system.php">
-                <!-- Conteúdo das configurações do sistema -->
-                <div class="content">
-                    <h3>Configurações do Sistema</h3>
-                </div>
-            </div>
-        </section>
-    </div>
+                <img class="area-flex-img" src="../imagens/banner.jpg" alt="">
+            </section>
+        </div>
 
     <script>
         document.querySelectorAll('.block').forEach(block => {
