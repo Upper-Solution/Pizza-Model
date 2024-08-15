@@ -78,16 +78,15 @@ document.addEventListener("DOMContentLoaded", function() {
     const emailForm = document.getElementById('emailForm');
     const userEmail = "<?php echo $_SESSION['user_email']; ?>"; // E-mail da pessoa logada
 
-    // Preencher automaticamente o campo de e-mail do formulário com o e-mail da pessoa logada
     document.getElementById('email').value = userEmail;
 
-    // Função para atualizar os pedidos
     function updateOrders() {
         fetch('get-order-details.php')
             .then(response => response.json())
             .then(data => {
                 if (data.error) {
                     console.error(data.error);
+                    ordersContainer.innerHTML = `<p>${data.error}</p>`;
                     return;
                 }
 
@@ -135,21 +134,18 @@ document.addEventListener("DOMContentLoaded", function() {
                         `;
                     });
                 } else {
-                    htmlContent += '<p>Nenhum pedido encontrado.</p>';
+                    htmlContent = '<p>Nenhum pedido encontrado.</p>';
                 }
 
                 ordersContainer.innerHTML = htmlContent;
 
-                // Adiciona event listeners para os botões de contato
                 document.querySelectorAll('.contact-btn').forEach(button => {
                     button.addEventListener('click', function() {
                         const orderId = this.getAttribute('data-order-id');
                         const orderItems = this.getAttribute('data-order-items');
 
-                        // Preenche o campo de assunto do e-mail com o ID do pedido
                         document.getElementById('orderId').value = orderId;
                         document.getElementById('subject').value = `Pedido #${orderId}`;
-
                         modal.style.display = 'block';
                     });
                 });
@@ -157,15 +153,12 @@ document.addEventListener("DOMContentLoaded", function() {
             .catch(error => console.error('Erro ao atualizar pedidos:', error));
     }
 
-    // Fechar o modal quando clicar no botão de fechar
     closeBtn.addEventListener('click', function() {
         modal.style.display = 'none';
     });
 
-    // Enviar o formulário de e-mail
     emailForm.addEventListener('submit', function(event) {
         event.preventDefault();
-
         const formData = new FormData(emailForm);
 
         fetch('send-email.php', {
@@ -186,11 +179,10 @@ document.addEventListener("DOMContentLoaded", function() {
         });
     });
 
-    // Atualiza a lista de pedidos imediatamente
     updateOrders();
 });
+
 </script>
 
-    </script>
 </body>
 </html>

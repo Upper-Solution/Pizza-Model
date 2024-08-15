@@ -72,7 +72,7 @@ $pdo = null;
                         </div>
                     </div>
                 </div>
-                <img class="area-flex-img" src="../imagens/banner.jpg" alt="">
+                <img class="area-flex-img" id="movingImage" src="../imagens/config.png" alt="">
             </section>
         </div>
 
@@ -85,6 +85,21 @@ $pdo = null;
                 }
             });
         });
+
+        const image = document.getElementById('movingImage');
+        let position = 0;
+        let direction = 1;
+
+        function moveImage() {
+            position += direction;
+            image.style.transform = `translateY(${position}px)`;
+
+            if (position > 10 || position < 0) {
+                direction *= -1; // Inverte a direção do movimento
+            }
+        }
+
+        setInterval(moveImage, 60); // Ajuste o tempo para a velocidade desejada
     </script>
 </body>
 </html>
