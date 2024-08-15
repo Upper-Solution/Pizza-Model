@@ -99,5 +99,6 @@ if ($loggedIn) {
             </div>
         </nav>
     </div>
+    <script src="../js/darkMode.js"></script>
 </body>
 </html>

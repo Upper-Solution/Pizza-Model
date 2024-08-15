@@ -49,6 +49,10 @@ $pdo = null;
     <title>Configurações</title>
     <link rel="stylesheet" href="../css/config.css">
     <link rel="stylesheet" href="../css/nav.css">
+    <link rel="stylesheet" href="../css/config-darkMode.css">
+    <link rel="stylesheet" href="../css/nav-darkMode.css">
+
+
 </head>
 
 <body>
@@ -76,6 +80,7 @@ $pdo = null;
             </section>
         </div>
 
+    <script src="../js/darkMode.js"></script>
     <script>
         document.querySelectorAll('.block').forEach(block => {
             block.addEventListener('click', function() {
@@ -100,6 +105,7 @@ $pdo = null;
         }
 
         setInterval(moveImage, 60); // Ajuste o tempo para a velocidade desejada
+
     </script>
 </body>
 </html>

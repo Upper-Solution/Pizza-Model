@@ -1,0 +1,83 @@
+/* Estilos gerais do corpo */
+body.dark-mode {
+    background: #555151;
+    color: #e0e0e0;
+}
+
+/* Área flexível */
+.dark-mode .config-area h2 {
+    color: #ffffff;
+}
+
+/* Blocos de configurações */
+.dark-mode .block {
+    background: #555151;
+    box-shadow: 5px 5px 10px #111;
+    border: solid 1px #3a3a3a;
+}
+
+.dark-mode .block:hover {
+    border: solid 1px #e0a225;
+    box-shadow: 0 6px 12px #000;
+}
+
+/* Área Config-User */
+.dark-mode .container-configUser {
+    background-color: #555151;
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.6);
+}
+
+.dark-mode .cabeçalho-config-user button {
+    background-color: #e0a225;
+    color: #1e1e1e;
+}
+
+.dark-mode .profile-section i {
+    color: #e0e0e0;
+}
+
+.dark-mode #userImage-profile {
+    background-color: #333;
+    color: #666;
+}
+
+.dark-mode .custom-file-upload {
+    background-color: #e0a225;
+    color: #1e1e1e;
+}
+
+.dark-mode .custom-file-upload:hover {
+    background-color: #cc8a19;
+}
+
+.dark-mode .form-group input {
+    background-color: #333;
+    color: #e0e0e0;
+    border: 1px solid #555;
+}
+
+/* Estilização das configurações do Sistema */
+.dark-mode .container-system {
+    background: #555151;
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.6);
+}
+
+.dark-mode .container-system h1 {
+    border-bottom: 2px solid #444;
+    color: white;
+}
+
+.dark-mode .config-section h2 {
+    color: #ffffff;
+}
+
+.dark-mode .config-section input[type="checkbox"] {
+    accent-color: #e0a225;
+}
+
+.dark-mode .config-section select, 
+input[type="text"] {
+    background-color: #333;
+    color: #e0e0e0;
+    border: 1px solid #555;
+}

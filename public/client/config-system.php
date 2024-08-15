@@ -46,7 +46,9 @@ $pdo = null;
     <title>Configurações do Sistema</title>
     <link rel="stylesheet" href="../css/config.css">
     <link rel="stylesheet" href="../css/nav.css">
-    <link rel="stylesheet" href="../css/darkMode.css">
+    <link rel="stylesheet" href="../css/config-darkMode.css">
+    <link rel="stylesheet" href="../css/nav-darkMode.css">
+
 </head>
 <body>
     <header class="header">
@@ -74,32 +76,35 @@ $pdo = null;
             </section>
         </main>
         <div class="botao-salvar">
-            <button   id="save-button">Salvar Configurações</button>
+            <button id="save-button">Salvar Configurações</button>
         </div>
     </div>
+    <script src="../js/darkMode.js"></script>
     <script>
-        // Verifica se o modo escuro está ativo no localStorage
-        const darkMode = localStorage.getItem('darkMode') === 'enabled';
 
-        // Atualiza o estado do checkbox e o modo escuro no carregamento da página
-        document.addEventListener('DOMContentLoaded', () => {
-            const darkModeToggle = document.getElementById('dark-mode');
-            if (darkMode) {
-                document.body.classList.add('dark-mode');
-                darkModeToggle.checked = true;
-            }
+        salvar = document.getElementById("save-button")
+        const darkModeToggle = document.getElementById('dark-mode');
+
+        salvar.addEventListener('click', function(){
 
             // Alterna o modo escuro quando o usuário altera o checkbox
-            darkModeToggle.addEventListener('change', function() {
-                if (this.checked) {
-                    document.body.classList.add('dark-mode');
-                    localStorage.setItem('darkMode', 'enabled');
-                } else {
-                    document.body.classList.remove('dark-mode');
-                    localStorage.setItem('darkMode', 'disabled');
-                }
-            });
+            if (darkModeToggle.checked) {
+                document.body.classList.add('dark-mode');
+                localStorage.setItem('darkMode', 'enabled');
+            } else {
+                document.body.classList.remove('dark-mode');
+                localStorage.setItem('darkMode', 'disabled');
+            }
         });
+
+        //Atribuição da funcionalidade do botão voltar
+        const clickVoltar = document.getElementById("backButton");
+        clickVoltar.addEventListener('click', function(){
+            window.location.href = '../client/tela-config.php' 
+        });
+            
+        
     </script>
+
 </body>
 </html>

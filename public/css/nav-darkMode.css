@@ -1,0 +1,53 @@
+.dark-mode .menu-area {
+    background: #333; /* Alterado para um fundo escuro */
+}
+
+.dark-mode .logo {
+    color: #fff; /* Alterado para texto branco */
+}
+
+.dark-mode .menu-openner span,
+.dark-mode .fa-cart-shopping {
+    color: #fab427; /* Mantém a cor para contraste no modo escuro */
+}
+
+.dark-mode .line-main::before,
+.dark-mode .line-main::after,
+.dark-mode .line-split::before,
+.dark-mode .line-split::after {
+    background: #fab427; /* Mantém a cor para contraste no modo escuro */
+}
+
+.dark-mode .menu ul a {
+    color: #fff; /* Alterado para texto branco */
+}
+
+.dark-mode .menu ul a::after {
+    background: #fab427; /* Mantém a cor para contraste no modo escuro */
+}
+
+.dark-mode .menu ul a:hover::after,
+.dark-mode .menu .active::after {
+    background: #fab427; /* Mantém a cor para contraste no modo escuro */
+}
+
+.dark-mode .profile-icon {
+    border: 2px solid #333; /* Alterado para borda escura */
+}
+
+.dark-mode .login-icon i {
+    color: #fff; /* Alterado para ícone branco */
+}
+
+.dark-mode .profile-menu {
+    background-color: #444; /* Alterado para fundo escuro */
+    border: 1px solid #555; /* Alterado para borda escura */
+}
+
+.dark-mode .profile-menu a {
+    color: #fff; /* Alterado para texto branco */
+}
+
+.dark-mode .profile-menu a:hover {
+    background-color: #666; /* Alterado para fundo mais escuro ao passar o mouse */
+}
