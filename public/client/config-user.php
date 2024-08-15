@@ -47,6 +47,7 @@ $pdo = null;
     <title>Configurações de Usuário</title>
     <link rel="stylesheet" href="../css/config.css">
     <link rel="stylesheet" href="../css/nav.css">
+    <link rel="stylesheet" href="../css/darkMode.css">
 </head>
 <body>
     <header class="header">
@@ -115,5 +116,18 @@ $pdo = null;
     </div>
 
     <script src="../js/edit-perfil-user.js"></script>
+    <script>
+        // Verifica se o modo escuro está ativo no localStorage
+        const darkMode = localStorage.getItem('darkMode') === 'enabled';
+
+        // Atualiza o estado do checkbox e o modo escuro no carregamento da página
+        document.addEventListener('DOMContentLoaded', () => {
+            const darkModeToggle = document.getElementById('dark-mode');
+            if (darkMode) {
+                document.body.classList.add('dark-mode');
+                darkModeToggle.checked = true;
+            }
+        });
+    </script>
 </body>
 </html>

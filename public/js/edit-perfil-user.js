@@ -1,5 +1,4 @@
 document.addEventListener('DOMContentLoaded', function() {
-    // Função para buscar dados do usuário
     async function fetchUserData() {
         try {
             const response = await fetch('../../includes/apiGetUser.php');
@@ -36,7 +35,6 @@ document.addEventListener('DOMContentLoaded', function() {
         }
     }
 
-    // Selecionar o botão "Voltar" e adicionar o ouvinte de evento de clique
     const backButton = document.getElementById("backButton");
     if (backButton) {
         backButton.addEventListener('click', function() {
@@ -44,13 +42,11 @@ document.addEventListener('DOMContentLoaded', function() {
         });
     }
 
-    // Selecionar o botão "Salvar" e adicionar o ouvinte de evento de clique
     const saveButton = document.getElementById("saveButton");
     if (saveButton) {
         saveButton.addEventListener("click", saveUser);
     }
 
-    // Chamar a função para carregar os dados do usuário
     fetchUserData();
 });
 
@@ -63,10 +59,8 @@ function convertImageToBase64(file) {
         reader.readAsDataURL(file);
     });
 }
-
 // Função para salvar alterações do usuário
 async function saveUser() {
-    // Coletar os dados do formulário
     const userData = {
         fullname: document.getElementById('userName').value,
         phone_number: document.getElementById('userPhone-number').value,
@@ -78,9 +72,22 @@ async function saveUser() {
         complement: document.getElementById('userAddress').value,
     };
 
-    // Obter o arquivo de imagem selecionado
     const imageFile = document.getElementById('uploadPhoto').files[0];
     if (imageFile) {
+        // Verificar o tipo da imagem
+        const allowedTypes = ['image/jpeg', 'image/png'];
+        if (!allowedTypes.includes(imageFile.type)) {
+            alert('Formato de imagem inválido. Apenas arquivos PNG e JPEG são permitidos.');
+            return;
+        }
+
+        // Verificar o tamanho da imagem
+        const maxSize = 16 * 1024 * 1024; // 16 MB
+        if (imageFile.size > maxSize) {
+            alert('A imagem é muito grande. O tamanho máximo permitido é de 16MB.');
+            return;
+        }
+
         try {
             const base64Image = await convertImageToBase64(imageFile);
             userData.profile_image = base64Image;
@@ -98,9 +105,8 @@ async function saveUser() {
                 'Content-Type': 'application/json'
             },
             body: JSON.stringify(userData)
-            
         });
-        console.log(userData);
+        
         if (!response.ok) {
             throw new Error('Network response was not ok');
         }

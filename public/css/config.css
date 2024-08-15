@@ -120,6 +120,7 @@ body {
     background-color: #007bff;
     color: white;
     border-radius: 4px;
+    display: inline;
 }
 
 .forms-config-user {
@@ -216,3 +217,48 @@ body {
     color: white;
     border-radius: 4px;
 }
+
+/**********************
+Estilização das configurações do Sistema*/
+
+.container-system {
+    max-width: 900px;
+    margin: 0 auto;
+    padding: 20px;
+    background: #fff;
+    border-radius: 8px;
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+}
+
+.container-system h1 {
+    border-bottom: 2px solid #eee;
+    padding-bottom: 10px;
+    margin-bottom: 20px;
+    font-size: 24px; 
+ }
+
+ .config-section {
+    margin-bottom: 20px;
+}
+
+.config-section h2 {
+    font-size: 20px;
+    margin-bottom: 10px;
+}
+
+.config-section label {
+    display: block;
+    margin-bottom: 10px;
+}
+
+.config-section input[type="checkbox"] {
+    margin-right: 10px;
+}
+
+.config-section select, input[type="text"] {
+    margin-top: 5px;
+    padding: 5px;
+    width: 100%;
+    box-sizing: border-box;
+}
+ 

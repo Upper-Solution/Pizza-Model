@@ -36,26 +36,29 @@ try {
         throw new Exception('Campos obrigatórios não preenchidos.');
     }
 
-    // Prepare a consulta SQL para atualizar os dados do usuário
+    // Inicializa a consulta SQL
     $sql = "UPDATE users SET 
                 fullname = :fullname, 
-                email = :email,
                 cep = :cep,
                 address = :address,
                 house_number = :house_number,
                 phone_number = :phone_number,
                 city = :city,
                 neighborhood = :neighborhood,
-                complement = :complement,
-                profile_image = :profile_image
-            WHERE id = :id";
+                complement = :complement";
+
+    // Adiciona a cláusula para a imagem de perfil se ela for fornecida
+    if (isset($data['profile_image']) && !empty($data['profile_image'])) {
+        $sql .= ", profile_image = :profile_image";
+    }
+
+    $sql .= " WHERE id = :id";
 
     $stmt = $pdo->prepare($sql);
 
     // Vincule os parâmetros
     $stmt->bindParam(':id', $userId); // Use o ID do usuário logado
     $stmt->bindParam(':fullname', $data['fullname']);
-    $stmt->bindParam(':email', $data['email']);
     $stmt->bindParam(':cep', $data['cep']);
     $stmt->bindParam(':address', $data['address']);
     $stmt->bindParam(':house_number', $data['house_number']);
@@ -64,14 +67,10 @@ try {
     $stmt->bindParam(':neighborhood', $data['neighborhood']);
     $stmt->bindParam(':complement', $data['complement']);
     
-    // Perfil de imagem é opcional
+    // Somente vincule o parâmetro profile_image se ele estiver presente
     if (isset($data['profile_image']) && !empty($data['profile_image'])) {
         $stmt->bindParam(':profile_image', $data['profile_image'], PDO::PARAM_LOB);
-    } else {
-        $stmt->bindValue(':profile_image', null, PDO::PARAM_NULL);
     }
-    
-
 
     // Execute a consulta
     if ($stmt->execute()) {
