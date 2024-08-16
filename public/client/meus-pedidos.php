@@ -37,12 +37,13 @@ try {
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <link rel="stylesheet" href="../css/meus-pedidos.css">
+    <link rel="stylesheet" href="../css/nav.css">
     <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;700&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css"> <!-- Link para Font Awesome -->
     <title>Meus Pedidos</title>
 </head>
 <body>
-
+    <div class="container">
     <header class="header">
         <?php include '../../includes/nav.php'; ?>
     </header>
@@ -68,6 +69,7 @@ try {
             <button type="submit">Enviar</button>
         </form>
     </div>
+</div>
 </div>
 
 <script>

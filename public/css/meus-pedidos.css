@@ -1,6 +1,5 @@
 /* Reset de margens e paddings */
 * {
-    box-sizing: border-box;
     margin: 0;
     padding: 0;
 }
@@ -8,85 +7,10 @@
 body {
     font-family: 'Montserrat', sans-serif;
     background-color: #f8f8f8;
-    margin: 0;
-    padding: 0;
 }
 
-.header {
-    height: 75px;
-    background: #fff;
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    position: fixed;
-    top: 0;
-    left: 0;
-    right: 0;
-    z-index: 99;
-    box-shadow: 0 3px 10px rgba(0, 0, 0, 0.1);
-}
-
-.menu-area {
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
+.container{
     width: 100%;
-    max-width: 1300px;
-    background: #fff;
-    padding: 0 20px;
-}
-
-.menu-area a {
-    color: black;
-    text-decoration: none;
-    margin: 0 15px;
-}
-
-.menu-area ul {
-    list-style-type: none;
-    margin: 0;
-    padding: 0;
-    display: flex;
-    align-items: center;
-}
-
-.menu-area .logo img {
-    height: 50px;
-}
-
-.menu-area nav {
-    display: flex;
-    align-items: center;
-}
-
-.menu-area .profile-icon {
-    border-radius: 50%;
-    height: 30px;
-    width: 30px;
-}
-
-.menu_hamburger {
-    display: none;
-    align-items: center;
-    justify-content: center;
-    padding: 15px;
-    cursor: pointer;
-}
-
-.menuMobile-area {
-    display: none;
-}
-
-.container-menu-mobile {
-    display: none;
-    line-height: 46px;
-    cursor: pointer;
-}
-
-.menu-openner span,
-.fa-cart-shopping {
-    color: #fab427;
-    font-size: 1.2rem;
 }
 
 .content {
@@ -322,31 +246,3 @@ h1 {
     background-color: #45a049;
 }
 
-/* Responsividade */
-@media (max-width: 768px) {
-    .menu_hamburger {
-        display: flex;
-    }
-
-    .menu-area {
-        flex-direction: column;
-        align-items: flex-start;
-    }
-
-    .menu-area ul {
-        flex-direction: column;
-        display: none; /* Para menu hambúrguer */
-    }
-
-    .menuMobile-area {
-        display: block;
-    }
-
-    .container-menu-mobile {
-        display: block;
-    }
-
-    .content {
-        margin-top: 80px; /* Ajuste para a altura do header fixo em telas menores */
-    }
-}
