@@ -37,7 +37,15 @@
 }
 
 .menu_hamburger {
-    display: inline-flex
+    display: inline-flex;
+    align-items: center; /* Alinha o botão verticalmente ao centro */
+    justify-content: center; /* Alinha o botão horizontalmente ao centro */
+    height: 100%; /* Garante que o botão ocupe toda a altura da div */
+    margin-left: 20px;
+}
+
+.menu_hamburger input{
+    display: none;
 }
 
 .line {
@@ -199,6 +207,11 @@
 Revisar*/
 /* Responsividade para telas menores */
 @media (max-width: 768px) {
+    .menu-area{
+        padding-left: 50px;
+        padding-right: 50px;
+    }
+
     .menu ul {
         padding: 0; /* Remove o padding da lista em telas menores */
     }
