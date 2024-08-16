@@ -51,8 +51,6 @@ $pdo = null;
     <link rel="stylesheet" href="../css/nav.css">
     <link rel="stylesheet" href="../css/config-darkMode.css">
     <link rel="stylesheet" href="../css/nav-darkMode.css">
-
-
 </head>
 
 <body>

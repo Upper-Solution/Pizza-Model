@@ -2,7 +2,7 @@
 .menu-lateral {
     position: fixed;
     top: 0;
-    right: -250px; /* Inicialmente oculta o menu fora da tela */
+    right: -450px; /* Inicialmente oculta o menu fora da tela */
     width: 250px;
     height: 100%;
     background-color: #fff;

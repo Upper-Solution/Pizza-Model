@@ -68,9 +68,6 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
 
 // Fechar conexão
 $pdo = null;
-
-// Inclua nav.php após a conexão ser estabelecida
-include '../../includes/nav.php';
 ?>
 
 <!DOCTYPE html>
@@ -87,7 +84,11 @@ include '../../includes/nav.php';
     <title>Login - Pizzaria</title>
 </head>
 <body>
+<header class="header">
+        <?php include '../../includes/nav.php'; ?>
+    </header>
     <div class="container">
+
         <div class="form-container">
             <h1 class="form-title">Login</h1>
             <form method="POST" action="login.php">
