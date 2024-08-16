@@ -48,7 +48,7 @@ body {
 
 .area-flex-img {
     margin-right: 110px;
-    width: 30%;
+    width: 35%;
     align-self: flex-start; /* Alinha a imagem com o início da config-area */
 }
 

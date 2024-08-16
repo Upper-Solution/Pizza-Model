@@ -67,12 +67,12 @@ $pdo = null;
 
                     <div class="block user-settings" data-url="./config-user.php">
                         <div class="content">
-                            <h3>Configurações de Usuário</h3>
+                            <h3>Perfil do Usuário</h3>
                         </div>
                     </div>
                     <div class="block system-settings" data-url="./config-system.php">
                         <div class="content">
-                            <h3>Configurações do Sistema</h3>
+                            <h3>Sobre o Sistema</h3>
                         </div>
                     </div>
                 </div>

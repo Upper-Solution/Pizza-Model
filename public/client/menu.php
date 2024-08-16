@@ -80,6 +80,7 @@ $pdo = null;
                         <button class="cart--item-qtmais">+</button>
                     </div>
                     <br>
+                    <hr>
 
                     <div class="cart--obs">
                         <p></p>
@@ -96,19 +97,15 @@ $pdo = null;
                     <div class="menu-closer">
                         <i class="fa-solid fa-arrow-left"></i>
                     </div>
-                    <h1>Suas Pizzas</h1>
+                    <h1>Seu Pedidos</h1>
                     <div class="cart"></div>
                     <div class="cart--details">
                         <div class="cart--totalitem pizzasValor">
-                            <span>Pizzas</span>
+                            <span>Carrinho</span>
                             <span>R$ --</span>
                         </div>
                         <div class="cart--totalitem entrega">
                             <span>Taxa de entrega</span>
-                            <span>R$ --</span>
-                        </div>
-                        <div class="cart--totalitem subtotal">
-                            <span>Subtotal</span>
                             <span>R$ --</span>
                         </div>
                         <div class="cart--totalitem desconto">

@@ -155,10 +155,6 @@ function updateCart() {
       style: "currency",
       currency: "BRL",
     })}`;
-    document.querySelector(".subtotal span:last-child").innerHTML = `${subtotal.toLocaleString("pt-br", {
-      style: "currency",
-      currency: "BRL",
-    })}`;
     document.querySelector(".desconto span:last-child").innerHTML = `${desconto.toLocaleString("pt-br", {
       style: "currency",
       currency: "BRL",
