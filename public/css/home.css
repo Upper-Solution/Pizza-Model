@@ -180,7 +180,7 @@ body {
   display: flex;
   justify-content: center;
   flex-direction: column;
-  width: 55%;
+  width: 65%;
 }
 
 .left-area {
@@ -400,16 +400,17 @@ footer a:hover::after {
   }
 
   .left-home {
-    align-items: center;
+    margin-top: -3rem;
     width: 100%;
+    height: 75%;
   }
 
   .left-area {
-    width: 55%;
+    width: 100%;
   }
 
   .left-text1 {
-    font-size: 2rem;
+    font-size: 2.3rem;
   }
 
   .left-text2 {
@@ -418,7 +419,7 @@ footer a:hover::after {
 
   .left-text3 {
     margin: 15px 0;
-    font-size: 0.65rem;
+    font-size: 1rem;
   }
 
   .button {
@@ -432,43 +433,11 @@ footer a:hover::after {
   .right-image {
     display: flex;
     justify-content: center;
-    max-width: 75%;
+    max-width: 100%;
+    margin-top: 3rem;
   }
 
   .right-image img {
-    width: 75%;
-  }
-}
-
-@media (max-width: 752px) {
-  .home-area {
-    justify-content: flex-end;
-  }
-}
-
-@media (max-width: 580px) {
-  .left-area {
-    width: 60%;
-  }
-
-  .left-text1 {
-    font-size: 1.5rem;
-  }
-
-  .left-text2 {
-    font-size: 1.2rem;
-  }
-
-  .left-text3 {
-    margin: 10px 0;
-    font-size: 0.65rem;
-  }
-
-  .button {
-    width: 55%;
-  }
-
-  .right-image {
-    max-width: 65%;
+    width: 100%;
   }
 }
