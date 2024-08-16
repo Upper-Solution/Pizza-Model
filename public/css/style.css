@@ -1001,8 +1001,6 @@ footer a:hover::after {
         flex-direction: row; /* Alinha imagem e textos horizontalmente */
         align-items: flex-start; /* Alinha itens ao topo */
         background: #fff;
-        margin: 15px 0;
-        padding: 10px;
         box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1); /* Adiciona uma leve sombra */
         width: 100%; /* Garante que a largura seja responsiva */
         max-width: 350px;
