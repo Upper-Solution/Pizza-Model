@@ -68,7 +68,7 @@ if ($loggedIn) {
     <div class="menu-area">
         <div class="logo">
             <a href="../client/index.php">
-                <img src="../imagens/logo_pizza.png" alt="logo_pizza.png">
+                <img src="../imagens/logo.png" alt="logo.png">
             </a>
         </div>
         <nav>
