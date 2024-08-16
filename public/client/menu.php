@@ -95,16 +95,6 @@ $pdo = null;
                 <div class="cart--area">
                     <div class="menu-closer">
                         <i class="fa-solid fa-arrow-left"></i>
-                        <?php if ($loggedIn) { ?>
-                            <div class="avatar-container">
-                                <img src="path_to_avatar_image.jpg" alt="Avatar do Usuário">
-                            </div>
-                        <?php } else { ?>
-                            <div class="avatar-container avatar-empty"></div>
-                        <?php } ?>
-                        <button id="loginButton" class="login-button">
-                            <?php echo $loggedIn ? 'Logout' : 'Login'; ?>
-                        </button>
                     </div>
                     <h1>Suas Pizzas</h1>
                     <div class="cart"></div>
