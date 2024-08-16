@@ -81,174 +81,179 @@ $pdo = null;
     </div>
 
     <script>
-        function updateClockInCards() {
-            const clocks = document.querySelectorAll('.clock');
-            clocks.forEach(clock => {
-                const orderDate = new Date(clock.dataset.orderDate);
-                const now = new Date();
-                const elapsed = now - orderDate; // tempo decorrido em milissegundos
+        // Função para atualizar o relógio nos cartões de pedidos
+function updateClockInCards() {
+    const clocks = document.querySelectorAll('.clock');
+    clocks.forEach(clock => {
+        const orderDate = new Date(clock.dataset.orderDate);
+        const now = new Date();
+        const elapsed = now - orderDate; // tempo decorrido em milissegundos
 
-                // Converte milissegundos em horas, minutos e segundos
-                const seconds = Math.floor(elapsed / 1000);
-                const minutes = Math.floor(seconds / 60);
-                const hours = Math.floor(minutes / 60);
+        // Converte milissegundos em horas, minutos e segundos
+        const seconds = Math.floor(elapsed / 1000);
+        const minutes = Math.floor(seconds / 60);
+        const hours = Math.floor(minutes / 60);
 
-                clock.textContent = `${hours}h ${minutes % 60}m ${seconds % 60}s`;
+        clock.textContent = `${hours}h ${minutes % 60}m ${seconds % 60}s`;
+    });
+}
+
+// Função para buscar pedidos e atualizar a lista
+function fetchOrders() {
+    var xhr = new XMLHttpRequest();
+    xhr.open('GET', 'fetch-orders.php', true);
+    xhr.onload = function() {
+        if (xhr.status === 200) {
+            var orders = JSON.parse(xhr.responseText);
+            updateOrderLists(orders);
+        }
+    };
+    xhr.send();
+}
+
+// Função para atualizar as listas de pedidos
+function updateOrderLists(orders) {
+    var recebidoList = document.getElementById('recebido-list');
+    var preparandoList = document.getElementById('preparando-list');
+    var entregaList = document.getElementById('entrega-list');
+
+    recebidoList.innerHTML = '';
+    preparandoList.innerHTML = '';
+    entregaList.innerHTML = '';
+
+    var groupedOrders = {};
+
+    orders.forEach(function(order) {
+        var key = order.order_date + '-' + order.customer_email;
+
+        if (!groupedOrders[key]) {
+            groupedOrders[key] = [];
+        }
+
+        groupedOrders[key].push(order);
+    });
+
+    for (var key in groupedOrders) {
+        if (groupedOrders.hasOwnProperty(key)) {
+            var orderGroup = groupedOrders[key];
+
+            var itemsDetails = '';
+            orderGroup.forEach(function(order) {
+                itemsDetails += "<div class='order-item'>Item: " + order.items + "</div>";
             });
-        }
 
-        // Atualiza o cronômetro a cada segundo
-        setInterval(updateClockInCards, 1000);
-        updateClockInCards(); // Atualiza imediatamente ao carregar a página
+            var listItem = "<li class='card' data-id='" + orderGroup[0].order_id + "' data-order-date='" + orderGroup[0].order_date + "' onclick='showDetails(" + orderGroup[0].order_id + ")'>" +
+                            "<div class='order-id-container'>" +
+                                "<div class='order-id'>Pedido #" + orderGroup[0].order_id + "</div>" +
+                                "<div class='clock' data-order-date='" + orderGroup[0].order_date + "'>00:00</div>" + // Adicione o valor inicial do cronômetro se necessário
+                            "</div>" +
+                            "<div class='order-name'>Cliente: " + orderGroup[0].customer_name + "</div>" +
+                            itemsDetails +
+                            "<div class='order-observation'>Observação: " + (orderGroup[0].observation || "Nenhuma") + "</div>" +
+                            "<div class='buttons-container'>";
 
-        function fetchOrders() {
-            var xhr = new XMLHttpRequest();
-            xhr.open('GET', 'fetch-orders.php', true);
-            xhr.onload = function() {
-                if (xhr.status === 200) {
-                    var orders = JSON.parse(xhr.responseText);
-                    updateOrderLists(orders);
-                }
-            };
-            xhr.send();
-        }
-
-        function updateOrderLists(orders) {
-            var recebidoList = document.getElementById('recebido-list');
-            var preparandoList = document.getElementById('preparando-list');
-            var entregaList = document.getElementById('entrega-list');
-
-            recebidoList.innerHTML = '';
-            preparandoList.innerHTML = '';
-            entregaList.innerHTML = '';
-
-            var groupedOrders = {};
-
-            orders.forEach(function(order) {
-                var key = order.order_date + '-' + order.customer_email;
-
-                if (!groupedOrders[key]) {
-                    groupedOrders[key] = [];
-                }
-
-                groupedOrders[key].push(order);
-            });
-
-            for (var key in groupedOrders) {
-                if (groupedOrders.hasOwnProperty(key)) {
-                    var orderGroup = groupedOrders[key];
-
-                    var itemsDetails = '';
-                    orderGroup.forEach(function(order) {
-                        itemsDetails += "<div class='order-item'>Item: " + order.items + "</div>";
-                    });
-
-                    var listItem = "<li class='card' data-id='" + orderGroup[0].order_id + "' data-order-date='" + orderGroup[0].order_date + "' onclick='showDetails(" + orderGroup[0].order_id + ")'>" +
-                                    "<div class='order-id-container'>" +
-                                        "<div class='order-id'>Pedido #" + orderGroup[0].order_id + "</div>" +
-                                        "<div class='clock' data-order-date='" + orderGroup[0].order_date + "'>00:00</div>" + // Adicione o valor inicial do cronômetro se necessário
-                                    "</div>" +
-                                    "<div class='order-name'>Cliente: " + orderGroup[0].customer_name + "</div>" +
-                                    itemsDetails +
-                                    "<div class='order-observation'>Observação: " + (orderGroup[0].observation || "Nenhuma") + "</div>" +
-                                    "<div class='buttons-container'>";
-
-                                if (orderGroup[0].status === 'Recebido') {
-                                    listItem += "<button onclick='moveToPreparing(" + orderGroup[0].order_id + ")' class='status-button'>Preparar</button>";
-                                } else if (orderGroup[0].status === 'Preparando') {
-                                    listItem += "<button onclick='moveToDelivery(" + orderGroup[0].order_id + ")' class='status-button'>Entregar</button>";
-                                }
-
-                                if (orderGroup[0].status === 'Recebido') {
-                                    listItem += "<button onclick='confirmRejectOrder(" + orderGroup[0].order_id + ")' class='reject-button'>Recusar</button>";
-                                } else if (orderGroup[0].status === 'Saiu para Entrega') {
-                                    listItem += "<button onclick='confirmMarkAsDelivered(" + orderGroup[0].order_id + ")' class='deliver-button'>Finalizar Pedido</button>";
-                                }
-
-                                listItem += "</div></li>";
-
-
-                    if (orderGroup[0].status === 'Recebido') {
-                        recebidoList.innerHTML += listItem;
-                    } else if (orderGroup[0].status === 'Preparando') {
-                        preparandoList.innerHTML += listItem;
-                    } else if (orderGroup[0].status === 'Saiu para Entrega') {
-                        entregaList.innerHTML += listItem;
-                    }
-                }
-            }
-
-            initializeSortable();
-        }
-
-        function initializeSortable() {
-            var sortableLists = document.querySelectorAll('.sortable');
-
-            sortableLists.forEach(function(list) {
-                Sortable.create(list, {
-                    group: 'shared',
-                    animation: 150,
-                    onStart: function(evt) {
-                        evt.item.classList.add('dragging');
-                    },
-                    onEnd: function(evt) {
-                        evt.item.classList.remove('dragging');
-                        
-                        var itemId = evt.item.dataset.id;
-                        var newStatus = evt.to.parentNode.dataset.status;
-                        
-                        var xhr = new XMLHttpRequest();
-                        xhr.open('POST', 'update-status.php', true);
-                        xhr.setRequestHeader('Content-Type', 'application/x-www-form-urlencoded');
-                        xhr.send('id=' + encodeURIComponent(itemId) + '&status=' + encodeURIComponent(newStatus));
-                        
-                        xhr.onload = function() {
-                            if (xhr.status === 200) {
-                                fetchOrders(); // Recarrega os pedidos para garantir que os dados estão atualizados
-                            } else {
-                                console.error('Falha ao atualizar status: ' + xhr.statusText);
+                            if (orderGroup[0].status === 'Recebido') {
+                                listItem += "<button onclick='moveToPreparing(" + orderGroup[0].order_id + ")' class='status-button'>Preparar</button>";
+                            } else if (orderGroup[0].status === 'Preparando') {
+                                listItem += "<button onclick='moveToDelivery(" + orderGroup[0].order_id + ")' class='status-button'>Entregar</button>";
                             }
-                        };
+
+                            if (orderGroup[0].status === 'Recebido') {
+                                listItem += "<button onclick='confirmRejectOrder(" + orderGroup[0].order_id + ")' class='reject-button'>Recusar</button>";
+                            } else if (orderGroup[0].status === 'Saiu para Entrega') {
+                                listItem += "<button onclick='confirmMarkAsDelivered(" + orderGroup[0].order_id + ")' class='deliver-button'>Finalizar Pedido</button>";
+                            }
+
+                            listItem += "</div></li>";
+
+            if (orderGroup[0].status === 'Recebido') {
+                recebidoList.innerHTML += listItem;
+            } else if (orderGroup[0].status === 'Preparando') {
+                preparandoList.innerHTML += listItem;
+            } else if (orderGroup[0].status === 'Saiu para Entrega') {
+                entregaList.innerHTML += listItem;
+            }
+        }
+    }
+
+    initializeSortable();
+}
+
+// Função para inicializar a funcionalidade de arrastar e soltar
+function initializeSortable() {
+    var sortableLists = document.querySelectorAll('.sortable');
+
+    sortableLists.forEach(function(list) {
+        Sortable.create(list, {
+            group: 'shared',
+            animation: 150,
+            onStart: function(evt) {
+                evt.item.classList.add('dragging');
+            },
+            onEnd: function(evt) {
+                evt.item.classList.remove('dragging');
+                
+                var itemId = evt.item.dataset.id;
+                var newStatus = evt.to.parentNode.dataset.status;
+                
+                var xhr = new XMLHttpRequest();
+                xhr.open('POST', 'update-status.php', true);
+                xhr.setRequestHeader('Content-Type', 'application/x-www-form-urlencoded');
+                xhr.send('id=' + encodeURIComponent(itemId) + '&status=' + encodeURIComponent(newStatus));
+                
+                xhr.onload = function() {
+                    if (xhr.status === 200) {
+                        fetchOrders(); // Recarrega os pedidos para garantir que os dados estão atualizados
+                    } else {
+                        console.error('Falha ao atualizar status: ' + xhr.statusText);
                     }
-                });
-            });
-        }
-
-        function moveToPreparing(orderId) {
-            updateOrderStatus(orderId, 'Preparando');
-        }
-
-        function moveToDelivery(orderId) {
-            updateOrderStatus(orderId, 'Saiu para Entrega');
-        }
-
-        function updateOrderStatus(orderId, newStatus) {
-            var xhr = new XMLHttpRequest();
-            xhr.open('POST', 'update-status.php', true);
-            xhr.setRequestHeader('Content-Type', 'application/x-www-form-urlencoded');
-            xhr.send('id=' + encodeURIComponent(orderId) + '&status=' + encodeURIComponent(newStatus));
-            xhr.onload = function() {
-                if (xhr.status === 200) {
-                    fetchOrders(); // Recarrega os pedidos para refletir as mudanças
-                } else {
-                    console.error('Falha ao atualizar status: ' + xhr.statusText);
-                }
-            };
-        }
-
-        function confirmRejectOrder(orderId) {
-            if (confirm('Tem certeza de que deseja recusar este pedido?')) {
-                updateOrderStatus(orderId, 'Recusado');
+                };
             }
-        }
+        });
+    });
+}
 
-        function confirmMarkAsDelivered(orderId) {
-            if (confirm('Tem certeza de que deseja marcar este pedido como entregue?')) {
-                updateOrderStatus(orderId, 'Entregue');
-            }
-        }
+// Função para mover pedido para preparando
+function moveToPreparing(orderId) {
+    updateOrderStatus(orderId, 'Preparando');
+}
 
-        function showDetails(orderId) {
+// Função para mover pedido para entrega
+function moveToDelivery(orderId) {
+    updateOrderStatus(orderId, 'Saiu para Entrega');
+}
+
+// Função para atualizar status do pedido
+function updateOrderStatus(orderId, newStatus) {
+    var xhr = new XMLHttpRequest();
+    xhr.open('POST', 'update-status.php', true);
+    xhr.setRequestHeader('Content-Type', 'application/x-www-form-urlencoded');
+    xhr.send('id=' + encodeURIComponent(orderId) + '&status=' + encodeURIComponent(newStatus));
+    xhr.onload = function() {
+        if (xhr.status === 200) {
+            fetchOrders(); // Recarrega os pedidos para refletir as mudanças
+        } else {
+            console.error('Falha ao atualizar status: ' + xhr.statusText);
+        }
+    };
+}
+
+// Função para confirmar a recusa do pedido
+function confirmRejectOrder(orderId) {
+    if (confirm('Tem certeza de que deseja recusar este pedido?')) {
+        updateOrderStatus(orderId, 'Recusado');
+    }
+}
+
+// Função para confirmar a finalização do pedido
+function confirmMarkAsDelivered(orderId) {
+    if (confirm('Tem certeza de que deseja marcar este pedido como entregue?')) {
+        updateOrderStatus(orderId, 'Entregue');
+    }
+}
+
+// Função para exibir detalhes do pedido
+function showDetails(orderId) {
     console.log('Exibindo detalhes para o pedido:', orderId);
     var xhr = new XMLHttpRequest();
     xhr.open('GET', 'get-order-details.php?id=' + encodeURIComponent(orderId), true);
@@ -284,32 +289,30 @@ $pdo = null;
                                     <hr>
                                 `;
                             }).join('')}
-                            <h3>Total Geral</h3>
-                            <p><strong>Total Quantidade:</strong> ${orderDetails.total_quantity}</p>
-                            <p><strong>Total Preço:</strong> R$${orderDetails.total_price.toFixed(2).replace('.', ',')}</p>
                         </div>
                     </div>
                 `;
-
-                document.getElementById('orderModal').style.display = 'block';
             } catch (e) {
-                console.error('Erro ao analisar JSON:', e);
+                console.error('Erro ao processar os detalhes do pedido:', e);
             }
-        } else {
-            console.error('Falha ao carregar detalhes do pedido:', xhr.statusText);
         }
     };
     xhr.send();
 }
 
+// Inicializa a busca de pedidos e a atualização periódica
+function initialize() {
+    fetchOrders(); // Busca inicial dos pedidos
 
+    // Atualiza os pedidos a cada 30 segundos
+    setInterval(fetchOrders, 30000);
 
-function closeModal() {
-    document.getElementById('orderModal').style.display = 'none';
+    // Atualiza o relógio a cada segundo
+    setInterval(updateClockInCards, 1000);
 }
 
+initialize();
 
-        fetchOrders(); // Carrega os pedidos ao iniciar a página
     </script>
 </body>
 </html>
