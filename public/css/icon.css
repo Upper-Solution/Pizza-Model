@@ -1,202 +1,103 @@
-/* Estilos gerais do menu */
-.menu-area {
-    position: relative;
-}
-
+/* Estilo para os itens da lista no menu */
 .menu ul {
-    list-style: none;
-    padding: 0;
-    margin: 0;
+    list-style: none; /* Remove os marcadores da lista */
+    padding: 0; /* Remove o padding padrão */
+    margin: 0; /* Remove a margem padrão */
 }
 
 .menu ul li {
-    position: relative;
-    margin-bottom: 5px;
+    position: relative; /* Para posicionar o menu suspenso corretamente */
+    margin-bottom: 5px; /* Espaço entre os itens do menu */
 }
 
+/* Adiciona margem superior aos itens de menu, exceto o ícone de login */
 .menu ul li:not(#loginItem) {
-    margin-top: 20px;
+    margin-top: 20px; /* Adiciona 20px de espaço acima dos itens de menu */
 }
 
+/* Estilo específico para o ícone de login */
 #loginItem {
-    margin-top: 10px;
-    border-bottom: 1px solid #ddd; /* Linha fraca abaixo do item de login */
-    padding-bottom: 10px; /* Espaço abaixo da linha */
+    margin-bottom: 0; /* Remove o espaçamento inferior do item de login */
+    margin-top: 10px; /* Adiciona espaçamento superior ao item de login */
 }
 
+/* Estilo para o link do ícone de login */
 .login-link {
     display: flex;
-    align-items: center;
-    text-decoration: none;
-    justify-content: flex-end; /* Alinha o conteúdo ao final (direita) */
-    color: #333;
+    align-items: center; /* Centraliza o conteúdo verticalmente */
+    text-decoration: none; /* Remove o sublinhado dos links */
 }
 
+/* Estilo para o ícone de login */
 .login-icon {
-    width: 40px;
-    height: 40px;
+    width: 40px; /* Tamanho do ícone de login */
+    height: 40px; /* Tamanho do ícone de login */
     display: flex;
     align-items: center;
-    justify-content: center;
+    justify-content: center; /* Centraliza o conteúdo dentro do ícone */
 }
 
+/* Estilo para a imagem de perfil */
 .profile-icon {
-    width: 100%;
-    height: 100%;
-    border-radius: 50%;
-    object-fit: cover;
-    border: 2px solid #fff;
-    box-shadow: 0 0 5px rgba(0, 0, 0, 0.2);
+    width: 100%; /* Ajusta a largura da imagem para ocupar todo o ícone */
+    height: 100%; /* Ajusta a altura da imagem para ocupar todo o ícone */
+    border-radius: 50%; /* Faz a imagem ser circular */
+    object-fit: cover; /* Ajusta o tamanho da imagem para cobrir o ícone */
+    border: 2px solid #fff; /* Borda branca ao redor da imagem */
+    box-shadow: 0 0 5px rgba(0, 0, 0, 0.2); /* Sombra ao redor da imagem */
 }
 
+/* Estilo para o ícone de login quando não está logado */
 .login-icon i {
-    font-size: 24px;
-    color: #333;
+    font-size: 24px; /* Tamanho do ícone */
+    color: #333; /* Cor do ícone */
 }
 
-.login-text {
-    margin-left: 10px;
-    font-size: 18px;
-}
-.menu-lateral ul li a {
-    color: #333; /* Ajuste a cor do texto */
-    text-decoration: none;
-    font-size: 18px;
-    display: flex;
-    align-items: center; /* Alinha verticalmente o texto e o ícone */
-}
-
-.menu-lateral ul li a:hover {
-    color: rgb(255, 166, 0); /* Cor de hover */
-}
-
-/* Estilo do menu lateral */
-.menu-lateral {
-    position: fixed;
-    top: 0;
-    right: -250px; /* Inicialmente oculta o menu fora da tela */
-    width: 250px;
-    height: 100%;
-    background-color: #fff;
-    box-shadow: -2px 0 5px rgba(0, 0, 0, 0.5); /* Sombra para a esquerda */
-    transition: right 0.3s ease; /* Transição para a direita */
-    z-index: 2000;
-    overflow-y: auto;
-    padding-top: 30px; /* Espaço no topo para a seta de fechamento */
-    padding-right: 20px; /* Espaço à direita dos itens */
-}
-
-.menu-lateral.open {
-    right: 0; /* Mostra o menu quando a classe .open é adicionada */
-}
-
-.menu-lateral ul {
-    padding: 0; /* Remove padding padrão */
-    list-style: none;
-    margin: 0; /* Remove margem padrão */
-    text-align: right; /* Alinha os itens à direita */
-}
-
-.menu-lateral ul li {
-    margin-bottom: 15px;
-    display: flex; /* Alinha o conteúdo do menu */
-    align-items: center; /* Alinha verticalmente os itens */
-    justify-content: flex-end; /* Alinha os itens à direita */
-}
-
-.menu-lateral ul li a {
-    color: #333;
-    text-decoration: none;
-    font-size: 18px;
-    display: flex;
-    align-items: center; /* Alinha verticalmente o texto e o ícone */
-}
-
-/* Estilo para o item do perfil do usuário */
-.user-profile {
-    display: flex;
-    align-items: center;
-    margin-bottom: 20px;
-    padding-bottom: 10px; /* Espaço abaixo da foto e do texto */
-    border-bottom: 1px solid #ddd; /* Linha fraca abaixo do perfil */
-    justify-content: flex-end; /* Alinha o perfil à direita */
-}
-
-.user-profile-img {
-    width: 40px;
-    height: 40px;
-    border-radius: 50%;
-    object-fit: cover;
-    margin-right: 10px;
-}
-
-.user-profile-text {
-    font-size: 18px;
-    color: #333;
-    margin-right: 8px;
-}
-
-/* Estilos do overlay */
-.menu-overlay {
-    position: fixed;
-    top: 0;
+/* Estilo para o menu suspenso de perfil */
+.profile-menu {
+    display: none; /* Esconde o menu suspenso por padrão */
+    position: absolute; /* Posiciona o menu suspenso relativo ao item de menu */
+    top: 100%; /* Posiciona o menu abaixo do item de menu */
     left: 0;
-    width: 100%;
-    height: 100%;
-    background-color: rgba(0, 0, 0, 0.5);
-    z-index: 1500;
-    display: none;
-    opacity: 0;
-    transition: opacity 0.3s ease;
+    background-color: #fff; /* Cor de fundo do menu */
+    border: 1px solid #ddd; /* Borda do menu */
+    box-shadow: 0 0 5px rgba(0, 0, 0, 0.2); /* Sombra ao redor do menu */
+    z-index: 1000; /* Garante que o menu fique acima de outros elementos */
 }
 
-.menu-overlay.open {
-    display: block;
-    opacity: 1;
+/* Estilo para os itens do menu suspenso */
+.profile-menu a {
+    display: block; /* Faz cada item ocupar uma linha */
+    padding: 10px; /* Espaço interno dos itens do menu */
+    color: #333; /* Cor do texto */
+    text-decoration: none; /* Remove o sublinhado dos links */
 }
 
-/* Estilo do ícone de fechamento */
-.menu-close {
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    font-size: 24px;
-    color: rgb(255, 166, 0); /* Cor da seta */
-    cursor: pointer;
-    margin: 10px;
-    position: absolute;
-    left: 10px; /* Ajuste a posição da seta conforme necessário */
+/* Estilo para o menu suspenso ao passar o mouse sobre o item de menu */
+#loginItem:hover .profile-menu {
+    display: block; /* Mostra o menu suspenso */
 }
 
-/* Responsividade para telas menores */
+/* Estilo para os itens do menu suspenso ao passar o mouse */
+.profile-menu a:hover {
+    background-color: #f0f0f0; /* Cor de fundo ao passar o mouse */
+}
+
+/* Oculta o menu lateral para dispositivos móveis */
+.menu-lateral {
+    display: none; /* Oculta o menu lateral */
+}
+
+/* Exibe o menu lateral apenas em dispositivos com telas maiores */
+@media (min-width: 769px) {
+    .menu-lateral {
+        display: block; /* Mostra o menu lateral em telas maiores */
+    }
+}
+
+/* Oculta o menu lateral para dispositivos com telas menores */
 @media (max-width: 768px) {
-    .menu ul {
-        padding: 0;
-    }
-
-    .menu ul li {
-        margin-top: 10px;
-    }
-
-    #loginItem {
-        margin-top: 5px;
-    }
-
-    .login-icon {
-        width: 30px;
-        height: 30px;
-    }
-
-    .profile-menu {
-        width: 100%;
-        position: static;
-        top: auto;
-        left: auto;
-        border: none;
-        box-shadow: none;
-    }
-
-    #loginItem:hover .profile-menu {
-        display: block;
+    .menu {
+        display: none; /* Oculta o menu de computador em telas menores */
     }
 }
