@@ -82,19 +82,23 @@
 
 /*area de observações*/
 .pizzaObservations {
+    margin: 10 auto;
+    width: 100%;
     font-size: 15px;
-    margin-top: 25px;
+    justify-content: center;
+    text-align: center;
 }
 
 .pizzaObservations textarea {
-    width: 100%;
+    width: 80%;
+    height: 85%;
     padding: 10px;
     font-size: 16px;
     border-radius: 5px;
     border: 1px solid #ccc;
     box-shadow: inset 0 1px 3px rgba(0, 0, 0, 0.1);
     transition: border-color 0.3s ease, box-shadow 0.3s ease;
-    resize: vertical;
+    resize: none;
     /* Permite o redimensionamento vertical */
 }
 
@@ -692,24 +696,27 @@ h1 {
     border-radius: 10px;
     box-shadow: 0px 10px 25px rgba(153, 153, 153, .342);
     display: flex;
-    margin: 20px 0px
+    margin: 20px 0px;
 }
 
 .pizzaWindowBody.modal {
-    padding: 10px 50px
+    padding: 10px;
 }
 
 .pizzaBig {
     flex: 1;
     display: flex;
+    flex-direction: column;
     justify-content: center;
     align-items: center
 }
 
 .pizzaBig img {
-    height: 350px;
+    padding-top: 20px;
+    height: 300px;
     width: auto;
-    border-radius: 200px
+    border-radius: 100%;
+    margin-bottom: 7px;
 }
 
 .pizzaBig--back {
@@ -717,6 +724,44 @@ h1 {
     width: 30px;
     height: 30px;
     background-color: #000
+}
+#adicionaisModal {
+    margin-top: 20px;
+    font-family: Arial, sans-serif;
+}
+
+#adicionaisModal h4 {
+    margin-bottom: 10px;
+    font-size: 16px;
+    color: #333;
+}
+
+.adicional-item {
+    margin-bottom: 8px;
+    font-size: 14px;
+    display: flex;
+    align-items: center;
+}
+
+.adicional-item input[type="checkbox"] {
+    margin-right: 8px;
+    cursor: pointer;
+    width: 18px;
+    height: 18px;
+    border-radius: 50%; /* Arredonda o checkbox */
+    border: 2px solid #fab427; /* Coloração amarelada */
+    background-color: #fff;
+    appearance: none;
+    transition: background-color 0.3s ease, border-color 0.3s ease;
+}
+
+.adicional-item input[type="checkbox"]:checked {
+    background-color: #fab427; /* Cor amarelada quando marcado */
+    border-color: #e0a225; /* Bordas levemente mais escuras quando marcado */
+}
+
+.adicional-item label {
+    cursor: pointer;
 }
 
 .pizzaInfo {
@@ -1192,7 +1237,7 @@ footer a:hover::after {
     }
 
     .pizzaWindowBody.modal {
-        padding: 25px 40px;
+        padding: 5px;
         height: 100vh;
     }
 

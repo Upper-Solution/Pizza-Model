@@ -145,7 +145,10 @@ $pdo = null;
                         <i class="fa-solid fa-arrow-left"></i>
                     </div>
                     <div class="pizzaBig">
-                        <img src="" alt="Pizza Image" />
+                        <img src="" alt="Pizza Image" /><br>
+                        <div class="pizzaObservations">
+                            <textarea id="observations" rows="4" placeholder="Observações: "></textarea>
+                        </div>
                     </div>
                     <div class="pizzaInfo">
                         <h1>--</h1>
@@ -162,9 +165,24 @@ $pdo = null;
                                 </div>
                             </div>
                         </div>
-                        <div class="pizzaObservations">
-                            <textarea id="observations" rows="4" placeholder="Escreva suas observações aqui..."></textarea>
-                        </div>
+                        <div id="adicionaisModal">
+    <h4>Adicionais:</h4>
+    <div class="adicional-item">
+        <input type="checkbox" id="bacon" name="adicional" value="bacon">
+        <label for="bacon">Bacon + R$ 3,00</label>
+    </div>
+    <div class="adicional-item">
+        <input type="checkbox" id="queijo" name="adicional" value="queijo-extra">
+        <label for="queijo">Queijo Extra + R$ 2,50</label>
+    </div>
+    <div class="adicional-item">
+        <input type="checkbox" id="ovo" name="adicional" value="ovo">
+        <label for="ovo">Ovo + R$ 1,50</label>
+    </div>
+    <!-- Mais opções de adicionais aqui -->
+</div>
+
+
                         <div class="pizzaInfo--addButton">Adicionar ao carrinho</div>
                         <div class="pizzaInfo--cancelButton">Cancelar</div>
                         
@@ -189,8 +207,7 @@ $pdo = null;
     </footer>
 
     <script src="../js/geral.js"></script>
-    <script src="../js/cart.js">
-    </script>
+    <script src="../js/cart.js"></script>
     <script>
         document.addEventListener("DOMContentLoaded", function () {
             console.log('DOM fully loaded and parsed');

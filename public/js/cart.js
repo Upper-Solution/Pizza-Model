@@ -8,7 +8,7 @@ let valorDesconto;
 let observacaoGeral;
 let formaPagamento;
 let valorTroco;
-
+let adicionais = new Array();
 
 getInfoDB();
 
@@ -16,14 +16,12 @@ getInfoDB();
 // Cria um identificador único, combinando o ID da pizza e o tamanho
 document.querySelector(".pizzaInfo--addButton").addEventListener("click", () => {
 
-  // Obtém o identificador da pizza (você pode ajustar conforme sua lógica)
+  // Obtém o identificador da pizza
   let identifier = pizzas[modalKey].id;
 
   // Captura as observações do usuário
   let observacoes;
   observacoes = document.getElementById("observations").value.trim();
-
-
 
   // Procura no carrinho se o identificador já existe
   let keyItem = cart.findIndex((item) => item.identifier == identifier);
@@ -43,6 +41,7 @@ document.querySelector(".pizzaInfo--addButton").addEventListener("click", () => 
       observacoes: observacoes,
       observacaoGeral,
       formaPagamento,
+      adicionais,
       valorTroco
     });
   }
@@ -288,4 +287,10 @@ function capturarInformacoes() {
     valorTroco = trocoInput.value;
   }
   console.log('Valor para Troco:', valorTroco);
+}
+
+function manipulaAdicionais(){
+  
+
+
 }
