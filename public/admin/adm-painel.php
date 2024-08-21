@@ -41,7 +41,7 @@ if (isset($_POST['logout'])) {
                 <p>Aqui você pode cadastrar, editar e excluir os itens do seu cardápio.</p>
             </div>
             <div class="card" onclick="window.location.href='adm-sobre.php'">
-                <h2>Sobre</h2>
+                <h2>Configurações Gerais</h2>
                 <p>Alterar as informações da página sobre.</p>
             </div>
             <div class="card" onclick="window.location.href='admin-orders.php'">
@@ -49,7 +49,7 @@ if (isset($_POST['logout'])) {
                 <p>Gerenciar os pedidos realizados pelos clientes.</p>
             </div>
             <div class="card" onclick="window.location.href='adm-clientes.php'">
-                <h2>Taxas e Descontos</h2>
+                <h2>Sistema de Pontuação</h2>
                 <p>(AINDA ESTA EM DESENVOLVIMENTO MEU COPINXA)</p>
             </div>
             <div class="card" onclick="window.location.href='adm-relatorio.php'">

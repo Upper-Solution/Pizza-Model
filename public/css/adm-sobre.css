@@ -53,6 +53,7 @@ header .back-button:hover {
     gap: 20px;
 }
 
+/* Grupo de Imagem */
 .image-group {
     display: flex;
     flex-direction: column;
@@ -75,6 +76,7 @@ header .back-button:hover {
     box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
 }
 
+/* Estilização dos inputs e textareas */
 input[type="text"],
 input[type="email"],
 input[type="url"],
@@ -102,6 +104,7 @@ textarea {
     color: #555;
 }
 
+/* Botões de Ação */
 .button {
     display: inline-block;
     background-color: #0056b3;
@@ -118,9 +121,10 @@ textarea {
 }
 
 .button:hover {
-    background-color: #0056b3;
+    background-color: #003f8a;
 }
 
+/* Mensagens de Sucesso e Erro */
 .message-container {
     margin-top: 20px;
 }
@@ -139,4 +143,101 @@ textarea {
 .message.error {
     background-color: #f8d7da;
     color: #721c24;
+}
+
+/* Estilo para o container de campos em linha */
+.inline-fields {
+    display: flex;
+    align-items: flex-end; /* Alinhar os campos e o botão na parte inferior */
+    gap: 15px; /* Espaço entre os elementos */
+    margin-bottom: 15px;
+}
+
+/* Estilo para cada grupo de campo */
+.field-group {
+    display: flex;
+    flex-direction: column;
+}
+
+/* Estilo para os inputs */
+.field-group input {
+    padding: 8px;
+    border-radius: 4px;
+    border: 1px solid #ccc;
+    font-size: 14px;
+    width: 100%; /* Ajusta a largura para ocupar todo o espaço do grupo */
+    box-sizing: border-box;
+}
+
+/* Estilo para o botão de adicionar bairro */
+.save-button {
+    padding: 8px 12px;
+    background-color: #1d5999;
+    color: white;
+    border: none;
+    border-radius: 4px;
+    cursor: pointer;
+    font-size: 14px;
+}
+
+/* Estilo para o container de tags */
+.tag-container {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 10px;
+    margin-bottom: 15px;
+    padding: 10px;
+    background-color: #f9f9f9;
+    border-radius: 8px;
+    border: 1px solid #ddd;
+}
+
+/* Estilo para cada tag individual */
+.tag {
+    display: flex;
+    align-items: center;
+    color: rgb(31, 41, 72);
+    padding: 5px 10px;
+    border-radius: 6px;
+    font-size: 14px;
+    font-weight: 500;
+    border: 2px solid rgb(31, 41, 72); /* Adiciona uma borda azul */
+}
+
+
+/* Nome do bairro na tag */
+.tag-name {
+    margin-right: 8px;
+}
+
+
+/* Botão de remover tag */
+.remove-tag {
+    color: rgb(196, 34, 34);
+    border-radius: 50%;
+    cursor: pointer;
+    font-size: 16px;
+    margin-left: 8px;
+}
+
+/* Estilo para as mensagens de sucesso e erro */
+.success-message, .error-message {
+    padding: 10px;
+    margin-top: 10px;
+    border-radius: 5px;
+    font-size: 14px;
+    font-weight: 500;
+    text-align: center;
+}
+
+/* Estilo específico para a mensagem de sucesso */
+.success-message {
+    background-color: #28a745;
+    color: white;
+}
+
+/* Estilo específico para a mensagem de erro */
+.error-message {
+    background-color: #dc3545;
+    color: white;
 }
