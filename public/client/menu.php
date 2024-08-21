@@ -40,6 +40,7 @@ $pdo = null;
 ?>
 <!DOCTYPE html>
 <html lang="pt-BR">
+
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -50,6 +51,7 @@ $pdo = null;
     <link href="https://fonts.googleapis.com/css?family=Hepta+Slab:400,700|Lato:400,700&display=swap" rel="stylesheet">
     <title>Cardápio</title>
 </head>
+
 <body>
     <div class="loader-content">
         <div class="loader-circle"></div>
@@ -64,7 +66,7 @@ $pdo = null;
             <div class="models">
                 <div class="pizza-item">
                     <a href="">
-                        <div class="pizza-item--img"><img/></div>
+                        <div class="pizza-item--img"><img /></div>
                         <div class="pizza-item--add">+</div>
                         <div class="pizza-item--price">R$ --</div>
                         <div class="pizza-item--name">--</div>
@@ -116,28 +118,28 @@ $pdo = null;
                             <span>Total</span>
                             <span>R$ --</span>
                         </div>
-                        
-                        <div class="observacoesGerais">
-                        <label for="observacoesGerais">Observações Gerais:</label>
-                        <textarea id="observacoesGerais" rows="4" placeholder="Escreva suas observações aqui..."></textarea>
-                        <div class="formaPagamento">
-                        <label for="formaPagamento">Forma de Pagamento:</label>
-                        <select id="formaPagamento" name="formaPagamento">
-                            <option value="cartao">Cartão</option>
-                            <option value="pix">Pix</option>
-                            <option value="dinheiro">Dinheiro</option>
-                        </select>
 
-                        <!-- Input para Troco (escondido por padrão) -->
-                        <div id="trocoContainer" style="display:none;">
-                            <label for="troco">Valor para Troco:</label>
-                            <input type="text" id="troco" name="troco" placeholder="Insira o valor para troco">
+                        <div class="observacoesGerais">
+                            <label for="observacoesGerais">Observações Gerais:</label>
+                            <textarea id="observacoesGerais" rows="4" placeholder="Escreva suas observações aqui..."></textarea>
+                            <div class="formaPagamento">
+                                <label for="formaPagamento">Forma de Pagamento:</label>
+                                <select id="formaPagamento" name="formaPagamento">
+                                    <option value="cartao">Cartão</option>
+                                    <option value="pix">Pix</option>
+                                    <option value="dinheiro">Dinheiro</option>
+                                </select>
+
+                                <!-- Input para Troco (escondido por padrão) -->
+                                <div id="trocoContainer" style="display:none;">
+                                    <label for="troco">Valor para Troco:</label>
+                                    <input type="text" id="troco" name="troco" placeholder="Insira o valor para troco">
+                                </div>
+                            </div>
+
+                            <div id="finalizarPedidoBtn" class="cart--finalizar">Finalizar a compra</div>
                         </div>
                     </div>
-
-                        <div id="finalizarPedidoBtn" class="cart--finalizar">Finalizar a compra</div>
-                    </div>
-                </div>
             </aside>
             <div class="pizzaWindowArea">
                 <div class="pizzaWindowBody modal">
@@ -146,14 +148,11 @@ $pdo = null;
                     </div>
                     <div class="pizzaBig">
                         <img src="" alt="Pizza Image" /><br>
-                        <div class="pizzaObservations">
-                            <textarea id="observations" rows="4" placeholder="Observações: "></textarea>
-                        </div>
                     </div>
                     <div class="pizzaInfo">
                         <h1>--</h1>
                         <div class="pizzaInfo--desc">--</div>
-                        
+
                         <div class="pizzaInfo--pricearea">
                             <div class="pizzaInfo--sector">Preço</div>
                             <div class="pizzaInfo--price">
@@ -165,30 +164,36 @@ $pdo = null;
                                 </div>
                             </div>
                         </div>
+                    </div>
+                    <div class="areaBack-Modal">
                         <div id="adicionaisModal">
-    <h4>Adicionais:</h4>
-    <div class="adicional-item">
-        <input type="checkbox" id="bacon" name="adicional" value="bacon">
-        <label for="bacon">Bacon + R$ 3,00</label>
-    </div>
-    <div class="adicional-item">
-        <input type="checkbox" id="queijo" name="adicional" value="queijo-extra">
-        <label for="queijo">Queijo Extra + R$ 2,50</label>
-    </div>
-    <div class="adicional-item">
-        <input type="checkbox" id="ovo" name="adicional" value="ovo">
-        <label for="ovo">Ovo + R$ 1,50</label>
-    </div>
-    <!-- Mais opções de adicionais aqui -->
-</div>
+                            <h4>Adicionais:</h4>
+                            <div class="adicional-item">
+                                <input type="checkbox" id="bacon" name="adicional" value="bacon">
+                                <label for="bacon">Bacon + R$ 3,00</label>
+                            </div>
+                            <div class="adicional-item">
+                                <input type="checkbox" id="queijo" name="adicional" value="queijo-extra">
+                                <label for="queijo">Queijo Extra + R$ 2,50</label>
+                            </div>
+                            <div class="adicional-item">
+                                <input type="checkbox" id="ovo" name="adicional" value="ovo">
+                                <label for="ovo">Ovo + R$ 1,50</label>
+                            </div>
+                            <!-- Mais opções de adicionais aqui -->
+                        </div>
+                        <div class="pizzaObservations">
+                            <textarea id="observations" rows="4" placeholder="Observações: "></textarea>
+                        </div>
 
+                    </div>
 
                         <div class="pizzaInfo--addButton">Adicionar ao carrinho</div>
                         <div class="pizzaInfo--cancelButton">Cancelar</div>
-                        
+
                     </div>
                 </div>
-                
+
             </div>
             <div class="success pizzaWindowArea">
                 <div class="pizzaWindowBody success">
@@ -209,13 +214,13 @@ $pdo = null;
     <script src="../js/geral.js"></script>
     <script src="../js/cart.js"></script>
     <script>
-        document.addEventListener("DOMContentLoaded", function () {
+        document.addEventListener("DOMContentLoaded", function() {
             console.log('DOM fully loaded and parsed');
             const finalizarPedidoBtn = document.getElementById('finalizarPedidoBtn');
             const loginButton = document.getElementById('loginButton');
 
             if (finalizarPedidoBtn) {
-                finalizarPedidoBtn.addEventListener('click', function (event) {
+                finalizarPedidoBtn.addEventListener('click', function(event) {
                     event.preventDefault();
                     console.log('Finalizar Pedido button clicked');
                     <?php if (!$loggedIn) { ?>
@@ -225,10 +230,10 @@ $pdo = null;
             }
 
             if (loginButton) {
-                loginButton.addEventListener('click', function () {
+                loginButton.addEventListener('click', function() {
                     console.log('Login button clicked');
                     <?php if ($loggedIn) { ?>
-                        window.location.href = '../../config/logout.php'; 
+                        window.location.href = '../../config/logout.php';
                     <?php } else { ?>
                         window.location.href = 'login.php';
                     <?php } ?>
@@ -236,11 +241,11 @@ $pdo = null;
             }
         });
 
-        document.addEventListener("DOMContentLoaded", function () {
+        document.addEventListener("DOMContentLoaded", function() {
             const formaPagamento = document.getElementById('formaPagamento');
             const trocoContainer = document.getElementById('trocoContainer');
 
-            formaPagamento.addEventListener('change', function () {
+            formaPagamento.addEventListener('change', function() {
                 if (formaPagamento.value === 'dinheiro') {
                     trocoContainer.style.display = 'block';
                 } else {
@@ -250,4 +255,5 @@ $pdo = null;
         });
     </script>
 </body>
+
 </html>

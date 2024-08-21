@@ -1,3 +1,20 @@
+* {
+    box-sizing: border-box;
+    margin: 0;
+    padding: 0;
+    font-family: "Montserrat", sans-serif
+}
+
+body {
+    background-color: #fafafa;
+    font-size: 15px;
+    display: flex;
+    flex-direction: column;
+    margin: 0;
+    min-height: 100vh
+}
+/************
+Area de Login*/
 .login-button {
     background-color: #ff9900;
     color: white;
@@ -79,6 +96,8 @@
 .form-button:hover {
     background-color: #ff4500;
 }
+/***************
+Fim da Area de Login*/
 
 /*area de observações*/
 .pizzaObservations {
@@ -242,22 +261,6 @@
 
 .cart--finalizar:hover {
     background-color: #219150;
-}
-
-* {
-    box-sizing: border-box;
-    margin: 0;
-    padding: 0;
-    font-family: "Montserrat", sans-serif
-}
-
-body {
-    background-color: #fafafa;
-    font-size: 15px;
-    display: flex;
-    flex-direction: column;
-    margin: 0;
-    min-height: 100vh
 }
 
 .loader-content {
@@ -675,6 +678,9 @@ h1 {
     padding: 10px 10px 20px
 }
 
+/***************
+Area do Modal*/
+
 .pizzaWindowArea {
     position: fixed;
     left: 0;
@@ -724,44 +730,6 @@ h1 {
     width: 30px;
     height: 30px;
     background-color: #000
-}
-#adicionaisModal {
-    margin-top: 20px;
-    font-family: Arial, sans-serif;
-}
-
-#adicionaisModal h4 {
-    margin-bottom: 10px;
-    font-size: 16px;
-    color: #333;
-}
-
-.adicional-item {
-    margin-bottom: 8px;
-    font-size: 14px;
-    display: flex;
-    align-items: center;
-}
-
-.adicional-item input[type="checkbox"] {
-    margin-right: 8px;
-    cursor: pointer;
-    width: 18px;
-    height: 18px;
-    border-radius: 50%; /* Arredonda o checkbox */
-    border: 2px solid #fab427; /* Coloração amarelada */
-    background-color: #fff;
-    appearance: none;
-    transition: background-color 0.3s ease, border-color 0.3s ease;
-}
-
-.adicional-item input[type="checkbox"]:checked {
-    background-color: #fab427; /* Cor amarelada quando marcado */
-    border-color: #e0a225; /* Bordas levemente mais escuras quando marcado */
-}
-
-.adicional-item label {
-    cursor: pointer;
 }
 
 .pizzaInfo {
@@ -887,6 +855,49 @@ h1 {
     margin-bottom: 5px;
     color: #888;
     font-weight: bold;
+}
+
+.areaBack-Modal{
+    display: flex;
+}
+
+#adicionaisModal {
+    margin-top: 20px;
+    font-family: Arial, sans-serif;
+}
+
+#adicionaisModal h4 {
+    margin-bottom: 10px;
+    font-size: 16px;
+    color: #333;
+}
+
+.adicional-item {
+    margin-bottom: 8px;
+    font-size: 14px;
+    display: flex;
+    align-items: center;
+}
+
+.adicional-item input[type="checkbox"] {
+    margin-right: 8px;
+    cursor: pointer;
+    width: 18px;
+    height: 18px;
+    border-radius: 50%; /* Arredonda o checkbox */
+    border: 2px solid #fab427; /* Coloração amarelada */
+    background-color: #fff;
+    appearance: none;
+    transition: background-color 0.3s ease, border-color 0.3s ease;
+}
+
+.adicional-item input[type="checkbox"]:checked {
+    background-color: #fab427; /* Cor amarelada quando marcado */
+    border-color: #e0a225; /* Bordas levemente mais escuras quando marcado */
+}
+
+.adicional-item label {
+    cursor: pointer;
 }
 
 .cart {
