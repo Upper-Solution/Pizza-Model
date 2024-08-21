@@ -143,31 +143,32 @@ $pdo = null;
             </aside>
             <div class="pizzaWindowArea">
                 <div class="pizzaWindowBody modal">
-                    <div class="pizzaInfo--cancelMobileButton">
-                        <i class="fa-solid fa-arrow-left"></i>
-                    </div>
-                    <div class="pizzaBig">
-                        <img src="" alt="Pizza Image" /><br>
-                    </div>
-                    <div class="pizzaInfo">
-                        <h1>--</h1>
-                        <div class="pizzaInfo--desc">--</div>
-
-                        <div class="pizzaInfo--pricearea">
-                            <div class="pizzaInfo--sector">Preço</div>
-                            <div class="pizzaInfo--price">
-                                <div class="pizzaInfo--actualPrice">R$ --</div>
-                                <div class="pizzaInfo--qtarea">
-                                    <button class="pizzaInfo--qtmenos">-</button>
-                                    <div class="pizzaInfo--qt">1</div>
-                                    <button class="pizzaInfo--qtmais">+</button>
+                    <div class="coluna-pizzaInfo-pizzaBig">
+                        <div class="pizzaInfo--cancelMobileButton">
+                            <i class="fa-solid fa-arrow-left"></i>
+                        </div>
+                        <div class="pizzaBig">
+                            <img src="" alt="Pizza Image" /><br>
+                        </div>
+                        <div class="pizzaInfo">
+                            <h1>--</h1>
+                            <div class="pizzaInfo--desc">--</div>
+                            <div class="pizzaInfo--pricearea">
+                                <div class="pizzaInfo--sector">Preço</div>
+                                <div class="pizzaInfo--price">
+                                    <div class="pizzaInfo--actualPrice">R$ --</div>
+                                    <div class="pizzaInfo--qtarea">
+                                        <button class="pizzaInfo--qtmenos">-</button>
+                                        <div class="pizzaInfo--qt">1</div>
+                                        <button class="pizzaInfo--qtmais">+</button>
+                                    </div>
                                 </div>
                             </div>
                         </div>
                     </div>
                     <div class="areaBack-Modal">
                         <div id="adicionaisModal">
-                            <h4>Adicionais:</h4>
+                            <h4>Adicionais</h4>
                             <div class="adicional-item">
                                 <input type="checkbox" id="bacon" name="adicional" value="bacon">
                                 <label for="bacon">Bacon + R$ 3,00</label>
@@ -180,31 +181,44 @@ $pdo = null;
                                 <input type="checkbox" id="ovo" name="adicional" value="ovo">
                                 <label for="ovo">Ovo + R$ 1,50</label>
                             </div>
+                            <div class="adicional-item">
+                                <input type="checkbox" id="ovo" name="adicional" value="ovo">
+                                <label for="ovo">Ovo + R$ 1,50</label>
+                            </div>
+                            <div class="adicional-item">
+                                <input type="checkbox" id="ovo" name="adicional" value="ovo">
+                                <label for="ovo">Ovo + R$ 1,50</label>
+                            </div>
+                            <div class="adicional-item">
+                                <input type="checkbox" id="ovo" name="adicional" value="ovo">
+                                <label for="ovo">Ovo + R$ 1,50</label>
+                            </div>
                             <!-- Mais opções de adicionais aqui -->
                         </div>
                         <div class="pizzaObservations">
                             <textarea id="observations" rows="4" placeholder="Observações: "></textarea>
                         </div>
-
                     </div>
-
+                    <div class="botoes-add-cancel">
                         <div class="pizzaInfo--addButton">Adicionar ao carrinho</div>
                         <div class="pizzaInfo--cancelButton">Cancelar</div>
-
                     </div>
+
                 </div>
 
             </div>
-            <div class="success pizzaWindowArea">
-                <div class="pizzaWindowBody success">
-                    <div class="pedido-finalizado">
-                        <i class="fa-solid fa-circle-check success-img"></i>
-                        <h1>Seu pedido foi finalizado!</h1>
-                    </div>
-                    <span>Previsão de entrega: 45 minutos!</span>
+
+        </div>
+        <div class="success pizzaWindowArea">
+            <div class="pizzaWindowBody success">
+                <div class="pedido-finalizado">
+                    <i class="fa-solid fa-circle-check success-img"></i>
+                    <h1>Seu pedido foi finalizado!</h1>
                 </div>
+                <span>Previsão de entrega: 45 minutos!</span>
             </div>
         </div>
+    </div>
     </div>
 
     <footer>
