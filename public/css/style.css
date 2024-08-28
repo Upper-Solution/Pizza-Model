@@ -1128,10 +1128,9 @@ footer a:hover::after {
 
     .pizza-item--img {
         flex-shrink: 0;
-        width: 80px;
-        /* Ajusta o tamanho da imagem */
-        height: 80px;
-        margin-right: 15px;
+        height: 150px;
+        width: 400px;
+        margin: 0%;
         /* Espaço entre a imagem e o texto */
     }
 
@@ -1139,6 +1138,7 @@ footer a:hover::after {
         width: 100%;
         height: 100%;
         object-fit: cover;
+        border-radius: 0% !important;
     }
 
     .pizza-item--details {
