@@ -1158,10 +1158,19 @@ footer a:hover::after {
     .pizza-item--name {
         font-weight: bold;
         font-size: 18px;
+        margin-top: 20px;
     }
 
     .pizza-item--price {
-        font-size: 16px;
+        font-size: 18px;
+        margin-top: -25px;
+        font-weight: bold;
+        color: white; /* Cor do texto */
+        text-shadow: 
+            -1px -1px 0 rgb(14, 13, 13),  
+            1px -1px 0 rgb(14, 13, 13),
+            -1px 1px 0 rgb(14, 13, 13),
+            2px 2px 0 rgb(14, 13, 13); /* Contorno ao redor do texto */
     }
 
     .pizza-item--desc {
