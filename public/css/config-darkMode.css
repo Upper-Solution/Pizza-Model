@@ -1,6 +1,6 @@
 /* Estilos gerais do corpo */
 body.dark-mode {
-    background: #5a5757d7;
+    background: rgb(9, 9, 10);
     color: #e0e0e0;
 }
 
@@ -11,7 +11,7 @@ body.dark-mode {
 
 /* Blocos de configurações */
 .dark-mode .block {
-    background: #555151;
+    background-color: rgb(18, 18, 20);
     box-shadow: 5px 5px 10px #111;
     border: solid 1px #3a3a3a;
 }
@@ -23,7 +23,7 @@ body.dark-mode {
 
 /* Área Config-User */
 .dark-mode .container-configUser {
-    background-color: #555151;
+    background-color: rgb(18, 18, 20);
     box-shadow: 0 0 10px rgba(0, 0, 0, 0.6);
 }
 
@@ -58,7 +58,7 @@ body.dark-mode {
 
 /* Estilização das configurações do Sistema */
 .dark-mode .container-system {
-    background: #555151;
+    background-color: rgb(18, 18, 20);
     box-shadow: 0 0 10px rgba(0, 0, 0, 0.6);
 }
 

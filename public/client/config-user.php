@@ -40,6 +40,7 @@ $pdo = null;
 ?>
 <!DOCTYPE html>
 <html lang="pt-BR">
+
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -51,16 +52,15 @@ $pdo = null;
     <link rel="stylesheet" href="../css/nav-darkMode.css">
 
 </head>
-<body>
+
+<body class="dark-mode">
     <header class="header">
         <?php include '../../includes/nav.php'; ?>
     </header>
     <div class="cabeçalho-config-user">
-            <button id="backButton">Voltar</button>
-        </div>
+        <button id="backButton">Voltar</button>
+    </div>
     <div class="container-configUser">
-        
-
         <form class="forms-config-user" action="">
             <div class="profile-section">
                 <i id="userImage-profile" class="fas fa-user"></i>
@@ -121,4 +121,5 @@ $pdo = null;
     <script src="../js/darkMode.js"></script>
 
 </body>
+
 </html>

@@ -40,7 +40,7 @@
 }
 
 .dark-mode .profile-menu {
-    background-color: #444; /* Alterado para fundo escuro */
+    background-color: rgb(18, 18, 20); /* Alterado para fundo escuro */
     border: 1px solid #555; /* Alterado para borda escura */
 }
 
@@ -49,5 +49,5 @@
 }
 
 .dark-mode .profile-menu a:hover {
-    background-color: #666; /* Alterado para fundo mais escuro ao passar o mouse */
+    background-color: rgb(18, 18, 20) /* Alterado para fundo mais escuro ao passar o mouse */
 }

@@ -8,6 +8,8 @@
     <link rel="shortcut icon" href="../imagens/favicon.ico" type="image/x-icon">
     <script src="https://kit.fontawesome.com/8b4042ccf0.js" crossorigin="anonymous"></script>
     <link rel="stylesheet" href="../css/home.css">
+    <link rel="stylesheet" href="../css/style-dark.css">
+    <link rel="stylesheet" href="../css/nav-darkMode.css">
     <title>Lanchonete</title>
 </head>
 
@@ -44,6 +46,7 @@
     </footer>
 
     <script src="../../includes/nav.php"></script>
+    <script src="../js/darkMode.js"></script>
 </body>
 
 </html>

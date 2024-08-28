@@ -54,7 +54,7 @@ $pdo = null;
     <title>Cardápio</title>
 </head>
 
-<body class="dark-mode">
+<body>
     <div class="loader-content">
         <div class="loader-circle"></div>
     </div>

@@ -1,8 +1,11 @@
 body.dark-mode {
-    background-color: #121212;
+    background-color: rgb(9, 9, 10);
     color: #e0e0e0;
     font-family: 'Lato', sans-serif;
 }
+
+/*************************
+Tela Menu*/
 
 /* Estilo para o cabeçalho */
 .dark-mode .header {
@@ -24,12 +27,13 @@ body.dark-mode {
 
 /* Estilo para os itens do menu */
 .dark-mode .pizza-item {
-    background-color: rgb(18, 18, 20);;
+    background-color: rgb(18, 18, 20);
     border: 1px solid #333;
 }
 
 .dark-mode .pizza-item--img img {
     filter: brightness(0.9);
+    border: #e0e0e0 solid 3px;
 }
 
 .dark-mode .pizza-item--add {
@@ -125,5 +129,75 @@ body.dark-mode {
 .dark-mode footer {
     background-color: #1f1f1f;
     color: #e0e0e0;
-    border-top: 1px solid #333;
+}
+
+/********************************
+Tela Index*/
+
+/* Estilo para a área principal da página inicial */
+.dark-mode .home {
+    background-color: rgb(9, 9, 10);
+    color: #e0e0e0;
+}
+
+.dark-mode .home-area {
+    background-color: rgb(9, 9, 10);
+    color: #e0e0e0;
+}
+
+/* Estilo para a seção à esquerda na página inicial */
+.dark-mode .left-home .left-area {
+    padding: 20px;
+}
+
+.dark-mode .left-text1 {
+    font-size: 2.5rem;
+    font-weight: bold;
+    color: #fab427;
+    margin-bottom: 10px;
+}
+
+.dark-mode .left-text2 {
+    font-size: 1.8rem;
+    color: #e0e0e0;
+    margin-bottom: 20px;
+}
+
+.dark-mode .left-text3 {
+    font-size: 1.2rem;
+    line-height: 1.5;
+    color: #c0c0c0;
+    margin-bottom: 30px;
+}
+
+/* Estilo para o botão de pedido */
+.dark-mode .left-home .button {
+    display: inline-block;
+    background-color: #fab427;
+    color: #2b2b2b;
+    border-radius: 5px;
+    font-weight: bold;
+    text-transform: uppercase;
+    transition: background-color 0.3s ease;
+}
+
+.dark-mode .left-home .button:hover {
+    background-color: #ffd65e;
+    color: rgb(9, 9, 10);
+}
+
+/* Estilo para o rodapé */
+.dark-mode footer {
+    background-color: rgb(9, 9, 10);
+    color: #e0e0e0;
+}
+
+.dark-mode footer a {
+    color: #fab427;
+    text-decoration: none;
+    transition: color 0.3s ease;
+}
+
+.dark-mode footer a:hover {
+    color: #ffd65e;
 }
