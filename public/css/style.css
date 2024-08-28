@@ -1151,7 +1151,7 @@ footer a:hover::after {
     .pizza-item--price,
     .pizza-item--name,
     .pizza-item--desc {
-        margin-bottom: 5px;
+        margin-bottom: 0px;
         /* Espaçamento entre os elementos */
     }
 
@@ -1165,7 +1165,7 @@ footer a:hover::after {
     }
 
     .pizza-item--desc {
-        font-size: 14px;
+        font-size: 11px;
         color: #555;
     }
 
