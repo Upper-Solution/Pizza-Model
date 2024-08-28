@@ -1,6 +1,6 @@
 /* Estilos gerais do corpo */
 body.dark-mode {
-    background: #555151;
+    background: #5a5757d7;
     color: #e0e0e0;
 }
 
@@ -51,8 +51,8 @@ body.dark-mode {
 }
 
 .dark-mode .form-group input {
-    background-color: #333;
-    color: #e0e0e0;
+    background-color: #a1a0a0a2;
+    color: #000000;
     border: 1px solid #555;
 }
 

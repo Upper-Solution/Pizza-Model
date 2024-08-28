@@ -48,11 +48,13 @@ $pdo = null;
     <link rel="shortcut icon" href="../imagens/favicon.ico" type="image/x-icon">
     <script src="https://kit.fontawesome.com/8b4042ccf0.js" crossorigin="anonymous"></script>
     <link rel="stylesheet" href="../css/style.css">
+    <link rel="stylesheet" href="../css/style-dark.css">
+    <link rel="stylesheet" href="../css/nav-darkMode.css">
     <link href="https://fonts.googleapis.com/css?family=Hepta+Slab:400,700|Lato:400,700&display=swap" rel="stylesheet">
     <title>Cardápio</title>
 </head>
 
-<body>
+<body class="dark-mode">
     <div class="loader-content">
         <div class="loader-circle"></div>
     </div>
@@ -225,6 +227,7 @@ $pdo = null;
         <a href="#" target="_blank">© Developed by UpperResolution</a>
     </footer>
 
+    <script src="../js/darkMode.js"></script>
     <script src="../js/geral.js"></script>
     <script src="../js/cart.js"></script>
     <script>
