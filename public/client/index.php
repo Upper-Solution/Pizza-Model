@@ -36,7 +36,7 @@
             </section>
             <section class="right-home">
                 <div class="right-image">
-                    <img src="../imagens/banner.jpg" alt="banner.png">
+                    <img src="../imagens/burguer.png" alt="burguer.png">
                 </div>
             </section>
         </div>
