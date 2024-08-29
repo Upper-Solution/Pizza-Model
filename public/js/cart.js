@@ -64,10 +64,9 @@ const saveCart = () => {
   localStorage.setItem("pizza_cart", JSON.stringify(cart));
 };
 
-// Abre o menu do carrinho ao clicar no ícone
-document.querySelector(".menu-openner").addEventListener("click", () => {
+document.querySelector(".barra-carrinho").addEventListener("click", () => {
   if (cart.length > 0) {
-    document.querySelector("aside").style.left = 0;
+      document.querySelector("aside").style.left = 0;
   }
 });
 
@@ -78,11 +77,24 @@ document.querySelector(".menu-closer").addEventListener("click", () => {
 
 // Função para atualizar a interface do carrinho
 function updateCart() {
-  // Atualiza o número de itens no ícone do carrinho
-  document.querySelector(".menu-openner span").innerHTML = cart.length;
+  // Atualiza o número de itens na barra do carrinho
+  document.querySelector(".barra-carrinho-total-itens").innerHTML = `${cart.length} itens`;
+
+  // Calcula o valor total
+  let pizzasValor = 0;
+  for (let i in cart) {
+      pizzasValor += cart[i].preco * cart[i].qtd;
+  }
+
+  // Atualiza o valor total na barra do carrinho
+  document.querySelector(".barra-carrinho-valor-total").innerHTML = `Total: R$ ${pizzasValor.toLocaleString("pt-br", {
+      style: "currency",
+      currency: "BRL",
+  })}`;
 
   // Verifica se há itens no carrinho
   if (cart.length > 0) {
+    document.querySelector("aside").classList.add("show");
     document.querySelector("aside").classList.add("show");
     document.querySelector(".cart").innerHTML = ""; // Limpa o conteúdo do carrinho
 

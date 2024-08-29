@@ -1100,6 +1100,45 @@ footer a:hover::after {
         box-shadow: none;
     }
 
+/*PARTE DO CARRINHO SEU MAZANZA*/
+
+    .barra-carrinho {
+    position: fixed;
+    bottom: 0;
+    width: 100%;
+    background-color: #333;
+    color: #fff;
+    text-align: center;
+    padding: 10px 0;
+    box-shadow: 0 -2px 5px rgba(0, 0, 0, 0.5);
+    z-index: 1000;
+    cursor: pointer;
+}
+
+.barra-carrinho-content {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 10px;
+}
+
+.barra-carrinho-info {
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start;
+}
+
+.barra-carrinho-total-itens,
+.barra-carrinho-valor-total {
+    font-weight: bold;
+}
+
+.barra-carrinho-texto {
+    font-size: 18px;
+    margin-right: 10px;
+}
+
+
     .pizza-item {
         display: flex;
         flex-direction: row;
@@ -1313,8 +1352,7 @@ footer a:hover::after {
     }
 
     .pizzaWindowBody.modal {
-        padding: 5px;
-        height: 100vh;
+        margin-top: 30%;
     }
 
     .pizzaBig img {

@@ -226,51 +226,69 @@ $pdo = null;
     <footer>
         <a href="#" target="_blank">© Developed by UpperResolution</a>
     </footer>
+    <div class="barra-carrinho">
+    <div class="barra-carrinho-content">
+        <div class="barra-carrinho-info">
+            <span class="barra-carrinho-total-itens">0 itens</span>
+            <span class="barra-carrinho-valor-total">Total: R$ 0,00</span>
+        </div>
+        <span class="barra-carrinho-texto">Ver Carrinho</span>
+    </div>
+</div>
+</div>
+</div>
+</div>
 
-    <script src="../js/darkMode.js"></script>
-    <script src="../js/geral.js"></script>
-    <script src="../js/cart.js"></script>
-    <script>
-        document.addEventListener("DOMContentLoaded", function() {
-            console.log('DOM fully loaded and parsed');
-            const finalizarPedidoBtn = document.getElementById('finalizarPedidoBtn');
-            const loginButton = document.getElementById('loginButton');
+<script src="../js/darkMode.js"></script>
+<script src="../js/geral.js"></script>
+<script src="../js/cart.js"></script>
+<script>
+    document.addEventListener("DOMContentLoaded", function() {
+        console.log('DOM fully loaded and parsed');
+        const finalizarPedidoBtn = document.getElementById('finalizarPedidoBtn');
+        const loginButton = document.getElementById('loginButton');
 
-            if (finalizarPedidoBtn) {
-                finalizarPedidoBtn.addEventListener('click', function(event) {
-                    event.preventDefault();
-                    console.log('Finalizar Pedido button clicked');
-                    <?php if (!$loggedIn) { ?>
-                        window.location.href = 'login.php';
-                    <?php } ?>
-                });
-            }
-
-            if (loginButton) {
-                loginButton.addEventListener('click', function() {
-                    console.log('Login button clicked');
-                    <?php if ($loggedIn) { ?>
-                        window.location.href = '../../config/logout.php';
-                    <?php } else { ?>
-                        window.location.href = 'login.php';
-                    <?php } ?>
-                });
-            }
-        });
-
-        document.addEventListener("DOMContentLoaded", function() {
-            const formaPagamento = document.getElementById('formaPagamento');
-            const trocoContainer = document.getElementById('trocoContainer');
-
-            formaPagamento.addEventListener('change', function() {
-                if (formaPagamento.value === 'dinheiro') {
-                    trocoContainer.style.display = 'block';
-                } else {
-                    trocoContainer.style.display = 'none';
-                }
+        if (finalizarPedidoBtn) {
+            finalizarPedidoBtn.addEventListener('click', function(event) {
+                event.preventDefault();
+                console.log('Finalizar Pedido button clicked');
+                <?php if (!$loggedIn) { ?>
+                    window.location.href = 'login.php';
+                <?php } ?>
             });
+        }
+
+        if (loginButton) {
+            loginButton.addEventListener('click', function() {
+                console.log('Login button clicked');
+                <?php if ($loggedIn) { ?>
+                    window.location.href = '../../config/logout.php';
+                <?php } else { ?>
+                    window.location.href = 'login.php';
+                <?php } ?>
+            });
+        }
+
+        const barraCarrinho = document.querySelector('.barra-carrinho');
+
+        barraCarrinho.addEventListener('click', function() {
+            // Redirecionar para a área do carrinho
+            document.querySelector('.cart--area').scrollIntoView({ behavior: 'smooth' });
         });
-    </script>
+
+        const formaPagamento = document.getElementById('formaPagamento');
+        const trocoContainer = document.getElementById('trocoContainer');
+
+        formaPagamento.addEventListener('change', function() {
+            if (formaPagamento.value === 'dinheiro') {
+                trocoContainer.style.display = 'block';
+            } else {
+                trocoContainer.style.display = 'none';
+            }
+        });
+    });
+</script>
+</div>
 </body>
 
 </html>
