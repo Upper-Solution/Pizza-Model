@@ -50,19 +50,20 @@ $pdo = null;
     <link rel="stylesheet" href="../css/style.css">
     <link rel="stylesheet" href="../css/style-dark.css">
     <link rel="stylesheet" href="../css/nav-darkMode.css">
+    <link rel="stylesheet" href="../css/loader.css">
     <link href="https://fonts.googleapis.com/css?family=Hepta+Slab:400,700|Lato:400,700&display=swap" rel="stylesheet">
     <title>Cardápio</title>
 </head>
 
 <body>
-    <div class="loader-content">
-        <div class="loader-circle"></div>
-    </div>
 
     <header class="header">
         <?php include '../../includes/nav.php'; ?>
     </header>
-
+    <div id="loader" class="loader">
+        <img src="../imagens/favicon.ico" alt="Loading...">
+    </div>
+    <div class="content">
     <div class="container">
         <div class="container-area">
             <div class="models">
@@ -238,7 +239,6 @@ $pdo = null;
 </div>
 </div>
 </div>
-
 <script src="../js/darkMode.js"></script>
 <script src="../js/geral.js"></script>
 <script src="../js/cart.js"></script>
@@ -287,6 +287,26 @@ $pdo = null;
             }
         });
     });
+
+    document.addEventListener("DOMContentLoaded", function() {
+            const loader = document.getElementById('loader');
+            const content = document.querySelector('.content');
+
+            if (!loader) {
+                console.error('Elemento com ID "loader" não encontrado.');
+                return;
+            }
+
+            if (!content) {
+                console.error('Elemento com classe "content" não encontrado.');
+                return;
+            }
+
+            setTimeout(() => {
+                loader.style.display = 'none';
+                content.style.display = 'block';
+            }, 4000);
+        });
 </script>
 </div>
 </body>
