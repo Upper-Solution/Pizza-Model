@@ -84,8 +84,6 @@ $pdo = null;
                         <div class="cart--item--qt">1</div>
                         <button class="cart--item-qtmais">+</button>
                     </div>
-                    <br>
-                    <hr>
 
                     <div class="cart--obs">
                         <p></p>

@@ -968,14 +968,15 @@ Fim do Modal*/
 
 .cart--item-nome {
     flex: 1;
-    padding-top: 5px;
+    padding-top: 10px;
 }
 
 .cart--item--qtarea {
     display: inline-flex;
     background-color: #eee;
     border-radius: 10px;
-    height: 30px
+    height: 30px;
+    margin-top: 5px;
 }
 
 .cart--item--qtarea button {
