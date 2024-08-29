@@ -658,7 +658,7 @@ h1 {
 
 .pizza-item--price {
     font-size: 15px;
-    color: #333;
+    color: #131313;
     margin-top: 5px
 }
 
@@ -1158,20 +1158,18 @@ footer a:hover::after {
     .pizza-item--name {
         font-weight: bold;
         font-size: 18px;
-        margin-top: 20px;
+        margin-top: 5px;
     }
 
     .pizza-item--price {
-        font-size: 18px;
-        margin-top: -25px;
+        font-size: 15px;
+        margin-top: 5px;
         font-weight: bold;
-        color: white; /* Cor do texto */
-        text-shadow: 
-            -1px -1px 0 rgb(14, 13, 13),  
-            1px -1px 0 rgb(14, 13, 13),
-            -1px 1px 0 rgb(14, 13, 13),
-            2px 2px 0 rgb(14, 13, 13); /* Contorno ao redor do texto */
+        background-color: #f1a307;
+        border-radius: 7px;
+        padding: 4px; /* Adiciona um espaço interno entre o texto e a borda */
     }
+    
 
     .pizza-item--desc {
         font-size: 11px;

@@ -33,7 +33,6 @@ Tela Menu*/
 
 .dark-mode .pizza-item--img img {
     filter: brightness(0.9);
-    border: #e0e0e0 solid 3px;
 }
 
 .dark-mode .pizza-item--add {
@@ -41,7 +40,9 @@ Tela Menu*/
     color: #e0e0e0;
 }
 
-.dark-mode .pizza-item--price,
+.dark-mode .pizza-item--price {
+    color: #1f1f1f;
+}
 .dark-mode .pizza-item--name,
 .dark-mode .pizza-item--desc {
     color: #e0e0e0;
