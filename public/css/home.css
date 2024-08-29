@@ -245,8 +245,12 @@ body {
   width: 90%;
 }
 
+/* Faz com que a imagem ocupe 100% do contêiner */
 .right-image img {
   width: 100%;
+  height: auto; /* mantém a proporção da imagem */
+  align-items: center;
+
 }
 
 footer {
