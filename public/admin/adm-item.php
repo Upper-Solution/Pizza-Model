@@ -86,6 +86,7 @@ $pdo = null;
 
 <!DOCTYPE html>
 <html lang="pt-BR">
+
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -95,12 +96,11 @@ $pdo = null;
     <link rel="stylesheet" href="../css/adm.css">
     <title>Pizzaria - Menu</title>
 </head>
+
 <body>
-    <header class="header">
-        <div class="header-content">
-            <h1 class="header-title">Lanches Cadastrados</h1>
-            <a href="adm-painel.php" class="btn-back">Voltar</a>
-        </div>
+    <header>
+        <h1>Lanches Cadastrados</h1>
+        <a href="adm-painel.php" class="button back-button">Voltar</a>
     </header>
     <div class="container">
         <div class="pizzas-container">
@@ -174,12 +174,12 @@ $pdo = null;
                                 </td>
                                 <td>
                                     <!-- Ícones de editar e excluir -->
-                                    <a href="javascript:void(0);" class="icon-edit" title="Editar" 
-                                       onclick="showEditForm(this)" 
-                                       data-id="<?php echo htmlspecialchars($pizza['id']); ?>" 
-                                       data-nome="<?php echo htmlspecialchars($pizza['nome']); ?>" 
-                                       data-descricao="<?php echo htmlspecialchars($pizza['descricao']); ?>" 
-                                       data-preco="<?php echo htmlspecialchars($pizza['preco']); ?>">
+                                    <a href="javascript:void(0);" class="icon-edit" title="Editar"
+                                        onclick="showEditForm(this)"
+                                        data-id="<?php echo htmlspecialchars($pizza['id']); ?>"
+                                        data-nome="<?php echo htmlspecialchars($pizza['nome']); ?>"
+                                        data-descricao="<?php echo htmlspecialchars($pizza['descricao']); ?>"
+                                        data-preco="<?php echo htmlspecialchars($pizza['preco']); ?>">
                                         <i class="fas fa-edit"></i>
                                     </a>
                                     <a href="delete_pizza.php?id=<?php echo htmlspecialchars($pizza['id']); ?>" class="icon-delete" title="Excluir" onclick="return confirm('Tem certeza que deseja excluir esta pizza?');">
@@ -243,4 +243,5 @@ $pdo = null;
         }
     </script>
 </body>
+
 </html>

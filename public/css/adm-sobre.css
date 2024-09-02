@@ -5,13 +5,13 @@
     margin: 0;
     padding: 0;
     box-sizing: border-box;
-    font-family: 'Roboto', sans-serif;
 }
 
 body {
-    background-color: #f4f4f9;
-    color: #333;
-    line-height: 1.6;
+    font-family: 'Roboto', sans-serif;
+    background-color: #f4f4f4;
+    margin: 0;
+    padding: 0;
 }
 
 header {
@@ -24,7 +24,7 @@ header {
 
 header .back-button {
     position: absolute;
-    top: 23px;
+    top: 19px;
     left: 20px;
     background-color: #0056b3;
     color: #fff;

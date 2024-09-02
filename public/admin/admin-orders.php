@@ -50,12 +50,9 @@ $pdo = null;
 </head>
 <body>
     <header class="header">
+        <a href="adm-painel.php" class="back-button">Voltar</a>
         <h1 class="title">Pedidos Realizados</h1>
     </header>
-
-    <section class="search-section">
-        <a href="adm-painel.php" class="back-link">Voltar</a>
-    </section>
 
     <div id="status-container" class="status-container">
         <div id="recebido" class="status-column" data-status="Recebido">
