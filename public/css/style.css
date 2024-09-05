@@ -870,13 +870,9 @@ Area do Modal*/
     font-family: Arial, sans-serif;
     display: flex;
     flex-wrap: wrap;
-    /* Permite que os itens quebrem para uma nova linha */
     gap: 10px;
-    /* Espaçamento entre os itens */
     max-height: calc(3 * 40px + 20px);
-    /* Altura máxima para 3 fileiras de 40px (tamanho médio de cada item) */
     overflow-y: auto;
-    /* Adiciona barra de rolagem se ultrapassar a altura máxima */
 }
 
 #adicionaisModal h4 {
@@ -1034,6 +1030,7 @@ Fim do Modal*/
 }
 
 .success-img {
+    background-color: #FFF;
     color: #48d05f;
     font-size: 3rem;
     margin-right: 20px

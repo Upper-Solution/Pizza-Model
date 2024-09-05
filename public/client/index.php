@@ -26,7 +26,7 @@
   <link href="../css/nav.css" rel="stylesheet">
 </head>
 
-<body class="index-page dark-mode">
+<body class="index-page">
   <header class="header">
     <?php include '../../includes/nav.php'; ?>
   </header>

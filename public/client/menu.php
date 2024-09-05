@@ -66,6 +66,11 @@ $pdo = null;
         <img src="../imagens/favicon.ico" alt="Loading...">
     </div>
 
+    <!--Loader de pedido finalizado-->
+    <div class="loader-content">
+        <div class="loader-circle"></div>
+    </div>
+
     <div class="content">
         <div class="container">
             <div class="container-area">
@@ -209,13 +214,8 @@ $pdo = null;
                         </div>
                     </div>
                 </div>
+            </div>
 
-            </div>
-            <!--Loader de pedido finalizado-->
-            <div class="loader-content">
-                <div class="loader-circle"></div>
-            </div>
-            
             <div class="success pizzaWindowArea">
                 <div class="pizzaWindowBody success">
                     <div class="pedido-finalizado">
@@ -311,7 +311,6 @@ $pdo = null;
             }, 4000);
         });
     </script>
-    </div>
 </body>
 
 </html>
