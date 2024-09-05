@@ -1,0 +1,48 @@
+body.dark-mode {
+    --background-color: #121212; 
+    --default-color: #e0e0e0; 
+    --heading-color: #ffffff; 
+    --accent-color: #fab427;
+    --surface-color: #1f1f1f; 
+    --contrast-color: #ffffff;
+  
+    --nav-color: rgba(255, 255, 255, 0.8);
+    --nav-hover-color: #fab427;
+    --nav-mobile-background-color: #121212;
+    --nav-dropdown-background-color: #1f1f1f;
+    --nav-dropdown-color: #e0e0e0;
+    --nav-dropdown-hover-color: #03dac6;
+  }
+  
+  .dark-mode .hero {
+    background-color: rgb(18, 18, 20);
+    background-size: cover;
+  }
+  
+  body.dark-mode .php-email-form .error-message {
+    background: #fab427;
+  }
+  
+  body.dark-mode .php-email-form .sent-message {
+    background: #fab427;
+  }
+  
+  body.dark-mode .footer {
+    background-color: var(--background-color);
+  }
+  
+  body.dark-mode .footer .social-links a {
+    color: var(--default-color);
+    border-color: var(--default-color);
+  }
+  
+  body.dark-mode .footer .social-links a:hover {
+    color: var(--accent-color);
+    border-color: var(--accent-color);
+  }
+  
+  body.dark-mode .contact .info-item i {
+    color: var(--contrast-color);
+    background: var(--accent-color);
+  }
+  

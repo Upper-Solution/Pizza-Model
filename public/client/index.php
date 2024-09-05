@@ -20,12 +20,13 @@
   <link href="../css/assets/vendor/glightbox/css/glightbox.min.css" rel="stylesheet">
 
   <!-- Main CSS File -->
-  <link href="../css/assets/css/main.css" rel="stylesheet">
+  <link href="../css/main.css" rel="stylesheet">
+  <link href="../css/main-darkMode.css" rel="stylesheet">
   <link href="../css/nav-darkMode.css" rel="stylesheet">
   <link href="../css/nav.css" rel="stylesheet">
 </head>
 
-<body class="index-page">
+<body class="index-page dark-mode">
   <header class="header">
     <?php include '../../includes/nav.php'; ?>
   </header>
@@ -265,9 +266,8 @@
   <script src="../css/assets/vendor/isotope-layout/isotope.pkgd.min.js"></script>
 
   <!-- Arquivo JS Principal -->
-  <script src="../css/assets/js/main.js"></script>
-  <script src="../../includes/nav.php"></script>
-  <script src="../../includes/darkMode.js"></script>
+  <script src="../js/main.js"></script>
+  <script src="../js/darkMode.js"></script>
 </body>
 
 </html>

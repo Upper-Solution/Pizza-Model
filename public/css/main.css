@@ -449,7 +449,7 @@ section,
   display: flex;
   align-items: center;
   justify-content: center;
-  background: url(../img/capa.png) no-repeat center center;
+  background: url(../imagens/capa.png) no-repeat center center;
   background-size: cover;
 }
 

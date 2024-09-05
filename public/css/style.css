@@ -703,10 +703,8 @@ Area do Modal*/
     box-shadow: 0px 10px 25px rgba(153, 153, 153, .342);
     display: flex;
     flex-direction: column;
-    /* Alinha os itens em coluna */
     padding: 50px;
     gap: 10px;
-    /* Espaçamento entre as seções */
 }
 
 /* Contêiner da pizza e informações */
@@ -714,7 +712,6 @@ Area do Modal*/
     display: flex;
     flex: 1;
     gap: 20px;
-    /* Espaçamento entre as colunas */
 }
 
 /* Imagem da pizza */
