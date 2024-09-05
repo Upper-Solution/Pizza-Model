@@ -47,6 +47,7 @@ Tela Menu*/
 .dark-mode .pizza-item--price {
     color: #ffffff;
 }
+
 .dark-mode .pizza-item--name,
 .dark-mode .pizza-item--desc {
     color: #e0e0e0;
@@ -63,37 +64,36 @@ Tela Menu*/
     filter: brightness(0.9);
 }
 
-.dark-mode .pizzaInfo--addButton,
-.dark-mode .pizzaInfo--cancelButton {
-    background-color: #333;
-    color: #e0e0e0;
-}
-
-.dark-mode .pizzaInfo--qtmenos,
-.dark-mode .pizzaInfo--qtmais {
-    background-color: #333;
-    color: #e0e0e0;
-}
-
 .dark-mode .pizzaInfo--actualPrice {
     color: #ffffff;
 }
 
+.dark-mode #adicionaisModal h4 {
+    color: #fff;
+}
+
 /* Estilo para a área do carrinho */
-.dark-mode .cart--area {
-    background-color: #1f1f1f;
+
+.dark-mode .pizzaInfo--qtarea,
+.dark-mode .cart--item--qtarea {
+    background-color: #2a2a2a;
     border-radius: 20px;
 }
 
-/*
-.dark-mode .cart--item {
-    background-color: #2a2a2a;
-    border-bottom: 1px solid #333;
-}*/
-
+.dark-mode .pizzaInfo--qt,
 .dark-mode .cart--item--qt {
-    background-color: #ffffff;
+    background-color: #2a2a2a;
+    color: #fff;
 }
+
+.dark-mode .pizzaInfo--qtarea button,
+.dark-mode .cart--item--qtarea button {
+    background-color: #2a2a2a;
+    color: #fff;
+    border-radius: 10px;
+}
+
+
 
 .dark-mode .cart--item-nome,
 .dark-mode .cart--totalitem span,
@@ -120,11 +120,10 @@ Tela Menu*/
 }
 
 /* Estilo para botões e ícones */
-.dark-mode button,
 .dark-mode .menu-closer i,
 .dark-mode .pizzaInfo--cancelMobileButton i,
 .dark-mode .success-img {
-    background-color: #333;
+    background-color: #1f1f1f;
     color: #e0e0e0;
 }
 
