@@ -15,8 +15,8 @@ localStorage.getItem("pizza_cart")
 const api = fetch("../../includes/apiData.php")
   .then(response => response.json())
   .then(data => {
-    pizzas = data; // Armazena os dados das pizzas na variável 'pizzas'
-    updateCart();  // Atualiza o carrinho
+    pizzas = data; 
+    updateCart();
 
     // Mapeia todos os objetos do JSON (dados das pizzas)
     data.map((item, index) => {
