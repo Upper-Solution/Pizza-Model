@@ -57,236 +57,241 @@ $pdo = null;
 
 <body>
 
+    <!--Menu de Navegação-->
     <header class="header">
         <?php include '../../includes/nav.php'; ?>
     </header>
+    <!--Loader de hamburguer-->
     <div id="loader" class="loader">
         <img src="../imagens/favicon.ico" alt="Loading...">
     </div>
+
     <div class="content">
-    <div class="container">
-        <div class="container-area">
-            <div class="models">
-                <div class="pizza-item">
-                    <a href="">
-                        <div class="pizza-item--img"><img /></div>
-                        <div class="pizza-item--add">+</div>
-                        <div class="pizza-item--price">R$ --</div>
-                        <div class="pizza-item--name">--</div>
-                        <div class="pizza-item--desc">--</div>
-                    </a>
+        <div class="container">
+            <div class="container-area">
+                <div class="models">
+                    <div class="pizza-item">
+                        <a href="">
+                            <div class="pizza-item--img"><img /></div>
+                            <div class="pizza-item--add">+</div>
+                            <div class="pizza-item--price">R$ --</div>
+                            <div class="pizza-item--name">--</div>
+                            <div class="pizza-item--desc">--</div>
+                        </a>
+                    </div>
+                    <div class="cart--item">
+                        <img src="" alt="Cart Item Image" />
+                        <div class="cart--item-nome">--</div>
+                        <div class="cart--item--qtarea">
+                            <button class="cart--item-qtmenos">-</button>
+                            <div class="cart--item--qt">1</div>
+                            <button class="cart--item-qtmais">+</button>
+                        </div>
+
+                        <div class="cart--obs">
+                            <p></p>
+                        </div>
+                    </div>
                 </div>
-                <div class="cart--item">
-                    <img src="" alt="Cart Item Image" />
-                    <div class="cart--item-nome">--</div>
-                    <div class="cart--item--qtarea">
-                        <button class="cart--item-qtmenos">-</button>
-                        <div class="cart--item--qt">1</div>
-                        <button class="cart--item-qtmais">+</button>
-                    </div>
+                <main>
+                    <h1 class="titulo--h1">Cardápio</h1>
+                    <div class="pizza-area"></div>
+                </main>
 
-                    <div class="cart--obs">
-                        <p></p>
-                    </div>
-                </div>
-            </div>
-            <main>
-                <h1 class="titulo--h1">Cardápio</h1>
-                <div class="pizza-area"></div>
-            </main>
-
-            <aside>
-                <div class="cart--area">
-                    <div class="menu-closer">
-                        <i class="fa-solid fa-arrow-left"></i>
-                    </div>
-                    <h1>Seu Pedidos</h1>
-                    <div class="cart"></div>
-                    <div class="cart--details">
-                        <div class="cart--totalitem pizzasValor">
-                            <span>Carrinho</span>
-                            <span>R$ --</span>
-                        </div>
-                        <div class="cart--totalitem entrega">
-                            <span>Taxa de entrega</span>
-                            <span>R$ --</span>
-                        </div>
-                        <div class="cart--totalitem desconto">
-                            <span>Desconto (-10%)</span>
-                            <span>R$ --</span>
-                        </div>
-                        <div class="cart--totalitem total big">
-                            <span>Total</span>
-                            <span>R$ --</span>
-                        </div>
-
-                        <div class="observacoesGerais">
-                            <label for="observacoesGerais">Observações Gerais:</label>
-                            <textarea id="observacoesGerais" rows="4" placeholder="Escreva suas observações aqui..."></textarea>
-                            <div class="formaPagamento">
-                                <label for="formaPagamento">Forma de Pagamento:</label>
-                                <select id="formaPagamento" name="formaPagamento">
-                                    <option value="cartao">Cartão</option>
-                                    <option value="pix">Pix</option>
-                                    <option value="dinheiro">Dinheiro</option>
-                                </select>
-
-                                <!-- Input para Troco (escondido por padrão) -->
-                                <div id="trocoContainer" style="display:none;">
-                                    <label for="troco">Valor para Troco:</label>
-                                    <input type="text" id="troco" name="troco" placeholder="Insira o valor para troco">
-                                </div>
-                            </div>
-
-                            <div id="finalizarPedidoBtn" class="cart--finalizar">Finalizar a compra</div>
-                        </div>
-                    </div>
-            </aside>
-            <div class="pizzaWindowArea">
-                <div class="pizzaWindowBody modal">
-                    <div class="coluna-pizzaInfo-pizzaBig">
-                        <div class="pizzaInfo--cancelMobileButton">
+                <aside>
+                    <div class="cart--area">
+                        <div class="menu-closer">
                             <i class="fa-solid fa-arrow-left"></i>
                         </div>
-                        <div class="pizzaBig">
-                            <img src="" alt="Pizza Image" /><br>
+                        <h1>Seu Pedidos</h1>
+                        <div class="cart"></div>
+                        <div class="cart--details">
+                            <div class="cart--totalitem pizzasValor">
+                                <span>Carrinho</span>
+                                <span>R$ --</span>
+                            </div>
+                            <div class="cart--totalitem entrega">
+                                <span>Taxa de entrega</span>
+                                <span>R$ --</span>
+                            </div>
+                            <div class="cart--totalitem desconto">
+                                <span>Desconto (-10%)</span>
+                                <span>R$ --</span>
+                            </div>
+                            <div class="cart--totalitem total big">
+                                <span>Total</span>
+                                <span>R$ --</span>
+                            </div>
+
+                            <div class="observacoesGerais">
+                                <label for="observacoesGerais">Observações Gerais:</label>
+                                <textarea id="observacoesGerais" rows="4" placeholder="Escreva suas observações aqui..."></textarea>
+                                <div class="formaPagamento">
+                                    <label for="formaPagamento">Forma de Pagamento:</label>
+                                    <select id="formaPagamento" name="formaPagamento">
+                                        <option value="cartao">Cartão</option>
+                                        <option value="pix">Pix</option>
+                                        <option value="dinheiro">Dinheiro</option>
+                                    </select>
+
+                                    <!-- Input para Troco (escondido por padrão) -->
+                                    <div id="trocoContainer" style="display:none;">
+                                        <label for="troco">Valor para Troco:</label>
+                                        <input type="text" id="troco" name="troco" placeholder="Insira o valor para troco">
+                                    </div>
+                                </div>
+
+                                <div id="finalizarPedidoBtn" class="cart--finalizar">Finalizar a compra</div>
+                            </div>
                         </div>
-                        <div class="pizzaInfo">
-                            <h1>--</h1>
-                            <div class="pizzaInfo--desc">--</div>
-                            <div class="pizzaInfo--pricearea">
-                                <div class="pizzaInfo--sector">Preço</div>
-                                <div class="pizzaInfo--price">
-                                    <div class="pizzaInfo--actualPrice">R$ --</div>
-                                    <div class="pizzaInfo--qtarea">
-                                        <button class="pizzaInfo--qtmenos">-</button>
-                                        <div class="pizzaInfo--qt">1</div>
-                                        <button class="pizzaInfo--qtmais">+</button>
+                </aside>
+                <div class="pizzaWindowArea">
+                    <div class="pizzaWindowBody modal">
+                        <div class="coluna-pizzaInfo-pizzaBig">
+                            <div class="pizzaInfo--cancelMobileButton">
+                                <i class="fa-solid fa-arrow-left"></i>
+                            </div>
+                            <div class="pizzaBig">
+                                <img src="" alt="Pizza Image" /><br>
+                            </div>
+                            <div class="pizzaInfo">
+                                <h1>--</h1>
+                                <div class="pizzaInfo--desc">--</div>
+                                <div class="pizzaInfo--pricearea">
+                                    <div class="pizzaInfo--sector">Preço</div>
+                                    <div class="pizzaInfo--price">
+                                        <div class="pizzaInfo--actualPrice">R$ --</div>
+                                        <div class="pizzaInfo--qtarea">
+                                            <button class="pizzaInfo--qtmenos">-</button>
+                                            <div class="pizzaInfo--qt">1</div>
+                                            <button class="pizzaInfo--qtmais">+</button>
+                                        </div>
                                     </div>
                                 </div>
                             </div>
                         </div>
-                    </div>
-                    <div class="areaBack-Modal">
-                        <div id="adicionaisModal">
-                            <h4>Adicionais</h4>
-                            <div class="adicional-item">
-                                <input type="checkbox" id="bacon" name="adicional" value="bacon">
-                                <label for="bacon">Bacon + R$ 3,00</label>
+                        <div class="areaBack-Modal">
+                            <div id="adicionaisModal">
+                                <h4>Adicionais</h4>
+                                <div class="adicional-item">
+                                    <input type="checkbox" id="bacon" name="adicional" value="bacon">
+                                    <label for="bacon">Bacon + R$ 3,00</label>
+                                </div>
+                                <div class="adicional-item">
+                                    <input type="checkbox" id="queijo" name="adicional" value="queijo-extra">
+                                    <label for="queijo">Queijo Extra + R$ 2,50</label>
+                                </div>
+                                <div class="adicional-item">
+                                    <input type="checkbox" id="ovo" name="adicional" value="ovo">
+                                    <label for="ovo">Ovo + R$ 1,50</label>
+                                </div>
+                                <div class="adicional-item">
+                                    <input type="checkbox" id="ovo" name="adicional" value="ovo">
+                                    <label for="ovo">Ovo + R$ 1,50</label>
+                                </div>
+                                <div class="adicional-item">
+                                    <input type="checkbox" id="ovo" name="adicional" value="ovo">
+                                    <label for="ovo">Ovo + R$ 1,50</label>
+                                </div>
+                                <div class="adicional-item">
+                                    <input type="checkbox" id="ovo" name="adicional" value="ovo">
+                                    <label for="ovo">Ovo + R$ 1,50</label>
+                                </div>
+                                <!-- Mais opções de adicionais aqui -->
                             </div>
-                            <div class="adicional-item">
-                                <input type="checkbox" id="queijo" name="adicional" value="queijo-extra">
-                                <label for="queijo">Queijo Extra + R$ 2,50</label>
+                            <div class="pizzaObservations">
+                                <textarea id="observations" rows="4" placeholder="Observações: "></textarea>
                             </div>
-                            <div class="adicional-item">
-                                <input type="checkbox" id="ovo" name="adicional" value="ovo">
-                                <label for="ovo">Ovo + R$ 1,50</label>
-                            </div>
-                            <div class="adicional-item">
-                                <input type="checkbox" id="ovo" name="adicional" value="ovo">
-                                <label for="ovo">Ovo + R$ 1,50</label>
-                            </div>
-                            <div class="adicional-item">
-                                <input type="checkbox" id="ovo" name="adicional" value="ovo">
-                                <label for="ovo">Ovo + R$ 1,50</label>
-                            </div>
-                            <div class="adicional-item">
-                                <input type="checkbox" id="ovo" name="adicional" value="ovo">
-                                <label for="ovo">Ovo + R$ 1,50</label>
-                            </div>
-                            <!-- Mais opções de adicionais aqui -->
                         </div>
-                        <div class="pizzaObservations">
-                            <textarea id="observations" rows="4" placeholder="Observações: "></textarea>
+                        <div class="botoes-add-cancel">
+                            <div class="pizzaInfo--addButton">Adicionar ao carrinho</div>
+                            <div class="pizzaInfo--cancelButton">Cancelar</div>
                         </div>
                     </div>
-                    <div class="botoes-add-cancel">
-                        <div class="pizzaInfo--addButton">Adicionar ao carrinho</div>
-                        <div class="pizzaInfo--cancelButton">Cancelar</div>
-                    </div>
-
                 </div>
 
             </div>
-
-        </div>
-        <div class="success pizzaWindowArea">
-            <div class="pizzaWindowBody success">
-                <div class="pedido-finalizado">
-                    <i class="fa-solid fa-circle-check success-img"></i>
-                    <h1>Seu pedido foi finalizado!</h1>
+            <!--Loader de pedido finalizado-->
+            <div class="loader-content">
+                <div class="loader-circle"></div>
+            </div>
+            
+            <div class="success pizzaWindowArea">
+                <div class="pizzaWindowBody success">
+                    <div class="pedido-finalizado">
+                        <i class="fa-solid fa-circle-check success-img"></i>
+                        <h1>Seu pedido foi finalizado!</h1>
+                    </div>
+                    <span>Previsão de entrega: 30 minutos!</span>
                 </div>
-                <span>Previsão de entrega: 45 minutos!</span>
             </div>
         </div>
-    </div>
     </div>
 
     <footer>
         <a href="#" target="_blank">© Developed by UpperResolution</a>
     </footer>
     <div class="barra-carrinho">
-    <div class="barra-carrinho-content">
-        <div class="barra-carrinho-info">
-            <span class="barra-carrinho-total-itens">0 itens</span>
-            <span class="barra-carrinho-valor-total">Total: R$ 0,00</span>
+        <div class="barra-carrinho-content">
+            <div class="barra-carrinho-info">
+                <span class="barra-carrinho-total-itens">0 itens</span>
+                <span class="barra-carrinho-valor-total">Total: R$ 0,00</span>
+            </div>
+            <span class="barra-carrinho-texto">Ver Carrinho</span>
         </div>
-        <span class="barra-carrinho-texto">Ver Carrinho</span>
     </div>
-</div>
-</div>
-</div>
-</div>
-<script src="../js/darkMode.js"></script>
-<script src="../js/geral.js"></script>
-<script src="../js/cart.js"></script>
-<script>
-    document.addEventListener("DOMContentLoaded", function() {
-        console.log('DOM fully loaded and parsed');
-        const finalizarPedidoBtn = document.getElementById('finalizarPedidoBtn');
-        const loginButton = document.getElementById('loginButton');
+    <script src="../js/darkMode.js"></script>
+    <script src="../js/geral.js"></script>
+    <script src="../js/cart.js"></script>
+    <script>
+        document.addEventListener("DOMContentLoaded", function() {
+            console.log('DOM fully loaded and parsed');
+            const finalizarPedidoBtn = document.getElementById('finalizarPedidoBtn');
+            const loginButton = document.getElementById('loginButton');
 
-        if (finalizarPedidoBtn) {
-            finalizarPedidoBtn.addEventListener('click', function(event) {
-                event.preventDefault();
-                console.log('Finalizar Pedido button clicked');
-                <?php if (!$loggedIn) { ?>
-                    window.location.href = 'login.php';
-                <?php } ?>
-            });
-        }
-
-        if (loginButton) {
-            loginButton.addEventListener('click', function() {
-                console.log('Login button clicked');
-                <?php if ($loggedIn) { ?>
-                    window.location.href = '../../config/logout.php';
-                <?php } else { ?>
-                    window.location.href = 'login.php';
-                <?php } ?>
-            });
-        }
-
-        const barraCarrinho = document.querySelector('.barra-carrinho');
-
-        barraCarrinho.addEventListener('click', function() {
-            // Redirecionar para a área do carrinho
-            document.querySelector('.cart--area').scrollIntoView({ behavior: 'smooth' });
-        });
-
-        const formaPagamento = document.getElementById('formaPagamento');
-        const trocoContainer = document.getElementById('trocoContainer');
-
-        formaPagamento.addEventListener('change', function() {
-            if (formaPagamento.value === 'dinheiro') {
-                trocoContainer.style.display = 'block';
-            } else {
-                trocoContainer.style.display = 'none';
+            if (finalizarPedidoBtn) {
+                finalizarPedidoBtn.addEventListener('click', function(event) {
+                    event.preventDefault();
+                    console.log('Finalizar Pedido button clicked');
+                    <?php if (!$loggedIn) { ?>
+                        window.location.href = 'login.php';
+                    <?php } ?>
+                });
             }
-        });
-    });
 
-    document.addEventListener("DOMContentLoaded", function() {
+            if (loginButton) {
+                loginButton.addEventListener('click', function() {
+                    console.log('Login button clicked');
+                    <?php if ($loggedIn) { ?>
+                        window.location.href = '../../config/logout.php';
+                    <?php } else { ?>
+                        window.location.href = 'login.php';
+                    <?php } ?>
+                });
+            }
+
+            const barraCarrinho = document.querySelector('.barra-carrinho');
+
+            barraCarrinho.addEventListener('click', function() {
+                // Redirecionar para a área do carrinho
+                document.querySelector('.cart--area').scrollIntoView({
+                    behavior: 'smooth'
+                });
+            });
+
+            const formaPagamento = document.getElementById('formaPagamento');
+            const trocoContainer = document.getElementById('trocoContainer');
+
+            formaPagamento.addEventListener('change', function() {
+                if (formaPagamento.value === 'dinheiro') {
+                    trocoContainer.style.display = 'block';
+                } else {
+                    trocoContainer.style.display = 'none';
+                }
+            });
+        });
+
+        document.addEventListener("DOMContentLoaded", function() {
             const loader = document.getElementById('loader');
             const content = document.querySelector('.content');
 
@@ -305,8 +310,8 @@ $pdo = null;
                 content.style.display = 'block';
             }, 4000);
         });
-</script>
-</div>
+    </script>
+    </div>
 </body>
 
 </html>

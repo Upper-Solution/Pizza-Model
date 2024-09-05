@@ -269,7 +269,7 @@ Fim da Area de Login*/
     bottom: 0;
     right: 0;
     z-index: 0;
-    background: rgba(255, 255, 255, .96);
+    background: rgb(255, 255, 255);
     display: flex;
     text-align: center;
     justify-content: center;
