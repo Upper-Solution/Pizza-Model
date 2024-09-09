@@ -141,7 +141,6 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
                 document.getElementById('city').value = data.localidade;
                 document.getElementById('state').value = data.uf;
             } catch (error) {
-                alert('Erro ao buscar endereço.');
             }
         }
 
@@ -156,14 +155,13 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
     </script>
 </head>
 <body>
-    <h1 class="form-title">Cadastro de Usuário</h1>
     <div class="container">
         <div class="form-container">
             <div class="profile-pic">
-                <div class="profile-circle">
-                    <img id="profileImage" src="default-profile.png" alt="Foto de Perfil">
-                </div>
-                <input type="file" id="profileImageInput" name="profile_image" accept="image/png, image/jpeg" style="display: none;">
+                <label for="profileImageInput" class="profile-circle">
+                    <img id="profileImage" src="../imagens/default-profile.png" alt="">
+                </label>
+                <input type="file" id="profileImageInput" name="profile_image" accept="image/png, image/jpeg" style="display: none;" onchange="previewImage()">
             </div>
             <form method="POST" action="register.php" enctype="multipart/form-data">
                 <div class="form-group-half">
@@ -209,10 +207,6 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
                     </div>
                 </div>
                 <div class="form-group">
-                    <label for="profile_image">Foto de Perfil:</label>
-                    <input type="file" id="profile_image" name="profile_image" accept="image/png, image/jpeg" onchange="previewImage()">
-                </div>
-                <div class="form-group">
                     <label for="password">Senha:</label>
                     <input type="password" id="password" name="password" class="form-input" required>
                 </div>
@@ -226,19 +220,22 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
             </form>
         </div>
     </div>
+
     <script>
         function previewImage() {
-            const fileInput = document.getElementById('profile_image');
-            const file = fileInput.files[0];
-            if (file) {
-                const reader = new FileReader();
-                reader.onload = function(e) {
-                    const profileImage = document.getElementById('profileImage');
-                    profileImage.src = e.target.result;
-                };
-                reader.readAsDataURL(file);
-            }
-        }
+    const fileInput = document.getElementById('profileImageInput');
+    const file = fileInput.files[0];
+    if (file) {
+        const reader = new FileReader();
+        reader.onload = function(e) {
+            const profileImage = document.getElementById('profileImage');
+            profileImage.src = e.target.result;
+            profileImage.classList.add('updated'); // Adiciona a classe 'updated'
+        };
+        reader.readAsDataURL(file);
+    }
+}
+
     </script>
 </body>
 </html>
