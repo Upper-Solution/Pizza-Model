@@ -53,7 +53,7 @@ $pdo = null;
 
 </head>
 
-<body class="dark-mode">
+<body>
     <header class="header">
         <?php include '../../includes/nav.php'; ?>
     </header>

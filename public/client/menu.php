@@ -55,7 +55,7 @@ $pdo = null;
     <title>Cardápio</title>
 </head>
 
-<body>
+<body class="dark-mode">
 
     <!--Menu de Navegação-->
     <header class="header">
@@ -176,34 +176,15 @@ $pdo = null;
                             </div>
                         </div>
                         <div class="areaBack-Modal">
+                            <!--Area de Adicionais-->
+
                             <div id="adicionaisModal">
                                 <h4>Adicionais</h4>
                                 <div class="adicional-item">
-                                    <input type="checkbox" id="bacon" name="adicional" value="bacon">
-                                    <label for="bacon">Bacon + R$ 3,00</label>
+
                                 </div>
-                                <div class="adicional-item">
-                                    <input type="checkbox" id="queijo" name="adicional" value="queijo-extra">
-                                    <label for="queijo">Queijo Extra + R$ 2,50</label>
-                                </div>
-                                <div class="adicional-item">
-                                    <input type="checkbox" id="ovo" name="adicional" value="ovo">
-                                    <label for="ovo">Ovo + R$ 1,50</label>
-                                </div>
-                                <div class="adicional-item">
-                                    <input type="checkbox" id="ovo" name="adicional" value="ovo">
-                                    <label for="ovo">Ovo + R$ 1,50</label>
-                                </div>
-                                <div class="adicional-item">
-                                    <input type="checkbox" id="ovo" name="adicional" value="ovo">
-                                    <label for="ovo">Ovo + R$ 1,50</label>
-                                </div>
-                                <div class="adicional-item">
-                                    <input type="checkbox" id="ovo" name="adicional" value="ovo">
-                                    <label for="ovo">Ovo + R$ 1,50</label>
-                                </div>
-                                <!-- Mais opções de adicionais aqui -->
                             </div>
+                            <!--Fim da area de adicionais-->
                             <div class="pizzaObservations">
                                 <textarea id="observations" rows="4" placeholder="Observações: "></textarea>
                             </div>

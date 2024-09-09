@@ -51,8 +51,8 @@ body.dark-mode {
 }
 
 .dark-mode .form-group input {
-    background-color: #a1a0a0a2;
-    color: #000000;
+    background-color: #333333;
+    color: #FFFFFF;
     border: 1px solid #555;
 }
 

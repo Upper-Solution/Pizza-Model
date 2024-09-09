@@ -15,7 +15,7 @@ localStorage.getItem("pizza_cart")
 const api = fetch("../../includes/apiData.php")
   .then(response => response.json())
   .then(data => {
-    pizzas = data; 
+    pizzas = data;
     updateCart();
 
     // Mapeia todos os objetos do JSON (dados das pizzas)
@@ -34,6 +34,7 @@ const api = fetch("../../includes/apiData.php")
       pizzaItem.querySelector(".pizza-item--desc").innerHTML = item.descricao;
 
       // Adiciona um evento de clique para abrir o modal com as informações da pizza selecionada
+      // Adiciona esta lógica dentro do evento de clique para abrir o modal
       pizzaItem.querySelector("a").addEventListener("click", (e) => {
         e.preventDefault(); // Previne a ação padrão do link
         let key = e.target.closest(".pizza-item").getAttribute("data-key"); // Obtém o data-key do item clicado
@@ -48,30 +49,20 @@ const api = fetch("../../includes/apiData.php")
           style: "currency",
           currency: "BRL",
         })}`;
-        //Area comentada devido a conteudo não utilizado ainda
-        /*
-        document.querySelector(".pizzaInfo--size.selected").classList.remove("selected"); // Reseta o tamanho selecionado
-        document.querySelectorAll(".pizzaInfo--size").forEach((size, sizeIndex) => {
-          // Define os tamanhos da pizza no modal
-          if (sizeIndex == 2) {
-            size.classList.add("selected"); // Seleciona o tamanho padrão (grande)
-          }
-          size.querySelector("span").innerHTML = pizzas[key].sizes[sizeIndex]; // Define o tamanho
-
-          // Adiciona um evento de clique para alterar o tamanho da pizza
-          size.addEventListener("click", () => {
-            document.querySelector(".pizzaInfo--size.selected").classList.remove("selected");
-            size.classList.add("selected");
-            modalQt = 1;
-            document.querySelector(".pizzaInfo--qt").innerHTML = modalQt;
-            document.querySelector(".pizzaInfo--actualPrice").innerHTML = ` ${pizzas[key].price[sizeIndex].toLocaleString(
-              "pt-br",
-              { style: "currency", currency: "BRL" }
-            )}`;
-          });
-        });
-*/
         document.querySelector(".pizzaInfo--qt").innerHTML = modalQt;
+
+        // Atualiza a área de adicionais no modal
+        const adicionaisDiv = document.querySelector("#adicionaisModal");
+        adicionaisDiv.innerHTML = ''; // Limpa qualquer conteúdo existente
+        
+        if (pizzas[key].Adicionais && pizzas[key].Adicionais.length > 0) {
+          pizzas[key].Adicionais.forEach(adicional => {
+            adicionaisDiv.innerHTML += `<div class="adicional-item">${adicional.nome} - R$ ${parseFloat(adicional.preco).toFixed(2)}</div>`;
+          });
+        } else {
+          adicionaisDiv.innerHTML = '<p>Sem adicionais disponíveis.</p>';
+        }
+        
 
         // Exibe o modal com animação de opacidade
         document.querySelector(".pizzaWindowArea").style.opacity = 0;

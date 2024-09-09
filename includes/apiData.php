@@ -15,7 +15,7 @@ if (!$pdo) {
 
 try {
     // Consulta para obter os dados das pizzas
-    $sql = "SELECT id, nome, imagem, preco, descricao FROM Pizzas";
+    $sql = "SELECT id, nome, imagem, preco, descricao, Adicionais FROM Pizzas";
     $stmt = $pdo->query($sql);
 
     $pizzas = [];
@@ -24,6 +24,25 @@ try {
     while ($row = $stmt->fetch(PDO::FETCH_ASSOC)) {
         // Converte a imagem BLOB para base64
         $row['imagem'] = base64_encode($row['imagem']);
+
+        // Processa os adicionais
+        if (!empty($row['Adicionais'])) {
+            $adicionais = explode(';', $row['Adicionais']); // Divide por ';' para separar os adicionais
+
+            $adicionaisArray = [];
+            foreach ($adicionais as $adicional) {
+                // Divide cada adicional pelo primeiro ',' encontrado para separar nome e preço
+                list($nome, $preco) = explode(',', $adicional . ',', 2);
+                $adicionaisArray[] = [
+                    'nome' => trim($nome),
+                    'preco' => trim($preco)
+                ];
+            }
+            $row['Adicionais'] = $adicionaisArray; // Atualiza o array de adicionais
+        } else {
+            $row['Adicionais'] = []; // Se não houver adicionais, retorna um array vazio
+        }
+
         // Adiciona o resultado no array de pizzas
         $pizzas[] = $row;
     }

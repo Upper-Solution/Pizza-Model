@@ -8,10 +8,9 @@ let valorDesconto;
 let observacaoGeral;
 let formaPagamento;
 let valorTroco;
-let adicionais = new Array();
+let adicionais = [];
 
 getInfoDB();
-
 // Adicionar ao carrinho
 // Cria um identificador único, combinando o ID da pizza e o tamanho
 document.querySelector(".pizzaInfo--addButton").addEventListener("click", () => {
@@ -20,8 +19,7 @@ document.querySelector(".pizzaInfo--addButton").addEventListener("click", () => 
   let identifier = pizzas[modalKey].id;
 
   // Captura as observações do usuário
-  let observacoes;
-  observacoes = document.getElementById("observations").value.trim();
+  let observacoes = document.getElementById("observations").value.trim();
 
   // Procura no carrinho se o identificador já existe
   let keyItem = cart.findIndex((item) => item.identifier == identifier);
@@ -39,10 +37,10 @@ document.querySelector(".pizzaInfo--addButton").addEventListener("click", () => 
       qtd: modalQt,
       imagem: pizzas[modalKey].imagem,
       observacoes: observacoes,
-      observacaoGeral,
-      formaPagamento,
-      adicionais,
-      valorTroco
+      observacaoGeral: observacaoGeral,
+      formaPagamento: formaPagamento,
+      adicionais: adicionais,
+      valorTroco: valorTroco
     });
   }
 
@@ -261,10 +259,10 @@ function retornaIdQT() {
     });
 }
 
-// Faz a requisição a API apiGetDB_to_Js
+// Faz a requisição a API para pegar entrega e desconto
 async function getInfoDB() {
   try {
-    const response = await fetch('../../includes/apiGetDB_to_Js.php');
+    const response = await fetch('../../includes/getEntretaDesconto.php');
     const data = await response.json();
 
     if (data.error || data.message) {
@@ -299,10 +297,4 @@ function capturarInformacoes() {
     valorTroco = trocoInput.value;
   }
   console.log('Valor para Troco:', valorTroco);
-}
-
-function manipulaAdicionais(){
-  
-
-
 }
