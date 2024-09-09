@@ -57,7 +57,7 @@ const api = fetch("../../includes/apiData.php")
         
         if (pizzas[key].Adicionais && pizzas[key].Adicionais.length > 0) {
           pizzas[key].Adicionais.forEach(adicional => {
-            adicionaisDiv.innerHTML += `<div class="adicional-item">${adicional.nome} - R$ ${parseFloat(adicional.preco).toFixed(2)}</div>`;
+            adicionaisDiv.innerHTML += `<div class="adicional-item"><input value="${adicional.nome}" type="checkbox">${adicional.nome} - R$ ${parseFloat(adicional.preco).toFixed(2)}</input></div>`;
           });
         } else {
           adicionaisDiv.innerHTML = '<p>Sem adicionais disponíveis.</p>';

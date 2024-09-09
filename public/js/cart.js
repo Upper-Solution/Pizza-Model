@@ -14,7 +14,6 @@ getInfoDB();
 // Adicionar ao carrinho
 // Cria um identificador único, combinando o ID da pizza e o tamanho
 document.querySelector(".pizzaInfo--addButton").addEventListener("click", () => {
-
   // Obtém o identificador da pizza
   let identifier = pizzas[modalKey].id;
 

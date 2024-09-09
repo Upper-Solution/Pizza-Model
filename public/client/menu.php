@@ -55,7 +55,7 @@ $pdo = null;
     <title>Cardápio</title>
 </head>
 
-<body class="dark-mode">
+<body>
 
     <!--Menu de Navegação-->
     <header class="header">
@@ -75,6 +75,7 @@ $pdo = null;
         <div class="container">
             <div class="container-area">
                 <div class="models">
+                    <!--Pizzas do menu-->
                     <div class="pizza-item">
                         <a href="">
                             <div class="pizza-item--img"><img /></div>
@@ -84,6 +85,7 @@ $pdo = null;
                             <div class="pizza-item--desc">--</div>
                         </a>
                     </div>
+                    <!--Pedidos do Carrinho-->
                     <div class="cart--item">
                         <img src="" alt="Cart Item Image" />
                         <div class="cart--item-nome">--</div>
@@ -102,8 +104,8 @@ $pdo = null;
                     <h1 class="titulo--h1">Cardápio</h1>
                     <div class="pizza-area"></div>
                 </main>
-
                 <aside>
+                    <!--Carrinho-->
                     <div class="cart--area">
                         <div class="menu-closer">
                             <i class="fa-solid fa-arrow-left"></i>
@@ -127,10 +129,11 @@ $pdo = null;
                                 <span>Total</span>
                                 <span>R$ --</span>
                             </div>
-
+                            <!--Observações Gerais-->
                             <div class="observacoesGerais">
                                 <label for="observacoesGerais">Observações Gerais:</label>
                                 <textarea id="observacoesGerais" rows="4" placeholder="Escreva suas observações aqui..."></textarea>
+                                <!--Método de Pagamento-->
                                 <div class="formaPagamento">
                                     <label for="formaPagamento">Forma de Pagamento:</label>
                                     <select id="formaPagamento" name="formaPagamento">
@@ -139,17 +142,16 @@ $pdo = null;
                                         <option value="dinheiro">Dinheiro</option>
                                     </select>
 
-                                    <!-- Input para Troco (escondido por padrão) -->
                                     <div id="trocoContainer" style="display:none;">
                                         <label for="troco">Valor para Troco:</label>
                                         <input type="text" id="troco" name="troco" placeholder="Insira o valor para troco">
                                     </div>
                                 </div>
-
                                 <div id="finalizarPedidoBtn" class="cart--finalizar">Finalizar a compra</div>
                             </div>
                         </div>
                 </aside>
+                <!--Modal dos Lanches-->
                 <div class="pizzaWindowArea">
                     <div class="pizzaWindowBody modal">
                         <div class="coluna-pizzaInfo-pizzaBig">
@@ -180,11 +182,9 @@ $pdo = null;
 
                             <div id="adicionaisModal">
                                 <h4>Adicionais</h4>
-                                <div class="adicional-item">
-
-                                </div>
+                                <div class="adicional-item"></div>
                             </div>
-                            <!--Fim da area de adicionais-->
+                            <!--Area de Observações do Modal-->
                             <div class="pizzaObservations">
                                 <textarea id="observations" rows="4" placeholder="Observações: "></textarea>
                             </div>
@@ -196,7 +196,7 @@ $pdo = null;
                     </div>
                 </div>
             </div>
-
+            <!--Painel de Pedido Finalizado-->
             <div class="success pizzaWindowArea">
                 <div class="pizzaWindowBody success">
                     <div class="pedido-finalizado">
