@@ -289,6 +289,11 @@ function showDetails(orderId) {
                         </div>
                     </div>
                 `;
+
+                // Exibir o modal após preencher os detalhes
+                var modal = document.getElementById('orderModal');
+                modal.style.display = 'block'; // Mostra o modal
+
             } catch (e) {
                 console.error('Erro ao processar os detalhes do pedido:', e);
             }
@@ -296,6 +301,20 @@ function showDetails(orderId) {
     };
     xhr.send();
 }
+// Função para fechar o modal
+function closeModal() {
+    var modal = document.getElementById('orderModal');
+    modal.style.display = 'none'; // Esconde o modal
+}
+
+// Fechar o modal quando clicar fora dele
+window.onclick = function(event) {
+    var modal = document.getElementById('orderModal');
+    if (event.target == modal) {
+        modal.style.display = 'none';
+    }
+};
+
 
 // Inicializa a busca de pedidos e a atualização periódica
 function initialize() {
