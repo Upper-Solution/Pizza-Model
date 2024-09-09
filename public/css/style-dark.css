@@ -7,6 +7,11 @@ body.dark-mode {
 /*************************
 Tela Menu*/
 
+/*load de hamburguer*/
+.dark-mode .loader {
+    background-color: #000;
+}
+
 /* Estilo para o cabeçalho */
 .dark-mode .header {
     background-color: #1f1f1f;
@@ -74,6 +79,9 @@ Tela Menu*/
 
 /* Estilo para a área do carrinho */
 
+.dark-mode .cart--area{
+    background-color: rgb rgb(18, 18, 20);
+}
 .dark-mode .pizzaInfo--qtarea,
 .dark-mode .cart--item--qtarea {
     background-color: #2a2a2a;
@@ -209,3 +217,43 @@ Tela Index*/
 .dark-mode footer a:hover {
     color: #ffd65e;
 }
+
+/********************************
+Tela Meus-Pedidos*/
+
+.dark-mode h1,
+.dark-mode .order-card h2 {
+    color: rgb(226 226 226)
+}
+
+.dark-mode .order-card p,
+.dark-mode .status-labels span {
+    color: #ffffff;
+}
+
+.dark-mode .menu-area,
+.dark-mode .status-bar {
+    background-color: rgb(18, 18, 20);
+}
+
+.dark-mode .profile-menu {
+    background-color: rgb(18, 18, 20);
+}
+
+.dark-mode .content {
+    background-color: rgb(18, 18, 20);
+    color: rgb(226 226 226);
+}
+
+.dark-mode .order-card {
+    background-color: rgb(18, 18, 20);
+    border: 1px solid rgb(18, 18, 20);
+    
+}
+
+.dark-mode .order-items{
+    background-color: rgb(18, 18, 20);
+}
+
+
+rgb(18, 18, 20)

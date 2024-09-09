@@ -1069,6 +1069,10 @@ footer a:hover::after {
     width: 100%
 }
 
+.barra-carrinho {
+    display: none;
+}
+
 @media(max-width: 1300px) {
 
     .menu-area,
@@ -1103,6 +1107,7 @@ footer a:hover::after {
     /*PARTE DO CARRINHO SEU MAZANZA*/
 
     .barra-carrinho {
+        display: block;
         position: fixed;
         bottom: 0;
         width: 100%;
@@ -1422,4 +1427,3 @@ footer a:hover::after {
     .pizzaInfo--cancelMobileButton {
         display: block;
     }
-}
