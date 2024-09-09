@@ -155,9 +155,6 @@ body {
 }
 
 @media (max-width: 767px) {
-    body {
-        margin-top: 250px;
-    }
 
     .container {
         flex-direction: column;
