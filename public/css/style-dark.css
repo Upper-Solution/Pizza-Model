@@ -7,19 +7,22 @@ body.dark-mode {
 /*************************
 Tela Menu*/
 
+.dark-mode .titulo--h1
+.dark-mode .h1         {
+    color: rgb(226 226 226) ;
+}
 /*load de hamburguer*/
 .dark-mode .loader {
-    background-color: #000;
+    background-color: rgb(9, 9, 10);
 }
 
 /* Estilo para o cabeçalho */
 .dark-mode .header {
-    background-color: #1f1f1f;
-    border-bottom: 1px solid #333;
+    background-color: rgb(18, 18, 20);
 }
 
 .dark-mode .header a {
-    color: #e0e0e0;
+    color: rgb(226 226 226);
 }
 
 .dark-mode .container {
@@ -80,7 +83,7 @@ Tela Menu*/
 /* Estilo para a área do carrinho */
 
 .dark-mode .cart--area{
-    background-color: rgb rgb(18, 18, 20);
+    background-color:rgb(18, 18, 20);
 }
 .dark-mode .pizzaInfo--qtarea,
 .dark-mode .cart--item--qtarea {
@@ -101,12 +104,15 @@ Tela Menu*/
     border-radius: 10px;
 }
 
-
+.dark-mode .observacoesGerais label,
+.dark-mode .formaPagamento label {
+    color: #cecece;
+}
 
 .dark-mode .cart--item-nome,
 .dark-mode .cart--totalitem span,
 .dark-mode .cart--finalizar {
-    color: #ffffff;
+    color: rgb(226 226 226);
 }
 
 .dark-mode .cart--finalizar {
@@ -221,11 +227,6 @@ Tela Index*/
 /********************************
 Tela Meus-Pedidos*/
 
-.dark-mode h1,
-.dark-mode .order-card h2 {
-    color: rgb(226 226 226)
-}
-
 .dark-mode .order-card p,
 .dark-mode .status-labels span {
     color: #ffffff;
@@ -254,6 +255,3 @@ Tela Meus-Pedidos*/
 .dark-mode .order-items{
     background-color: rgb(18, 18, 20);
 }
-
-
-rgb(18, 18, 20)

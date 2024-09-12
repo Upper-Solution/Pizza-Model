@@ -116,6 +116,9 @@ body {
     color: white;
     border-radius: 4px;
     display: inline;
+    margin-top: 15px;
+    margin-bottom: 15px;
+    margin-left: 9px;
 }
 
 .forms-config-user {

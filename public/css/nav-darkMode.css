@@ -20,10 +20,6 @@
     background: #fab427; /* Mantém a cor para contraste no modo escuro */
 }
 
-.dark-mode .menu ul a {
-    color: #fff; /* Alterado para texto branco */
-}
-
 .dark-mode .menu ul a::after {
     background: #fab427; /* Mantém a cor para contraste no modo escuro */
 }

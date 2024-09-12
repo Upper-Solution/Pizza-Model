@@ -246,3 +246,9 @@ h1 {
     background-color: #45a049;
 }
 
+@media (max-width: 767px) {
+    
+    .content {
+        margin: 1px 1px 1px;
+    }
+}
