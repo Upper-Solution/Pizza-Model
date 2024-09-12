@@ -13,44 +13,44 @@ let adicionais = [];
 getInfoDB();
 // Adicionar ao carrinho
 // Cria um identificador único, combinando o ID da pizza e o tamanho
+// Adicionar ao carrinho
 document.querySelector(".pizzaInfo--addButton").addEventListener("click", () => {
-  // Obtém o identificador da pizza
   let identifier = pizzas[modalKey].id;
 
   // Captura as observações do usuário
   let observacoes = document.getElementById("observations").value.trim();
+
+  // Captura os adicionais selecionados no modal
+  let adicionaisSelecionados = capturarAdicionais();
 
   // Procura no carrinho se o identificador já existe
   let keyItem = cart.findIndex((item) => item.identifier == identifier);
 
   // Verifica se a pizza já está no carrinho
   if (keyItem > -1) {
-    // Se já estiver, aumenta a quantidade e atualiza as observações
-    cart[keyItem].qtd += modalQt;
+      // Se já estiver, aumenta a quantidade e atualiza as observações
+      cart[keyItem].qtd += modalQt;
+      cart[keyItem].adicionais = adicionaisSelecionados;
   } else {
-    // Se não estiver, adiciona um novo item ao carrinho
-    cart.push({
-      identifier,
-      id: pizzas[modalKey].id,
-      preco: pizzas[modalKey].preco,
-      qtd: modalQt,
-      imagem: pizzas[modalKey].imagem,
-      observacoes: observacoes,
-      observacaoGeral: observacaoGeral,
-      formaPagamento: formaPagamento,
-      adicionais: adicionais,
-      valorTroco: valorTroco
-    });
+      // Se não estiver, adiciona um novo item ao carrinho
+      cart.push({
+          identifier,
+          id: pizzas[modalKey].id,
+          preco: pizzas[modalKey].preco,
+          qtd: modalQt,
+          imagem: pizzas[modalKey].imagem,
+          observacoes: observacoes,
+          observacaoGeral: observacaoGeral,
+          formaPagamento: formaPagamento,
+          adicionais: adicionaisSelecionados, // Adicionais selecionados
+          valorTroco: valorTroco
+      });
   }
 
   //Limpa a area de observações
   document.getElementById("observations").value = '';
 
-  // Adiciona uma animação de pulso ao ícone do carrinho
-  document.querySelector(".fa-cart-shopping").classList.add("pulse");
-
-  // Atualiza o carrinho, fecha o modal e salva o carrinho no localStorage
-  // Chame a função para garantir que `entregaTaxa` seja definida
+  // Atualiza o carrinho
   updateCart();
   closeModal();
   saveCart();
@@ -80,18 +80,17 @@ function updateCart() {
   // Calcula o valor total
   let pizzasValor = 0;
   for (let i in cart) {
-      pizzasValor += cart[i].preco * cart[i].qtd;
+    pizzasValor += cart[i].preco * cart[i].qtd;
   }
 
   // Atualiza o valor total na barra do carrinho
   document.querySelector(".barra-carrinho-valor-total").innerHTML = `Total: R$ ${pizzasValor.toLocaleString("pt-br", {
-      style: "currency",
-      currency: "BRL",
+    style: "currency",
+    currency: "BRL",
   })}`;
 
   // Verifica se há itens no carrinho
   if (cart.length > 0) {
-    document.querySelector("aside").classList.add("show");
     document.querySelector("aside").classList.add("show");
     document.querySelector(".cart").innerHTML = ""; // Limpa o conteúdo do carrinho
 
@@ -105,9 +104,18 @@ function updateCart() {
     for (let i in cart) {
       // Encontra a pizza correspondente no array de pizzas
       let pizzaItem = pizzas.find((item) => item.id == cart[i].id);
-      // Calcula o valor total das pizzas
-      pizzasValor += cart[i].preco * cart[i].qtd;
-      
+
+      // Calcula o valor dos adicionais
+      let adicionaisValor = 0;
+      if (cart[i].adicionais && cart[i].adicionais.length > 0) {
+        cart[i].adicionais.forEach(adicional => {
+          adicionaisValor += adicional.preco;
+        });
+      }
+
+      // Calcula o valor total das pizzas (incluindo adicionais)
+      pizzasValor += (cart[i].preco * cart[i].qtd) + (adicionaisValor * cart[i].qtd);
+
       // Define o nome da pizza com o tamanho
       let pizzaName = `${pizzaItem.nome}`;
 

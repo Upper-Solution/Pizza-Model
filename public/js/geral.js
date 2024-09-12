@@ -53,15 +53,15 @@ const api = fetch("../../includes/apiData.php")
 
         // Atualiza a área de adicionais no modal
         const adicionaisDiv = document.querySelector("#adicionaisModal");
-        adicionaisDiv.innerHTML = ''; // Limpa qualquer conteúdo existente
+        adicionaisDiv.innerHTML = '';
         
-        if (pizzas[key].Adicionais && pizzas[key].Adicionais.length > 0) {
-          pizzas[key].Adicionais.forEach(adicional => {
-            adicionaisDiv.innerHTML += `<div class="adicional-item"><input value="${adicional.nome}" type="checkbox">${adicional.nome} - R$ ${parseFloat(adicional.preco).toFixed(2)}</input></div>`;
-          });
-        } else {
-          adicionaisDiv.innerHTML = '<p>Sem adicionais disponíveis.</p>';
-        }
+        pizzas[key].Adicionais.forEach(adicional => {
+          adicionaisDiv.innerHTML += `
+            <div class="adicional-item">
+              <input value="${adicional.nome}" type="checkbox" data-preco="${adicional.preco}">
+              ${adicional.nome} - R$ ${parseFloat(adicional.preco).toFixed(2)}
+            </div>`;
+        });
         
 
         // Exibe o modal com animação de opacidade
@@ -127,3 +127,19 @@ document.querySelector(".pizzaInfo--qtmais").addEventListener("click", () => {
     currency: "BRL",
   })}`;
 });
+
+function capturarAdicionais() {
+  // Seleciona todos os checkboxes de adicionais marcados
+  const adicionaisSelecionados = [];
+  const checkboxes = document.querySelectorAll("#adicionaisModal input[type='checkbox']:checked");
+
+  checkboxes.forEach(checkbox => {
+      // Para cada checkbox marcado, salva o nome e preço (pegando do atributo data-preco)
+      const nomeAdicional = checkbox.value;
+      const precoAdicional = parseFloat(checkbox.getAttribute('data-preco')); 
+      adicionaisSelecionados.push({ nome: nomeAdicional, preco: precoAdicional });
+  });
+
+  // Retorna os adicionais selecionados
+  return adicionaisSelecionados;
+}

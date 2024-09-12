@@ -56,7 +56,6 @@ $pdo = null;
 </head>
 
 <body>
-
     <!--Menu de Navegação-->
     <header class="header">
         <?php include '../../includes/nav.php'; ?>
@@ -178,8 +177,8 @@ $pdo = null;
                             </div>
                         </div>
                         <div class="areaBack-Modal">
+                            
                             <!--Area de Adicionais-->
-
                             <div id="adicionaisModal">
                                 <h4>Adicionais</h4>
                                 <div class="adicional-item"></div>

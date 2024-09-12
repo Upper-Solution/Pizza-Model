@@ -48,35 +48,35 @@ $pdo = null;
     <script src="https://kit.fontawesome.com/8b4042ccf0.js" crossorigin="anonymous"></script>
     <title>Configurações</title>
     <link rel="stylesheet" href="../css/config.css">
-    <link rel="stylesheet" href="../css/nav.css">
     <link rel="stylesheet" href="../css/config-darkMode.css">
+    <link rel="stylesheet" href="../css/nav.css">
     <link rel="stylesheet" href="../css/nav-darkMode.css">
 </head>
 
 <body>
-        <header class="header">
-            <?php include '../../includes/nav.php'; ?>
-        </header>
-        <div class="container-telaConfig">
-            
-            <section class="area-flex">
-                <div class="config-area">
+    <header class="header">
+        <?php include '../../includes/nav.php'; ?>
+    </header>
+    <div class="container-telaConfig">
+
+        <section class="area-flex">
+            <div class="config-area">
                 <h2>Configurações</h2>
 
-                    <div class="block user-settings" data-url="./config-user.php">
-                        <div class="content">
-                            <h3>Perfil do Usuário</h3>
-                        </div>
-                    </div>
-                    <div class="block system-settings" data-url="./config-system.php">
-                        <div class="content">
-                            <h3>Sobre o Sistema</h3>
-                        </div>
+                <div class="block user-settings" data-url="./config-user.php">
+                    <div class="content">
+                        <h3>Perfil do Usuário</h3>
                     </div>
                 </div>
-                <img class="area-flex-img" id="movingImage" src="../imagens/config.png" alt="">
-            </section>
-        </div>
+                <div class="block system-settings" data-url="./config-system.php">
+                    <div class="content">
+                        <h3>Sobre o Sistema</h3>
+                    </div>
+                </div>
+            </div>
+            <img class="area-flex-img" id="movingImage" src="../imagens/config.png" alt="">
+        </section>
+    </div>
 
     <script src="../js/darkMode.js"></script>
     <script>
@@ -103,7 +103,7 @@ $pdo = null;
         }
 
         setInterval(moveImage, 60); // Ajuste o tempo para a velocidade desejada
-
     </script>
 </body>
+
 </html>
