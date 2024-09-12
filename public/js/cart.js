@@ -236,7 +236,8 @@ function retornaIdQT() {
     valorTotal: item.preco * item.qtd,
     observacoesGerais: item.observacaoGeral,
     formaPagamento: item.formaPagamento,
-    valorTroco: item.valorTroco
+    valorTroco: item.valorTroco,
+    adicionais: item.adicionais
   }));
   fetch('../admin/get-dataCart.php', {
 

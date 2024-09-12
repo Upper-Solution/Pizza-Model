@@ -44,6 +44,7 @@ try {
     $formaPagamento = '';
     $valorTroco = 0;
     $itensPedido = [];
+    $adicionaisStr = ''; // Para armazenar os adicionais
 
     foreach ($cartData as $item) {
         $orderId = $item['orderId'];
@@ -53,6 +54,16 @@ try {
         $formaPagamento = $item['formaPagamento'];
         $valorTroco = $item['valorTroco'];
         $total = $item['valorTotal'];
+
+        // Se os adicionais existirem, armazená-los na variável
+        if (isset($item['adicionais']) && is_array($item['adicionais'])) {
+            $adicionais = array_map(function ($adicional) {
+                return $adicional['nome'] . ', ' . $adicional['preco'] . ';';
+            }, $item['adicionais']);
+
+            // Transformar em string para salvar no banco de dados
+            $adicionaisStr = implode(' ', $adicionais);
+        }
 
         // Consultar as informações da pizza
         $stmt = $pdo->prepare('SELECT nome FROM Pizzas WHERE id = ?');
@@ -68,17 +79,18 @@ try {
 
         // Acumular o total do pedido e informações dos itens
         $totalPedido += $total;
-        $itensPedido[] = $pizza['nome'] . ' - Qtd: ' . $quantidade . ' |';
+        $itensPedido[] = $pizza['nome'] . ' - Qtd: ' . $quantidade . ' | Adicionais: ' . $adicionaisStr;
     }
 
     // Converter o array de itens em uma string separada por nova linha
     $itensPedidoStr = implode("\n", $itensPedido);
 
     // Inserir o pedido na tabela orders
-    $stmt = $pdo->prepare('INSERT INTO orders (customer_name, quantidade, observacoesPedidos, ObservacoesGerais, formaPagamento, valorTroco, total, status, cep, city, neighborhood, street, number, complement, phone_number, email, items) VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)');
+    $stmt = $pdo->prepare('INSERT INTO orders (customer_name, quantidade, Adicionais, observacoesPedidos, ObservacoesGerais, formaPagamento, valorTroco, total, status, cep, city, neighborhood, street, number, complement, phone_number, email, items) VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)');
     $stmt->execute([
         $user['fullname'], // customer_name
         count($cartData), // quantidade
+        $adicionaisStr, // Adicionais
         $observacaoPedidos, // observacoesPedidos
         $observacoesGerais, // ObservacoesGerais
         $formaPagamento, // formaPagamento
