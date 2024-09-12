@@ -27,17 +27,20 @@ try {
 
         // Processa os adicionais
         if (!empty($row['Adicionais'])) {
-            $adicionais = explode(';', $row['Adicionais']); // Divide por ';' para separar os adicionais
+            // Separa os IDs de adicionais por vírgula
+            $adicionaisIds = explode(',', $row['Adicionais']);
+            $adicionaisIds = array_map('trim', $adicionaisIds); // Remove espaços em branco
 
-            $adicionaisArray = [];
-            foreach ($adicionais as $adicional) {
-                // Divide cada adicional pelo primeiro ',' encontrado para separar nome e preço
-                list($nome, $preco) = explode(',', $adicional . ',', 2);
-                $adicionaisArray[] = [
-                    'nome' => trim($nome),
-                    'preco' => trim($preco)
-                ];
-            }
+            // Prepara a consulta para buscar os adicionais
+            $placeholders = implode(',', array_fill(0, count($adicionaisIds), '?'));
+            $sqlAdicionais = "SELECT id, nome, preco FROM Adicionais WHERE id IN ($placeholders)";
+            $stmtAdicionais = $pdo->prepare($sqlAdicionais);
+
+            // Executa a consulta com os IDs dos adicionais
+            $stmtAdicionais->execute($adicionaisIds);
+
+            // Recupera os dados dos adicionais
+            $adicionaisArray = $stmtAdicionais->fetchAll(PDO::FETCH_ASSOC);
             $row['Adicionais'] = $adicionaisArray; // Atualiza o array de adicionais
         } else {
             $row['Adicionais'] = []; // Se não houver adicionais, retorna um array vazio

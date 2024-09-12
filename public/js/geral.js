@@ -34,7 +34,6 @@ const api = fetch("../../includes/apiData.php")
       pizzaItem.querySelector(".pizza-item--desc").innerHTML = item.descricao;
 
       // Adiciona um evento de clique para abrir o modal com as informações da pizza selecionada
-      // Adiciona esta lógica dentro do evento de clique para abrir o modal
       pizzaItem.querySelector("a").addEventListener("click", (e) => {
         e.preventDefault(); // Previne a ação padrão do link
         let key = e.target.closest(".pizza-item").getAttribute("data-key"); // Obtém o data-key do item clicado
@@ -88,8 +87,7 @@ function closeModal() {
 
 // Fecha o modal ao pressionar a tecla 'Escape'
 document.addEventListener("keydown", (event) => {
-  const isEscKey = event.key === "Escape";
-  if ((document.querySelector(".pizzaWindowArea").style.opacity = 1 && isEscKey)) {
+  if (event.key === "Escape" && document.querySelector(".pizzaWindowArea").style.display === "flex") {
     closeModal();
   }
 });
@@ -134,10 +132,10 @@ function capturarAdicionais() {
   const checkboxes = document.querySelectorAll("#adicionaisModal input[type='checkbox']:checked");
 
   checkboxes.forEach(checkbox => {
-      // Para cada checkbox marcado, salva o nome e preço (pegando do atributo data-preco)
-      const nomeAdicional = checkbox.value;
-      const precoAdicional = parseFloat(checkbox.getAttribute('data-preco')); 
-      adicionaisSelecionados.push({ nome: nomeAdicional, preco: precoAdicional });
+    // Para cada checkbox marcado, salva o nome e preço (pegando do atributo data-preco)
+    const nomeAdicional = checkbox.value;
+    const precoAdicional = parseFloat(checkbox.getAttribute('data-preco')); 
+    adicionaisSelecionados.push({ nome: nomeAdicional, preco: precoAdicional });
   });
 
   // Retorna os adicionais selecionados
