@@ -35,10 +35,10 @@ const api = fetch("../../includes/apiData.php")
 
       // Adiciona um evento de clique para abrir o modal com as informações da pizza selecionada
       pizzaItem.querySelector("a").addEventListener("click", (e) => {
-        e.preventDefault(); // Previne a ação padrão do link
-        let key = e.target.closest(".pizza-item").getAttribute("data-key"); // Obtém o data-key do item clicado
-        modalQt = 1; // Reseta a quantidade de pizzas no modal
-        modalKey = key; // Define a chave da pizza no modal
+        e.preventDefault();
+        let key = e.target.closest(".pizza-item").getAttribute("data-key");
+        modalQt = 1;
+        modalKey = key;
 
         // Define as informações da pizza no modal
         document.querySelector(".pizzaBig img").src = `data:image/jpeg;base64,${pizzas[key].imagem}`;
@@ -51,17 +51,16 @@ const api = fetch("../../includes/apiData.php")
         document.querySelector(".pizzaInfo--qt").innerHTML = modalQt;
 
         // Atualiza a área de adicionais no modal
-        const adicionaisDiv = document.querySelector("#adicionaisModal");
+        const adicionaisDiv = document.querySelector(".adicional-item");
         adicionaisDiv.innerHTML = '';
-        
+
         pizzas[key].Adicionais.forEach(adicional => {
-          adicionaisDiv.innerHTML += `
-            <div class="adicional-item">
-              <input value="${adicional.nome}" type="checkbox" data-preco="${adicional.preco}">
-              ${adicional.nome} - R$ ${parseFloat(adicional.preco).toFixed(2)}
-            </div>`;
+          adicionaisDiv.innerHTML = `
+            <button class="adicional--qtmenos">-</button>
+            <div class="adicional--qt">0</div>
+            <button class="adicional--qtmais">+</button>
+            <span class="adicional">${adicional.nome} - R$ ${adicional.preco}</span>`;
         });
-        
 
         // Exibe o modal com animação de opacidade
         document.querySelector(".pizzaWindowArea").style.opacity = 0;
@@ -74,70 +73,70 @@ const api = fetch("../../includes/apiData.php")
       // Adiciona o item de pizza clonado à área de pizzas
       document.querySelector(".pizza-area").append(pizzaItem);
     });
+
+    // Função para fechar o modal
+    function closeModal() {
+      document.querySelector(".pizzaWindowArea").style.opacity = 0;
+      setTimeout(() => {
+        document.querySelector(".pizzaWindowArea").style.display = "none";
+      }, 600);
+      window.scrollTo(0, 0);
+    }
+
+    // Fecha o modal ao pressionar a tecla 'Escape'
+    document.addEventListener("keydown", (event) => {
+      if (event.key === "Escape" && document.querySelector(".pizzaWindowArea").style.display === "flex") {
+        closeModal();
+      }
+    });
+
+    // Fecha o modal ao clicar nos botões de cancelar
+    document
+      .querySelectorAll(".pizzaInfo--cancelButton, .pizzaInfo--cancelMobileButton")
+      .forEach((item) => {
+        item.addEventListener("click", closeModal);
+      });
+
+    // Controle de quantidade
+    // Evento para diminuir a quantidade de pizzas no modal
+    document.querySelector(".pizzaInfo--qtmenos").addEventListener("click", () => {
+      if (modalQt > 1) {
+        let preco = pizzas[modalKey].preco;
+        modalQt--;
+        document.querySelector(".pizzaInfo--qt").innerHTML = modalQt;
+        let updatePreco = preco * modalQt;
+        document.querySelector(".pizzaInfo--actualPrice").innerHTML = `${updatePreco.toLocaleString("pt-br", {
+          style: "currency",
+          currency: "BRL",
+        })}`;
+      }
+    });
+
+    // Evento para aumentar a quantidade de pizzas no modal
+    document.querySelector(".pizzaInfo--qtmais").addEventListener("click", () => {
+      let preco = pizzas[modalKey].preco;
+      modalQt++;
+      document.querySelector(".pizzaInfo--qt").innerHTML = modalQt;
+      let updatePreco = preco * modalQt;
+      document.querySelector(".pizzaInfo--actualPrice").innerHTML = `${updatePreco.toLocaleString("pt-br", {
+        style: "currency",
+        currency: "BRL",
+      })}`;
+    });
   });
 
-// Função para fechar o modal
-function closeModal() {
-  document.querySelector(".pizzaWindowArea").style.opacity = 0;
-  setTimeout(() => {
-    document.querySelector(".pizzaWindowArea").style.display = "none";
-  }, 600);
-  window.scrollTo(0, 0); // Rola a página para o topo
-}
+    function capturarAdicionais() {
+      // Seleciona todos os checkboxes de adicionais marcados
+      const adicionaisSelecionados = [];
+      const checkboxes = document.querySelectorAll("#adicionaisModal input[type='checkbox']:checked");
 
-// Fecha o modal ao pressionar a tecla 'Escape'
-document.addEventListener("keydown", (event) => {
-  if (event.key === "Escape" && document.querySelector(".pizzaWindowArea").style.display === "flex") {
-    closeModal();
-  }
-});
+      checkboxes.forEach(checkbox => {
+        // Para cada checkbox marcado, salva o nome e preço (pegando do atributo data-preco)
+        const nomeAdicional = checkbox.value;
+        const precoAdicional = parseFloat(checkbox.getAttribute('data-preco'));
+        adicionaisSelecionados.push({ nome: nomeAdicional, preco: precoAdicional });
+      });
 
-// Fecha o modal ao clicar nos botões de cancelar
-document
-  .querySelectorAll(".pizzaInfo--cancelButton, .pizzaInfo--cancelMobileButton")
-  .forEach((item) => {
-    item.addEventListener("click", closeModal);
-  });
-
-// Controle de quantidade
-// Evento para diminuir a quantidade de pizzas no modal
-document.querySelector(".pizzaInfo--qtmenos").addEventListener("click", () => {
-  if (modalQt > 1) {
-    let preco = pizzas[modalKey].preco;
-    modalQt--;
-    document.querySelector(".pizzaInfo--qt").innerHTML = modalQt;
-    let updatePreco = preco * modalQt;
-    document.querySelector(".pizzaInfo--actualPrice").innerHTML = `${updatePreco.toLocaleString("pt-br", {
-      style: "currency",
-      currency: "BRL",
-    })}`;
-  }
-});
-
-// Evento para aumentar a quantidade de pizzas no modal
-document.querySelector(".pizzaInfo--qtmais").addEventListener("click", () => {
-  let preco = pizzas[modalKey].preco;
-  modalQt++;
-  document.querySelector(".pizzaInfo--qt").innerHTML = modalQt;
-  let updatePreco = preco * modalQt;
-  document.querySelector(".pizzaInfo--actualPrice").innerHTML = `${updatePreco.toLocaleString("pt-br", {
-    style: "currency",
-    currency: "BRL",
-  })}`;
-});
-
-function capturarAdicionais() {
-  // Seleciona todos os checkboxes de adicionais marcados
-  const adicionaisSelecionados = [];
-  const checkboxes = document.querySelectorAll("#adicionaisModal input[type='checkbox']:checked");
-
-  checkboxes.forEach(checkbox => {
-    // Para cada checkbox marcado, salva o nome e preço (pegando do atributo data-preco)
-    const nomeAdicional = checkbox.value;
-    const precoAdicional = parseFloat(checkbox.getAttribute('data-preco')); 
-    adicionaisSelecionados.push({ nome: nomeAdicional, preco: precoAdicional });
-  });
-
-  // Retorna os adicionais selecionados
-  return adicionaisSelecionados;
-}
+      // Retorna os adicionais selecionados
+      return adicionaisSelecionados;
+    }

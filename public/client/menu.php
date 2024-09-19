@@ -181,7 +181,8 @@ $pdo = null;
                             <!--Area de Adicionais-->
                             <div id="adicionaisModal">
                                 <h4>Adicionais</h4>
-                                <div class="adicional-item"></div>
+                                <div class="adicional-item">
+                                </div>
                             </div>
                             <!--Area de Observações do Modal-->
                             <div class="pizzaObservations">
