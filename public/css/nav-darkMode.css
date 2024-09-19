@@ -46,6 +46,6 @@
     color: #fff; /* Alterado para texto branco */
 }
 
-.dark-mode .profile-menu a:hover {
+.dark-mode .profile-menu a :hover {
     background-color: rgb(18, 18, 20) /* Alterado para fundo mais escuro ao passar o mouse */
 }

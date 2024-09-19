@@ -7,10 +7,10 @@ body.dark-mode {
 /*************************
 Tela Menu*/
 
-.dark-mode .titulo--h1
-.dark-mode .h1         {
+.dark-mode .titulo--h1 {
     color: rgb(226 226 226) ;
 }
+
 /*load de hamburguer*/
 .dark-mode .loader {
     background-color: rgb(9, 9, 10);
@@ -18,7 +18,7 @@ Tela Menu*/
 
 /* Estilo para o cabeçalho */
 .dark-mode .header {
-    background-color: rgb(18, 18, 20);
+    background-color: #fff;
 }
 
 .dark-mode .header a {
@@ -227,14 +227,20 @@ Tela Index*/
 /********************************
 Tela Meus-Pedidos*/
 
+.dark-mode h1,
+.dark-mode .order-card h2,
 .dark-mode .order-card p,
 .dark-mode .status-labels span {
-    color: #ffffff;
+    color: #fff;
 }
 
 .dark-mode .menu-area,
 .dark-mode .status-bar {
     background-color: rgb(18, 18, 20);
+}
+
+.dark-mode .profile-menu a:hover {
+    background-color: rgb(18, 18, 20); 
 }
 
 .dark-mode .profile-menu {
@@ -249,7 +255,8 @@ Tela Meus-Pedidos*/
 .dark-mode .order-card {
     background-color: rgb(18, 18, 20);
     border: 1px solid rgb(18, 18, 20);
-    
+    border-bottom: 2px solid #6d6d6d;
+    border-radius: 0px;
 }
 
 .dark-mode .order-items{
